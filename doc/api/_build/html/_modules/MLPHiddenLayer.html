@@ -1,0 +1,656 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+    <title>MLPHiddenLayer &mdash; pyVision 0.0.1 documentation</title>
+  <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../_static/css/bootstrap.min.css" media="screen" />
+  <link rel="stylesheet" href="../_static/css/bootstrap-responsive.css"/>
+
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="pyVision 0.0.1 documentation" href="../index.html" />
+    <link rel="up" title="Module code" href="index.html" />
+  
+   
+       <script type="text/javascript" src="../_static/sidebar.js"></script>
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="../_static/js/bootstrap.min.js" type="text/javascript"></script>
+  <link rel="canonical" href="http://scikit-learn.org/stable/_modules/MLPHiddenLayer.html" />
+
+  <script type="text/javascript">
+    $("div.buttonNext, div.buttonPrevious").hover(
+       function () {
+           $(this).css('background-color', '#FF9C34');
+       },
+       function () {
+           $(this).css('background-color', '#A7D6E2');
+       }
+    );
+    var bodywrapper = $('.bodywrapper');
+    var sidebarbutton = $('#sidebarbutton');
+    sidebarbutton.css({'height': '900px'});
+  </script>
+
+  </head>
+  <body>
+
+
+<div class="header-wrapper">
+    <div class="header"><div class="navbar">
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="https://github.com/pi19404/OpenVision">Source</a></li>            
+            </ul>
+
+            <div class="search_form">
+                <div id="cse" style="width: 100%;"></div>
+            </div>
+        </div> <!-- end navbar --></div>
+</div>
+
+
+<!-- Github "fork me" ribbon -->
+<a href="https://github.com/pi19404/OpenVision">
+  <img class="fork-me"
+       style="position: absolute; top: 0; right: 0; border: 0;"
+       src="../_static/img/forkme.png"
+       alt="Fork me on GitHub" />
+</a>
+
+<div class="content-wrapper">
+    <div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+        <div class="rel">
+    
+
+  <!-- rellinks[1:] is an ugly hack to avoid link to module
+  index -->
+        <div class="rellink">
+        <a href="../py-modindex.html"
+        >Modules
+        <br/>
+        <span class="smallrellink">
+        Python Module In...
+        </span>
+            <span class="hiddenrellink">
+            Python Module Index
+            </span>
+        </a>
+        </div>
+
+    <!-- Ad a link to the 'up' page -->
+        <div class="spacer">
+        &nbsp;
+        </div>
+        <div class="rellink">
+        <a href="index.html">
+        Up
+        <br/>
+        <span class="smallrellink">
+        Module code
+        </span>
+            <span class="hiddenrellink">
+            Module code
+            </span>
+            
+        </a>
+        </div>
+    </div>
+    
+      <p class="doc-version">This documentation is for pyVision <strong>version 0.0.1</strong> &mdash; </p>
+    <p class="citing">If you use the software, please consider citing pyVision</a>.</p>
+    
+    </div>
+</div>
+
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for MLPHiddenLayer</h1><div class="highlight"><pre>
+<span class="c">#!/usr/bin/python</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Created on Mon Sep 22 01:44:17 2014</span>
+
+<span class="sd">@author: pi19404</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">optimize</span>
+<span class="kn">from</span> <span class="nn">numpy.linalg</span> <span class="kn">import</span> <span class="n">norm</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">confusion_matrix</span>
+<span class="kn">import</span> <span class="nn">sklearn.metrics</span> <span class="kn">as</span> <span class="nn">met</span>
+<span class="kn">import</span> <span class="nn">LoadDataSets</span>
+<span class="kn">import</span> <span class="nn">LogisticRegression</span>
+<span class="kn">import</span> <span class="nn">cPickle</span> <span class="kn">as</span> <span class="nn">pickle</span>
+<span class="kn">import</span> <span class="nn">pyvision_common</span> <span class="kn">as</span> <span class="nn">pyvision</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">izip</span> 
+<span class="kn">import</span> <span class="nn">Optimizer</span>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_digits</span>
+<span class="n">rng</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+<span class="sd">&quot;&quot;&quot; logistic function &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="sigmoid"><a class="viewcode-back" href="../MLPHiddenLayer.html#MLPHiddenLayer.sigmoid">[docs]</a><span class="k">def</span> <span class="nf">sigmoid</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Compute the sigmoid function &#39;&#39;&#39;</span>
+    <span class="n">den</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">+</span> <span class="n">math</span><span class="o">.</span><span class="n">e</span> <span class="o">**</span> <span class="p">(</span><span class="o">-</span><span class="mf">1.0</span> <span class="o">*</span> <span class="n">X</span><span class="p">)</span> 
+    <span class="n">d</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">den</span> 
+    <span class="k">return</span> <span class="n">d</span>
+    </div>
+<div class="viewcode-block" id="sigmoid_stable"><a class="viewcode-back" href="../MLPHiddenLayer.html#MLPHiddenLayer.sigmoid_stable">[docs]</a><span class="k">def</span> <span class="nf">sigmoid_stable</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="s">&quot;Numerically-stable sigmoid function.&quot;</span>
+    <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">z</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c"># if x is less than zero then z will be small, denom can&#39;t be</span>
+        <span class="c"># zero because it&#39;s 1+z.</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">z</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">z</span><span class="p">)</span>
+        </div>
+<div class="viewcode-block" id="grad_sigmoid"><a class="viewcode-back" href="../MLPHiddenLayer.html#MLPHiddenLayer.grad_sigmoid">[docs]</a><span class="k">def</span> <span class="nf">grad_sigmoid</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
+    <span class="n">s</span><span class="o">=</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">X</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">s</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">s</span><span class="p">);</span>
+    </div>
+<span class="n">sigmoid_vec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vectorize</span><span class="p">(</span><span class="n">sigmoid</span><span class="p">)</span>
+
+<span class="n">grad_sigmoid_vec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vectorize</span><span class="p">(</span><span class="n">grad_sigmoid</span><span class="p">)</span>
+
+     
+<div class="viewcode-block" id="HiddenLayer"><a class="viewcode-back" href="../MLPHiddenLayer.html#MLPHiddenLayer.HiddenLayer">[docs]</a><span class="k">class</span> <span class="nc">HiddenLayer</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot; the class absracts the hidden layer in a Multi Layer perceptron feed forward neural network </span>
+<span class="sd">    and is essentially a collection of neurons </span>
+<span class="sd">           </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    n_in   :  dimension of input vector</span>
+<span class="sd">    n_out  :  dimension of the output vector</span>
+<span class="sd">    activation : activation function typicall sigmoid or tanh</span>
+<span class="sd">    Reg : regularization option 1=L1 and 2=L2</span>
+<span class="sd">    W,b : intial weight matrix and bias vector</span>
+<span class="sd">    </span>
+<span class="sd">    W is matix of dimension n_inxn_out and b is vector of size n_outx1</span>
+
+<span class="sd">    </span>
+<span class="sd">    Attributes        </span>
+<span class="sd">    -----------</span>
+<span class="sd">    `out` : array-like ,shape=[n_out]</span>
+<span class="sd">    The output of hidden layer </span>
+<span class="sd">    </span>
+<span class="sd">    `params`:array-like ,shape=[n_out,n_in+1]        </span>
+<span class="sd">    contains the parameters in a flattened structure</span>
+<span class="sd">    </span>
+<span class="sd">    `W,b`:array-like,shape=[n_out,n_int],shape=[n_out,1]</span>
+<span class="sd">     weight matrix and bias vector characterizing the hidden layer</span>
+<span class="sd">     </span>
+<span class="sd">     `activation`:function</span>
+<span class="sd">     the non linear activation function that is applied after performing</span>
+<span class="sd">     affine transformation over input vector.</span>
+<span class="sd">    </span>
+<span class="sd">    Examples</span>
+<span class="sd">    -----------    </span>
+<span class="sd">    &gt;&gt; hidden_layer=HiddenLayer(n_in=n_in, n_out=n_hidden_units,activation=sigmoid_stable)</span>
+<span class="sd">    &gt;&gt; y=hidden_layer.compute(input);</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">n_in</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">n_out</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">activation</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">Reg</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">W</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">b</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>        
+        <span class="k">if</span> <span class="n">n_in</span> <span class="o">==</span><span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span><span class="p">;</span>
+        <span class="sd">&quot;&quot;&quot; random  initialization of weight matrix  &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">W</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+             <span class="n">low</span><span class="o">=-</span><span class="mi">4</span><span class="o">*</span><span class="n">numpy</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">6.</span> <span class="o">/</span> <span class="p">(</span><span class="n">n_in</span> <span class="o">+</span> <span class="n">n_out</span><span class="p">));</span>
+             <span class="n">high</span><span class="o">=</span><span class="mi">4</span><span class="o">*</span><span class="n">numpy</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">6.</span> <span class="o">/</span> <span class="p">(</span><span class="n">n_in</span> <span class="o">+</span> <span class="n">n_out</span><span class="p">));</span>
+             <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">n_out</span><span class="p">,</span> <span class="n">n_in</span><span class="p">);</span>
+             <span class="bp">self</span><span class="o">.</span><span class="n">W</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">rng</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">low</span><span class="p">,</span><span class="n">high</span><span class="p">,</span><span class="n">size</span><span class="p">),</span><span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">);</span>
+         
+        <span class="k">if</span> <span class="n">b</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+              <span class="bp">self</span><span class="o">.</span><span class="n">b</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_out</span><span class="p">,),</span><span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">);</span>
+
+        <span class="sd">&quot;&quot;&quot; storing the  other initialization parameters &quot;&quot;&quot;</span>    
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">Regularization</span><span class="o">=</span><span class="n">Reg</span><span class="p">;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_out</span><span class="o">=</span><span class="n">n_out</span><span class="p">;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_in</span><span class="o">=</span><span class="n">n_in</span><span class="p">;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">activation</span><span class="o">=</span><span class="n">activation</span><span class="p">;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">n_out</span><span class="p">,</span><span class="n">n_in</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span><span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">);</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">flatten</span><span class="p">();</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nparam</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">n_in</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+
+        <span class="n">param1</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">nparam</span><span class="p">);</span>
+        
+        <span class="n">param1</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">nparam</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">W</span><span class="p">;</span>
+        <span class="n">param1</span><span class="p">[:,</span><span class="bp">self</span><span class="o">.</span><span class="n">nparam</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">;</span>   
+        <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">=</span><span class="n">param1</span><span class="o">.</span><span class="n">flatten</span><span class="p">();</span>
+        <span class="c">#self.labels=np.array(xrange(0,n_out));</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">eta</span><span class="o">=</span><span class="mf">0.001</span>    
+     
+       
+
+    
+<div class="viewcode-block" id="HiddenLayer.compute"><a class="viewcode-back" href="../MLPHiddenLayer.html#MLPHiddenLayer.HiddenLayer.compute">[docs]</a>    <span class="k">def</span> <span class="nf">compute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="nb">input</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;function computes the output of the hidden layer for input matrix</span>
+<span class="sd">      </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        input   :   numpy array,shape=(N,n_in)</span>
+<span class="sd">                    :math:`h_{i-1}(x)` is the `input`</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -----------</span>
+<span class="sd">        output  : numpy array,shape=(N,n_out)</span>
+<span class="sd">                    :math:`f(b_k + w_k^T h_{i-1}(x))`</span>
+<span class="sd">        &quot;&quot;&quot;</span>                
+        <span class="c">#performs affine transformation over input vector        </span>
+        <span class="n">linout</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">W</span><span class="p">,</span><span class="nb">input</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">,(</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="mi">1</span><span class="p">));</span>     
+        <span class="c">#applies non linear activation function over computed linear transformation</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">activation</span><span class="p">(</span><span class="n">linout</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="p">;</span>                 
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="p">;</span>
+
+
+       </div>
+<div class="viewcode-block" id="HiddenLayer.activation_gradient"><a class="viewcode-back" href="../MLPHiddenLayer.html#MLPHiddenLayer.HiddenLayer.activation_gradient">[docs]</a>    <span class="k">def</span> <span class="nf">activation_gradient</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; function computes the value of gradient of activation function for output of hidden layer over all input samples N</span>
+<span class="sd">        </span>
+<span class="sd">        </span>
+<span class="sd">            </span>
+<span class="sd">        Returns</span>
+<span class="sd">        ---------</span>
+<span class="sd">        output : numpy array , shape=(N,n_out)</span>
+<span class="sd">                :math:`h_k(x)=f(a_k)=\\begin{align} \\frac{\partial \mathbf{h}_{k-1,j} }{\partial \mathbf{a}_{k-1,j}} \end{align}`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">out1</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="p">,(</span><span class="mi">1</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="p">));</span>
+        <span class="k">return</span> <span class="n">out1</span><span class="p">;</span>
+
+</div>
+<div class="viewcode-block" id="HiddenLayer.set_training_data"><a class="viewcode-back" href="../MLPHiddenLayer.html#MLPHiddenLayer.HiddenLayer.set_training_data">[docs]</a>    <span class="k">def</span> <span class="nf">set_training_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">args</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Function to set the training data for current computation loop</span>
+<span class="sd">            useful in running algorithms for batch processing &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">=</span><span class="n">args</span><span class="p">;</span>
+
+       
+    </div>
+<div class="viewcode-block" id="HiddenLayer.linear_gradient"><a class="viewcode-back" href="../MLPHiddenLayer.html#MLPHiddenLayer.HiddenLayer.linear_gradient">[docs]</a>    <span class="k">def</span> <span class="nf">linear_gradient</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">weights</span><span class="p">,</span><span class="n">error</span><span class="p">):</span>   
+            <span class="sd">&quot;&quot;&quot; The function compues gradient of likelyhodd function wrt output of hidden layer</span>
+<span class="sd">                    </span>
+<span class="sd">            \frac{\partial L }{\partial \mathbf{h}_{k-1,j}}</span>
+<span class="sd">            </span>
+<span class="sd">            Parameters </span>
+<span class="sd">            ------------</span>
+<span class="sd">            weights : weights of next hidden layer</span>
+<span class="sd">            error   : backpropagated error from next layer</span>
+<span class="sd">        </span>
+<span class="sd">            </span>
+<span class="sd">            &quot;&quot;&quot;</span>            
+            
+            <span class="k">return</span> <span class="n">numpy</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">error</span><span class="p">,</span><span class="n">weights</span><span class="p">);</span>
+
+</div>
+<div class="viewcode-block" id="HiddenLayer.compute_error"><a class="viewcode-back" href="../MLPHiddenLayer.html#MLPHiddenLayer.HiddenLayer.compute_error">[docs]</a>    <span class="k">def</span> <span class="nf">compute_error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">w</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>      
+        <span class="sd">&quot;&quot;&quot;                 </span>
+<span class="sd">        This function computes the gradient of the likelyhood function wrt to parameters  of the hidden layer for single input</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters </span>
+<span class="sd">        -------------</span>
+<span class="sd">        x : numpy array,shape=(n_out,)</span>
+<span class="sd">            `x` represents :math:`\\begin{align} \\frac{\partial \mathbf{h}_{k,j} }{\partial \mathbf{a}_{k,j}} \end{align}`,the gradient of activation function wrt to input</span>
+<span class="sd">        w : numpy array,shape=(n_out,)</span>
+<span class="sd">            `w` represents :math:`\\begin{align} \\frac{\partial L }{\partial \mathbf{h}_{k,i}}\end{align}` the gradient of the likelyhood fuction wrt output of hidden layer</span>
+<span class="sd">        y : numpy array,shape=(n_in,)</span>
+<span class="sd">            `y` represents :math:`h_{k-1,j}` the input hidden layer</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        ------------</span>
+<span class="sd">        res : numpy array,shape=(n_in+1,n_out)        </span>
+<span class="sd">              :math:`\\begin{align} \\frac{\partial L }{\partial \mathbf{W}_{k-1,i,j}}  \\text{ and } \\frac{\partial L }{\partial \mathbf{W}_{k-1,i}} \end{align}`</span>
+<span class="sd">        &quot;&quot;&quot;</span>        
+       
+        
+        <span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="o">*</span><span class="n">w</span><span class="p">;</span>                
+        <span class="c">#gradient of likelyhood function wrt input activation</span>
+        <span class="n">res1</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="mi">1</span><span class="p">);</span>
+        <span class="c">#gradient of likelyhood function wrt weight matrix</span>
+        <span class="n">res</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">res1</span><span class="p">,</span><span class="n">y</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="p">);</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">eta</span><span class="o">=</span><span class="mf">0.0001</span>
+        <span class="c">#code for L1 and L2 regularization </span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Regularization</span><span class="o">==</span><span class="mi">2</span><span class="p">:</span>
+           <span class="n">res</span><span class="o">=</span><span class="n">res</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">eta</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">W</span><span class="p">;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Regularization</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+           <span class="n">res</span><span class="o">=</span><span class="n">res</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">eta</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">W</span><span class="p">);</span>
+
+        <span class="c">#stacking the parameters and preparing for returning            </span>
+        <span class="n">res</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">res</span><span class="p">,</span><span class="n">res1</span><span class="p">));</span>
+        <span class="k">print</span> <span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+        <span class="n">ddd</span>
+        <span class="k">return</span> <span class="n">res</span><span class="o">.</span><span class="n">T</span><span class="p">;</span>
+        
+                        
+    </div>
+<div class="viewcode-block" id="HiddenLayer.cost_gradients"><a class="viewcode-back" href="../MLPHiddenLayer.html#MLPHiddenLayer.HiddenLayer.cost_gradients">[docs]</a>    <span class="k">def</span> <span class="nf">cost_gradients</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">weights</span><span class="p">,</span><span class="n">activation</span><span class="p">,</span><span class="n">error</span><span class="p">):</span>        
+        <span class="sd">&quot;&quot;&quot; function to compute the gradient of log likelyhood function wrt the parameters of the hidden layer</span>
+<span class="sd">        averaged over all the input samples.        </span>
+<span class="sd">        &quot;&quot;&quot;</span>                        
+        
+        <span class="n">we</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">linear_gradient</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span><span class="n">error</span><span class="p">);</span>
+        <span class="n">e</span><span class="o">=</span><span class="p">[</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_error</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">we</span><span class="p">,</span><span class="n">b</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span><span class="n">b</span> <span class="ow">in</span> <span class="n">izip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">activation_gradient</span><span class="p">(),</span><span class="n">activation</span><span class="p">)]</span>
+        <span class="n">gW</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">e</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="p">;</span>        
+        <span class="k">return</span> <span class="n">gW</span><span class="p">;</span>
+
+</div>
+<div class="viewcode-block" id="HiddenLayer.update_gradients"><a class="viewcode-back" href="../MLPHiddenLayer.html#MLPHiddenLayer.HiddenLayer.update_gradients">[docs]</a>    <span class="k">def</span> <span class="nf">update_gradients</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">grads</span><span class="p">,</span><span class="n">learning_rate</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; function to updated the learn parameters to the model &quot;&quot;&quot;</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">=</span><span class="n">grads</span><span class="p">;</span>
+        <span class="n">param1</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">nparam</span><span class="p">);</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">W</span><span class="o">=</span><span class="n">param1</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">nparam</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="o">=</span><span class="n">param1</span><span class="p">[:,</span><span class="bp">self</span><span class="o">.</span><span class="n">nparam</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span>
+        
+
+        
+
+    
+
+</div></div>
+<div class="viewcode-block" id="MLP"><a class="viewcode-back" href="../MLPHiddenLayer.html#MLPHiddenLayer.MLP">[docs]</a><span class="k">class</span> <span class="nc">MLP</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+   <span class="sd">&quot;&quot;&quot; Class with implements the Multi layer perceptron feed forward neural networks&quot;&quot;&quot;</span>    
+   <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">n_in</span><span class="p">,</span><span class="n">n_hidden_layers</span><span class="p">,</span><span class="n">n_hidden_units</span><span class="p">,</span><span class="n">n_out</span><span class="p">):</span>       
+            <span class="bp">self</span><span class="o">.</span><span class="n">n_hidden_layers</span><span class="o">=</span><span class="n">n_hidden_layers</span><span class="p">;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">n_hidden_units</span><span class="o">=</span><span class="n">n_hidden_units</span><span class="p">;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">n_in</span><span class="o">=</span><span class="n">n_in</span><span class="p">;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">n_out</span><span class="o">=</span><span class="n">n_out</span><span class="p">;</span>
+            <span class="k">if</span> <span class="n">n_hidden_layers</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+                <span class="n">n_hidden_units</span><span class="o">=</span><span class="n">n_in</span><span class="p">;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">hiddenLayer</span> <span class="o">=</span> <span class="p">[</span><span class="n">HiddenLayer</span><span class="p">(</span><span class="n">n_in</span><span class="o">=</span><span class="n">n_in</span><span class="p">,</span> <span class="n">n_out</span><span class="o">=</span><span class="n">n_hidden_units</span><span class="p">,</span><span class="n">activation</span><span class="o">=</span><span class="n">sigmoid_stable</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_hidden_layers</span><span class="p">)];</span>    
+            <span class="bp">self</span><span class="o">.</span><span class="n">logRegressionLayer</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="o">.</span><span class="n">LogisticRegression</span><span class="p">(</span><span class="n">n_hidden_units</span><span class="p">,</span><span class="n">n_out</span><span class="p">);</span>
+
+   
+<div class="viewcode-block" id="MLP.lable"><a class="viewcode-back" href="../MLPHiddenLayer.html#MLPHiddenLayer.MLP.lable">[docs]</a>   <span class="k">def</span> <span class="nf">lable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
+      <span class="sd">&quot;&quot;&quot; mapping functions for output label and probability &quot;&quot;&quot;</span>
+      <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">labels</span><span class="p">[</span><span class="n">y</span><span class="p">];</span>
+
+  </div>
+<div class="viewcode-block" id="MLP.probability"><a class="viewcode-back" href="../MLPHiddenLayer.html#MLPHiddenLayer.MLP.probability">[docs]</a>   <span class="k">def</span> <span class="nf">probability</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
+       <span class="sd">&quot;&quot;&quot; mapping functions for output label and probability &quot;&quot;&quot;</span>
+       <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">temp_output</span><span class="p">[</span><span class="n">y</span><span class="p">];</span>   
+            
+   </div>
+<div class="viewcode-block" id="MLP.propagate_forward"><a class="viewcode-back" href="../MLPHiddenLayer.html#MLPHiddenLayer.MLP.propagate_forward">[docs]</a>   <span class="k">def</span> <span class="nf">propagate_forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="nb">input</span><span class="p">):</span>
+       <span class="sd">&quot;&quot;&quot;the function that performs forward iteration to compute the output&quot;&quot;&quot;</span>
+       <span class="bp">self</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+   
+ 
+</div>
+<div class="viewcode-block" id="MLP.set_training_data"><a class="viewcode-back" href="../MLPHiddenLayer.html#MLPHiddenLayer.MLP.set_training_data">[docs]</a>   <span class="k">def</span> <span class="nf">set_training_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">args</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; function to set the training data for current computation loop&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot; useful in running algorithms for batch processing &quot;&quot;&quot;</span>       
+        <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">=</span><span class="n">args</span><span class="p">;</span>   
+
+               </div>
+<div class="viewcode-block" id="MLP.propagate_backward"><a class="viewcode-back" href="../MLPHiddenLayer.html#MLPHiddenLayer.MLP.propagate_backward">[docs]</a>   <span class="k">def</span> <span class="nf">propagate_backward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">error</span><span class="p">,</span><span class="n">weights</span><span class="p">,</span><span class="nb">input</span><span class="p">):</span>                 
+        <span class="sd">&quot;&quot;&quot; the function that executes the backward propagation loop on hidden layers&quot;&quot;&quot;</span>                              
+        <span class="c">#input matrix for the hidden layer    </span>
+        <span class="n">input1</span><span class="o">=</span><span class="nb">input</span><span class="p">;</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_hidden_layers</span><span class="p">):</span>                        
+            <span class="n">prev_error</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">;</span>
+            <span class="n">best_grad</span><span class="o">=</span><span class="p">[];</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">):</span>
+                <span class="sd">&quot;&quot;&quot; computing the derivative of the parameters of the hidden layers&quot;&quot;&quot;</span>
+                <span class="n">hidden_layer</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hiddenLayer</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">n_hidden_layers</span><span class="o">-</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span>
+                <span class="n">hidden_layer</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">input1</span><span class="p">);</span>
+          
+                <span class="c"># computing the gradient of likelyhood function wrt the parameters of the hidden layer </span>
+                <span class="n">grad</span><span class="o">=</span><span class="n">hidden_layer</span><span class="o">.</span><span class="n">cost_gradients</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span><span class="n">input1</span><span class="p">,</span><span class="n">error</span><span class="p">);</span>
+                <span class="c">#update the parameter of hidden layer</span>
+                <span class="n">res</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">hidden_layer</span><span class="o">.</span><span class="n">params</span><span class="p">,</span><span class="n">grad</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span><span class="mf">0.13</span><span class="p">);</span>
+            
+                <span class="sd">&quot;&quot;&quot; update the parameters &quot;&quot;&quot;</span>
+                <span class="n">hidden_layer</span><span class="o">.</span><span class="n">update_gradients</span><span class="p">(</span><span class="n">res</span><span class="p">,</span><span class="mf">0.9</span><span class="p">);</span>
+            <span class="c">#set the weights ,inputs and error required for the back propagation algorithm</span>
+            <span class="c">#for the next layer</span>
+            <span class="n">weights</span><span class="o">=</span><span class="n">hidden_layer</span><span class="o">.</span><span class="n">W</span><span class="p">;</span>
+            <span class="n">error</span><span class="o">=</span><span class="n">grad</span><span class="p">[:,</span><span class="n">hidden_layer</span><span class="o">.</span><span class="n">n_in</span><span class="p">];</span>                                    
+            <span class="bp">self</span><span class="o">.</span><span class="n">hiddenLayer</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">n_hidden_layers</span><span class="o">-</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="n">hidden_layer</span><span class="p">;</span>
+            <span class="n">input1</span><span class="o">=</span><span class="n">hidden_layer</span><span class="o">.</span><span class="n">output</span><span class="p">;</span>
+                    
+                    </div>
+<div class="viewcode-block" id="MLP.callback"><a class="viewcode-back" href="../MLPHiddenLayer.html#MLPHiddenLayer.MLP.callback">[docs]</a>   <span class="k">def</span> <span class="nf">callback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">w</span><span class="p">,</span><span class="n">num</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">flag</span><span class="p">,</span><span class="n">eta</span><span class="p">):</span>    
+        <span class="sd">&quot;&quot;&quot; The callback function from optimizer,can be used to display periodic updates &quot;&quot;&quot;</span>                               
+        <span class="c">#compute likelyhood function if  instructed by optimizer</span>
+        <span class="k">if</span> <span class="n">flag</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+            <span class="n">l</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cost</span><span class="p">();</span>
+            <span class="k">print</span> <span class="s">&quot;Loss function   : &quot;</span><span class="p">,</span><span class="n">l</span><span class="p">;</span>       
+            <span class="c">#save the model file</span>
+            <span class="n">file_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="o">+</span><span class="s">&quot;.pyvision1&quot;</span><span class="p">;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">file_name</span><span class="p">);</span>       
+
+          
+
+                  </div>
+<div class="viewcode-block" id="MLP.cost"><a class="viewcode-back" href="../MLPHiddenLayer.html#MLPHiddenLayer.MLP.cost">[docs]</a>   <span class="k">def</span> <span class="nf">cost</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+       <span class="sd">&quot;&quot;&quot; the function computer the likelyhood taking into account regularization over all hidden layers &quot;&quot;&quot;</span>
+       <span class="c">#compute the cost of prediction</span>
+       <span class="n">l</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">logRegressionLayer</span><span class="o">.</span><span class="n">negative_log_likelihood</span><span class="p">()</span>
+       <span class="bp">self</span><span class="o">.</span><span class="n">eta</span><span class="o">=</span><span class="mf">0.0001</span>
+       <span class="c">#incorporate the prior likelihood of hidden layers</span>
+       <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_hidden_layers</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+           <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_hidden_layers</span><span class="p">):</span>
+               <span class="n">hidden_layer</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hiddenLayer</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">n_hidden_layers</span><span class="o">-</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span>
+               <span class="n">l</span><span class="o">=</span><span class="n">l</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">eta</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">hidden_layer</span><span class="o">.</span><span class="n">W</span><span class="o">**</span><span class="mi">2</span><span class="p">));</span>
+      
+       <span class="c">#return the compute cost             </span>
+       <span class="k">return</span> <span class="n">l</span><span class="p">;</span>
+    
+                    
+                
+  </div>
+<div class="viewcode-block" id="MLP.learn"><a class="viewcode-back" href="../MLPHiddenLayer.html#MLPHiddenLayer.MLP.learn">[docs]</a>   <span class="k">def</span> <span class="nf">learn</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">update</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; the main function that performs learning,computing gradients and updating parameters &quot;&quot;&quot;</span>
+        <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="o">=</span><span class="n">update</span><span class="p">;</span>                        
+        <span class="c">#execute the forward iteration loop</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">propagate_forward</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>        
+        <span class="n">args1</span><span class="o">=</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hidden_output</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
+        <span class="c">#set the input for the output logistic regression layer</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logRegressionLayer</span><span class="o">.</span><span class="n">set_training_data</span><span class="p">(</span><span class="n">args1</span><span class="p">);</span>
+        <span class="c">#gradient computation and parameter updation of output layer</span>
+        <span class="p">[</span><span class="n">params</span><span class="p">,</span><span class="n">grad</span><span class="p">]</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">logRegressionLayer</span><span class="o">.</span><span class="n">learn</span><span class="p">(</span><span class="n">update</span><span class="p">);</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logRegressionLayer</span><span class="o">.</span><span class="n">update_params</span><span class="p">(</span><span class="n">params</span><span class="p">);</span>
+        <span class="c">#[params,grad]=self.logRegressionLayer.learn();</span>
+                   
+        <span class="c">#initialize the gradiients and weights for backward error propagation</span>
+        <span class="n">error</span><span class="o">=</span><span class="n">grad</span><span class="p">;</span>
+        <span class="n">weights</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">logRegressionLayer</span><span class="o">.</span><span class="n">W</span><span class="p">;</span>
+        
+        <span class="c">#perform the backward iteration over the hidden layers</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_hidden_layers</span> <span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>   
+             <span class="n">weights</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">logRegressionLayer</span><span class="o">.</span><span class="n">W</span><span class="p">;</span>
+             <span class="bp">self</span><span class="o">.</span><span class="n">propagate_backward</span><span class="p">(</span><span class="n">error</span><span class="p">,</span><span class="n">weights</span><span class="p">,</span><span class="n">x</span><span class="p">)</span>
+             
+        <span class="k">return</span> <span class="p">[</span><span class="bp">None</span><span class="p">,</span><span class="bp">None</span><span class="p">];</span>                
+
+                          
+</div>
+<div class="viewcode-block" id="MLP.predict"><a class="viewcode-back" href="../MLPHiddenLayer.html#MLPHiddenLayer.MLP.predict">[docs]</a>   <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">x</span><span class="p">):</span>
+       <span class="sd">&quot;&quot;&quot; the function predicts the output of the MLP feed forward network given the input X &quot;&quot;&quot;</span>                                 
+       <span class="nb">input</span><span class="o">=</span><span class="n">x</span><span class="p">;</span>
+       <span class="c">#loop for computing output of each hidden layer</span>
+       <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_hidden_layers</span><span class="p">):</span>
+       <span class="c">#    print &quot;computing hidden layer&quot;,i</span>
+           <span class="n">hidden</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hiddenLayer</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+           <span class="c">#setting the output of present hidden layer as input to the next</span>
+           <span class="nb">input</span><span class="o">=</span><span class="n">hidden</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>           
+           <span class="bp">self</span><span class="o">.</span><span class="n">hiddenLayer</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">hidden</span><span class="p">;</span>
+       <span class="c">#the input to output layer    </span>
+       <span class="bp">self</span><span class="o">.</span><span class="n">hidden_output</span><span class="o">=</span><span class="nb">input</span><span class="p">;</span>
+       <span class="c">#ccompute the prediction output over output layer</span>
+       <span class="n">o</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">logRegressionLayer</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="nb">input</span><span class="p">);</span>
+       <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="o">=</span><span class="n">o</span><span class="p">;</span>
+       
+       <span class="k">return</span> <span class="n">o</span><span class="p">;</span>
+       
+   </div>
+<div class="viewcode-block" id="MLP.classify"><a class="viewcode-back" href="../MLPHiddenLayer.html#MLPHiddenLayer.MLP.classify">[docs]</a>   <span class="k">def</span> <span class="nf">classify</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">x</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; the method performs classificaiton by assigning each input vector x to one of defined class lables &quot;&quot;&quot;</span>             
+        <span class="c">#compute the prediction probability</span>
+        <span class="n">output</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>        
+        <span class="c">#get index if class with highest probability</span>
+        <span class="n">indices</span><span class="o">=</span><span class="n">output</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">);</span>            
+        <span class="c">#get the output label exhibiting highest probability</span>
+        <span class="n">labels</span><span class="o">=</span><span class="nb">map</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lable</span><span class="p">,</span> <span class="n">indices</span><span class="p">);</span> 
+        <span class="k">return</span> <span class="n">labels</span><span class="p">;</span>
+    
+   </div>
+<div class="viewcode-block" id="MLP.save"><a class="viewcode-back" href="../MLPHiddenLayer.html#MLPHiddenLayer.MLP.save">[docs]</a>   <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">file_name</span><span class="p">):</span>
+       <span class="sd">&quot;&quot;&quot; the function saves the trainied model parameters to output file &quot;&quot;&quot;</span>           
+       <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="s">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">output</span><span class="p">:</span>
+           <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_hidden_layers</span><span class="p">,</span> <span class="n">output</span> <span class="p">)</span>
+           <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">labels</span><span class="p">,</span><span class="n">output</span><span class="p">);</span>
+           <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_hidden_layers</span><span class="p">):</span>
+               <span class="n">hidden_layer</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hiddenLayer</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+               <span class="k">print</span> <span class="s">&quot;saving hidden layer &quot;</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="s">&quot;in file&quot;</span><span class="p">,</span><span class="n">file_name</span>
+               <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span> <span class="n">hidden_layer</span><span class="p">,</span> <span class="n">output</span> <span class="p">)</span>
+        
+           <span class="n">output_layer</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">logRegressionLayer</span><span class="p">;</span>
+           <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span> <span class="n">output_layer</span><span class="p">,</span> <span class="n">output</span><span class="p">)</span>
+    
+</div>
+<div class="viewcode-block" id="MLP.load"><a class="viewcode-back" href="../MLPHiddenLayer.html#MLPHiddenLayer.MLP.load">[docs]</a>   <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">file_name</span><span class="p">):</span>
+       <span class="sd">&quot;&quot;&quot; the method loads the trained model parameters from output file &quot;&quot;&quot;</span>       
+       <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="s">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="nb">input</span><span class="p">:</span>
+           <span class="bp">self</span><span class="o">.</span><span class="n">n_hidden_layers</span><span class="o">=</span><span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">input</span><span class="p">);</span>
+           <span class="bp">self</span><span class="o">.</span><span class="n">labels</span><span class="o">=</span><span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">input</span><span class="p">);</span>
+           <span class="bp">self</span><span class="o">.</span><span class="n">hiddenLayer</span> <span class="o">=</span> <span class="p">[</span><span class="n">HiddenLayer</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_hidden_layers</span><span class="p">)];</span> 
+       
+           
+           <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_hidden_layers</span><span class="p">):</span>
+               <span class="k">print</span> <span class="n">i</span>
+               <span class="bp">self</span><span class="o">.</span><span class="n">hiddenLayer</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">input</span><span class="p">);</span>
+               <span class="k">print</span> <span class="bp">self</span><span class="o">.</span><span class="n">hiddenLayer</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span>
+           
+           <span class="bp">self</span><span class="o">.</span><span class="n">logRegressionLayer</span><span class="o">=</span><span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+           <span class="k">print</span> <span class="bp">self</span><span class="o">.</span><span class="n">logRegressionLayer</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span>
+           <span class="bp">self</span><span class="o">.</span><span class="n">n_in</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hiddenLayer</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">n_in</span><span class="p">;</span>
+           <span class="bp">self</span><span class="o">.</span><span class="n">n_out</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">labels</span><span class="p">);</span>
+           <span class="bp">self</span><span class="o">.</span><span class="n">n_hidden_units</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hiddenLayer</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">n_out</span><span class="p">;</span>
+           
+    
+ </div>
+<div class="viewcode-block" id="MLP.train"><a class="viewcode-back" href="../MLPHiddenLayer.html#MLPHiddenLayer.MLP.train">[docs]</a>   <span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">train</span><span class="p">,</span><span class="n">test</span><span class="p">,</span><span class="n">validate</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; the main training function,that initialzes the optimizer</span>
+<span class="sd">        and starts the training process &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">labels</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">train</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>            
+        <span class="c">#initialize the optimizer        </span>
+        <span class="n">opti</span><span class="o">=</span><span class="n">Optimizer</span><span class="o">.</span><span class="n">Optimizer</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="s">&quot;SGD&quot;</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">200</span><span class="p">,</span><span class="mf">0.13</span><span class="p">,</span><span class="mi">200</span><span class="o">*</span><span class="mf">0.001</span><span class="p">);</span>    
+        <span class="c">#set the training,testing and validation datasets</span>
+        <span class="n">opti</span><span class="o">.</span><span class="n">set_datasets</span><span class="p">(</span><span class="n">train</span><span class="p">,</span><span class="n">test</span><span class="p">,</span><span class="n">validate</span><span class="p">);</span>
+        <span class="c">#set the cinoytat</span>
+        <span class="n">opti</span><span class="o">.</span><span class="n">set_functions</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">logRegressionLayer</span><span class="o">.</span><span class="n">negative_log_likelihood</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">set_training_data</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">classify</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">callback</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">learn</span><span class="p">,</span><span class="bp">None</span><span class="p">,</span><span class="bp">None</span><span class="p">);</span>
+        <span class="n">opti</span><span class="o">.</span><span class="n">run</span><span class="p">();</span>
+     </div></div>
+<span class="mi">1</span>     
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>    
+
+     <span class="n">model_name1</span><span class="o">=</span><span class="s">&quot;/home/pi19404/Documents/mnist.pkl.gz&quot;</span>
+     <span class="n">data</span><span class="o">=</span><span class="n">LoadDataSets</span><span class="o">.</span><span class="n">LoadDataSets</span><span class="p">();</span>
+     <span class="p">[</span><span class="n">train</span><span class="p">,</span><span class="n">test</span><span class="p">,</span><span class="n">validate</span><span class="p">]</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">load_pickle_data</span><span class="p">(</span><span class="n">model_name1</span><span class="p">);</span>
+     <span class="n">x</span><span class="o">=</span><span class="n">train</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="n">borrow</span><span class="o">=</span><span class="bp">True</span><span class="p">);</span>
+     <span class="n">y</span><span class="o">=</span><span class="n">train</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">eval</span><span class="p">();</span>     
+     <span class="n">train</span><span class="o">=</span><span class="p">[</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">];</span>
+     <span class="c">#train=[x,y];</span>
+
+     <span class="n">x</span><span class="o">=</span><span class="n">test</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="n">borrow</span><span class="o">=</span><span class="bp">True</span><span class="p">);</span>
+     <span class="n">y</span><span class="o">=</span><span class="n">test</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">eval</span><span class="p">();</span>
+     <span class="n">test</span><span class="o">=</span><span class="p">[</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">];</span>
+     
+     <span class="n">x</span><span class="o">=</span><span class="n">validate</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="n">borrow</span><span class="o">=</span><span class="bp">True</span><span class="p">);</span>
+     <span class="n">y</span><span class="o">=</span><span class="n">validate</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">eval</span><span class="p">();</span>
+     <span class="n">validate</span><span class="o">=</span><span class="p">[</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">];</span>
+
+     <span class="n">labels</span> <span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">y</span><span class="p">);</span>        
+     <span class="n">n_classes</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">);</span>
+     <span class="n">n_dimensions</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">x</span><span class="p">)[</span><span class="mi">1</span><span class="p">];</span>
+                
+     <span class="n">classifier</span><span class="o">=</span><span class="n">MLP</span><span class="p">(</span><span class="n">n_dimensions</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="n">n_classes</span><span class="p">);</span>
+     <span class="n">classifier</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s">&quot;MLP.pyvision1&quot;</span><span class="p">);</span>
+     <span class="n">classifier</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">train</span><span class="p">,</span><span class="n">test</span><span class="p">,</span><span class="n">validate</span><span class="p">);</span>
+       
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2014, pi19404.
+    </div>
+     <div class="rel">
+    
+    <div class="buttonPrevious">
+      <a href="../py-modindex.html">Previous
+      </a>
+    </div>
+    
+     </div>
+
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-22606712-2']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    
+
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script type="text/javascript"> google.load('search', '1',
+        {language : 'en'}); google.setOnLoadCallback(function() {
+            var customSearchControl = new
+            google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+            customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+            var options = new google.search.DrawOptions();
+            options.setAutoComplete(true);
+            customSearchControl.draw('cse', options); }, true);
+    </script>
+  </body>
+</html>

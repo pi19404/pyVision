@@ -1,0 +1,308 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+    <title>LogisticRegression module &mdash; pyVision 0.0.1 documentation</title>
+  <!-- htmltitle is before nature.css - we use this hack to load bootstrap first -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="_static/css/bootstrap.min.css" media="screen" />
+  <link rel="stylesheet" href="_static/css/bootstrap-responsive.css"/>
+
+    
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="pyVision 0.0.1 documentation" href="index.html" />
+    <link rel="next" title="MLPHiddenLayer module" href="MLPHiddenLayer.html" />
+    <link rel="prev" title="LoadDataSets module" href="LoadDataSets.html" />
+  
+   
+       <script type="text/javascript" src="_static/sidebar.js"></script>
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="_static/js/bootstrap.min.js" type="text/javascript"></script>
+  <link rel="canonical" href="http://scikit-learn.org/stable/LogisticRegression.html" />
+
+  <script type="text/javascript">
+    $("div.buttonNext, div.buttonPrevious").hover(
+       function () {
+           $(this).css('background-color', '#FF9C34');
+       },
+       function () {
+           $(this).css('background-color', '#A7D6E2');
+       }
+    );
+    var bodywrapper = $('.bodywrapper');
+    var sidebarbutton = $('#sidebarbutton');
+    sidebarbutton.css({'height': '900px'});
+  </script>
+
+  </head>
+  <body>
+
+
+<div class="header-wrapper">
+    <div class="header"><div class="navbar">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="https://github.com/pi19404/OpenVision">Source</a></li>            
+            </ul>
+
+            <div class="search_form">
+                <div id="cse" style="width: 100%;"></div>
+            </div>
+        </div> <!-- end navbar --></div>
+</div>
+
+
+<!-- Github "fork me" ribbon -->
+<a href="https://github.com/pi19404/OpenVision">
+  <img class="fork-me"
+       style="position: absolute; top: 0; right: 0; border: 0;"
+       src="_static/img/forkme.png"
+       alt="Fork me on GitHub" />
+</a>
+
+<div class="content-wrapper">
+    <div class="sphinxsidebar">
+    <div class="sphinxsidebarwrapper">
+        <div class="rel rellarge">
+    
+
+  <!-- rellinks[1:] is an ugly hack to avoid link to module
+  index -->
+        <div class="rellink">
+        <a href="LoadDataSets.html"
+        accesskey="P">Previous
+        <br/>
+        <span class="smallrellink">
+        LoadDataSets mod...
+        </span>
+            <span class="hiddenrellink">
+            LoadDataSets module
+            </span>
+        </a>
+        </div>
+            <div class="spacer">
+            &nbsp;
+            </div>
+        <div class="rellink">
+        <a href="MLPHiddenLayer.html"
+        accesskey="N">Next
+        <br/>
+        <span class="smallrellink">
+        MLPHiddenLayer m...
+        </span>
+            <span class="hiddenrellink">
+            MLPHiddenLayer module
+            </span>
+        </a>
+        </div>
+            <div class="spacer">
+            &nbsp;
+            </div>
+        <div class="rellink">
+        <a href="py-modindex.html"
+        >Modules
+        <br/>
+        <span class="smallrellink">
+        Python Module In...
+        </span>
+            <span class="hiddenrellink">
+            Python Module Index
+            </span>
+        </a>
+        </div>
+
+    <!-- Ad a link to the 'up' page -->
+    </div>
+    
+      <p class="doc-version">This documentation is for pyVision <strong>version 0.0.1</strong> &mdash; </p>
+    <p class="citing">If you use the software, please consider citing pyVision</a>.</p>
+    <ul>
+<li><a class="reference internal" href="#">LogisticRegression module</a></li>
+</ul>
+
+    </div>
+</div>
+
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-LogisticRegression">
+<span id="logisticregression-module"></span><h1>LogisticRegression module<a class="headerlink" href="#module-LogisticRegression" title="Permalink to this headline">¶</a></h1>
+<p>Logistic Regression</p>
+<dl class="class">
+<dt id="LogisticRegression.LogisticRegression">
+<em class="property">class </em><tt class="descclassname">LogisticRegression.</tt><tt class="descname">LogisticRegression</tt><big>(</big><em>n_in</em>, <em>n_out</em>, <em>labels=None</em>, <em>Regularization=2</em>, <em>eta=0.0001</em><big>)</big><a class="reference internal" href="_modules/LogisticRegression.html#LogisticRegression"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LogisticRegression.LogisticRegression" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="LogisticRegression.LogisticRegression.callback">
+<tt class="descname">callback</tt><big>(</big><em>w</em>, <em>num</em>, <em>x</em>, <em>y</em>, <em>flag</em>, <em>eta</em>, <em>error=None</em><big>)</big><a class="reference internal" href="_modules/LogisticRegression.html#LogisticRegression.callback"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LogisticRegression.LogisticRegression.callback" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="LogisticRegression.LogisticRegression.classify">
+<tt class="descname">classify</tt><big>(</big><em>x</em><big>)</big><a class="reference internal" href="_modules/LogisticRegression.html#LogisticRegression.classify"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LogisticRegression.LogisticRegression.classify" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="LogisticRegression.LogisticRegression.compute_gradients">
+<tt class="descname">compute_gradients</tt><big>(</big><em>out</em>, <em>y</em>, <em>x</em><big>)</big><a class="reference internal" href="_modules/LogisticRegression.html#LogisticRegression.compute_gradients"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LogisticRegression.LogisticRegression.compute_gradients" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="LogisticRegression.LogisticRegression.get_params">
+<tt class="descname">get_params</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/LogisticRegression.html#LogisticRegression.get_params"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LogisticRegression.LogisticRegression.get_params" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="LogisticRegression.LogisticRegression.gradients">
+<tt class="descname">gradients</tt><big>(</big><em>params=None</em><big>)</big><a class="reference internal" href="_modules/LogisticRegression.html#LogisticRegression.gradients"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LogisticRegression.LogisticRegression.gradients" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="LogisticRegression.LogisticRegression.initialize_parameters">
+<tt class="descname">initialize_parameters</tt><big>(</big><em>n_in</em>, <em>n_out</em><big>)</big><a class="reference internal" href="_modules/LogisticRegression.html#LogisticRegression.initialize_parameters"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LogisticRegression.LogisticRegression.initialize_parameters" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="LogisticRegression.LogisticRegression.lable">
+<tt class="descname">lable</tt><big>(</big><em>y</em><big>)</big><a class="reference internal" href="_modules/LogisticRegression.html#LogisticRegression.lable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LogisticRegression.LogisticRegression.lable" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="LogisticRegression.LogisticRegression.learn">
+<tt class="descname">learn</tt><big>(</big><em>update=None</em><big>)</big><a class="reference internal" href="_modules/LogisticRegression.html#LogisticRegression.learn"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LogisticRegression.LogisticRegression.learn" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="LogisticRegression.LogisticRegression.negative_log_likelihood">
+<tt class="descname">negative_log_likelihood</tt><big>(</big><em>params=None</em><big>)</big><a class="reference internal" href="_modules/LogisticRegression.html#LogisticRegression.negative_log_likelihood"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LogisticRegression.LogisticRegression.negative_log_likelihood" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="LogisticRegression.LogisticRegression.predict">
+<tt class="descname">predict</tt><big>(</big><em>x</em><big>)</big><a class="reference internal" href="_modules/LogisticRegression.html#LogisticRegression.predict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LogisticRegression.LogisticRegression.predict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="LogisticRegression.LogisticRegression.probability">
+<tt class="descname">probability</tt><big>(</big><em>y</em><big>)</big><a class="reference internal" href="_modules/LogisticRegression.html#LogisticRegression.probability"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LogisticRegression.LogisticRegression.probability" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="LogisticRegression.LogisticRegression.set_params">
+<tt class="descname">set_params</tt><big>(</big><em>params</em><big>)</big><a class="reference internal" href="_modules/LogisticRegression.html#LogisticRegression.set_params"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LogisticRegression.LogisticRegression.set_params" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="LogisticRegression.LogisticRegression.set_training_data">
+<tt class="descname">set_training_data</tt><big>(</big><em>args</em><big>)</big><a class="reference internal" href="_modules/LogisticRegression.html#LogisticRegression.set_training_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LogisticRegression.LogisticRegression.set_training_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="LogisticRegression.LogisticRegression.train">
+<tt class="descname">train</tt><big>(</big><em>train</em>, <em>test</em>, <em>validate</em><big>)</big><a class="reference internal" href="_modules/LogisticRegression.html#LogisticRegression.train"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LogisticRegression.LogisticRegression.train" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="LogisticRegression.LogisticRegression.update_params">
+<tt class="descname">update_params</tt><big>(</big><em>params=None</em><big>)</big><a class="reference internal" href="_modules/LogisticRegression.html#LogisticRegression.update_params"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LogisticRegression.LogisticRegression.update_params" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="LogisticRegression.LogisticRegression.update_params_grads">
+<tt class="descname">update_params_grads</tt><big>(</big><em>W</em>, <em>b</em><big>)</big><a class="reference internal" href="_modules/LogisticRegression.html#LogisticRegression.update_params_grads"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LogisticRegression.LogisticRegression.update_params_grads" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="LogisticRegression.LogisticRegression.vector_mul">
+<tt class="descname">vector_mul</tt><big>(</big><em>x</em>, <em>y</em><big>)</big><a class="reference internal" href="_modules/LogisticRegression.html#LogisticRegression.vector_mul"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#LogisticRegression.LogisticRegression.vector_mul" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2014, pi19404.
+      <a href="_sources/LogisticRegression.txt" rel="nofollow">Show this page source</a>
+    </div>
+     <div class="rel rellarge">
+    
+    <div class="buttonPrevious">
+      <a href="LoadDataSets.html">Previous
+      </a>
+    </div>
+    <div class="buttonNext">
+      <a href="MLPHiddenLayer.html">Next
+      </a>
+    </div>
+    <div class="buttonPrevious">
+      <a href="py-modindex.html">Previous
+      </a>
+    </div>
+    
+     </div>
+
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-22606712-2']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    
+
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script type="text/javascript"> google.load('search', '1',
+        {language : 'en'}); google.setOnLoadCallback(function() {
+            var customSearchControl = new
+            google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+            customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+            var options = new google.search.DrawOptions();
+            options.setAutoComplete(true);
+            customSearchControl.draw('cse', options); }, true);
+    </script>
+  </body>
+</html>

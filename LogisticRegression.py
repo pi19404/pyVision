@@ -21,7 +21,7 @@ import sklearn.metrics as met
 import LoadDataSets
 # Minimization routines
 import pickle
-import sgd;
+
 import pyvision_common as pyvision
 from itertools import izip 
 import Optimizer
