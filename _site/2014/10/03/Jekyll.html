@@ -49,15 +49,15 @@
 <p>Github pages generator gives us the facility to create a website for the project using one of the standard defined themes .This is the easiest way to start a project without having to worry about the HTML themes and CSS files etc and just focus on content writing.</p>
 
 <p>To generate a static webpage of the project go to project settings on github.com
-<img src="/pyVision/images/ss5.png" alt="enter image description here" />
+<img src="https://googledrive.com/host/0B-pfqaQBbAAtbExWN0Zya3JySzA/ss5.png" alt="enter image description here" />
 Click on the <strong><em>Automatic page generator</em></strong> options</p>
 
 <p>This will provide you with a markdown editor where you can enter the contents for the main page of the website.</p>
 
 <p>Enter the name ,content and other details and click on <strong><em>“Continue to Layouts Button”</em></strong> to proceed to HTML theme selection
-<img src="/pyVision/images/ss6.png" alt="enter image description here" />
+<img src="https://googledrive.com/host/0B-pfqaQBbAAtbExWN0Zya3JySzA/ss6.png" alt="enter image description here" />
 Select the desired theme and click on <strong><em>“Publish Page”</em></strong> button to complete the process
-<img src="/pyVision/images/ss7.png" alt="enter image description here" />
+<img src="https://googledrive.com/host/0B-pfqaQBbAAtbExWN0Zya3JySzA/ss7.png" alt="enter image description here" />
 This will lead to github servers hosting the created website on “http://pi19404.github.io/pyVision”</p>
 
 <p>now we are ready to modify and edit the website.The sources of the website are also stored in github repository of the  project in the gh-pages branch.</p>
@@ -124,13 +124,13 @@ Thus .Jekyll requires that Markdown files have front-matter defined at the top o
 
 <p>The present article was written using Markdown syntax and frontmatter included on top of the files was</p>
 
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="o">---</span>
-<span class="ss">layout</span><span class="p">:</span> <span class="n">post</span>
-<span class="ss">title</span><span class="p">:</span> <span class="no">Jekyll</span> <span class="n">A</span> <span class="no">Static</span> <span class="no">Website</span> <span class="no">Generator</span>
-<span class="o">---</span>
-<span class="no">Introduction</span>
-<span class="o">-------------</span>
-<span class="no">In</span> <span class="n">this</span> <span class="n">article</span> <span class="n">we</span> <span class="n">will</span> <span class="n">look</span> <span class="n">at</span> <span class="o">**</span><span class="no">Jekyll</span><span class="o">**</span> <span class="n">static</span> <span class="n">site</span> <span class="n">generator</span> <span class="n">to</span> <span class="n">generate</span> <span class="n">a</span> <span class="n">static</span> <span class="n">website</span> <span class="ow">and</span> <span class="n">host</span> <span class="n">the</span> <span class="n">same</span> <span class="n">on</span> <span class="o">**</span><span class="n">github</span><span class="o">**</span>  <span class="n">using</span> <span class="n">github</span> <span class="n">pages</span><span class="o">.</span></code></pre></div>
+<div class="highlight"><pre><code class="language-html" data-lang="html">---
+layout: post
+title: Jekyll A Static Website Generator
+---
+Introduction
+-------------
+In this article we will look at **Jekyll** static site generator to generate a static website and host the same on **github**  using github pages.</code></pre></div>
 
 <p>The layout tag specifies the template to be used for generating posts.The templates can be makrdown containing HTML contents.</p>
 
@@ -143,14 +143,14 @@ layout: default
 ---
 <span class="nt">&lt;article</span> <span class="na">class=</span><span class="s">&quot;post&quot;</span><span class="nt">&gt;</span>
 
-  <span class="nt">&lt;h1&gt;</span>{{ page.title }}<span class="nt">&lt;/h1&gt;</span>
+  <span class="nt">&lt;h1&gt;</span>{{  page.title }}<span class="nt">&lt;/h1&gt;</span>
 
   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;entry&quot;</span><span class="nt">&gt;</span>
-    {{ content }}&#39;
+    {{  content }}&#39;
   <span class="nt">&lt;/div&gt;</span>
 
   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;date&quot;</span><span class="nt">&gt;</span>
-    Written on {{ page.date | date: &quot;%B %e, %Y&quot; }}
+    Written on {{  page.date | date: &quot;%B %e, %Y&quot; }}
   <span class="nt">&lt;/div&gt;</span>
 
 
@@ -163,7 +163,7 @@ Jekyll provides numerous  predefined global variables that you can set in the fr
 
 <p>The rendered html output for above file is </p>
 
-<p><a href="/pyVision/images/ss8.png">enter link description here</a></p>
+<p><img src="https://googledrive.com/host/0B-pfqaQBbAAtbExWN0Zya3JySzA/ss8.png" alt="enter link description here" /></p>
 
 <p>we have seen that in <strong>post.html</strong> file we have included frontmatter <strong>“layout”</strong>.This enables us to include the contents of the post.html file into another files as its contents using Liquid markup language.</p>
 
@@ -176,8 +176,7 @@ We modify this file so that it can be used as a base template for all the pages 
 
 <p>we create a file default.html.The default.html file contains the html headers,javascript,stylesheets etc as well as contents to be included in header and footer of pages. Again Liquid markup language is used to specify where the content is be be included</p>
 
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="cp">&lt;!doctype html&gt;</span>
-<span class="nt">&lt;html&gt;</span>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;html&gt;</span>
   <span class="nt">&lt;head&gt;</span>
     <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">&quot;utf-8&quot;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;meta</span> <span class="na">http-equiv=</span><span class="s">&quot;X-UA-Compatible&quot;</span> <span class="na">content=</span><span class="s">&quot;chrome=1&quot;</span><span class="nt">&gt;</span>
@@ -193,24 +192,16 @@ We modify this file so that it can be used as a base template for all the pages 
   <span class="nt">&lt;body&gt;</span>
     <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;wrapper&quot;</span><span class="nt">&gt;</span>
       <span class="nt">&lt;header&gt;</span>
-        <span class="nt">&lt;h1&gt;</span>pyVision<span class="nt">&lt;/h1&gt;</span>
-        <span class="nt">&lt;p&gt;</span>pyVision Machine Learning Library<span class="nt">&lt;/p&gt;</span>
-        <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">&quot;view&quot;</span><span class="nt">&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;https://github.com/pi19404/pyVision&quot;</span><span class="nt">&gt;</span>View the Project on GitHub <span class="nt">&lt;small&gt;</span>pi19404/pyVision<span class="nt">&lt;/small&gt;&lt;/a&gt;&lt;/p&gt;</span>
-        <span class="nt">&lt;ul&gt;</span>
-          <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;https://github.com/pi19404/pyVision/zipball/master&quot;</span><span class="nt">&gt;</span>Download <span class="nt">&lt;strong&gt;</span>ZIP File<span class="nt">&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;</span>
-          <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;https://github.com/pi19404/pyVision/tarball/master&quot;</span><span class="nt">&gt;</span>Download <span class="nt">&lt;strong&gt;</span>TAR Ball<span class="nt">&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;</span>
-          <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;https://github.com/pi19404/pyVision&quot;</span><span class="nt">&gt;</span>View On <span class="nt">&lt;strong&gt;</span>GitHub<span class="nt">&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;</span>
-        <span class="nt">&lt;/ul&gt;</span>
+         ........ 
       <span class="nt">&lt;/header&gt;</span>
       <span class="nt">&lt;section&gt;</span>
-        {{ content }}  <span class="c">&lt;!-----  contents inserted here ---&gt;</span>
+        {{  content }}  <span class="c">&lt;!-----  contents inserted here ---&gt;</span>
       <span class="nt">&lt;/section&gt;</span>
     <span class="nt">&lt;/div&gt;</span>
     <span class="nt">&lt;footer&gt;</span>
-      <span class="nt">&lt;p&gt;</span>Project maintained by <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;https://github.com/pi19404&quot;</span><span class="nt">&gt;</span>pi19404<span class="nt">&lt;/a&gt;&lt;/p&gt;</span>
-      <span class="nt">&lt;p&gt;</span>Hosted on GitHub Pages <span class="ni">&amp;mdash;</span> Theme by <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;https://github.com/orderedlist&quot;</span><span class="nt">&gt;</span>orderedlist<span class="nt">&lt;/a&gt;&lt;/p&gt;</span>
+      .......
     <span class="nt">&lt;/footer&gt;</span>
-    <span class="c">&lt;!--[if !IE]&gt;&lt;script&gt;fixScale(document);&lt;/script&gt;&lt;![endif]--&gt;</span>
+    
     
   <span class="nt">&lt;/body&gt;</span>
 <span class="nt">&lt;/html&gt;</span></code></pre></div>
@@ -223,55 +214,57 @@ The blog posts can be html or markdown .</p>
 
 <p>Let us create a blog post called 2014-10-03-test.md</p>
 
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="o">---</span>
-<span class="ss">layout</span><span class="p">:</span> <span class="n">post</span>
-<span class="ss">title</span><span class="p">:</span> <span class="no">Jekyll</span> <span class="n">A</span> <span class="no">Static</span> <span class="no">Website</span> <span class="no">Generator</span>
-<span class="o">---</span>
+<div class="highlight"><pre><code class="language-html" data-lang="html">---
+layout: post
+title: Jekyll A Static Website Generator
+---
 
-<span class="no">Introduction</span>
-<span class="o">-------------</span>
-<span class="no">In</span> <span class="n">this</span> <span class="n">article</span> <span class="n">we</span> <span class="n">will</span> <span class="n">look</span> <span class="n">at</span> <span class="o">**</span><span class="no">Jekyll</span><span class="o">**</span> <span class="n">static</span> <span class="n">site</span> <span class="n">generator</span> <span class="n">to</span> <span class="n">generate</span> <span class="n">a</span> <span class="n">static</span> <span class="n">website</span> <span class="ow">and</span> <span class="n">host</span> <span class="n">the</span> <span class="n">same</span> <span class="n">on</span> <span class="o">**</span><span class="n">github</span><span class="o">**</span>  <span class="n">using</span> <span class="n">github</span> <span class="n">pages</span><span class="o">.</span></code></pre></div>
+Introduction
+-------------
+In this article we will look at **Jekyll** static site generator to generate a static website and host the same on **github**  using github pages.</code></pre></div>
 
 <p>Now we need to provide links to access the blog content from the main page of website.This is done using Jekyll variables and adding the below content in the <strong>index.html</strong> page</p>
 
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="o">---</span>
-<span class="ss">layout</span><span class="p">:</span> <span class="n">default</span>
-<span class="o">---</span>
-<span class="o">&lt;</span><span class="n">section</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;content&quot;</span><span class="o">&gt;</span>
-      <span class="o">&lt;</span><span class="n">section</span><span class="o">&gt;</span>
-        <span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span><span class="no">This</span> <span class="n">is</span> <span class="n">website</span> <span class="k">for</span> <span class="n">pyVision</span> <span class="n">machine</span> <span class="n">learning</span> <span class="n">library</span><span class="o">.</span><span class="n">&lt;</span><span class="sr">/p&gt;</span>
+<div class="highlight"><pre><code class="language-html" data-lang="html">---
+layout: default
+---
+<span class="nt">&lt;section</span> <span class="na">class=</span><span class="s">&quot;content&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;section&gt;</span>
+        .......
+      <span class="nt">&lt;/section&gt;</span>
 
-<span class="sr">&lt;p&gt;A lot of code is developed from scratch and is associated with documentation containing theoretical and algorithmic details.&lt;/</span><span class="nb">p</span><span class="o">&gt;</span>
+<span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">&quot;entries&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;li&gt;</span> Blog Posts -{{  site.url }}<span class="nt">&lt;/li&gt;</span>
+  {{%  for post in site.posts %}}
 
-<span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span><span class="no">The</span> <span class="n">main</span> <span class="n">purpose</span> <span class="n">of</span> <span class="n">the</span> <span class="n">project</span> <span class="n">is</span> <span class="n">to</span> <span class="n">understand</span> <span class="n">the</span> <span class="n">theory</span> <span class="n">as</span> <span class="n">well</span> <span class="n">as</span> <span class="n">implementation</span> <span class="n">details</span> <span class="n">which</span> <span class="n">is</span> <span class="n">typically</span> <span class="n">missing</span> <span class="k">in</span> <span class="n">many</span> <span class="n">of</span> <span class="n">the</span> <span class="no">OpenSource</span> <span class="n">projects</span><span class="o">.</span><span class="n">&lt;</span><span class="sr">/p&gt;</span>
-<span class="sr">      &lt;/se</span><span class="n">ction</span><span class="o">&gt;</span>
-
-<span class="o">&lt;</span><span class="n">ul</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;entries&quot;</span><span class="o">&gt;</span>
-  <span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;</span> <span class="no">Blog</span> <span class="no">Posts</span> <span class="o">-</span><span class="p">{{</span> <span class="n">site</span><span class="o">.</span><span class="n">url</span> <span class="p">}}</span><span class="o">&lt;</span><span class="sr">/li&gt;</span>
-<span class="sr">  {{% for post in site.posts %}</span>
-
-<span class="sr">  &lt;li&gt;</span>
-<span class="sr">    &lt;a href=&quot;&quot;&gt;      </span>
-<span class="sr">      &lt;h3&gt;{{ post.title }}&lt;/</span><span class="n">h3</span><span class="o">&gt;</span>
-    <span class="o">&lt;</span><span class="sr">/a&gt;</span>
-<span class="sr">  &lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+  <span class="nt">&lt;li&gt;</span>
+    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;{{ post.url | remove_first:&#39;/&#39;}}&quot;</span><span class="nt">&gt;</span>      
+      <span class="nt">&lt;h3&gt;</span>{{ post.title }}<span class="nt">&lt;/h3&gt;</span>
+    <span class="nt">&lt;/a&gt;</span>
+  <span class="nt">&lt;/li&gt;</span>
  
-  <span class="p">{</span><span class="o">%</span> <span class="n">endfor</span> <span class="o">%</span><span class="p">}</span>
-<span class="o">&lt;</span><span class="sr">/ul&gt;</span>
+  {{%  endfor %}}
+<span class="nt">&lt;/ul&gt;</span>
 
-<span class="sr">&lt;/se</span><span class="n">ction</span><span class="o">&gt;</span></code></pre></div>
+<span class="nt">&lt;/section&gt;</span></code></pre></div>
 
 <p>now we launch the website on local machine by executing command </p>
 
 <p><code>bundle exec jekyll serve</code></p>
 
-<p><img src="/pyVision/images/ss9.png" alt="enter image description here" /></p>
+<p><img src="https://googledrive.com/host/0B-pfqaQBbAAtbExWN0Zya3JySzA/ss9.png" alt="enter image description here" /></p>
 
 <p>now we push the repository onto github </p>
 
 <p><code>git push origin gh-pages</code></p>
 
 <p>access the webpage and observe the similar output as on local server </p>
+
+<p>The markdown used is called <code>GitHub Flavored Markdown</code>,It is different from standard markdown language.The following like gives the difference and highlights the features of <a href="https://help.github.com/articles/github-flavored-markdown/">Github Flavored markdown</a> language</p>
+
+<p>now that we have created the html,say we want to use the html content on other sites like codeproject or blogger.we can access the html at _site/posts/2013/10/03/Jekyll.html.</p>
+
+<p>we can copy the relevant sections of html file and with slight modifications make it compatible with other websites.</p>
 
 <h2 id="code">Code</h2>
 <p>The pyVision repository can be found at <code>www.github.com/pi19404/pyvision</code>
