@@ -1,31 +1,7 @@
-<!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>pyVision by pi19404</title>
-
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <script src="javascripts/scale.fix.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-  </head>
-  <body>
-    <div class="wrapper">
-      <header>
-        <h1>pyVision</h1>
-        <p>pyVision Machine Learning Library</p>
-        <p class="view"><a href="https://github.com/pi19404/pyVision">View the Project on GitHub <small>pi19404/pyVision</small></a></p>
-        <ul>
-          <li><a href="https://github.com/pi19404/pyVision/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/pi19404/pyVision/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/pi19404/pyVision">View On <strong>GitHub</strong></a></li>
-        </ul>
-      </header>
+---
+layout: default
+---
+<section class="content">
       <section>
         <p>This is website for pyVision machine learning library.</p>
 
@@ -33,12 +9,24 @@
 
 <p>The main purpose of the project is to understand the theory as well as implementation details which is typically missing in many of the OpenSource projects.</p>
       </section>
-    </div>
-    <footer>
-      <p>Project maintained by <a href="https://github.com/pi19404">pi19404</a></p>
-      <p>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></p>
-    </footer>
-    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
-    
-  </body>
-</html>
+
+<ul class="entries">
+  <li> Blog Posts -{{ site.url }}</li>
+  {% for post in site.posts %}
+
+  <li>
+    <a href="{{ post.url | remove_first:'/'}}">      
+      <h3>{{ post.title }}</h3>
+    </a>
+  </li>
+ 
+  {% endfor %}
+</ul>
+
+<p>some of the documentation can be found on blog : http://<a href="mailto:pi-virtualworld@blogspot.com">pi-virtualworld@blogspot.com</a> or PDF format documents 
+can be found at <a href="http://scribd.com/pi19404">http://scribd.com/pi19404</a></p>
+
+  
+</section>
+
+

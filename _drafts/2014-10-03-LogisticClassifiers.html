@@ -1,0 +1,244 @@
+---
+layout: post
+title:  Multi-Layer Perceptron
+---
+   <footer id="footer" class="main" role="contentinfo">
+      <div class="region region-footer"><div class="region-inner clearfix">    <div>
+      <div class="statistics">
+        <ul>
+          <li>
+            <span>581 089</span>
+            Registered devs
+          </li>
+          <li>
+            <span>141 166</span>
+            Lines of code
+          </li>
+          <li>
+            <span id="footer_downloads">9 502 248</span>
+            number of downloads
+          </li>
+          <li>
+            <span>89 310</span>
+            Coffee cups consumed
+          </li>
+          <li class="last">
+            <a href="http://opensource.org/docs/definition.php" title="Read more about Open Source">Open source</a>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <div class="additional">
+          <small role="contentinfo">&copy; 2003 - 2014 <a href="http://cksource.com/" title="Visit the CKSource website">CKSource</a> - Frederico Knabben. All rights reserved</small>
+          <ul>
+            <li><a href="/terms" title="The terms of use of this website">Terms of use</a></li>
+            <li><a href="/privacy" title="How we deal with information that you provide us">Privacy Policy</a></li>
+            <li><a href="http://opensource.org/docs/definition.php" title="Read more about Open Source">Proud to be Open Source</a></li>
+          </ul>
+        </div>
+      </div>
+    </div></div></div>    </footer>
+
+<section class="content">
+<h1><span id="ArticleContent">Introduction</span></h1>
+
+<div>
+<p><span id="ArticleContent">In this article we will look at supervised learning algorithm called Multi-Layer Perceptron (MLP) and implementation of single hidden layer MLP</span></p>
+
+<h1><span id="ArticleContent">Background</span></h1>
+
+<p><span id="ArticleContent"><span style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: medium;">An MLP is a network of simple&nbsp;</span><i style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: medium;">neurons</i><span style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: medium;">&nbsp;called&nbsp;</span><i style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: medium;">perceptron.</i><span style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: medium;">The perceptron computes a single&nbsp;</span><i style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: medium;">output</i><span style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: medium;">&nbsp;from multiple real-valued&nbsp;</span><i style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: medium;">inputs</i><span style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: medium;">&nbsp;by forming a linear combination according to its input&nbsp;</span><i style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: medium;">weights</i><span style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: medium;">&nbsp;and then possibly putting the output through some nonlinear activation function</span></span></p>
+
+<p><span id="ArticleContent">&nbsp;</span></p>
+
+<p><span id="ArticleContent"><img alt="_images/mlp.png" src="http://www.deeplearning.net/tutorial/_images/mlp.png" style="color: rgb(0, 0, 0); font-family: 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; letter-spacing: -0.14000000059604645px; line-height: 21px; text-align: center; background-color: rgb(255, 255, 255);" />&nbsp;</span></p>
+
+<p><span id="ArticleContent">image taken from tutorials &quot;http://www.deeplearning.net/tutorial/mlp.html&quot;</span></p>
+
+<p><span>\(f(x) = G( W^T x+b)\)</span></p>
+
+<div class="math"><span id="ArticleContent">&nbsp;</span></div>
+
+<div class="math"><span id="ArticleContent"><span style="color: rgb(0, 0, 0); font-family: 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; letter-spacing: -0.14000000059604645px; line-height: 21px; background-color: rgb(255, 255, 255);">A one-hidden layer MLP &nbsp;a function&nbsp;</span><img alt="f: R^D \rightarrow R^L" class="math" src="http://www.deeplearning.net/tutorial/_images/math/4775f33628a8fb51387c4bebea2c79477ce8c12e.png" style="vertical-align: middle; color: rgb(0, 0, 0); font-family: 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; letter-spacing: -0.14000000059604645px; line-height: 21px; background-color: rgb(255, 255, 255);" /><span style="color: rgb(0, 0, 0); font-family: 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; letter-spacing: -0.14000000059604645px; line-height: 21px; background-color: rgb(255, 255, 255);">, where&nbsp;</span><img alt="D" class="math" src="http://www.deeplearning.net/tutorial/_images/math/9ffb448918db29f2a72f8f87f421b3b3cad18f95.png" style="vertical-align: middle; color: rgb(0, 0, 0); font-family: 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; letter-spacing: -0.14000000059604645px; line-height: 21px; background-color: rgb(255, 255, 255);" /><span style="color: rgb(0, 0, 0); font-family: 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; letter-spacing: -0.14000000059604645px; line-height: 21px; background-color: rgb(255, 255, 255);">&nbsp;is the size of input vector&nbsp;</span><img alt="x" class="math" src="http://www.deeplearning.net/tutorial/_images/math/26eeb5258ca5099acf8fe96b2a1049c48c89a5e6.png" style="vertical-align: middle; color: rgb(0, 0, 0); font-family: 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; letter-spacing: -0.14000000059604645px; line-height: 21px; background-color: rgb(255, 255, 255);" /><span style="color: rgb(0, 0, 0); font-family: 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; letter-spacing: -0.14000000059604645px; line-height: 21px; background-color: rgb(255, 255, 255);">&nbsp;and&nbsp;</span><img alt="L" class="math" src="http://www.deeplearning.net/tutorial/_images/math/859ccf4cd60c7bc6b8fa1afc9a42dc811a826d6f.png" style="vertical-align: middle; color: rgb(0, 0, 0); font-family: 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; letter-spacing: -0.14000000059604645px; line-height: 21px; background-color: rgb(255, 255, 255);" /><span style="color: rgb(0, 0, 0); font-family: 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; letter-spacing: -0.14000000059604645px; line-height: 21px; background-color: rgb(255, 255, 255);">&nbsp;is the size of the output vector.G is activation function.</span></span></div>
+
+<div class="math"><span id="ArticleContent">&nbsp;</span></div>
+
+<div class="math"><span id="ArticleContent"><span style="color: rgb(0, 0, 0); font-family: 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; letter-spacing: -0.14000000059604645px; line-height: 21px; background-color: rgb(255, 255, 255);">I case the activation function G is sigmoid function then a one-hidden-layer MLP is euivalent to a logistic classifer</span> <span style="color: rgb(0, 0, 0); font-family: Helvetica, Arial, sans-serif;">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span> </span></div>
+
+<div class="math">&nbsp;</div>
+
+<div class="math"><span><img alt="" src="http://www.codeproject.com/KB/Articles/810988/ss1.png" style="overflow: auto; max-width: 100%; height: auto; color: rgb(0, 0, 0); font-family: Helvetica, Arial, sans-serif;" /></span></div>
+
+<div class="math"><span id="ArticleContent">$\begin{eqnarray*} f(x) =\frac {e^{W_i x + b_i}}{\sum_j e^{W_j x + b_j}} \\ \end{eqnarray*}$</span></div>
+
+<p><span id="ArticleContent">A MLP with no hidden layer is equivalent to a linear classifier where <span class="math">( f[x] = W^T x + b ) </span> where output is a linear combination of input</span></p>
+
+<h1><span id="ArticleContent"><strong>Feed Forward Neural Network&nbsp;</strong></span></h1>
+
+<p><span style="font-family: 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-size: 14px; letter-spacing: -0.14000000059604645px; line-height: 21px; background-color: rgb(255, 255, 255);">Let us first consider the most classical case of a single hidden layer neural network, mapping &nbsp;of vector of dimensionality $d$ to vector of dimensionality $m$.The number of inputs to hidden layer is $d$ and number of ouputs of hidden layer are $m$</span></p>
+
+<p><span>Each output of hidden layer of a MLP can be parameterized by a <span style="background-color: rgb(255, 255, 255);">&nbsp;weight matirx and bias vector </span></span><span style="background-color: rgb(255, 255, 255);">&nbsp;$(W,b)$&nbsp;</span><span><span style="background-color: rgb(255, 255, 255);">similar to a Logistic Regression and activation function.</span></span><span id="ArticleContent"><span style="background-color: rgb(255, 255, 255);">The output of a hidden layer is activation function applied to linear combination of input and weight vector.</span></span><span id="ArticleContent"><span style="background-color: rgb(255, 255, 255);">Dimensionality of weight matrix and bias vector is determined by desired number of output units.</span></span></p>
+
+<p>The vector valued function &nbsp;$h(x)$ &nbsp;is called output of the hidden layer.The output is the affine transformation of the input layer followed by the appplication of function $f(x)$ ,which is typically a non linear function like sigmoid of inverse tan hyperbolic&nbsp;function.</p>
+
+<p>$ h(x) = f(W^T x + c ) $</p>
+
+<p>$h(x)$ is a vector valued functions.Each element of vector is called a hidden unit.</p>
+
+<p>The output layer of MLP is typically Logistic regresson classifier,if probabilistic outputs are desired for classification purposes.&nbsp;</p>
+
+<p>$g(x) = F(W^T h(x) + b) $</p>
+
+<p>where $F$ represents the softmax regression function.</p>
+
+<h1>Multi Layer Perceptron&#39;s</h1>
+
+<p>The parameters of hidden layers are characterized by dimension of input vector and desired dimensionality of output vector or number of hidden units.There is not fixed rule to determine the number of hidden units.The parameters are application specific and best parameters are often arrived at by emperical testing process.Less number of hidden units leads to increased generalization and training error while having a large number of training units leads to issues of with training of large number of parameters and significantly large training time.</p>
+
+<p>Let $h_i$ denote the output vector of the i-th layer.$h_0$=x is input layer and $h_n=y$ is output layer which produces the desired prediction output.</p>
+
+<p>Let $f(x)$ denote the activation function of the hidden layers.</p>
+
+<p>Thus we denote the output of each hidden layer as</p>
+
+<p>$h_k(x) = f(b_k + w_k^T h_{i-1}(x)) = f(a_{k}) $</p>
+
+<p>Considering sigmoid activation function</p>
+
+<p>$\begin{align}&nbsp;\frac{\partial \mathbf{h}_k(x)&nbsp; }{\partial \mathbf{a}_{k}}= &nbsp;f(a_{k})(1-&nbsp;f(a_{k})) \end{align}$&nbsp;</p>
+
+<p>The computation associated with each hidden unit $(i)$&nbsp;of the layer can be denoted as</p>
+
+<p>$h_{k,i}(x)&nbsp;= f(b_{k,i}&nbsp;+ W_{k,i}^T h_{i-1}(x)) = f(a_{k}(x))$</p>
+
+<p>In this article we will look at implementation single hidden layer MLP ie a MLP with one input,hidden and output layer.</p>
+
+<p>The hidden layer has M inputs and N outputs.Let us assume that $(W,b)$ are the parameters of the hidden layer ,where $W$ is a MXN&nbsp;matrix and b is a (Nx1) vector.</p>
+
+<p>The output layer is a Logistic regression classifier.The output is a probabilistic output denoting the confident that input belongs to the predicted class.The cost function defined for the same is defined as negative log likelyhood over the training data</p>
+
+<p>$L = -log (p_y) $</p>
+
+<p>The idea is to maximize $p_y= P( Y =y_i | x )$ as estimator of conditional probability of the class $y$ given that input is $x$.</p>
+
+<p>This is the cost function for training algorithm.</p>
+
+<h1><strong>Back-Propagation Algorithm</strong></h1>
+
+<p>The Back-Propagation Algorithm is recursive gradient algorithm used to optimize the parameters MLP wrt to defined loss function.Thus our aim is that each layer of MLP the hidden units are computed so that cost function is maximized.</p>
+
+<p>Like in logistic regression we compute the gradients of weights wrt to the cost function .The same is done for training MLP . The gradient of the cost function wrt all the weights in various hidden layers are computed.Standard gradient based optimization is performed to obtain the parameters that will minimize the likelihood function.The output layer determines the cost function.Since we are using Logistic regression as output layer.The cost function is the softmax function.Let L denote the cost function.</p>
+
+<p>There is nothing different we do in backpropagation algorithm that any other optimization techniue.The aim is to determine how the weights and biases change in the network $ \frac{\partial L}{\partial W_{k,i,j}&nbsp;} $ and $ \frac{\partial L}{\partial&nbsp;b_{k,i,j}&nbsp;} $.</p>
+
+<p>$\begin{align}&nbsp;L = -log ( f(a_{k,i}) ) \end{align}$</p>
+
+<p>$\begin{align}&nbsp;\frac{\partial L&nbsp; }{\partial \mathbf{a}_{k,i}} =&nbsp;\frac{\partial L&nbsp; }{\partial \mathbf{h}_{k,i}}&nbsp;\frac{\partial \mathbf{h}_{k,i} }{\partial \mathbf{a}_{k,i}}&nbsp;= -\frac{1}{h_{k,i}} * h_{k,i}*(1-h_{k,i}) = (h_{k,i}-1)\end{align}&nbsp; $</p>
+
+<p>where&nbsp;$\begin{align} h_{k,i}(1-h_{k,i})&nbsp;\end{align}$ &nbsp;is derivative of softmax function when $y=y_i$</p>
+
+<p>Let is consider the case of gradient of the softmax function when $y \ne y_i,y=y_j$</p>
+
+<p>$ \begin{align} \frac{\partial \mathbf{h}_{k,i} }{\partial \mathbf{a}_{k,i}} =&nbsp;-\mathbf{h}_{k,i}*\mathbf{h}_{k,j}\end{align}&nbsp;$</p>
+
+<p>$\begin{align}&nbsp;&nbsp;\frac{\partial L&nbsp; }{\partial \mathbf{a}_{k,i}} =&nbsp;\mathbf{h}_{k,j}&nbsp;\end{align} $</p>
+
+<p>Thus we get</p>
+
+<p>$ \begin{align} \frac{\partial L&nbsp; }{\partial \mathbf{a}_{k,i}} =\mathbf{h}_{k,j} - 1_{y=y_i} \end{align}$</p>
+
+<p>The above expression can be considered as the error in output.When $y=y_i$ the error is $(1-p_i)$ and then $y \ne y_i$ the error in prediction is $p_i$.</p>
+
+<p>In general for other hidden layers we have</p>
+
+<p>$\begin{align}\frac{\partial L }{\partial \mathbf{a}_{k-1,j}} = &nbsp;\frac{\partial L }{\partial \mathbf{h}_{k-1,j}}&nbsp;\frac{\partial \mathbf{h}_{k-1,j} }{\partial \mathbf{a}_{k-1,j}}&nbsp;\end{align}$</p>
+
+<p>Thus the idea is to start computing gradients from the bottomost layer.To compute the gradients of the cost function wrt parameters at the i-th layer we need to know the gradients of cost function wrt parameters at $(i+1)$th layer.</p>
+
+<p>We start with gradient computation at the logistic classifier level.The propagate backwards,updating the parameters at each layer</p>
+
+<p>Let us consider the case of other other hidden layers</p>
+
+<p>$\begin{align}&nbsp;\frac{\partial L }{\partial \mathbf{h}_{k-1,j}} = \sum_i&nbsp;\frac{\partial L }{\partial \mathbf{a}_{k,i}}\frac{\partial \mathbf{a}_{k,i} }{\partial \mathbf{h}_{k-1,j}} = \sum_i&nbsp;\frac{\partial L }{\partial \mathbf{a}_{k,i}}&nbsp;W_{k,i,j} &nbsp;\end{align} $</p>
+
+<p>The gradients computation of parameters of hidden layers is as follows</p>
+
+<p>$\begin{align}\frac{\partial L }{\partial \mathbf{W}_{k-1,i,j}} = &nbsp;\frac{\partial L }{\partial \mathbf{a}_{k-1,j}}&nbsp;\frac{\partial \mathbf{a}_{k-1,j} }{\partial \mathbf{W}_{k-1,i,j}}=\frac{\partial L }{\partial \mathbf{a}_{k-1,j}} \mathbf{h}_{k-1,j} \end{align}$</p>
+
+<p>$\begin{align}\frac{\partial L }{\partial \mathbf{b}_{k-1,i}} = &nbsp;\frac{\partial L }{\partial \mathbf{a}_{k-1,i}}&nbsp;\frac{\partial \mathbf{a}_{k-1,i} }{\partial \mathbf{b}_{k-1,i}}=\frac{\partial L }{\partial \mathbf{a}_{k-1,i}} &nbsp;\end{align}$</p>
+
+<p>Each hidden layer is implemented using the class HiddenLayer.It encapsulates all the menthods for prediction,classification,training,gradient computation and error propagation that are reuired</p>
+
+<p>&nbsp;</p>
+
+<p>A class MLP is implemented that contains a array of Hidden and output layers.This encapsulates all the methods for prediction,classification,training,forward and backpropagation,saving and loading models etc</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>One of the issues observed in MLP training is the slow nature of learning.Also in the present implementation we are using fixed learning rates.Using adaptive learning rates based on error is a much better approach to obtain faster convergence.If the learning rates are too high we observe oscilllations while if they are too slow we observe slow learning about the converge point.</p>
+
+<p>&nbsp;</p>
+
+<p>Thus based on the error computed at each hidden layer,we tune the learning rates for the next iteration.</p>
+
+<p>Let us consider a exampled where input is a 784 dimensional vector,output is a class label consisting of 10 uniue classes and let the number of units in the hidden layer be 500.</p>
+
+<p>Thus at the output or logistic regression layer.The input will be a 500 dimensional vector and output will be a 10 dimensional vector.The dimensions of the weight matrix will be 500x10 and bias vector will be 500x1.</p>
+
+<p>At the hidden layer the input will be a 784 dimensional vector and output will be a 500 dimensional vector.The dimensions of the weight matrix will be 784x500 and that of bias vector will be 784x1.</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<table>
+	<tbody>
+		<tr>
+			<td>
+			<pre>
+&nbsp;</pre>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p><span id="ArticleContent"><span class="math" style="background-color: rgb(255, 255, 255);"><span aria-readonly="true" class="MathJax" id="MathJax-Element-2-Frame" role="textbox" style="display: inline; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; direction: ltr; max-width: none; max-height: none; min-width: 0px; min-height: 0px;"><nobr style="transition: none; -webkit-transition: none; border: 0px; padding: 0px; margin: 0px; max-width: none; max-height: none; min-width: 0px; min-height: 0px; vertical-align: 0px;"></nobr></span></span></span></p>
+
+<p><span><span class="math"><span>Using the code</span></span></span></p>
+
+<p><span id="ArticleContent"><span class="math"><span>A brief description of how to use the article or code. The class names, the methods and properties, any tricks or tips.</span></span></span></p>
+
+<p><span id="ArticleContent"><span class="math"><span>Blocks of code should be set as style &quot;Formatted&quot; like this:</span></span></span></p>
+
+<pre lang="C++">
+<span id="ArticleContent">
+<span class="math"><span>
+//
+// Any source code blocks look like this
+//</span></span></span></pre>
+
+<p><span id="ArticleContent"><span class="math"><span>&nbsp;</span></span></span></p>
+
+<p><span id="ArticleContent"><span class="math"><span>Remember to set the Language of your code snippet using the Language dropdown.</span></span></span></p>
+
+<p><span id="ArticleContent"><span class="math"><span>Use the &quot;var&quot; button to to wrap Variable or class names in &lt;code&gt; tags like <code>this</code>.</span></span></span></p>
+
+<h2><span id="ArticleContent"><span class="math"><span>Points of Interest</span></span></span></h2>
+
+<p><span id="ArticleContent"><span class="math"><span>Did you learn anything interesting/fun/annoying while writing the code? Did you do anything particularly clever or wild or zany?</span></span></span></p>
+
+<h2><span id="ArticleContent"><span class="math"><span>History</span></span></span></h2>
+
+<p><span id="ArticleContent"><span class="math"><span>Keep a running update of any changes or improvements you&#39;ve made here.</span></span></span></p>
+<!-- End Article --></div>
+</section>
