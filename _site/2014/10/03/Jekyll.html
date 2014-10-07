@@ -122,40 +122,39 @@ Thus .Jekyll requires that Markdown files have front-matter defined at the top o
 
 <p>Between the dashed lines you can set predefined variables ( title,layout) or set custom used defined variables.</p>
 
-<p>The present article was written using Markdown syntax and frontmatter included on top of the files was
-<code>
----
+<p>The present article was written using Markdown syntax and frontmatter included on top of the files was</p>
+
+<div class="highlight"><pre><code class="language-html" data-lang="html">---
 layout: post
 title: Jekyll A Static Website Generator
 ---
 Introduction
 -------------
-In this article we will look at **Jekyll** static site generator to generate a static website and host the same on **github**  using github pages.
-</code></p>
+In this article we will look at **Jekyll** static site generator to generate a static website and host the same on **github**  using github pages.</code></pre></div>
 
 <p>The layout tag specifies the template to be used for generating posts.The templates can be makrdown containing HTML contents.</p>
 
 <p>Jekyll uses the <a href="https://github.com/shopify/liquid/wiki/liquid-for-designers">Liquid template system</a> .The variables defined in front matter and page contents can be accessed  accessed using the Liquid tags both within the files as well as any layouts that page of post relies on.</p>
 
-<p>Let us look at the template for post called <strong>post.html</strong> and how contents are incorporated using Liquid markup language
-```
-—
+<p>Let us look at the template for post called <strong>post.html</strong> and how contents are incorporated using Liquid markup language</p>
+
+<div class="highlight"><pre><code class="language-html" data-lang="html">---
 layout: default
-—
-&lt;article class="post"&gt;</p>
+---
+<span class="nt">&lt;article</span> <span class="na">class=</span><span class="s">&quot;post&quot;</span><span class="nt">&gt;</span>
 
-<h1>Jekyll A Static Website Generator</h1>
+  <span class="nt">&lt;h1&gt;</span>{{  page.title }}<span class="nt">&lt;/h1&gt;</span>
 
-<div class="entry">
-    '
-  </div>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;entry&quot;</span><span class="nt">&gt;</span>
+    {{  content }}&#39;
+  <span class="nt">&lt;/div&gt;</span>
 
-<div class="date">
-    Written on October  3, 2014
-  </div>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;date&quot;</span><span class="nt">&gt;</span>
+    Written on {{  page.date | date: &quot;%B %e, %Y&quot; }}
+  <span class="nt">&lt;/div&gt;</span>
 
-<p>&lt;/article&gt;
-```</p>
+
+<span class="nt">&lt;/article&gt;</span></code></pre></div>
 
 <p>Thus when a post is created using the template,then the title specified in the frontmatter is the post is accessed via variable page.title.The page content is accessed via variable content.
 Jekyll provides numerous  predefined global variables that you can set in the front matter of a page or post.</p>
@@ -164,7 +163,7 @@ Jekyll provides numerous  predefined global variables that you can set in the fr
 
 <p>The rendered html output for above file is </p>
 
-<p><a href="https://googledrive.com/host/0B-pfqaQBbAAtbExWN0Zya3JySzA/ss8.png">enter link description here</a></p>
+<p><img src="https://googledrive.com/host/0B-pfqaQBbAAtbExWN0Zya3JySzA/ss8.png" alt="enter link description here" /></p>
 
 <p>we have seen that in <strong>post.html</strong> file we have included frontmatter <strong>“layout”</strong>.This enables us to include the contents of the post.html file into another files as its contents using Liquid markup language.</p>
 
@@ -175,39 +174,37 @@ We modify this file so that it can be used as a base template for all the pages 
 
 <p>we create a <code>_layouts</code> directory in the root folder of the repository.This directory contains all the files that can be accessed by defining the <code>layout</code> variable in the frontmatter of the files.If the layout variable is assigned values post then the file post.html in the _layout directory will be accessed.</p>
 
-<p>we create a file default.html.The default.html file contains the html headers,javascript,stylesheets etc as well as contents to be included in header and footer of pages. Again Liquid markup language is used to specify where the content is be be included
-```
-&lt;!doctype html&gt;</p>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <title>pyVision by pi19404</title>
+<p>we create a file default.html.The default.html file contains the html headers,javascript,stylesheets etc as well as contents to be included in header and footer of pages. Again Liquid markup language is used to specify where the content is be be included</p>
 
-    <link rel="stylesheet" href="/stylesheets/styles.css" />
-    <link rel="stylesheet" href="/stylesheets/pygment_trac.css" />
-    <script src="javascripts/scale.fix.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;html&gt;</span>
+  <span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">&quot;utf-8&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">http-equiv=</span><span class="s">&quot;X-UA-Compatible&quot;</span> <span class="na">content=</span><span class="s">&quot;chrome=1&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;title&gt;</span>pyVision by pi19404<span class="nt">&lt;/title&gt;</span>
+
+    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href=</span><span class="s">&quot;/stylesheets/styles.css&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href=</span><span class="s">&quot;/stylesheets/pygment_trac.css&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;javascripts/scale.fix.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">&quot;viewport&quot;</span> <span class="na">content=</span><span class="s">&quot;width=device-width, initial-scale=1, user-scalable=no&quot;</span><span class="nt">&gt;</span>
 
  
-  </head>
-  <body>
-    <div class="wrapper">
-      <header>
+  <span class="nt">&lt;/head&gt;</span>
+  <span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;wrapper&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;header&gt;</span>
          ........ 
-      </header>
-      <section>
-          <!-----  contents inserted here --->
-      </section>
-    </div>
-    <footer>
+      <span class="nt">&lt;/header&gt;</span>
+      <span class="nt">&lt;section&gt;</span>
+        {{  content }}  <span class="c">&lt;!-----  contents inserted here ---&gt;</span>
+      <span class="nt">&lt;/section&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;footer&gt;</span>
       .......
-    </footer>
+    <span class="nt">&lt;/footer&gt;</span>
     
     
-  </body>
-</html>
-<p>```</p>
+  <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span></code></pre></div>
 
 <p>If the file is markdown file then all its contents are inserted in place of contents tag.If the file is HTML then the declaration inside section tag of class content is inserted in place of contents tag.All the pages of the website including the main page index.html contains frontmatter are designed so that generated contents are inserted within default layout.</p>
 
@@ -215,43 +212,41 @@ We modify this file so that it can be used as a base template for all the pages 
 <p>All the blog posts reside in the <code>_posts</code> directory.The format of filename is <strong>year-month-day-title.ext</strong>.This will generate the blogs posts in year/month/day directory of static website.
 The blog posts can be html or markdown .</p>
 
-<p>Let us create a blog post called 2014-10-03-test.md
-```
-—
+<p>Let us create a blog post called 2014-10-03-test.md</p>
+
+<div class="highlight"><pre><code class="language-html" data-lang="html">---
 layout: post
 title: Jekyll A Static Website Generator
-—</p>
+---
 
-<h2 id="introduction-1">Introduction</h2>
-<p>In this article we will look at <strong>Jekyll</strong> static site generator to generate a static website and host the same on <strong>github</strong>  using github pages.
-```</p>
+Introduction
+-------------
+In this article we will look at **Jekyll** static site generator to generate a static website and host the same on **github**  using github pages.</code></pre></div>
 
-<p>Now we need to provide links to access the blog content from the main page of website.This is done using Jekyll variables and adding the below content in the <strong>index.html</strong> page
-```
-—
+<p>Now we need to provide links to access the blog content from the main page of website.This is done using Jekyll variables and adding the below content in the <strong>index.html</strong> page</p>
+
+<div class="highlight"><pre><code class="language-html" data-lang="html">---
 layout: default
-—
-&lt;section class="content"&gt;
-      &lt;section&gt;
-        …….
-      &lt;/section&gt;</p>
+---
+<span class="nt">&lt;section</span> <span class="na">class=</span><span class="s">&quot;content&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;section&gt;</span>
+        .......
+      <span class="nt">&lt;/section&gt;</span>
 
-<ul class="entries">
-  <li> Blog Posts -</li>
-  
+<span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">&quot;entries&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;li&gt;</span> Blog Posts -{{  site.url }}<span class="nt">&lt;/li&gt;</span>
+  {{%  for post in site.posts %}}
 
-  <li>
-    <a href="">      
-      <h3></h3>
-    </a>
-  </li>
+  <span class="nt">&lt;li&gt;</span>
+    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;{{&quot;</span><span class="nt">&gt;</span>      
+      <span class="nt">&lt;h3&gt;</span>{{ post.title }}<span class="nt">&lt;/h3&gt;</span>
+    <span class="nt">&lt;/a&gt;</span>
+  <span class="nt">&lt;/li&gt;</span>
  
-  
-</ul>
+  {{%  endfor %}}
+<span class="nt">&lt;/ul&gt;</span>
 
-<p>&lt;/section&gt;</p>
-
-<p>```</p>
+<span class="nt">&lt;/section&gt;</span></code></pre></div>
 
 <p>now we launch the website on local machine by executing command </p>
 
