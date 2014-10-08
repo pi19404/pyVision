@@ -19,6 +19,23 @@ import LogisticRegression
 import cPickle as pickle
 
 
+    
+def sigmoid_stable(x):
+    "Numerically-stable sigmoid function."
+    if x >= 0:
+        z = np.exp(-x)
+        return 1 / (1 + z)
+    else:
+        # if x is less than zero then z will be small, denom can't be
+        # zero because it's 1+z.
+        z = np.exp(x)
+        return z / (1 + z)
+        
+def grad_sigmoid(X):
+    s=sigmoid(X);
+    return s*(1-s);
+    
+    
 def sigmoid(X):
     """ This function applies sigmoid transformation on each element of input vector 
     :param X :Real Valued Input vector 
