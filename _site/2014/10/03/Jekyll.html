@@ -1,31 +1,77 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
+    <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>pyVision by pi19404</title>
-
-    <link rel="stylesheet" href="/pyVision/stylesheets/styles.css">
-    <link rel="stylesheet" href="/pyVision/stylesheets/pygment_trac.css">
-    <script src="javascripts/scale.fix.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-
+    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="/pyVision/stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="/pyVision/stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="/pyVision/stylesheets/print.css" media="print">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script type="text/x-mathjax-config">
+   MathJax.Hub.Config({ 
+                config: ["MMLorHTML.js"], 
+                extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js"], 
+                jax: ["input/TeX"], 
+                tex2jax: { 
+                    inlineMath: [ ['$','$'], ["\\(","\\)"] ], 
+                    displayMath: [ ['$$','$$'], ["\\[","\\]"] ], 
+                    processEscapes: false 
+                }, 
+                TeX: { 
+                    TagSide: "right", 
+                    TagIndent: ".8em", 
+                    MultLineWidth: "85%", 
+                    equationNumbers: { 
+                       autoNumber: "AMS", 
+                    }, 
+                    unicode: { 
+                       fonts: "STIXGeneral,'Arial Unicode MS'" 
+                    } 
+                }, 
+                showProcessingMessages: false 
+            }); 
+</script>
+<script src="/pyVision/javascripts/gitdata.js"></script>
+	<script type="text/javascript">
+    	$(function() {
+        $("#display-projects").getRepos("pi19404"); //Add your github username.
+    	});
+	</script>
+<script type="text/javascript"
+    src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+    <title>pyVision by pi19404</title>
   </head>
+
   <body>
-    <div class="wrapper">
-      <header>
-        <h1>pyVision</h1>
-        <p>pyVision Machine Learning Library</p>
-        <p class="view"><a href="https://github.com/pi19404/pyVision">View the Project on GitHub <small>pi19404/pyVision</small></a></p>
-        <ul>
-          <li><a href="https://github.com/pi19404/pyVision/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/pi19404/pyVision/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/pi19404/pyVision">View On <strong>GitHub</strong></a></li>
-        </ul>
-      </header>
+    <div id="container">
+      <div class="inner">
+
+        <header>
+          <h1>pyVision</h1>
+          <h2>pyVision Machine Learning Library</h2>
+        </header>
+
+        <section id="downloads" class="clearfix">
+          <a href="https://github.com/pi19404/pyVision/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
+          <a href="https://github.com/pi19404/pyVision/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
+          <a href="https://github.com/pi19404/pyVision" id="view-on-github" class="button"><span>View on GitHub</span></a>
+		
+	  
+          </section>
+	
+
+	 <g:plusone size="medium">Google</g:plusone> 
+		
+	
+       
+
+
+        <hr>
       <section>
         <article class="post">
 
@@ -212,7 +258,7 @@ We modify this file so that it can be used as a base template for all the pages 
 <p>All the blog posts reside in the <code>_posts</code> directory.The format of filename is <strong>year-month-day-title.ext</strong>.This will generate the blogs posts in year/month/day directory of static website.
 The blog posts can be html or markdown .</p>
 
-<p>Let us create a blog post called 2014-10-03-test.md</p>
+<p>Let us create a blog post called 2014-10-03-Jekyll.md</p>
 
 <div class="highlight"><pre><code class="language-html" data-lang="html">---
 layout: post
@@ -221,7 +267,8 @@ title: Jekyll A Static Website Generator
 
 Introduction
 -------------
-In this article we will look at **Jekyll** static site generator to generate a static website and host the same on **github**  using github pages.</code></pre></div>
+In this article we will look at **Jekyll** static site generator to generate a static website and host the same on **github**  using github pages.
+..........</code></pre></div>
 
 <p>Now we need to provide links to access the blog content from the main page of website.This is done using Jekyll variables and adding the below content in the <strong>index.html</strong> page</p>
 
@@ -282,19 +329,76 @@ The source files in <code>gh-pages branch</code> of the repository files can als
   </div>
 
   <div class="date">
-    Written on October  3, 2014
+    Written on October  3, 2014 /pyVision
   </div>
+<div id="page-navigation"> 
+        <div class="clear">&nbsp;</div> 
+        <div class="left"> 
+         
+        </div> 
 
-
+        <div class="right"> 
+         
+                <a href="/pyVision//2014/10/03/test.html" title="next Post: 
+Multilayer Perceptron in Python">Multilayer Perceptron in Python &raquo; </a> 
+         
+        </div> 
+        <div class="clear">&nbsp;</div> 
+</div> 
 </article>
+<!-- This is the actual comments section  -->
+<div id="disqus_thread"></div>
+		<script type="text/javascript">
+			/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+			var disqus_shortname = 'pi19404'; // required: replace example with your forum shortname
+    			var disqus_identifier = '/2014/10/03/Jekyll.html';
+    			var disqus_url = 'http://pyvision.github.com/2014/10/03/Jekyll.html';       
+ 
+			/* * * DON'T EDIT BELOW THIS LINE * * */
+			(function() {
+				var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+				dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+				(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+			})();
+		</script>
+		<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+		<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+    
+
 
       </section>
+
+ <footer>
+          pyVision is maintained by <a href="https://github.com/pi19404">pi19404</a><br>
+          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
+        </footer>
+
+        
+      </div>
     </div>
-    <footer>
-      <p>Project maintained by <a href="https://github.com/pi19404">pi19404</a></p>
-      <p>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></p>
-    </footer>
-    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
-    
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+    <script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'pyvision'; // required: replace example with your forum shortname
+    var disqus_identifier = '/2014/10/03/Jekyll.html';
+    var disqus_url = 'http://pyvision.github.com/2014/10/03/Jekyll.html';
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+
+    </script>
+
   </body>
 </html>
+
+

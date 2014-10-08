@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="/pyVision/stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="/pyVision/stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="/pyVision/stylesheets/print.css" media="print">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script type="text/x-mathjax-config">
+   MathJax.Hub.Config({ 
+                config: ["MMLorHTML.js"], 
+                extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js"], 
+                jax: ["input/TeX"], 
+                tex2jax: { 
+                    inlineMath: [ ['$','$'], ["\\(","\\)"] ], 
+                    displayMath: [ ['$$','$$'], ["\\[","\\]"] ], 
+                    processEscapes: false 
+                }, 
+                TeX: { 
+                    TagSide: "right", 
+                    TagIndent: ".8em", 
+                    MultLineWidth: "85%", 
+                    equationNumbers: { 
+                       autoNumber: "AMS", 
+                    }, 
+                    unicode: { 
+                       fonts: "STIXGeneral,'Arial Unicode MS'" 
+                    } 
+                }, 
+                showProcessingMessages: false 
+            }); 
+</script>
+<script src="/pyVision/javascripts/gitdata.js"></script>
+	<script type="text/javascript">
+    	$(function() {
+        $("#display-projects").getRepos("pi19404"); //Add your github username.
+    	});
+	</script>
+<script type="text/javascript"
+    src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+    <title>pyVision by pi19404</title>
+  </head>
+
+  <body>
+    <div id="container">
+      <div class="inner">
+
+        <header>
+          <h1>pyVision</h1>
+          <h2>pyVision Machine Learning Library</h2>
+        </header>
+
+        <section id="downloads" class="clearfix">
+          <a href="https://github.com/pi19404/pyVision/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
+          <a href="https://github.com/pi19404/pyVision/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
+          <a href="https://github.com/pi19404/pyVision" id="view-on-github" class="button"><span>View on GitHub</span></a>
+		
+	  
+          </section>
+	
+
+	 <g:plusone size="medium">Google</g:plusone> 
+		
+	
+       
+
+
+        <hr>
+      <section>
+        <article class="post">
+
+  <h1>Multilayer Perceptron in Python</h1>
+
+  <div class="entry">
+    <h2 id="introduction">Introduction</h2>
+<p>In this article we will look at supervised learning algorithm called Multi-Layer Perceptron (MLP) and implementation of single hidden layer MLP</p>
+
+<h3 id="perceptron">Perceptron</h3>
+
+<p>A perceptron is a  unit that computes a single output from multiple real-valued inputs by forming a linear combination according to its input weights and then possibly putting the output through some nonlinear function called the activation function</p>
+
+<p>Below is a figure illustrating the operation of perceptron</p>
+
+<p><img src="https://googledrive.com/host/0B-pfqaQBbAAtbExWN0Zya3JySzA/images1.jpg" alt="enter image description here" /></p>
+
+<p><a href="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSPBshuqpGJBgvzx9ECppUv6QBg7ipgPH4XDEle3gZVn3Ku56MT">figure taken from</a></p>
+
+<p>The output of perceptron can be expressed as </p>
+
+<p>$f(x) = G( W^T x+b)$</p>
+
+<p>$x$ is the input vector 
+$(W,b)$ are the parameters of perceptron 
+ $f$ is the non linear function</p>
+
+<h3 id="multi-layer-perceptron">Multi Layer Perceptron</h3>
+<p>The MLP network consists of input,output and hidden layers.Each hidden layer consists of numerous perceptron’s which are called hidden units</p>
+
+<p>Below is figure illustrating a feed forward neural network architecture for Multi Layer perceptron</p>
+
+<p><img src="https://googledrive.com/host/0B-pfqaQBbAAtbExWN0Zya3JySzA/mlp1.png" alt="enter image description here" /><a href="http://www.deeplearning.net/tutorial/_images/mlp.png">(figure taken from)</a></p>
+
+<p>A single-hidden layer MLP  contains a array of perceptrons .
+The output of hidden layer of MLP can be expressed as a function </p>
+
+<p>$f(x) = G( W^T x+b)$</p>
+
+<p>$f: R^D \rightarrow R^L$, 
+where D is the size of input vector $x$ 
+$L$ is the size of the output vector
+$G$ is activation function.</p>
+
+<p>In case the activation function G is a sigmoid function then a single-layer MLP consisting of just the output layer is equivalent to a logistic classifier         </p>
+
+<p>$\begin{align} f_{i}(x)=\frac{e^{W_{i}x+b_{i}}}{\sum_{j} e^{W_{j}x+b_{j}}} \end{align}$</p>
+
+<p>Each unit of input layer corresponds to element of input vector.
+Each output unit of logistic classifier generate a prediction probability that input vector belong to a specified class.</p>
+
+<h2 id="feed-forward-neural-network">Feed Forward Neural Network</h2>
+<p>Let us first consider the most classical case of a single hidden layer neural network</p>
+
+<p>The number of inputs to hidden layer is $(d)$ and number of outputs of hidden layer are $(m)$
+The hidden layer performs mapping  of vector of dimensionality $d$ to vector of dimensionality $m$.</p>
+
+<p>Each unit of hidden layer of a MLP can be parameterized by a  weight matirx and bias vector  $(W,b)$ and a activation function $(\mathcal{G})$.The output of a hidden layer is activation function applied to linear combination of input and weight vector.</p>
+
+<p>Dimensionality of weight matrix and bias vector are determined by desired number of output units.
+If the number of  inputs to hidden layer/dimensionality of input is $\mathcal{M}$ and number of outputs is $\mathcal{N}$ then dimensionality of weight vector in $\mathcal{NxM}$ and that of  bias vector is $\mathcal{N}x1$.</p>
+
+<p>We can consider that hidden layer consists of $\mathcal{N}$ hidden units ,each of which accepts a $\mathcal{M}$ dimensional vector and produces a single output.</p>
+
+<p>The output is the affine transformation of the input layer followed by the appplication of function $f(x)$ ,which is typically a non linear function like sigmoid of inverse tan hyperbolic function.</p>
+
+<p>The vector valued function  $h(x)$  is the output of the hidden layer.</p>
+
+<p>$ h(x) = f(W^T x + c ) $</p>
+
+<p>The output layer of MLP is typically Logistic regresson classifier,if probabilistic outputs are desired for classification purposes in which case the activation function is the softmax regression function.</p>
+
+<h3 id="single-hidden-layer-multi-layer-perceptrons">Single Hidden Layer Multi Layer Perceptron’s</h3>
+<p>Let ,</p>
+
+<ul>
+  <li>$h_{i-1}$ denote the input vector to the i-th  layer</li>
+  <li>$h_{i}$ denote the output vector of the i-th layer.</li>
+  <li>$h_{0}$=x is vector that represents input layer </li>
+  <li>$h_{n}=y$ is output layer which produces the desired prediction output.</li>
+  <li>$f(x)$ denote the activation function </li>
+</ul>
+
+<p>Thus we denote the output of each hidden layer as</p>
+
+<p>$h_{k}(x) = f(b_{k} + w_{k}^T h_{i-1}(x)) = f(a_{k}) $</p>
+
+<p>Considering sigmoid activation function,gradient of fundtion wrt arguments can be written as</p>
+
+<p>$\begin{align} \frac{\partial \mathbf{h}_{k}(x)  }{\partial \mathbf{a}_{k}}=  f(a_{k})(1- f(a_{k})) \end{align}$ </p>
+
+<p>The computation associated with each hidden unit $(i)$ of the layer can be denoted as</p>
+
+<p>$h_{k,i}(x) = f(b_{k,i} + W_{k,i}^T h_{i-1}(x)) = f(a_{k}(x))$</p>
+
+<p>The output layer is a Logistic regression classifier.The output is a probabilistic output denoting the confident that input belongs to the predicted class.The cost function defined for the same is defined as negative log likelyhood over the training data</p>
+
+<p>$L = -log (p_{y}) $</p>
+
+<p>The idea is to maximize $p_{y}= P( Y =y_{i} | x )$ as estimator of conditional probability of the class $y$ given that input is $x$.This is the cost function for training algorithm.</p>
+
+<h3 id="back-propagation-algorithm">Back-Propagation Algorithm</h3>
+
+<p>The Back-Propagation Algorithm is recursive gradient algorithm used to optimize the parameters MLP wrt to defined loss function.Thus our aim is that each layer of MLP the hidden units are computed so that cost function is maximized.</p>
+
+<p>Like in logistic regression we compute the gradients of weights wrt to the cost function . The gradient of the cost function wrt all the weights in various hidden layers are computed.Standard gradient based optimization is performed to obtain the parameters that will minimize the likelihood function.</p>
+
+<p>The output layer determines the cost function.Since we are using Logistic regression as output layer.The cost function is the softmax function.Let L denote the cost function.</p>
+
+<p>There is nothing different we do in backpropagation algorithm that any other optimization techniue.The aim is to determine how the weights and biases change in the network </p>
+
+<p>$ \begin{align} \frac{\partial L}{\partial W_{k,i,j} } \text{ and } \frac{\partial L}{\partial b_{k,i,j} } \end{align}$.</p>
+
+<h4 id="output-layer">output layer</h4>
+
+<p>$\begin{align} L = -log ( f(a_{k,i}) ) \end{align}$</p>
+
+<p>$\begin{align} \frac{\partial L  }{\partial \mathbf{a}_{k,i}} = \frac{\partial L  }{\partial \mathbf{h}_{k,i}} \frac{\partial \mathbf{h}_{k,i} }{\partial \mathbf{a}_{k,i}} = -\frac{1}{h_{k,i}} * h_{k,i}*(1-h_{k,i}) = (h_{k,i}-1)\end{align}  $</p>
+
+<p>$ \begin{align} \frac{\partial L  }{\partial \mathbf{a}_{k,i}} =\mathbf{h}_{k,j} - 1_{y=y_{i}} \end{align}$</p>
+
+<p>The above expression can be considered as the error in output.When $y=y_{i}$ the error is $(1-p_{i})$ and then $y \ne y_{i}$ the error in prediction is $p_{i}$.</p>
+
+<h4 id="hidden-layer">hidden layer</h4>
+
+<p>$\begin{align}\frac{\partial L }{\partial \mathbf{a}_{k-1,j}} =  \frac{\partial L }{\partial \mathbf{h}_{k-1,j}} \frac{\partial \mathbf{h}_{k-1,j} }{\partial \mathbf{a}_{k-1,j}} \end{align}$</p>
+
+<p>Thus the idea is to start computing gradients from the bottom most layer.To compute the gradients of the cost function wrt parameters at the i-th layer we need to know the gradients of cost function wrt parameters at $(i+1)$th layer.</p>
+
+<p>We start with gradient computation at the logistic classifier level.The propagate backwards,updating the parameters at each layer</p>
+
+<p>Let us consider the case of other other hidden layers</p>
+
+<p>$\begin{align} \frac{\partial L }{\partial \mathbf{h}_{k-1,j}} = \sum_i \frac{\partial L }{\partial \mathbf{a}_{k,i}}\frac{\partial \mathbf{a}_{k,i} }{\partial \mathbf{h}_{k-1,j}} = \sum_i \frac{\partial L }{\partial \mathbf{a}_{k,i}} W_{k,i,j}  \end{align} $</p>
+
+<p>The implementation of the above equation </p>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">linear_gradient</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">weights</span><span class="p">,</span><span class="n">error</span><span class="p">):</span>   
+            <span class="sd">&quot;&quot;&quot; The function compues gradient of likelihood function wrt output of hidden layer</span>
+<span class="sd">            :math:`\\begin{align} \\frac{\partial L }{\partial \mathbf{h}\_{k-1,j}} \\end{align}`</span>
+<span class="sd">            </span>
+<span class="sd">            Parameters </span>
+<span class="sd">            ------------</span>
+<span class="sd">            weights : ndarray,shape=(n_out,n_hidden)</span>
+<span class="sd">                      weights of next hidden layer, :math:`\\begin{align} \mathbf{W}\_{k,i,j}  \\end{align}`</span>
+<span class="sd">                      </span>
+<span class="sd">            error   : ndarray,shape=(n_out,)</span>
+<span class="sd">                      backpropagated error from next layer :math:`\\begin{align} \\frac{\partial L }{\partial \mathbf{a}\_{k,i}} \\end{align}`</span>
+<span class="sd">        </span>
+<span class="sd">            Returns </span>
+<span class="sd">            -----------     </span>
+<span class="sd">            out : ndarray,shape=(n_hidden,)                </span>
+<span class="sd">                  compute the backpropagated error, :math:`\\begin{align} \\frac{\partial L }{\partial \mathbf{h}\_{k-1,j}} \\end{align}`</span>
+<span class="sd">            &quot;&quot;&quot;</span>            
+            
+            <span class="k">return</span> <span class="n">numpy</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">error</span><span class="p">,</span><span class="n">weights</span><span class="p">);</span></code></pre></div>
+
+<p>The gradients computation of parameters of hidden layers is as follows</p>
+
+<p>$\begin{align}\frac{\partial L }{\partial \mathbf{W}_{k-1,i,j}} =  \frac{\partial L }{\partial \mathbf{a}_{k-1,j}} \frac{\partial \mathbf{a}_{k-1,j} }{\partial \mathbf{W}_{k-1,i,j}}=\frac{\partial L }{\partial \mathbf{a}_{k-1,j}} \mathbf{h}_{k-2,j} \end{align}$</p>
+
+<p>$\begin{align}\frac{\partial L }{\partial \mathbf{b}_{k-1,i}} =  \frac{\partial L }{\partial \mathbf{a}_{k-1,i}} \frac{\partial \mathbf{a}_{k-1,i} }{\partial \mathbf{b}_{k-1,i}}=\frac{\partial L }{\partial \mathbf{a}_{k-1,i}}  \end{align}$</p>
+
+<p>This is implemented as below ,where the input</p>
+
+<ul>
+  <li>$x$ represents $\begin{align} \frac{\partial \mathbf{h}_{k,j} }{\partial \mathbf{a}_{k,j}} \end{align}$ -output gradient</li>
+  <li>$y$ represents $\begin{align} h_{k-2,j} \end{align}$ -activation</li>
+  <li>$w$ represents $\begin{align} \frac{\partial L }{\partial \mathbf{a}_{k-1,i}}\end{align}$ -error</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">compute_error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">w</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>      
+        <span class="sd">&quot;&quot;&quot;                 </span>
+<span class="sd">        function computes the gradient of the likelyhood function wrt to parameters  of the hidden layer for single input</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters </span>
+<span class="sd">        -------------</span>
+<span class="sd">        x : ndarray,shape=(n_hidden,)</span>
+
+<span class="sd">        w : ndarray,shape=(n_hidden,)</span>
+<span class="sd">            `w` represents :math:`\\begin{align} \\frac{\partial L }{\partial \mathbf{h}\_{k,i}}\end{align}` the gradient of the likelyhood fuction wrt output of hidden layer</span>
+<span class="sd">            </span>
+<span class="sd">        y : ndarray,shape=(n_in,)</span>
+<span class="sd">            `y` represents :math:`\mathbf{h}\_{k-2,j}` the input hidden layer</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        ------------</span>
+<span class="sd">        res : ndarray,shape=(n_in+1,n_hidden)        </span>
+<span class="sd">              :math:`\\begin{align} \\frac{\partial L }{\partial \mathbf{W}\_{k-1,i,j}}  \\text{ and } \\frac{\partial L }{\partial \mathbf{W}\_{k-1,i}} \end{align}`</span>
+<span class="sd">        &quot;&quot;&quot;</span>        
+       
+        
+        <span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="o">*</span><span class="n">w</span><span class="p">;</span>                
+        <span class="c">#gradient of likelyhood function wrt input activation</span>
+        <span class="n">res1</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="mi">1</span><span class="p">);</span>
+        <span class="c">#gradient of likelyhood function wrt weight matrix</span>
+        <span class="n">res</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">res1</span><span class="p">,</span><span class="n">y</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="p">);</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">eta</span><span class="o">=</span><span class="mf">0.0001</span>
+        <span class="c">#code for L1 and L2 regularization </span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Regularization</span><span class="o">==</span><span class="mi">2</span><span class="p">:</span>
+           <span class="n">res</span><span class="o">=</span><span class="n">res</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">eta</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">W</span><span class="p">;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Regularization</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+           <span class="n">res</span><span class="o">=</span><span class="n">res</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">eta</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">W</span><span class="p">);</span>
+
+        <span class="c">#stacking the parameters and preparing for returning            </span>
+        <span class="n">res</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">res</span><span class="p">,</span><span class="n">res1</span><span class="p">));</span>
+        <span class="k">return</span> <span class="n">res</span><span class="o">.</span><span class="n">T</span><span class="p">;</span>
+
+
+    <span class="k">def</span> <span class="nf">cost_gradients</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">weights</span><span class="p">,</span><span class="n">activation</span><span class="p">,</span><span class="n">error</span><span class="p">):</span>        
+        <span class="sd">&quot;&quot;&quot; function to compute the gradient of log </span>
+<span class="sd">        likelyhood function wrt the parameters of the hidden layer</span>
+<span class="sd">        averaged over all the input samples.        </span>
+<span class="sd">        </span>
+<span class="sd">        Parameters </span>
+<span class="sd">        -------------</span>
+<span class="sd">        weights : numpy,shape(n_out,n_hidden),</span>
+<span class="sd">                  weight matrix of the next layer,W\_{k,i,j} </span>
+<span class="sd">                  </span>
+<span class="sd">                  </span>
+<span class="sd">        activation: numpy,shape=(N,n_in)</span>
+<span class="sd">                    input to the hidden layer \mathbf{h}\_{k-2,j}</span>
+<span class="sd">                    </span>
+<span class="sd">        error : numpy,shape=(n_out,) </span>
+<span class="sd">                 \frac{\partial L }{\partial \mathbf{a}\_{k,i}}</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        </span>
+<span class="sd">        -------------</span>
+<span class="sd">        gW : ndarray,shape=(n_hidden,n_in+1)</span>
+<span class="sd">             coefficient parameter matrix of next hidden layer,</span>
+<span class="sd">             :math:`\\begin{align} \\frac{\partial L }{\partial \mathbf{W}\_{k-1,i,j}}  \\text{ and } \\frac{\partial L }{\partial \mathbf{W}\_{k-1,i}} \end{align}`</span>
+<span class="sd">        &quot;&quot;&quot;</span>                                       
+        <span class="n">we</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">linear_gradient</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span><span class="n">error</span><span class="p">)</span>
+        <span class="n">ag</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">activation_gradient</span><span class="p">()</span>
+        <span class="n">e</span><span class="o">=</span><span class="p">[</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_error</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">we</span><span class="p">,</span><span class="n">b</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span><span class="n">b</span> <span class="ow">in</span> <span class="n">izip</span><span class="p">(</span><span class="n">ag</span><span class="p">,</span><span class="n">activation</span><span class="p">)]</span>
+        <span class="n">gW</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">e</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>        
+        <span class="k">return</span> <span class="n">gW</span><span class="p">;</span></code></pre></div>
+
+<p>Once we have the gradients and have computed the new parameters,the <code>function update</code> is called to updated the new parameters in the model.</p>
+
+<p>This function is called by the Optimizer module that performs SGD based optimizations,all the optimization parameters like learning rate are handled by the optimizer methods.</p>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">update_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">params</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; function to updated the learn parameters to the model</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        grads : ndarray,shape=(n_hidden,n_in+1)        </span>
+<span class="sd">                coefficient parameter matrix                </span>
+<span class="sd">        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">;</span>
+        <span class="n">param1</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">nparam</span><span class="p">);</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">W</span><span class="o">=</span><span class="n">param1</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">nparam</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="o">=</span><span class="n">param1</span><span class="p">[:,</span><span class="bp">self</span><span class="o">.</span><span class="n">nparam</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span></code></pre></div>
+
+<h3 id="implementation-details">Implementation Details</h3>
+<p>The class HiddenLayer encapsulates all the methods for prediction,classification,training,gradient computation and error propagation that are required</p>
+
+<p>The important attributes of the HiddenLayer class are </p>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">Attributes</span>        
+    <span class="o">-----------</span>
+    <span class="sb">`out`</span> <span class="p">:</span> <span class="n">array</span><span class="o">-</span><span class="n">like</span> <span class="p">,</span><span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="n">n_out</span><span class="p">]</span>
+    <span class="n">The</span> <span class="n">output</span> <span class="n">of</span> <span class="n">hidden</span> <span class="n">layer</span> 
+    
+    <span class="sb">`params`</span><span class="p">:</span><span class="n">array</span><span class="o">-</span><span class="n">like</span> <span class="p">,</span><span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="n">n_out</span><span class="p">,</span><span class="n">n_in</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>        
+     <span class="n">parameters</span> <span class="n">of</span> <span class="n">hidden</span> <span class="n">layer</span>
+    
+    <span class="sb">`W,b`</span><span class="p">:</span><span class="n">array</span><span class="o">-</span><span class="n">like</span><span class="p">,</span><span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="n">n_out</span><span class="p">,</span><span class="n">n_int</span><span class="p">],</span><span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="n">n_out</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+     <span class="n">parameters</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">form</span> <span class="n">of</span> <span class="n">weight</span> <span class="n">matrix</span> <span class="ow">and</span> <span class="n">bias</span> <span class="n">vector</span> <span class="n">characterizing</span> 
+     <span class="n">the</span> <span class="n">hidden</span> <span class="n">layer</span>
+     
+     <span class="sb">`activation`</span><span class="p">:</span><span class="n">function</span>
+     <span class="n">the</span> <span class="n">non</span> <span class="n">linear</span> <span class="n">activation</span> <span class="n">function</span>
+     
+    <span class="o">..</span> <span class="n">note</span> <span class="p">:</span>
+    <span class="ow">in</span> <span class="n">the</span> <span class="n">below</span> <span class="n">functions</span> <span class="n">to</span> <span class="n">n_hidden</span> <span class="n">denotes</span> <span class="n">the</span> <span class="n">number</span> <span class="n">of</span> <span class="n">output</span> <span class="n">units</span> <span class="n">of</span> <span class="n">present</span> <span class="n">hidden</span> <span class="n">layer</span>
+    <span class="n">n_out</span> <span class="n">denotes</span> <span class="n">the</span> <span class="n">number</span> <span class="n">of</span> <span class="n">output</span> <span class="n">units</span> <span class="n">of</span> <span class="nb">next</span> <span class="n">hidden</span> <span class="n">layer</span>
+    <span class="ow">and</span> <span class="n">n_in</span> <span class="n">denotes</span> <span class="n">the</span> <span class="n">size</span> <span class="n">of</span> <span class="nb">input</span> <span class="n">vector</span> <span class="n">to</span> <span class="n">present</span> <span class="n">hidden</span> <span class="n">layer</span>
+    
+    <span class="k">def</span> <span class="nf">compute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="nb">input</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;function computes the output of the hidden layer for input matrix</span>
+<span class="sd">      </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        input   :   ndarray,shape=(N,n_in)</span>
+<span class="sd">                    :math:`h\_{i-1}(x)` is the `input`</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -----------</span>
+<span class="sd">        output  : ndarray ,shape=(N,n_out)</span>
+<span class="sd">                    :math:`f(b_k + w_k^T h\_{i-1}(x))` ,affine transformation over input</span>
+<span class="sd">        &quot;&quot;&quot;</span>                
+        <span class="c">#performs affine transformation over input vector        </span>
+        <span class="n">linout</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">W</span><span class="p">,</span><span class="nb">input</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">,(</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="mi">1</span><span class="p">));</span>     
+        <span class="c">#applies non linear activation function over computed linear transformation</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">activation</span><span class="p">(</span><span class="n">linout</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="p">;</span>                 
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="p">;</span></code></pre></div>
+
+<p>A class MLP  encapsulates all the methods for prediction,classification,training,forward and back propagation,saving and loading models etc.
+Below 3 important functions are displayed.The learn function is called at every optimizer loop.
+This calls the forward and backward iteration methods and updated the parameters of each hidden layer</p>
+
+<p>the forward iteration simply computes the output of network and while propagate_backward fuctions
+is responsible for passing suitable inputs and weights to each hidden layer so that it can execute the backward algorithm loop</p>
+
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">propagate_backward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">error</span><span class="p">,</span><span class="n">weights</span><span class="p">,</span><span class="nb">input</span><span class="p">):</span>                 
+        <span class="sd">&quot;&quot;&quot; the function that executes the backward propagation loop on hidden layers</span>
+<span class="sd">                </span>
+<span class="sd">        Parameters </span>
+<span class="sd">        ----------------</span>
+<span class="sd">        error : numpy array,shape=(n_out,)</span>
+<span class="sd">                average prediction error over all the input samples in output layer</span>
+<span class="sd">                :math:`\\begin{align}\frac{\partial L  }{\partial \mathbf{a}\_{k,i}} \\end{align}`</span>
+
+
+<span class="sd">        weight : numpy array,shape=(n_out,n_hidden)        </span>
+<span class="sd">                 parameter weight matrix of the output layer</span>
+<span class="sd">        </span>
+<span class="sd">        </span>
+<span class="sd">        input : ndarray,shape=(n_samples,n_in)</span>
+<span class="sd">                input training data</span>
+<span class="sd">        Returns</span>
+<span class="sd">        ----------------</span>
+<span class="sd">        None </span>
+<span class="sd">        </span>
+<span class="sd">        &quot;&quot;&quot;</span>              
+
+
+        <span class="c">#input matrix for the hidden layer    </span>
+        <span class="n">input1</span><span class="o">=</span><span class="nb">input</span><span class="p">;</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_hidden_layers</span><span class="p">):</span>                        
+            <span class="n">prev_error</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">;</span>
+            <span class="n">best_grad</span><span class="o">=</span><span class="p">[];</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">):</span>
+                <span class="sd">&quot;&quot;&quot; computing the derivative of the parameters of the hidden layers&quot;&quot;&quot;</span>
+                <span class="n">hidden_layer</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hiddenLayer</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">n_hidden_layers</span><span class="o">-</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span>
+                <span class="n">hidden_layer</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">input1</span><span class="p">);</span>
+          
+                <span class="c"># computing the gradient of likelyhood function wrt the parameters of the hidden layer </span>
+                <span class="n">grad</span><span class="o">=</span><span class="n">hidden_layer</span><span class="o">.</span><span class="n">cost_gradients</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span><span class="n">input1</span><span class="p">,</span><span class="n">error</span><span class="p">);</span>
+                <span class="c">#update the parameter of hidden layer</span>
+                <span class="n">res</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">hidden_layer</span><span class="o">.</span><span class="n">params</span><span class="p">,</span><span class="n">grad</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span><span class="mf">0.13</span><span class="p">);</span>
+            
+                <span class="sd">&quot;&quot;&quot; update the parameters &quot;&quot;&quot;</span>
+                <span class="n">hidden_layer</span><span class="o">.</span><span class="n">update_parameters</span><span class="p">(</span><span class="n">res</span><span class="p">);</span>
+            <span class="c">#set the weights ,inputs and error required for the back propagation algorithm</span>
+            <span class="c">#for the next layer</span>
+            <span class="n">weights</span><span class="o">=</span><span class="n">hidden_layer</span><span class="o">.</span><span class="n">W</span><span class="p">;</span>
+            <span class="n">error</span><span class="o">=</span><span class="n">grad</span><span class="p">[:,</span><span class="n">hidden_layer</span><span class="o">.</span><span class="n">n_in</span><span class="p">];</span>                                    
+            <span class="bp">self</span><span class="o">.</span><span class="n">hiddenLayer</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">n_hidden_layers</span><span class="o">-</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="n">hidden_layer</span><span class="p">;</span>
+            <span class="n">input1</span><span class="o">=</span><span class="n">hidden_layer</span><span class="o">.</span><span class="n">output</span><span class="p">;</span>
+
+   <span class="k">def</span> <span class="nf">propagate_forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="nb">input</span><span class="p">):</span>
+       <span class="sd">&quot;&quot;&quot;the function that performs forward iteration to compute the output</span>
+<span class="sd">        </span>
+<span class="sd">       Parameters</span>
+<span class="sd">       -----------</span>
+<span class="sd">       input : ndarray,shape=(n_samples,n_in)</span>
+<span class="sd">               input training data</span>
+<span class="sd">       </span>
+<span class="sd">       &quot;&quot;&quot;</span>
+       <span class="bp">self</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+
+                
+  
+   <span class="k">def</span> <span class="nf">learn</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">update</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; the main function that performs learning,computing gradients and updating parameters </span>
+<span class="sd">            this is called by the optimizer module for each iteration</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        update - python function</span>
+<span class="sd">                 this represents the update function that performs the gradient descent iteration</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c">#set the training data</span>
+        <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">;</span>
+        <span class="c">#set the update function</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="o">=</span><span class="n">update</span><span class="p">;</span>                        
+        <span class="c">#execute the forward iteration loop</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">propagate_forward</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>  
+        <span class="c">#set the input for output layer</span>
+        <span class="n">args1</span><span class="o">=</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hidden_output</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
+        <span class="c">#set the input for the output logistic regression layer</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logRegressionLayer</span><span class="o">.</span><span class="n">set_training_data</span><span class="p">(</span><span class="n">args1</span><span class="p">);</span>
+        <span class="c">#gradient computation and parameter updation of output layer</span>
+        <span class="p">[</span><span class="n">params</span><span class="p">,</span><span class="n">grad</span><span class="p">]</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">logRegressionLayer</span><span class="o">.</span><span class="n">learn</span><span class="p">(</span><span class="n">update</span><span class="p">);</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logRegressionLayer</span><span class="o">.</span><span class="n">update_params</span><span class="p">(</span><span class="n">params</span><span class="p">);</span>
+       
+        <span class="c">#initialize the gradiients and weights for backward error propagation</span>
+        <span class="n">error</span><span class="o">=</span><span class="n">grad</span><span class="p">;</span>
+        <span class="n">weights</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">logRegressionLayer</span><span class="o">.</span><span class="n">W</span><span class="p">;</span>
+        
+        <span class="c">#perform the backward iteration over the hidden layers</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_hidden_layers</span> <span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>   
+             <span class="n">weights</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">logRegressionLayer</span><span class="o">.</span><span class="n">W</span><span class="p">;</span>
+             <span class="bp">self</span><span class="o">.</span><span class="n">propagate_backward</span><span class="p">(</span><span class="n">error</span><span class="p">,</span><span class="n">weights</span><span class="p">,</span><span class="n">x</span><span class="p">)</span>
+             
+        <span class="k">return</span> <span class="p">[</span><span class="bp">None</span><span class="p">,</span><span class="bp">None</span><span class="p">];</span></code></pre></div>
+
+<h3 id="selecting-the-parameters-of-the-model">Selecting the parameters of the model</h3>
+<p>As mentioned earlier that MLP consits of input,hidden and output layers.There is not fixed rule to determine the number of hidden units.The parameters are application specific and best parameters are often arrived at by emperical testing process.Less number of hidden units leads to increased generalization and training error while having a large number of training units leads to issues of with training of large number of parameters and significantly large training time.</p>
+
+<h3 id="issues-with-mlp">Issues with MLP</h3>
+<p>One of the issues observed in MLP training is the slow nature of learning.The below figure illustrates the nature of learning process when a small learning parameter or improper regularization constant is chosen.Various adaptive methods can be implemented which can improve the performance ,but slow convergence and large learning times is an issue with Neural networks based learning algorithms.</p>
+
+<p><img src="https://googledrive.com/host/0B-pfqaQBbAAtbExWN0Zya3JySzA/save.png" alt="enter image description here" /></p>
+
+<h3 id="code">Code</h3>
+<p>The important files related to MLP are</p>
+
+<ul>
+  <li>MLP.py</li>
+  <li>LogisticRegression.py</li>
+  <li>Optimizer.py</li>
+</ul>
+
+<p>The latest version of the code can be found in github repository <a href="www.github.com/pi19404/pyVision">www.github.com/pi19404/pyVision</a></p>
+
+<p>The files used in the current article can be downloaded from below link
+ - <a href="https://github.com/pi19404/pyVision/archive/pyVision_alpha0.002.zip">Github Release</a></p>
+
+<p>The dataset and model file can be found under the models and data repository</p>
+
+<ul>
+  <li>MLP.pyvision - model file</li>
+  <li>mnist.pkl.gz - data file</li>
+</ul>
+
+<p>make suitable changes to the path in MLP.py file before running the code.</p>
+
+
+  </div>
+
+  <div class="date">
+    Written on October  3, 2014 /pyVision
+  </div>
+<div id="page-navigation"> 
+        <div class="clear">&nbsp;</div> 
+        <div class="left"> 
+         
+                <a href="/pyVision//2014/10/03/Jekyll.html" title="Previous Post: 
+Jekyll A Static Website Generator">&laquo; Jekyll A Static Website Generator</a> 
+         
+        </div> 
+
+        <div class="right"> 
+         
+        </div> 
+        <div class="clear">&nbsp;</div> 
+</div> 
+</article>
+<!-- This is the actual comments section  -->
+<div id="disqus_thread"></div>
+		<script type="text/javascript">
+			/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+			var disqus_shortname = 'pi19404'; // required: replace example with your forum shortname
+    			var disqus_identifier = '/2014/10/03/test.html';
+    			var disqus_url = 'http://pyvision.github.com/2014/10/03/test.html';       
+ 
+			/* * * DON'T EDIT BELOW THIS LINE * * */
+			(function() {
+				var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+				dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+				(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+			})();
+		</script>
+		<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+		<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+    
+
+
+      </section>
+
+ <footer>
+          pyVision is maintained by <a href="https://github.com/pi19404">pi19404</a><br>
+          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
+        </footer>
+
+        
+      </div>
+    </div>
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+    <script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'pyvision'; // required: replace example with your forum shortname
+    var disqus_identifier = '/2014/10/03/test.html';
+    var disqus_url = 'http://pyvision.github.com/2014/10/03/test.html';
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+
+    </script>
+
+  </body>
+</html>
+
+
