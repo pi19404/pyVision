@@ -176,7 +176,7 @@ If the file is markdown file then all its contents are inserted in place of cont
 All the blog posts reside in the `_posts` directory.The format of filename is **year-month-day-title.ext**.This will generate the blogs posts in year/month/day directory of static website.
 The blog posts can be html or markdown .
 
-Let us create a blog post called 2014-10-03-Jekyll.md
+Let us create a blog post called 2014-10-03-test.md
 {% highlight html %}
 ---
 layout: post
@@ -186,7 +186,6 @@ title: Jekyll A Static Website Generator
 Introduction
 -------------
 In this article we will look at **Jekyll** static site generator to generate a static website and host the same on **github**  using github pages.
-..........
 {%  endhighlight %}
 
 Now we need to provide links to access the blog content from the main page of website.This is done using Jekyll variables and adding the below content in the **index.html** page
