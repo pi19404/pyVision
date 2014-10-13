@@ -273,6 +273,7 @@ if __name__ == "__main__":
         
         #introduce delay
         dx=delay(x,tdelay);
+
         result=numpy.zeros((1,loop));
         for i in range(loop):
             s=dx;
@@ -284,6 +285,8 @@ if __name__ == "__main__":
             #normalize signals                
             s=s/np.linalg.norm(s);
             x1=x2/np.linalg.norm(x2);
+            
+            
             if carrier!=None:
                 unfiltered_signal=s;
                 if mode==1:
@@ -299,7 +302,9 @@ if __name__ == "__main__":
             s=abs(scipy.signal.hilbert(s))
             if mode==1 or mode==2:
                 r=numpy.correlate(s,x1,mode="full")
-      
+            
+            arg=np.argmax(r)
+            result[0,i]=abs(arg-len(x))         
 
 
    
