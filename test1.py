@@ -32,6 +32,7 @@ b = scipy.signal.convolve2d(im[:,:,2], kernel[:,:,2], mode='same')
 # stack the channels back into a 8-bit colour depth image and plot it
 im_out = np.dstack([r, g, b])
 #im_out = (im_out ).astype(np.uint8) 
+scipy.nd
 img2 = scipy.ndimage.convolve(im, kernel, mode='constant', cval=0.0)
 
 pylab.subplot(1,3,1)
