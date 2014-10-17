@@ -1,17 +1,12 @@
 ---
 layout: default
 ---
+
 <article class="post">
-
-  <h1>{{ page.title }}</h1>
-
-  <div class="entry">
-    {{ content }}
-  </div>
-
-  <div class="date">
-    Written on {{ page.date | date: "%B %e, %Y" }} {{ site.baseurl }}
-  </div>
+  <h1 class="post-title">{{ page.title }}</h1>
+  <span class="post-date">{{ page.date | date_to_string }}</span>
+  {{ content }}
+</article>
 <div id="page-navigation"> 
         <div class="clear">&nbsp;</div> 
         <div class="left"> 
@@ -29,8 +24,6 @@ layout: default
         </div> 
         <div class="clear">&nbsp;</div> 
 </div> 
-</article>
-<!-- This is the actual comments section  -->
 <div id="disqus_thread"></div>
 		<script type="text/javascript">
 			/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
@@ -47,5 +40,7 @@ layout: default
 		</script>
 		<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 		<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
-    
+
+
+
 

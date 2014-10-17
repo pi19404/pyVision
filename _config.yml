@@ -1,0 +1,26 @@
+# Dependencies
+markdown:            redcarpet
+highlighter:         pygments
+
+# Permalinks
+#
+# Use of `relative_permalinks` ensures post links from the index work properly.
+permalink:           pretty
+relative_permalinks: true
+
+# Setup
+title:               pyVision
+tagline:             'A Machine Learning and Signal Processing toolbox'
+description:         'A Machine Learning and Signal Processing toolbox'
+url:                 pi19404.github.io
+baseurl:             /pyVision
+paginate:            5
+
+# About/contact
+author:
+  name:              pi19404
+  url:               https://pi-virtualworld@blogspot.com
+  email:             pi19404@gmail.com
+
+# Custom vars
+version:             1.0.0

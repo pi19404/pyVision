@@ -67,7 +67,7 @@ The output is the affine transformation of the input layer followed by the apppl
 
 The vector valued function  $h(x)$  is the output of the hidden layer.
 
-$ h(x) = f(W^T x + c ) $
+$$ h(x) = f(W^T x + c ) $$
 
 The output layer of MLP is typically Logistic regresson classifier,if probabilistic outputs are desired for classification purposes in which case the activation function is the softmax regression function.
 
@@ -90,12 +90,12 @@ $\begin{align} \frac{\partial \mathbf{h}\_{k}(x)  }{\partial \mathbf{a}\_{k}}=  
 
 The computation associated with each hidden unit $(i)$ of the layer can be denoted as
 
-$h\_{k,i}(x) = f(b\_{k,i} + W\_{k,i}^T h\_{i-1}(x)) = f(a\_{k}(x))$
+$$h\_{k,i}(x) = f(b\_{k,i} + W\_{k,i}^T h\_{i-1}(x)) = f(a\_{k}(x))$$
 
 
 The output layer is a Logistic regression classifier.The output is a probabilistic output denoting the confident that input belongs to the predicted class.The cost function defined for the same is defined as negative log likelyhood over the training data
 
-$L = -log (p\_{y}) $
+$$L = -log (p\_{y}) $$
 
 The idea is to maximize $p\_{y}= P( Y =y\_{i} \| x )$ as estimator of conditional probability of the class $y$ given that input is $x$.This is the cost function for training algorithm.
 
@@ -131,10 +131,11 @@ We start with gradient computation at the logistic classifier level.The propagat
 
 Let us consider the case of other other hidden layers
 
-$\begin{align} \frac{\partial L }{\partial \mathbf{h}\_{k-1,j}} = \sum_i \frac{\partial L }{\partial \mathbf{a}\_{k,i}}\frac{\partial \mathbf{a}\_{k,i} }{\partial \mathbf{h}\_{k-1,j}} = \sum_i \frac{\partial L }{\partial \mathbf{a}\_{k,i}} W\_{k,i,j}  \end{align} $
+$\begin{align} \frac{\partial L }{\partial \mathbf{h}\_{k-1,j}} = \sum_i \frac{\partial L }{\partial \mathbf{a}\_{k,i}}\frac{\partial \mathbf{a}\_{k,i} }{\partial \mathbf{h}\_{k-1,j}} = \sum\_{i} \frac{\partial L }{\partial \mathbf{a}\_{k,i}} W\_{k,i,j}  \end{align} $
 
 The implementation of the above equation 
-{% highlight python %}
+
+<pre class="brush : python ">
     def linear_gradient(self,weights,error):   
             """ The function compues gradient of likelihood function wrt output of hidden layer
             :math:`\\begin{align} \\frac{\partial L }{\partial \mathbf{h}\_{k-1,j}} \\end{align}`
@@ -154,7 +155,7 @@ The implementation of the above equation
             """            
             
             return numpy.dot(error,weights);
-{% endhighlight  %}
+</pre>
 
 
 The gradients computation of parameters of hidden layers is as follows
@@ -168,7 +169,8 @@ This is implemented as below ,where the input
  - $x$ represents $\begin{align} \frac{\partial \mathbf{h}\_{k,j} }{\partial \mathbf{a}\_{k,j}} \end{align}$ -output gradient
  - $y$ represents $\begin{align} h\_{k-2,j} \end{align}$ -activation
  - $w$ represents $\begin{align} \frac{\partial L }{\partial \mathbf{a}\_{k-1,i}}\end{align}$ -error
-{% highlight python %}
+
+<pre class="brush : python ">
    
     def compute_error(self,x,w,y):      
         """                 
@@ -238,12 +240,13 @@ This is implemented as below ,where the input
         e=[ self.compute_error(a,we,b) for a,b in izip(ag,activation)]
         gW=np.mean(e,axis=0).T        
         return gW;        
-{% endhighlight  %}
+</pre>
 
 Once we have the gradients and have computed the new parameters,the `function update` is called to updated the new parameters in the model.
 
 This function is called by the Optimizer module that performs SGD based optimizations,all the optimization parameters like learning rate are handled by the optimizer methods.
-{% highlight python %}
+
+<pre class="brush : python ">
     def update_parameters(self,params):
         """ function to updated the learn parameters to the model
         
@@ -259,12 +262,14 @@ This function is called by the Optimizer module that performs SGD based optimiza
         self.W=param1[:,0:self.nparam-1];
         self.b=param1[:,self.nparam-1];
         
-{% endhighlight  %}
+</pre>
+
 ### Implementation Details
 The class HiddenLayer encapsulates all the methods for prediction,classification,training,gradient computation and error propagation that are required
 
 The important attributes of the HiddenLayer class are 
-{% highlight python %}
+
+<pre class="brush : python ">
     Attributes        
     -----------
     `out` : array-like ,shape=[n_out]
@@ -304,7 +309,7 @@ The important attributes of the HiddenLayer class are
         self.output=self.activation(linout).T;                 
         return self.output;
 
-{% endhighlight %}
+</pre>
 
 A class MLP  encapsulates all the methods for prediction,classification,training,forward and back propagation,saving and loading models etc.
 Below 3 important functions are displayed.The learn function is called at every optimizer loop.
@@ -313,7 +318,7 @@ This calls the forward and backward iteration methods and updated the parameters
 the forward iteration simply computes the output of network and while propagate_backward fuctions
 is responsible for passing suitable inputs and weights to each hidden layer so that it can execute the backward algorithm loop
 
-{% highlight python %}
+<pre class="brush : python ">
 
                
    def propagate_backward(self,error,weights,input):                 
@@ -409,7 +414,7 @@ is responsible for passing suitable inputs and weights to each hidden layer so t
              self.propagate_backward(error,weights,x)
              
         return [None,None];                        
-{% endhighlight  %}
+</pre>
 
 
 ### Selecting the parameters of the model
