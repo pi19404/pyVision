@@ -141,8 +141,10 @@ def rectangular(N,start,end):
           rectangular pulse signal
           
         """
+        interval=end-start;
         x = np.zeros((1,N))
-        x[:,start:end]=1;
+        x[:,start:start+interval]=1;
+         
         x=x.flatten();    
         return x;
 
@@ -180,8 +182,11 @@ def delay(signal,N):
     return signal1;
 
 
-def GenerateNoise(Variance,L):
-    random.seed(1234+100*Variance)
+def GenerateNoise(Variance,L,flag=0):
+    if flag==1:
+        random.seed(1234+100*Variance)
+    else:
+        random.seed(1234)
     noise = np.random.normal(0,Variance,L)  
     return noise;
     
@@ -279,12 +284,14 @@ if __name__ == "__main__":
         carrier=None;
         Fs=5000;
         tdelay=10;
-        varnoise=0.1;
-        loop=2
-        order=2;
-        filter_type='butter_worth'
-        #filter_type='FIR'
-        carrier=1000;
+        varnoise1=0.4;
+        varnoise2=0.4;
+        
+        #number of receivers
+        loop1=2
+        #number of periods of the signal
+        loop2=4;
+
         
             
        
@@ -292,30 +299,62 @@ if __name__ == "__main__":
           
        
         #x=sinepulse(1000,100,200,carrier,Fs)
-        x2=rectangular(1000,100,200)             
+        x2=4*rectangular(1000,100,200)             
         
         PS=np.mean(x2*x2);
-        PN=0.1*0.1
-        print "Signal strength",
-        print "Noise power",varnoise
+        PN=(varnoise2*varnoise2)+(varnoise1*varnoise1)
+        print "Signal strength",PS
+        print "Noise power",PN
         print "SNR",PS/PN
+        SNR1=PS/PN;
          
        
-        signal=numpy.zeros((1000,loop));
-        for i in range(loop):
-            signal[:,i]=GenerateNoise(varnoise,1000)
+        
+        signal=numpy.zeros((1000,loop1,loop2));
+        noise=numpy.zeros((1000,loop1,loop2));
+        
+        
+        #over multiple periods of the signal
+        for k in range(loop2):
+            n=GenerateNoise(varnoise2,1000)           
+            #simulating environmental noise
+            for i in range(loop1):
+                noise[:,i,k]=n;
             
-        ms=np.mean(signal*signal,axis=0)
-        #print ms
-        PSM=np.mean(ms);
-        print "Mean noisy signal strent",PSM
-        print "Mean SNR",(PSM/PN-1)
+            
+        #over multiple sensors
+        for k in range(loop1):
+            
+            #dummpy call to change the random seed generator
+            GenerateNoise(varnoise1,1000,1)
+            for i in range(loop2):
+                signal[:,k,i]=x2+noise[:,k,i]+GenerateNoise(varnoise2,1000)
+            #noise[:,i]=
+
+
+        
         S=np.sum(signal,axis=1)              
-        print S.shape
-        print np.std(S,axis=0)
+        
+        S=np.sum(S,axis=1);
+        #print np.std(S,axis=0)
         PSA=np.mean(S*S);
+        #
+        print loop1*loop1*loop2*varnoise1*varnoise1 +loop1*loop2*varnoise2*varnoise2#loop1*(loop1*loop2+loop2)*PN/2
+        
+        #PSA=np.mean((S*S))
         print "Nosiy signal strength",PSA
-        print "Mean SNR",(PSA/PN-1)
+        
+                
+        N=(S-loop1*loop2*x2);
+        
+        #NS=np.sum(N,axis=1)
+        PNA=np.mean(N*N)
+        print "noise power",PNA
+        SNR2=PSA/PNA;
+        print "SNR",SNR2
+        print "SNR improvement",SNR2/SNR1
+        
+        #print "Mean SNR",(PSA/PN)
             ########
             
             
