@@ -4,7 +4,7 @@
  <title>pyVision</title>
  <link href="pi19404.github.io/atom.xml" rel="self"/>
  <link href="pi19404.github.io/"/>
- <updated>2014-10-20T01:24:34+05:30</updated>
+ <updated>2014-10-20T01:30:14+05:30</updated>
  <id>pi19404.github.io</id>
  <author>
    <name>pi19404</name>
@@ -17,12 +17,12 @@
    <link href="pi19404.github.io/2014/10/19/TODA2/"/>
    <updated>2014-10-19T00:00:00+05:30</updated>
    <id>pi19404.github.io/2014/10/19/TODA2</id>
-   <content type="html">&lt;h3&gt;Introduction&lt;/h3&gt;
+   <content type="html">&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
 
 &lt;p&gt;In this article we will look at improving the Time Delay estimation in presense of noise using information of signals coming in from multiple receivers or observing multiple samples
 intervals of the signal.&lt;/p&gt;
 
-&lt;h3&gt;Background&lt;/h3&gt;
+&lt;h3 id=&quot;background&quot;&gt;Background&lt;/h3&gt;
 
 &lt;p&gt;Let us consider an array of N receiver ,the signal $x_{m}[n]$ at receiver is given by&lt;/p&gt;
 
@@ -36,7 +36,7 @@ intervals of the signal.&lt;/p&gt;
 
 &lt;p&gt;Both techniques have the same effect of enhancing the signal and averaging the noise,therby increasing the SNR of the signal.&lt;/p&gt;
 
-&lt;h3&gt;Reducing Environmental Noise&lt;/h3&gt;
+&lt;h3 id=&quot;reducing-environmental-noise&quot;&gt;Reducing Environmental Noise&lt;/h3&gt;
 
 &lt;p&gt;Mathematically this can be expressed as&lt;/p&gt;
 
@@ -85,16 +85,49 @@ the resultant noise power is &lt;/p&gt;
 
 &lt;p&gt;Let us observe the variance of sum signal for N={2,4,8 .... 128}&lt;/p&gt;
 
-&lt;p&gt;|   |  | |
-----|------|----
-N | Simulation | Theory
-2 | 0.14  | 0.14
-4 | 0.20 | 0.2
-8 | 0.28  | 0.28
-16 | 0.39|0.4
-32 | 0.56|0.56
-64 | 0.78|0.8
-128 | 1.144|1.13&lt;/p&gt;
+&lt;table&gt;&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;N&lt;/th&gt;
+&lt;th&gt;Simulation&lt;/th&gt;
+&lt;th&gt;Theory&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;0.14&lt;/td&gt;
+&lt;td&gt;0.14&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;4&lt;/td&gt;
+&lt;td&gt;0.20&lt;/td&gt;
+&lt;td&gt;0.2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;8&lt;/td&gt;
+&lt;td&gt;0.28&lt;/td&gt;
+&lt;td&gt;0.28&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;16&lt;/td&gt;
+&lt;td&gt;0.39&lt;/td&gt;
+&lt;td&gt;0.4&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;32&lt;/td&gt;
+&lt;td&gt;0.56&lt;/td&gt;
+&lt;td&gt;0.56&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;64&lt;/td&gt;
+&lt;td&gt;0.78&lt;/td&gt;
+&lt;td&gt;0.8&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;128&lt;/td&gt;
+&lt;td&gt;1.144&lt;/td&gt;
+&lt;td&gt;1.13&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
 
 &lt;p&gt;we can see from the table that simulated and theoretical results agrees with each other&lt;/p&gt;
 
@@ -117,7 +150,7 @@ emprical SNR improvement  1.02291262194
 &lt;p&gt;The empirical results agree with our theoretical analysis.
 Thought the improvement factor is not very significant&lt;/p&gt;
 
-&lt;h3&gt;Sensor Noise&lt;/h3&gt;
+&lt;h3 id=&quot;sensor-noise&quot;&gt;Sensor Noise&lt;/h3&gt;
 
 &lt;p&gt;The next case comes where we observe signal from the same receiver over N periods.&lt;/p&gt;
 
@@ -166,7 +199,7 @@ emprical SNR improvement  8.25409981816
 &lt;p&gt;The empirical estimates again agree with our theoretical analysis.
 We get a significant improvement in SNR,just by increasing the number of periods of observation.The SNR improves linearly by factor of $N$.&lt;/p&gt;
 
-&lt;h3&gt;SNR Improvement In Presence of sensor and environmental noise&lt;/h3&gt;
+&lt;h3 id=&quot;snr-improvement-in-presence-of-sensor-and-environmental-noise&quot;&gt;SNR Improvement In Presence of sensor and environmental noise&lt;/h3&gt;
 
 &lt;p&gt;Let us say that the signal is corrupted by both environmental and receiver noise&lt;/p&gt;
 
@@ -222,13 +255,13 @@ emprical SNR improvement  5.62755843289
 
 &lt;p&gt;Also it can be seen that improvement is larger by considering longer duration signals than adding more receivers.&lt;/p&gt;
 
-&lt;h3&gt;Time Delay Estimation&lt;/h3&gt;
+&lt;h3 id=&quot;time-delay-estimation&quot;&gt;Time Delay Estimation&lt;/h3&gt;
 
 &lt;p&gt;Given signals form  the receviers,time period to analyze signals we compute the SNR for all possible delays between the signals.The delay which gives the maximum SNR is considered to be the time delay between the signals.&lt;/p&gt;
 
 &lt;p&gt;In the present article we only consider pairs of signals for analysis.We can perform the delay and sum operation wrt to ideal signal or noisy signal from one of the receivers.&lt;/p&gt;
 
-&lt;h3&gt;Ideal Signal&lt;/h3&gt;
+&lt;h3 id=&quot;ideal-signal&quot;&gt;Ideal Signal&lt;/h3&gt;
 
 &lt;p&gt;In the first method we  construct an ideal signal and perform this computation wrt signals obtained from both the receivers.&lt;/p&gt;
 
@@ -278,7 +311,7 @@ std deviation  0.0
 since pairwise operations are performed,increasing the number of receivers has not effect
 on the analysis.&lt;/p&gt;
 
-&lt;h3&gt;Code&lt;/h3&gt;
+&lt;h3 id=&quot;code&quot;&gt;Code&lt;/h3&gt;
 
 &lt;p&gt;A class  &lt;strong&gt;&lt;em&gt;TimeDelaySimulator&lt;/em&gt;&lt;/strong&gt; encapsulates all the methods for generating time delayed signals with additive environmental and sensor noise components and computing the statistics.&lt;/p&gt;
 
@@ -485,11 +518,11 @@ be changed and the various results mentioned in the article can be generated.&lt
    <link href="pi19404.github.io/2014/10/13/TDOA1/"/>
    <updated>2014-10-13T00:00:00+05:30</updated>
    <id>pi19404.github.io/2014/10/13/TDOA1</id>
-   <content type="html">&lt;h3&gt;Introduction&lt;/h3&gt;
+   <content type="html">&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
 
 &lt;p&gt;In this article we will look at signal processing techniques for time delay estimation.&lt;/p&gt;
 
-&lt;h3&gt;Background&lt;/h3&gt;
+&lt;h3 id=&quot;background&quot;&gt;Background&lt;/h3&gt;
 
 &lt;p&gt;Time delay estimation has been a research topic of significant practical importance in
 many fields like radar, sonar, seismology, geophysics, ultrasonic&amp;#39;s, hands-free communications,Doppler positioning systems etc and is of fundamental importance in a variety of signal-processing applications.&lt;/p&gt;
@@ -509,7 +542,7 @@ Let us consider two  spatially separated sensors and $x_{1}(t)$ and $x_{2}(t)$ b
 
 &lt;p&gt;We make a assumption that the distance from the sensors to the source is very large compared to the spatial separation between the sensors.Thus signal $s(t)$ received by both the receivers is the same,there is no significant change in the signal as it travels thorough different paths to reach the spatially separated sensors.&lt;/p&gt;
 
-&lt;h3&gt;Cross-correlation&lt;/h3&gt;
+&lt;h3 id=&quot;cross-correlation&quot;&gt;Cross-correlation&lt;/h3&gt;
 
 &lt;p&gt;One of the simplest method of time delay estimation is cross-correlation .
 The cross-correlation of two signals is a measure of similarity between the two sequences.
@@ -527,7 +560,7 @@ between [0,1]&lt;/p&gt;
 &lt;p&gt;Now we increase the noise to try to get estimate of noise co-variance at which this technique fails.
 we run the experiment 100 times and estimate the number of times we get the proper answer.&lt;/p&gt;
 
-&lt;h4&gt;Testing with Different Additive Noise Covariance&lt;/h4&gt;
+&lt;h4 id=&quot;testing-with-different-additive-noise-covariance&quot;&gt;Testing with Different Additive Noise Covariance&lt;/h4&gt;
 
 &lt;pre class=&quot;brush : python &quot;&gt;
  *********** Information ************ 
@@ -686,7 +719,7 @@ if __name__ == &quot;__main__&quot;:
 &lt;/pre&gt;
     
 
-&lt;h3&gt;Rectangular Pulse signals&lt;/h3&gt;
+&lt;h3 id=&quot;rectangular-pulse-signals&quot;&gt;Rectangular Pulse signals&lt;/h3&gt;
 
 &lt;p&gt;Let us look at the results for a different signal in the form of a rectangular pulse .
 we will consider the wave of same duration 30.&lt;/p&gt;
@@ -764,7 +797,7 @@ x=rectangular(1000,100,150)
 
 &lt;p&gt;For pulses like the ones observed above,noise is a dominant factor,signal energy is low compared to noise energy.&lt;/p&gt;
 
-&lt;h3&gt;Modulated Pulses&lt;/h3&gt;
+&lt;h3 id=&quot;modulated-pulses&quot;&gt;Modulated Pulses&lt;/h3&gt;
 
 &lt;p&gt;Often the pulses are modulated by sinusoidal waves for longer range transmissions.
 &lt;/pre&gt;
@@ -812,7 +845,7 @@ def sinepulse(N,start,end,f,Fs=1000,tau=0):
         return x.flatten();
 &lt;/pre&gt;
 
-&lt;h3&gt;Carrier Synchronization Issues&lt;/h3&gt;
+&lt;h3 id=&quot;carrier-synchronization-issues&quot;&gt;Carrier Synchronization Issues&lt;/h3&gt;
 
 &lt;p&gt;we can synchronize exactly with the carrier ,then like broadband techniques we can achieve a significantly enhanced SNR. However synchronizations are never possible.&lt;/p&gt;
 
@@ -842,7 +875,7 @@ mean  325.336 Std  272.058543523
 
 &lt;/pre&gt;
 
-&lt;h4&gt;Envelope Detection&lt;/h4&gt;
+&lt;h4 id=&quot;envelope-detection&quot;&gt;Envelope Detection&lt;/h4&gt;
 
 &lt;p&gt;We perform envelope detection on the signal and then apply correlation.
 This improves the situation considerably&lt;/p&gt;
@@ -863,7 +896,7 @@ mean  9.746 Std  0.793400277288
                 s=abs(scipy.signal.hilbert(s))
 &lt;/pre&gt;
 
-&lt;h3&gt;Filtering&lt;/h3&gt;
+&lt;h3 id=&quot;filtering&quot;&gt;Filtering&lt;/h3&gt;
 
 &lt;p&gt;If we known the carrier frequency ,we can filter the noise outside the signal  bandwidth before performing the correlation operation.&lt;/p&gt;
 
@@ -1078,7 +1111,7 @@ mean  9.746 Std  0.793400277288
 
 &lt;p&gt;Though band-pass filtering did not lead to a significant improvement  due no the noise within the frequency bandwidth .It is essential to keep out unwanted frequency components due to environmental noise and other factors.&lt;/p&gt;
 
-&lt;h3&gt;Code&lt;/h3&gt;
+&lt;h3 id=&quot;code&quot;&gt;Code&lt;/h3&gt;
 
 &lt;p&gt;The code used in the article can be found in github repository &lt;a href=&quot;https://github.com/pi19404/pyVision/tree/master/pySignalProc&quot;&gt;&amp;quot;Github Link&amp;quot;&lt;/a&gt;&lt;/p&gt;
 
@@ -1098,7 +1131,7 @@ mean  9.746 Std  0.793400277288
    <link href="pi19404.github.io/2014/10/11/DFT1/"/>
    <updated>2014-10-11T00:00:00+05:30</updated>
    <id>pi19404.github.io/2014/10/11/DFT1</id>
-   <content type="html">&lt;h3&gt;Introduction&lt;/h3&gt;
+   <content type="html">&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
 
 &lt;p&gt;&lt;strong&gt;Fourier analysis&lt;/strong&gt; is generally concerned with the analysis and synthesis of functions. The decomposition of signal into easy-to-analyze components and the reconstruction from such components.&lt;/p&gt;
 
@@ -1106,7 +1139,7 @@ mean  9.746 Std  0.793400277288
 
 &lt;p&gt;Discrete time signal are defined at only particular set of time instances and are represented as sequence of real numbers that have continuous range of values&lt;/p&gt;
 
-&lt;h3&gt;Fourier Series Representation of signal&lt;/h3&gt;
+&lt;h3 id=&quot;fourier-series-representation-of-signal&quot;&gt;Fourier Series Representation of signal&lt;/h3&gt;
 
 &lt;p&gt;A discrete time complex exponential is periodic in nature&lt;/p&gt;
 
@@ -1131,7 +1164,7 @@ over this range&lt;/p&gt;
 
 &lt;p&gt;$x[n]$ is  periodic with period N.&lt;/p&gt;
 
-&lt;h3&gt;Discrete time Fourier Series&lt;/h3&gt;
+&lt;h3 id=&quot;discrete-time-fourier-series&quot;&gt;Discrete time Fourier Series&lt;/h3&gt;
 
 &lt;p&gt;Let us consider a arbitrary periodic signal $x[n]$ with period N and that  $x[n]$ can be expressed in the form&lt;/p&gt;
 
@@ -1307,7 +1340,7 @@ series coefficients are equal to the total number of input samples.&lt;/p&gt;
         FourierSinusoids(F,w,150);    
 &lt;/pre&gt;
 
-&lt;h3&gt;Synthesis of Signal&lt;/h3&gt;
+&lt;h3 id=&quot;synthesis-of-signal&quot;&gt;Synthesis of Signal&lt;/h3&gt;
 
 &lt;p&gt;In the earlier section we saw the process of decomposition of aperiodic signal into its frequency components.&lt;/p&gt;
 
@@ -1354,7 +1387,7 @@ def IFourierSeries(input):
         FourierSinusoids(F,w,150,1); 
 &lt;/pre&gt;
 
-&lt;h3&gt;Discrete  Fourier Transform&lt;/h3&gt;
+&lt;h3 id=&quot;discrete-fourier-transform&quot;&gt;Discrete  Fourier Transform&lt;/h3&gt;
 
 &lt;p&gt;Now arises the situation what do we do for a-periodic signals.After a lot of theorotical analysis
 on Discrete time Fourier transform and sampling in the frequency domain,it turns out
@@ -1481,9 +1514,9 @@ This representation of is called as Fourier Transform.&lt;/p&gt;
         print(&quot;Elapsed time of fft algo  %g seconds&quot; % (end_time - start_time)) 
 &lt;/pre&gt;      
 
-&lt;h4&gt;Circular Convolution and DFT&lt;/h4&gt;
+&lt;h4 id=&quot;circular-convolution-and-dft&quot;&gt;Circular Convolution and DFT&lt;/h4&gt;
 
-&lt;h5&gt;Circular Shift of a sequence&lt;/h5&gt;
+&lt;h5 id=&quot;circular-shift-of-a-sequence&quot;&gt;Circular Shift of a sequence&lt;/h5&gt;
 
 &lt;p&gt;Let $x[n]$ denote the finite length time domain sequence&lt;/p&gt;
 
@@ -1615,7 +1648,7 @@ and the result obtained is equivalent to linear convolution result.&lt;/p&gt;
 &lt;/pre&gt;
         
 
-&lt;h3&gt;Code&lt;/h3&gt;
+&lt;h3 id=&quot;code&quot;&gt;Code&lt;/h3&gt;
 
 &lt;p&gt;The code for all the examples can be found at github repository
 &lt;a href=&quot;https://github.com/pi19404/pyVision/tree/master/pySignalProc/tutorial/fourierSeries.py&quot;&gt;https://github.com/pi19404/pyVision/tree/master/pySignalProc/tutorial/fourierSeries.py&lt;/a&gt;&lt;/p&gt;
@@ -1635,11 +1668,11 @@ and the result obtained is equivalent to linear convolution result.&lt;/p&gt;
    <link href="pi19404.github.io/2014/10/03/test/"/>
    <updated>2014-10-03T00:00:00+05:30</updated>
    <id>pi19404.github.io/2014/10/03/test</id>
-   <content type="html">&lt;h2&gt;Introduction&lt;/h2&gt;
+   <content type="html">&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
 
 &lt;p&gt;In this article we will look at supervised learning algorithm called Multi-Layer Perceptron (MLP) and implementation of single hidden layer MLP&lt;/p&gt;
 
-&lt;h3&gt;Perceptron&lt;/h3&gt;
+&lt;h3 id=&quot;perceptron&quot;&gt;Perceptron&lt;/h3&gt;
 
 &lt;p&gt;A perceptron is a  unit that computes a single output from multiple real-valued inputs by forming a linear combination according to its input weights and then possibly putting the output through some nonlinear function called the activation function&lt;/p&gt;
 
@@ -1657,7 +1690,7 @@ and the result obtained is equivalent to linear convolution result.&lt;/p&gt;
 $(W,b)$ are the parameters of perceptron 
  $f$ is the non linear function&lt;/p&gt;
 
-&lt;h3&gt;Multi Layer Perceptron&lt;/h3&gt;
+&lt;h3 id=&quot;multi-layer-perceptron&quot;&gt;Multi Layer Perceptron&lt;/h3&gt;
 
 &lt;p&gt;The MLP network consists of input,output and hidden layers.Each hidden layer consists of numerous perceptron&amp;#39;s which are called hidden units&lt;/p&gt;
 
@@ -1682,7 +1715,7 @@ $G$ is activation function.&lt;/p&gt;
 &lt;p&gt;Each unit of input layer corresponds to element of input vector.
 Each output unit of logistic classifier generate a prediction probability that input vector belong to a specified class.&lt;/p&gt;
 
-&lt;h2&gt;Feed Forward Neural Network&lt;/h2&gt;
+&lt;h2 id=&quot;feed-forward-neural-network&quot;&gt;Feed Forward Neural Network&lt;/h2&gt;
 
 &lt;p&gt;Let us first consider the most classical case of a single hidden layer neural network&lt;/p&gt;
 
@@ -1704,7 +1737,7 @@ If the number of  inputs to hidden layer/dimensionality of input is $\mathcal{M}
 
 &lt;p&gt;The output layer of MLP is typically Logistic regresson classifier,if probabilistic outputs are desired for classification purposes in which case the activation function is the softmax regression function.&lt;/p&gt;
 
-&lt;h3&gt;Single Hidden Layer Multi Layer Perceptron&amp;#39;s&lt;/h3&gt;
+&lt;h3 id=&quot;single-hidden-layer-multi-layer-perceptron&amp;#39;s&quot;&gt;Single Hidden Layer Multi Layer Perceptron&amp;#39;s&lt;/h3&gt;
 
 &lt;p&gt;Let ,&lt;/p&gt;
 
@@ -1734,7 +1767,7 @@ If the number of  inputs to hidden layer/dimensionality of input is $\mathcal{M}
 
 &lt;p&gt;The idea is to maximize $p_{y}= P( Y =y_{i} | x )$ as estimator of conditional probability of the class $y$ given that input is $x$.This is the cost function for training algorithm.&lt;/p&gt;
 
-&lt;h3&gt;Back-Propagation Algorithm&lt;/h3&gt;
+&lt;h3 id=&quot;back-propagation-algorithm&quot;&gt;Back-Propagation Algorithm&lt;/h3&gt;
 
 &lt;p&gt;The Back-Propagation Algorithm is recursive gradient algorithm used to optimize the parameters MLP wrt to defined loss function.Thus our aim is that each layer of MLP the hidden units are computed so that cost function is maximized.&lt;/p&gt;
 
@@ -1746,7 +1779,7 @@ If the number of  inputs to hidden layer/dimensionality of input is $\mathcal{M}
 
 &lt;p&gt;$ \begin{align} \frac{\partial L}{\partial W_{k,i,j} } \text{ and } \frac{\partial L}{\partial b_{k,i,j} } \end{align}$.&lt;/p&gt;
 
-&lt;h4&gt;output layer&lt;/h4&gt;
+&lt;h4 id=&quot;output-layer&quot;&gt;output layer&lt;/h4&gt;
 
 &lt;p&gt;$\begin{align} L = -log ( f(a_{k,i}) ) \end{align}$&lt;/p&gt;
 
@@ -1756,7 +1789,7 @@ If the number of  inputs to hidden layer/dimensionality of input is $\mathcal{M}
 
 &lt;p&gt;The above expression can be considered as the error in output.When $y=y_{i}$ the error is $(1-p_{i})$ and then $y \ne y_{i}$ the error in prediction is $p_{i}$.&lt;/p&gt;
 
-&lt;h4&gt;hidden layer&lt;/h4&gt;
+&lt;h4 id=&quot;hidden-layer&quot;&gt;hidden layer&lt;/h4&gt;
 
 &lt;p&gt;$\begin{align}\frac{\partial L }{\partial \mathbf{a}_{k-1,j}} =  \frac{\partial L }{\partial \mathbf{h}_{k-1,j}} \frac{\partial \mathbf{h}_{k-1,j} }{\partial \mathbf{a}_{k-1,j}} \end{align}$&lt;/p&gt;
 
@@ -1900,7 +1933,7 @@ If the number of  inputs to hidden layer/dimensionality of input is $\mathcal{M}
         
 &lt;/pre&gt;
 
-&lt;h3&gt;Implementation Details&lt;/h3&gt;
+&lt;h3 id=&quot;implementation-details&quot;&gt;Implementation Details&lt;/h3&gt;
 
 &lt;p&gt;The class HiddenLayer encapsulates all the methods for prediction,classification,training,gradient computation and error propagation that are required&lt;/p&gt;
 
@@ -2053,17 +2086,17 @@ is responsible for passing suitable inputs and weights to each hidden layer so t
         return [None,None];                        
 &lt;/pre&gt;
 
-&lt;h3&gt;Selecting the parameters of the model&lt;/h3&gt;
+&lt;h3 id=&quot;selecting-the-parameters-of-the-model&quot;&gt;Selecting the parameters of the model&lt;/h3&gt;
 
 &lt;p&gt;As mentioned earlier that MLP consits of input,hidden and output layers.There is not fixed rule to determine the number of hidden units.The parameters are application specific and best parameters are often arrived at by emperical testing process.Less number of hidden units leads to increased generalization and training error while having a large number of training units leads to issues of with training of large number of parameters and significantly large training time.&lt;/p&gt;
 
-&lt;h3&gt;Issues with MLP&lt;/h3&gt;
+&lt;h3 id=&quot;issues-with-mlp&quot;&gt;Issues with MLP&lt;/h3&gt;
 
 &lt;p&gt;One of the issues observed in MLP training is the slow nature of learning.The below figure illustrates the nature of learning process when a small learning parameter or improper regularization constant is chosen.Various adaptive methods can be implemented which can improve the performance ,but slow convergence and large learning times is an issue with Neural networks based learning algorithms.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://googledrive.com/host/0B-pfqaQBbAAtbExWN0Zya3JySzA/save.png&quot; alt=&quot;enter image description here&quot;&gt;&lt;/p&gt;
 
-&lt;h3&gt;Code&lt;/h3&gt;
+&lt;h3 id=&quot;code&quot;&gt;Code&lt;/h3&gt;
 
 &lt;p&gt;The important files related to MLP are&lt;/p&gt;
 
@@ -2094,11 +2127,11 @@ is responsible for passing suitable inputs and weights to each hidden layer so t
    <link href="pi19404.github.io/2014/10/03/Jekyll/"/>
    <updated>2014-10-03T00:00:00+05:30</updated>
    <id>pi19404.github.io/2014/10/03/Jekyll</id>
-   <content type="html">&lt;h2&gt;Introduction&lt;/h2&gt;
+   <content type="html">&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
 
 &lt;p&gt;In this article we will look at &lt;strong&gt;Jekyll&lt;/strong&gt; static site generator to generate a static website and host the same on &lt;strong&gt;github&lt;/strong&gt;  using github pages.&lt;/p&gt;
 
-&lt;h2&gt;Background&lt;/h2&gt;
+&lt;h2 id=&quot;background&quot;&gt;Background&lt;/h2&gt;
 
 &lt;p&gt;Jekyll is a simple, blog aware, static site generator. &lt;/p&gt;
 
@@ -2106,7 +2139,7 @@ is responsible for passing suitable inputs and weights to each hidden layer so t
 
 &lt;p&gt;Jekyll is the engine behind GitHub Pages, which enables us to use Jekyll to host  the project’s page, blog, or website from GitHub’s servers for free&lt;/p&gt;
 
-&lt;h2&gt;Github Pages and Jekyll Installation&lt;/h2&gt;
+&lt;h2 id=&quot;github-pages-and-jekyll-installation&quot;&gt;Github Pages and Jekyll Installation&lt;/h2&gt;
 
 &lt;p&gt;Let us consider the github project &lt;a href=&quot;https://github.com/pi19404/pyVision&quot;&gt;www.github.com/pi19404/pyVision.&lt;/a&gt; &lt;/p&gt;
 
@@ -2122,7 +2155,7 @@ Click on the &lt;strong&gt;&lt;em&gt;Automatic page generator&lt;/em&gt;&lt;/str
 &lt;img src=&quot;https://googledrive.com/host/0B-pfqaQBbAAtbExWN0Zya3JySzA/ss6.png&quot; alt=&quot;enter image description here&quot;&gt;
 Select the desired theme and click on &lt;strong&gt;&lt;em&gt;&amp;quot;Publish Page&amp;quot;&lt;/em&gt;&lt;/strong&gt; button to complete the process
 &lt;img src=&quot;https://googledrive.com/host/0B-pfqaQBbAAtbExWN0Zya3JySzA/ss7.png&quot; alt=&quot;enter image description here&quot;&gt;
-This will lead to github servers hosting the created website on &amp;quot;http://pi19404.github.io/pyVision&amp;quot;&lt;/p&gt;
+This will lead to github servers hosting the created website on &amp;quot;&lt;a href=&quot;http://pi19404.github.io/pyVision&quot;&gt;http://pi19404.github.io/pyVision&lt;/a&gt;&amp;quot;&lt;/p&gt;
 
 &lt;p&gt;now we are ready to modify and edit the website.The sources of the website are also stored in github repository of the  project in the gh-pages branch.&lt;/p&gt;
 
@@ -2132,7 +2165,7 @@ This will lead to github servers hosting the created website on &amp;quot;http:/
 
 &lt;p&gt;Every GitHub Page is run through Jekyll when you push content to gh-pages branch within your repository&lt;/p&gt;
 
-&lt;h2&gt;Installing Jekyll&lt;/h2&gt;
+&lt;h2 id=&quot;installing-jekyll&quot;&gt;Installing Jekyll&lt;/h2&gt;
 
 &lt;p&gt;Though Jekyll installation on local PC is not necessary.It can be installed in order to preview the website  and troubleshoot issues or bugs before pushing the site on GitHub Pages.&lt;/p&gt;
 
@@ -2173,10 +2206,10 @@ This will lead to github servers hosting the created website on &amp;quot;http:/
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;ul&gt;
 &lt;li&gt;Running Jekyll : &lt;code&gt;bundle exec jekyll serve&lt;/code&gt;
-The website is accessible for preview at : http://localhost:4000&lt;/li&gt;
+The website is accessible for preview at : &lt;a href=&quot;http://localhost:4000&quot;&gt;http://localhost:4000&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2&gt;Layouts and Website Template&lt;/h2&gt;
+&lt;h2 id=&quot;layouts-and-website-template&quot;&gt;Layouts and Website Template&lt;/h2&gt;
 
 &lt;p&gt;Front-matter is just a set of metadata, delineated by three dashes which takes for form of valid YAML content.Any file that contains a front matter block will be processed by Jekyll as a special file.
 Thus .Jekyll requires that Markdown files have front-matter defined at the top of every file.The front matter can be included in top of markdown or HTML files.&lt;/p&gt;
@@ -2201,9 +2234,9 @@ In this article we will look at **Jekyll** static site generator to generate a s
 
 &lt;p&gt;Let us look at the template for post called &lt;strong&gt;post.html&lt;/strong&gt; and how contents are incorporated using Liquid markup language&lt;/p&gt;
 
-&lt;h2&gt;&lt;pre class=&quot;brush : html &quot;&gt;&lt;/h2&gt;
+&lt;h2 id=&quot;&quot;&gt;&lt;pre class=&quot;brush : html &quot;&gt;&lt;/h2&gt;
 
-&lt;h2&gt;layout: default&lt;/h2&gt;
+&lt;h2 id=&quot;layout:-default&quot;&gt;layout: default&lt;/h2&gt;
 
 &lt;p&gt;&lt;article class=&quot;post&quot;&gt;&lt;/p&gt;
 
@@ -2274,7 +2307,7 @@ We modify this file so that it can be used as a base template for all the pages 
 
 &lt;p&gt;If the file is markdown file then all its contents are inserted in place of contents tag.If the file is HTML then the declaration inside section tag of class content is inserted in place of contents tag.All the pages of the website including the main page index.html contains frontmatter are designed so that generated contents are inserted within default layout.&lt;/p&gt;
 
-&lt;h2&gt;Posting Blog&lt;/h2&gt;
+&lt;h2 id=&quot;posting-blog&quot;&gt;Posting Blog&lt;/h2&gt;
 
 &lt;p&gt;All the blog posts reside in the &lt;code&gt;_posts&lt;/code&gt; directory.The format of filename is &lt;strong&gt;year-month-day-title.ext&lt;/strong&gt;.This will generate the blogs posts in year/month/day directory of static website.
 The blog posts can be html or markdown .&lt;/p&gt;
@@ -2338,7 +2371,7 @@ layout: default
 
 &lt;p&gt;we can copy the relevant sections of html file and with slight modifications make it compatible with other websites.&lt;/p&gt;
 
-&lt;h2&gt;Code&lt;/h2&gt;
+&lt;h2 id=&quot;code&quot;&gt;Code&lt;/h2&gt;
 
 &lt;p&gt;The pyVision repository can be found at &lt;code&gt;[www.github.com/pi19404/pyvision](www.github.com/pi19404/pyvision)&lt;/code&gt; and website can be seen at &lt;a href=&quot;http://pi19404.github.io/pyVision/&quot;&gt;pyvision&lt;/a&gt;
 All the files used in the preset article can be found in the gh-pages branch of the repository.&lt;/p&gt;

@@ -185,11 +185,11 @@ img.onerror = cantload;
         <article class="post">
   <h1 class="post-title">Jekyll A Static Website Generator</h1>
   <span class="post-date">03 Oct 2014</span>
-  <h2>Introduction</h2>
+  <h2 id="introduction">Introduction</h2>
 
 <p>In this article we will look at <strong>Jekyll</strong> static site generator to generate a static website and host the same on <strong>github</strong>  using github pages.</p>
 
-<h2>Background</h2>
+<h2 id="background">Background</h2>
 
 <p>Jekyll is a simple, blog aware, static site generator. </p>
 
@@ -197,7 +197,7 @@ img.onerror = cantload;
 
 <p>Jekyll is the engine behind GitHub Pages, which enables us to use Jekyll to host  the project’s page, blog, or website from GitHub’s servers for free</p>
 
-<h2>Github Pages and Jekyll Installation</h2>
+<h2 id="github-pages-and-jekyll-installation">Github Pages and Jekyll Installation</h2>
 
 <p>Let us consider the github project <a href="https://github.com/pi19404/pyVision">www.github.com/pi19404/pyVision.</a> </p>
 
@@ -213,7 +213,7 @@ Click on the <strong><em>Automatic page generator</em></strong> options</p>
 <img src="https://googledrive.com/host/0B-pfqaQBbAAtbExWN0Zya3JySzA/ss6.png" alt="enter image description here">
 Select the desired theme and click on <strong><em>&quot;Publish Page&quot;</em></strong> button to complete the process
 <img src="https://googledrive.com/host/0B-pfqaQBbAAtbExWN0Zya3JySzA/ss7.png" alt="enter image description here">
-This will lead to github servers hosting the created website on &quot;http://pi19404.github.io/pyVision&quot;</p>
+This will lead to github servers hosting the created website on &quot;<a href="http://pi19404.github.io/pyVision">http://pi19404.github.io/pyVision</a>&quot;</p>
 
 <p>now we are ready to modify and edit the website.The sources of the website are also stored in github repository of the  project in the gh-pages branch.</p>
 
@@ -223,7 +223,7 @@ This will lead to github servers hosting the created website on &quot;http://pi1
 
 <p>Every GitHub Page is run through Jekyll when you push content to gh-pages branch within your repository</p>
 
-<h2>Installing Jekyll</h2>
+<h2 id="installing-jekyll">Installing Jekyll</h2>
 
 <p>Though Jekyll installation on local PC is not necessary.It can be installed in order to preview the website  and troubleshoot issues or bugs before pushing the site on GitHub Pages.</p>
 
@@ -264,10 +264,10 @@ This will lead to github servers hosting the created website on &quot;http://pi1
 </code></pre></div>
 <ul>
 <li>Running Jekyll : <code>bundle exec jekyll serve</code>
-The website is accessible for preview at : http://localhost:4000</li>
+The website is accessible for preview at : <a href="http://localhost:4000">http://localhost:4000</a></li>
 </ul>
 
-<h2>Layouts and Website Template</h2>
+<h2 id="layouts-and-website-template">Layouts and Website Template</h2>
 
 <p>Front-matter is just a set of metadata, delineated by three dashes which takes for form of valid YAML content.Any file that contains a front matter block will be processed by Jekyll as a special file.
 Thus .Jekyll requires that Markdown files have front-matter defined at the top of every file.The front matter can be included in top of markdown or HTML files.</p>
@@ -292,9 +292,9 @@ In this article we will look at **Jekyll** static site generator to generate a s
 
 <p>Let us look at the template for post called <strong>post.html</strong> and how contents are incorporated using Liquid markup language</p>
 
-<h2><pre class="brush : html "></h2>
+<h2 id=""><pre class="brush : html "></h2>
 
-<h2>layout: default</h2>
+<h2 id="layout:-default">layout: default</h2>
 
 <p><article class="post"></p>
 
@@ -365,7 +365,7 @@ We modify this file so that it can be used as a base template for all the pages 
 
 <p>If the file is markdown file then all its contents are inserted in place of contents tag.If the file is HTML then the declaration inside section tag of class content is inserted in place of contents tag.All the pages of the website including the main page index.html contains frontmatter are designed so that generated contents are inserted within default layout.</p>
 
-<h2>Posting Blog</h2>
+<h2 id="posting-blog">Posting Blog</h2>
 
 <p>All the blog posts reside in the <code>_posts</code> directory.The format of filename is <strong>year-month-day-title.ext</strong>.This will generate the blogs posts in year/month/day directory of static website.
 The blog posts can be html or markdown .</p>
@@ -429,7 +429,7 @@ layout: default
 
 <p>we can copy the relevant sections of html file and with slight modifications make it compatible with other websites.</p>
 
-<h2>Code</h2>
+<h2 id="code">Code</h2>
 
 <p>The pyVision repository can be found at <code>[www.github.com/pi19404/pyvision](www.github.com/pi19404/pyvision)</code> and website can be seen at <a href="http://pi19404.github.io/pyVision/">pyvision</a>
 All the files used in the preset article can be found in the gh-pages branch of the repository.</p>

@@ -185,11 +185,11 @@ img.onerror = cantload;
         <article class="post">
   <h1 class="post-title">Multilayer Perceptron in Python</h1>
   <span class="post-date">03 Oct 2014</span>
-  <h2>Introduction</h2>
+  <h2 id="introduction">Introduction</h2>
 
 <p>In this article we will look at supervised learning algorithm called Multi-Layer Perceptron (MLP) and implementation of single hidden layer MLP</p>
 
-<h3>Perceptron</h3>
+<h3 id="perceptron">Perceptron</h3>
 
 <p>A perceptron is a  unit that computes a single output from multiple real-valued inputs by forming a linear combination according to its input weights and then possibly putting the output through some nonlinear function called the activation function</p>
 
@@ -207,7 +207,7 @@ img.onerror = cantload;
 $(W,b)$ are the parameters of perceptron 
  $f$ is the non linear function</p>
 
-<h3>Multi Layer Perceptron</h3>
+<h3 id="multi-layer-perceptron">Multi Layer Perceptron</h3>
 
 <p>The MLP network consists of input,output and hidden layers.Each hidden layer consists of numerous perceptron&#39;s which are called hidden units</p>
 
@@ -232,7 +232,7 @@ $G$ is activation function.</p>
 <p>Each unit of input layer corresponds to element of input vector.
 Each output unit of logistic classifier generate a prediction probability that input vector belong to a specified class.</p>
 
-<h2>Feed Forward Neural Network</h2>
+<h2 id="feed-forward-neural-network">Feed Forward Neural Network</h2>
 
 <p>Let us first consider the most classical case of a single hidden layer neural network</p>
 
@@ -254,7 +254,7 @@ If the number of  inputs to hidden layer/dimensionality of input is $\mathcal{M}
 
 <p>The output layer of MLP is typically Logistic regresson classifier,if probabilistic outputs are desired for classification purposes in which case the activation function is the softmax regression function.</p>
 
-<h3>Single Hidden Layer Multi Layer Perceptron&#39;s</h3>
+<h3 id="single-hidden-layer-multi-layer-perceptron&#39;s">Single Hidden Layer Multi Layer Perceptron&#39;s</h3>
 
 <p>Let ,</p>
 
@@ -284,7 +284,7 @@ If the number of  inputs to hidden layer/dimensionality of input is $\mathcal{M}
 
 <p>The idea is to maximize $p_{y}= P( Y =y_{i} | x )$ as estimator of conditional probability of the class $y$ given that input is $x$.This is the cost function for training algorithm.</p>
 
-<h3>Back-Propagation Algorithm</h3>
+<h3 id="back-propagation-algorithm">Back-Propagation Algorithm</h3>
 
 <p>The Back-Propagation Algorithm is recursive gradient algorithm used to optimize the parameters MLP wrt to defined loss function.Thus our aim is that each layer of MLP the hidden units are computed so that cost function is maximized.</p>
 
@@ -296,7 +296,7 @@ If the number of  inputs to hidden layer/dimensionality of input is $\mathcal{M}
 
 <p>$ \begin{align} \frac{\partial L}{\partial W_{k,i,j} } \text{ and } \frac{\partial L}{\partial b_{k,i,j} } \end{align}$.</p>
 
-<h4>output layer</h4>
+<h4 id="output-layer">output layer</h4>
 
 <p>$\begin{align} L = -log ( f(a_{k,i}) ) \end{align}$</p>
 
@@ -306,7 +306,7 @@ If the number of  inputs to hidden layer/dimensionality of input is $\mathcal{M}
 
 <p>The above expression can be considered as the error in output.When $y=y_{i}$ the error is $(1-p_{i})$ and then $y \ne y_{i}$ the error in prediction is $p_{i}$.</p>
 
-<h4>hidden layer</h4>
+<h4 id="hidden-layer">hidden layer</h4>
 
 <p>$\begin{align}\frac{\partial L }{\partial \mathbf{a}_{k-1,j}} =  \frac{\partial L }{\partial \mathbf{h}_{k-1,j}} \frac{\partial \mathbf{h}_{k-1,j} }{\partial \mathbf{a}_{k-1,j}} \end{align}$</p>
 
@@ -450,7 +450,7 @@ If the number of  inputs to hidden layer/dimensionality of input is $\mathcal{M}
         
 </pre>
 
-<h3>Implementation Details</h3>
+<h3 id="implementation-details">Implementation Details</h3>
 
 <p>The class HiddenLayer encapsulates all the methods for prediction,classification,training,gradient computation and error propagation that are required</p>
 
@@ -603,17 +603,17 @@ is responsible for passing suitable inputs and weights to each hidden layer so t
         return [None,None];                        
 </pre>
 
-<h3>Selecting the parameters of the model</h3>
+<h3 id="selecting-the-parameters-of-the-model">Selecting the parameters of the model</h3>
 
 <p>As mentioned earlier that MLP consits of input,hidden and output layers.There is not fixed rule to determine the number of hidden units.The parameters are application specific and best parameters are often arrived at by emperical testing process.Less number of hidden units leads to increased generalization and training error while having a large number of training units leads to issues of with training of large number of parameters and significantly large training time.</p>
 
-<h3>Issues with MLP</h3>
+<h3 id="issues-with-mlp">Issues with MLP</h3>
 
 <p>One of the issues observed in MLP training is the slow nature of learning.The below figure illustrates the nature of learning process when a small learning parameter or improper regularization constant is chosen.Various adaptive methods can be implemented which can improve the performance ,but slow convergence and large learning times is an issue with Neural networks based learning algorithms.</p>
 
 <p><img src="https://googledrive.com/host/0B-pfqaQBbAAtbExWN0Zya3JySzA/save.png" alt="enter image description here"></p>
 
-<h3>Code</h3>
+<h3 id="code">Code</h3>
 
 <p>The important files related to MLP are</p>
 

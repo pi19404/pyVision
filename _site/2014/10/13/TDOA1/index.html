@@ -185,11 +185,11 @@ img.onerror = cantload;
         <article class="post">
   <h1 class="post-title">Time Delay Estimation Techniques - Part 1</h1>
   <span class="post-date">13 Oct 2014</span>
-  <h3>Introduction</h3>
+  <h3 id="introduction">Introduction</h3>
 
 <p>In this article we will look at signal processing techniques for time delay estimation.</p>
 
-<h3>Background</h3>
+<h3 id="background">Background</h3>
 
 <p>Time delay estimation has been a research topic of significant practical importance in
 many fields like radar, sonar, seismology, geophysics, ultrasonic&#39;s, hands-free communications,Doppler positioning systems etc and is of fundamental importance in a variety of signal-processing applications.</p>
@@ -209,7 +209,7 @@ Let us consider two  spatially separated sensors and $x_{1}(t)$ and $x_{2}(t)$ b
 
 <p>We make a assumption that the distance from the sensors to the source is very large compared to the spatial separation between the sensors.Thus signal $s(t)$ received by both the receivers is the same,there is no significant change in the signal as it travels thorough different paths to reach the spatially separated sensors.</p>
 
-<h3>Cross-correlation</h3>
+<h3 id="cross-correlation">Cross-correlation</h3>
 
 <p>One of the simplest method of time delay estimation is cross-correlation .
 The cross-correlation of two signals is a measure of similarity between the two sequences.
@@ -227,7 +227,7 @@ between [0,1]</p>
 <p>Now we increase the noise to try to get estimate of noise co-variance at which this technique fails.
 we run the experiment 100 times and estimate the number of times we get the proper answer.</p>
 
-<h4>Testing with Different Additive Noise Covariance</h4>
+<h4 id="testing-with-different-additive-noise-covariance">Testing with Different Additive Noise Covariance</h4>
 
 <pre class="brush : python ">
  *********** Information ************ 
@@ -386,7 +386,7 @@ if __name__ == "__main__":
 </pre>
     
 
-<h3>Rectangular Pulse signals</h3>
+<h3 id="rectangular-pulse-signals">Rectangular Pulse signals</h3>
 
 <p>Let us look at the results for a different signal in the form of a rectangular pulse .
 we will consider the wave of same duration 30.</p>
@@ -464,7 +464,7 @@ x=rectangular(1000,100,150)
 
 <p>For pulses like the ones observed above,noise is a dominant factor,signal energy is low compared to noise energy.</p>
 
-<h3>Modulated Pulses</h3>
+<h3 id="modulated-pulses">Modulated Pulses</h3>
 
 <p>Often the pulses are modulated by sinusoidal waves for longer range transmissions.
 </pre>
@@ -512,7 +512,7 @@ def sinepulse(N,start,end,f,Fs=1000,tau=0):
         return x.flatten();
 </pre>
 
-<h3>Carrier Synchronization Issues</h3>
+<h3 id="carrier-synchronization-issues">Carrier Synchronization Issues</h3>
 
 <p>we can synchronize exactly with the carrier ,then like broadband techniques we can achieve a significantly enhanced SNR. However synchronizations are never possible.</p>
 
@@ -542,7 +542,7 @@ mean  325.336 Std  272.058543523
 
 </pre>
 
-<h4>Envelope Detection</h4>
+<h4 id="envelope-detection">Envelope Detection</h4>
 
 <p>We perform envelope detection on the signal and then apply correlation.
 This improves the situation considerably</p>
@@ -563,7 +563,7 @@ mean  9.746 Std  0.793400277288
                 s=abs(scipy.signal.hilbert(s))
 </pre>
 
-<h3>Filtering</h3>
+<h3 id="filtering">Filtering</h3>
 
 <p>If we known the carrier frequency ,we can filter the noise outside the signal  bandwidth before performing the correlation operation.</p>
 
@@ -778,7 +778,7 @@ mean  9.746 Std  0.793400277288
 
 <p>Though band-pass filtering did not lead to a significant improvement  due no the noise within the frequency bandwidth .It is essential to keep out unwanted frequency components due to environmental noise and other factors.</p>
 
-<h3>Code</h3>
+<h3 id="code">Code</h3>
 
 <p>The code used in the article can be found in github repository <a href="https://github.com/pi19404/pyVision/tree/master/pySignalProc">&quot;Github Link&quot;</a></p>
 

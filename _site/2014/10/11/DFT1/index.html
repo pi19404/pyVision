@@ -185,7 +185,7 @@ img.onerror = cantload;
         <article class="post">
   <h1 class="post-title">Discrete Fourier Transform For Freuency Analysis</h1>
   <span class="post-date">11 Oct 2014</span>
-  <h3>Introduction</h3>
+  <h3 id="introduction">Introduction</h3>
 
 <p><strong>Fourier analysis</strong> is generally concerned with the analysis and synthesis of functions. The decomposition of signal into easy-to-analyze components and the reconstruction from such components.</p>
 
@@ -193,7 +193,7 @@ img.onerror = cantload;
 
 <p>Discrete time signal are defined at only particular set of time instances and are represented as sequence of real numbers that have continuous range of values</p>
 
-<h3>Fourier Series Representation of signal</h3>
+<h3 id="fourier-series-representation-of-signal">Fourier Series Representation of signal</h3>
 
 <p>A discrete time complex exponential is periodic in nature</p>
 
@@ -218,7 +218,7 @@ over this range</p>
 
 <p>$x[n]$ is  periodic with period N.</p>
 
-<h3>Discrete time Fourier Series</h3>
+<h3 id="discrete-time-fourier-series">Discrete time Fourier Series</h3>
 
 <p>Let us consider a arbitrary periodic signal $x[n]$ with period N and that  $x[n]$ can be expressed in the form</p>
 
@@ -394,7 +394,7 @@ series coefficients are equal to the total number of input samples.</p>
         FourierSinusoids(F,w,150);    
 </pre>
 
-<h3>Synthesis of Signal</h3>
+<h3 id="synthesis-of-signal">Synthesis of Signal</h3>
 
 <p>In the earlier section we saw the process of decomposition of aperiodic signal into its frequency components.</p>
 
@@ -441,7 +441,7 @@ def IFourierSeries(input):
         FourierSinusoids(F,w,150,1); 
 </pre>
 
-<h3>Discrete  Fourier Transform</h3>
+<h3 id="discrete-fourier-transform">Discrete  Fourier Transform</h3>
 
 <p>Now arises the situation what do we do for a-periodic signals.After a lot of theorotical analysis
 on Discrete time Fourier transform and sampling in the frequency domain,it turns out
@@ -568,9 +568,9 @@ This representation of is called as Fourier Transform.</p>
         print("Elapsed time of fft algo  %g seconds" % (end_time - start_time)) 
 </pre>      
 
-<h4>Circular Convolution and DFT</h4>
+<h4 id="circular-convolution-and-dft">Circular Convolution and DFT</h4>
 
-<h5>Circular Shift of a sequence</h5>
+<h5 id="circular-shift-of-a-sequence">Circular Shift of a sequence</h5>
 
 <p>Let $x[n]$ denote the finite length time domain sequence</p>
 
@@ -702,7 +702,7 @@ and the result obtained is equivalent to linear convolution result.</p>
 </pre>
         
 
-<h3>Code</h3>
+<h3 id="code">Code</h3>
 
 <p>The code for all the examples can be found at github repository
 <a href="https://github.com/pi19404/pyVision/tree/master/pySignalProc/tutorial/fourierSeries.py">https://github.com/pi19404/pyVision/tree/master/pySignalProc/tutorial/fourierSeries.py</a></p>
