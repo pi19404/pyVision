@@ -4,7 +4,7 @@
  <title>pyVision</title>
  <link href="pi19404.github.io/atom.xml" rel="self"/>
  <link href="pi19404.github.io/"/>
- <updated>2014-10-20T00:26:33+05:30</updated>
+ <updated>2014-10-20T01:24:34+05:30</updated>
  <id>pi19404.github.io</id>
  <author>
    <name>pi19404</name>
@@ -84,7 +84,8 @@ the resultant noise power is &lt;/p&gt;
 &lt;p&gt;In the first case we observe only the noise signal&lt;/p&gt;
 
 &lt;p&gt;Let us observe the variance of sum signal for N={2,4,8 .... 128}&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt; |   |  | |
+
+&lt;p&gt;|   |  | |
 ----|------|----
 N | Simulation | Theory
 2 | 0.14  | 0.14
@@ -93,8 +94,8 @@ N | Simulation | Theory
 16 | 0.39|0.4
 32 | 0.56|0.56
 64 | 0.78|0.8
-128 | 1.144|1.13
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+128 | 1.144|1.13&lt;/p&gt;
+
 &lt;p&gt;we can see from the table that simulated and theoretical results agrees with each other&lt;/p&gt;
 
 &lt;p&gt;we consider the case where $M=4$ independent receivers are used .The signal is corrupted by additive environmental  noise of variance $\sigma^2=0.2$ &lt;/p&gt;
