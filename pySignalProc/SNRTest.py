@@ -289,8 +289,9 @@ if __name__ == "__main__":
         
         #number of receivers
         loop1=2
+        
         #number of periods of the signal
-        loop2=4;
+        loop2=1;
 
         
             
@@ -326,7 +327,7 @@ if __name__ == "__main__":
         for k in range(loop1):
             
             #dummpy call to change the random seed generator
-            GenerateNoise(varnoise1,1000,1)
+            GenerateNoise(varnoise2,1000,1)
             for i in range(loop2):
                 signal[:,k,i]=x2+noise[:,k,i]+GenerateNoise(varnoise2,1000)
             #noise[:,i]=
