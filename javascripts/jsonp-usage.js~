@@ -1,4 +1,0 @@
-JSONP( 'https://api.github.com/users/erjjones?callback=?', function( response ) {
-	var data = response.data;
-	console.log(data.followers);
-	});
