@@ -156,8 +156,7 @@
             
   <div class="section" id="module-MLPHiddenLayer">
 <span id="mlphiddenlayer-module"></span><h1>MLPHiddenLayer module<a class="headerlink" href="#module-MLPHiddenLayer" title="Permalink to this headline">¶</a></h1>
-<p>Created on Mon Sep 22 01:44:17 2014</p>
-<p>&#64;author: pi19404</p>
+<p>Multi Layer Perceptron</p>
 <dl class="class">
 <dt id="MLPHiddenLayer.HiddenLayer">
 <em class="property">class </em><tt class="descclassname">MLPHiddenLayer.</tt><tt class="descname">HiddenLayer</tt><big>(</big><em>n_in=None</em>, <em>n_out=None</em>, <em>activation=None</em>, <em>Reg=2</em>, <em>W=None</em>, <em>b=None</em><big>)</big><a class="reference internal" href="_modules/MLPHiddenLayer.html#HiddenLayer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MLPHiddenLayer.HiddenLayer" title="Permalink to this definition">¶</a></dt>
@@ -178,29 +177,27 @@ and is essentially a collection of neurons</p>
 </tbody>
 </table>
 <p class="rubric">Examples</p>
-<p>&gt;&gt; hidden_layer=HiddenLayer(n_in=n_in, n_out=n_hidden_units,activation=sigmoid_stable)
-&gt;&gt; y=hidden_layer.compute(input);</p>
+<p>&gt;&gt; hidden_layer=HiddenLayer(n_in=n_in, n_out=n_hidden_units,activation=sigmoid_stable)</p>
+<p>&gt;&gt; y=hidden_layer.compute(input);</p>
+<p>in the below functions docstring</p>
+<p>n_hidden denotes the number of output units of present hidden layer</p>
+<p>n_out denotes the number of output units of next hidden layer</p>
+<p>n_in denotes the size of input vector to present hidden layer</p>
 <p class="rubric">Attributes</p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="21%" />
-<col width="79%" />
+<col width="3%" />
+<col width="97%" />
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><cite>out</cite></td>
-<td>(array-like ,shape=[n_out])</td>
+<td>(array-like ,shape=(n_out,)) The output of hidden layer</td>
 </tr>
-<tr class="row-even"><td>The output of hidden layer</td>
-<td>&nbsp;</td>
+<tr class="row-even"><td><cite>params</cite></td>
+<td>(array-like ,shape=(n_out,n_in+1)) contains the parameters in a flattened structure</td>
 </tr>
-<tr class="row-odd"><td><cite>params</cite>:array-like ,shape=[n_out,n_in+1]</td>
-<td>&nbsp;</td>
-</tr>
-<tr class="row-even"><td>contains the parameters in a flattened structure</td>
-<td>&nbsp;</td>
-</tr>
-<tr class="row-odd"><td><cite>W,b</cite>:array-like,shape=[n_out,n_int],shape=[n_out,1]</td>
-<td>weight matrix and bias vector characterizing the hidden layer  <cite>activation</cite>:function the non linear activation function that is applied after performing affine transformation over input vector.</td>
+<tr class="row-odd"><td><cite>W,b</cite></td>
+<td>(array-like,shape=(n_out,n_int),shape=(n_out,1)) weight matrix and bias vector characterizing the hidden layer  <cite>activation</cite> : input activation the non linear activation function that is applied after performing affine transformation over input vector.</td>
 </tr>
 </tbody>
 </table>
@@ -208,14 +205,15 @@ and is essentially a collection of neurons</p>
 <dl class="method">
 <dt id="MLPHiddenLayer.HiddenLayer.activation_gradient">
 <tt class="descname">activation_gradient</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/MLPHiddenLayer.html#HiddenLayer.activation_gradient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MLPHiddenLayer.HiddenLayer.activation_gradient" title="Permalink to this definition">¶</a></dt>
-<dd><p>function computes the value of gradient of activation function for output of hidden layer over all input samples N</p>
+<dd><p>computes gradient of activation function for output of hidden layer over all input samples N</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>output</strong> : numpy array , shape=(N,n_out)</p>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>output</strong> : ndarray , shape=(n_out,)</p>
 <blockquote class="last">
-<div><p><span class="math">\(h_k(x)=f(a_k)=\begin{align} \frac{\partial \mathbf{h}_{k-1,j} }{\partial \mathbf{a}_{k-1,j}} \end{align}\)</span></p>
+<div><p><span class="math">\(h_k(x)=f(a_k)=\begin{align} \frac{\partial \mathbf{h}_{k-1,j} }{\partial \mathbf{a}_{k-1,j}} \end{align}\)</span>
+gradient of activation function</p>
 </div></blockquote>
 </td>
 </tr>
@@ -231,15 +229,15 @@ and is essentially a collection of neurons</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>input</strong> :   numpy array,shape=(N,n_in)</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>input</strong> :   ndarray,shape=(N,n_in)</p>
 <blockquote>
 <div><p><span class="math">\(h_{i-1}(x)\)</span> is the <cite>input</cite></p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>output</strong> : numpy array,shape=(N,n_out)</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>output</strong> : ndarray ,shape=(N,n_out)</p>
 <blockquote class="last">
-<div><p><span class="math">\(f(b_k + w_k^T h_{i-1}(x))\)</span></p>
+<div><p><span class="math">\(f(b_k + w_k^T h_{i-1}(x))\)</span> ,affine transformation over input</p>
 </div></blockquote>
 </td>
 </tr>
@@ -250,26 +248,26 @@ and is essentially a collection of neurons</p>
 <dl class="method">
 <dt id="MLPHiddenLayer.HiddenLayer.compute_error">
 <tt class="descname">compute_error</tt><big>(</big><em>x</em>, <em>w</em>, <em>y</em><big>)</big><a class="reference internal" href="_modules/MLPHiddenLayer.html#HiddenLayer.compute_error"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MLPHiddenLayer.HiddenLayer.compute_error" title="Permalink to this definition">¶</a></dt>
-<dd><p>This function computes the gradient of the likelyhood function wrt to parameters  of the hidden layer for single input</p>
+<dd><p>function computes the gradient of the likelyhood function wrt to parameters  of the hidden layer for single input</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>x</strong> : numpy array,shape=(n_out,)</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>x</strong> : ndarray,shape=(n_hidden,)</p>
 <blockquote>
 <div><p><cite>x</cite> represents <span class="math">\(\begin{align} \frac{\partial \mathbf{h}_{k,j} }{\partial \mathbf{a}_{k,j}} \end{align}\)</span>,the gradient of activation function wrt to input</p>
 </div></blockquote>
-<p><strong>w</strong> : numpy array,shape=(n_out,)</p>
+<p><strong>w</strong> : ndarray,shape=(n_hidden,)</p>
 <blockquote>
 <div><p><cite>w</cite> represents <span class="math">\(\begin{align} \frac{\partial L }{\partial \mathbf{h}_{k,i}}\end{align}\)</span> the gradient of the likelyhood fuction wrt output of hidden layer</p>
 </div></blockquote>
-<p><strong>y</strong> : numpy array,shape=(n_in,)</p>
+<p><strong>y</strong> : ndarray,shape=(n_in,)</p>
 <blockquote>
-<div><p><cite>y</cite> represents <span class="math">\(h_{k-1,j}\)</span> the input hidden layer</p>
+<div><p><cite>y</cite> represents <span class="math">\(\mathbf{h}_{k-2,j}\)</span> the input hidden layer</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>res</strong> : numpy array,shape=(n_in+1,n_out)</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>res</strong> : ndarray,shape=(n_in+1,n_hidden)</p>
 <blockquote class="last">
 <div><p><span class="math">\(\begin{align} \frac{\partial L }{\partial \mathbf{W}_{k-1,i,j}}  \text{ and } \frac{\partial L }{\partial \mathbf{W}_{k-1,i}} \end{align}\)</span></p>
 </div></blockquote>
@@ -282,22 +280,66 @@ and is essentially a collection of neurons</p>
 <dl class="method">
 <dt id="MLPHiddenLayer.HiddenLayer.cost_gradients">
 <tt class="descname">cost_gradients</tt><big>(</big><em>weights</em>, <em>activation</em>, <em>error</em><big>)</big><a class="reference internal" href="_modules/MLPHiddenLayer.html#HiddenLayer.cost_gradients"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MLPHiddenLayer.HiddenLayer.cost_gradients" title="Permalink to this definition">¶</a></dt>
-<dd><p>function to compute the gradient of log likelyhood function wrt the parameters of the hidden layer
-averaged over all the input samples.</p>
+<dd><dl class="docutils">
+<dt>function to compute the gradient of log likelyhood function wrt the parameters of the hidden layer</dt>
+<dd>averaged over all the input samples.</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>weights</strong> : numpy,shape(n_out,n_hidden),</p>
+<blockquote>
+<div><blockquote>
+<div><p>weight matrix of the next layer,W_{k,i,j}</p>
+</div></blockquote>
+<dl class="docutils">
+<dt>activation: numpy,shape=(N,n_in)</dt>
+<dd><p class="first last">input to the hidden layer mathbf{h}_{k-2,j}</p>
+</dd>
+<dt>error <span class="classifier-delimiter">:</span> <span class="classifier">numpy,shape=(n_out,) </span></dt>
+<dd><p class="first last">, error of next  layer</p>
+</dd>
+</dl>
+</div></blockquote>
+<p><strong>rac{partial L }{partial mathbf{a}_{k,i}}</strong></p>
+<blockquote class="last">
+<div><p>Returns</p>
+<dl class="docutils">
+<dt>gW <span class="classifier-delimiter">:</span> <span class="classifier">ndarray,shape=(n_hidden,n_in+1)</span></dt>
+<dd><p class="first last">coefficient parameter matrix of next hidden layer,
+<span class="math">\(\begin{align} \frac{\partial L }{\partial \mathbf{W}_{k-1,i,j}}  \text{ and } \frac{\partial L }{\partial \mathbf{W}_{k-1,i}} \end{align}\)</span></p>
+</dd>
+</dl>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="MLPHiddenLayer.HiddenLayer.linear_gradient">
 <tt class="descname">linear_gradient</tt><big>(</big><em>weights</em>, <em>error</em><big>)</big><a class="reference internal" href="_modules/MLPHiddenLayer.html#HiddenLayer.linear_gradient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MLPHiddenLayer.HiddenLayer.linear_gradient" title="Permalink to this definition">¶</a></dt>
-<dd><p>The function compues gradient of likelyhodd function wrt output of hidden layer</p>
-<p>rac{partial L }{partial mathbf{h}_{k-1,j}}</p>
+<dd><p>The function compues gradient of likelihood function wrt output of hidden layer
+<span class="math">\(\begin{align} \frac{\partial L }{\partial \mathbf{h}_{k-1,j}} \end{align}\)</span></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>weights</strong> : weights of next hidden layer</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>weights</strong> : ndarray,shape=(n_out,n_hidden)</p>
+<blockquote>
+<div><p>weights of next hidden layer, <span class="math">\(\begin{align} \mathbf{W}_{k,i,j}  \end{align}\)</span></p>
+</div></blockquote>
+<p><strong>error</strong> : ndarray,shape=(n_out,)</p>
+<blockquote>
+<div><p>backpropagated error from next layer <span class="math">\(\begin{align} \frac{\partial L }{\partial \mathbf{a}_{k,i}} \end{align}\)</span></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>out</strong> : ndarray,shape=(n_hidden,)</p>
 <blockquote class="last">
-<div><p>error   : backpropagated error from next layer</p>
+<div><p>compute the backpropagated error, <span class="math">\(\begin{align} \frac{\partial L }{\partial \mathbf{h}_{k-1,j}} \end{align}\)</span></p>
 </div></blockquote>
 </td>
 </tr>
@@ -310,12 +352,36 @@ averaged over all the input samples.</p>
 <tt class="descname">set_training_data</tt><big>(</big><em>args</em><big>)</big><a class="reference internal" href="_modules/MLPHiddenLayer.html#HiddenLayer.set_training_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MLPHiddenLayer.HiddenLayer.set_training_data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Function to set the training data for current computation loop
 useful in running algorithms for batch processing</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>args :tuple,shape=[(N,n_in),(N,n_out)]</strong></p>
+<blockquote class="last">
+<div><p>training data</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
-<dt id="MLPHiddenLayer.HiddenLayer.update_gradients">
-<tt class="descname">update_gradients</tt><big>(</big><em>grads</em>, <em>learning_rate</em><big>)</big><a class="reference internal" href="_modules/MLPHiddenLayer.html#HiddenLayer.update_gradients"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MLPHiddenLayer.HiddenLayer.update_gradients" title="Permalink to this definition">¶</a></dt>
+<dt id="MLPHiddenLayer.HiddenLayer.update_parameters">
+<tt class="descname">update_parameters</tt><big>(</big><em>params</em><big>)</big><a class="reference internal" href="_modules/MLPHiddenLayer.html#HiddenLayer.update_parameters"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MLPHiddenLayer.HiddenLayer.update_parameters" title="Permalink to this definition">¶</a></dt>
 <dd><p>function to updated the learn parameters to the model</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>grads</strong> : ndarray,shape=(n_hidden,n_in+1)</p>
+<blockquote class="last">
+<div><p>coefficient parameter matrix</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </dd></dl>
@@ -353,7 +419,22 @@ useful in running algorithms for batch processing</p>
 <dl class="method">
 <dt id="MLPHiddenLayer.MLP.learn">
 <tt class="descname">learn</tt><big>(</big><em>update</em><big>)</big><a class="reference internal" href="_modules/MLPHiddenLayer.html#MLP.learn"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MLPHiddenLayer.MLP.learn" title="Permalink to this definition">¶</a></dt>
-<dd><p>the main function that performs learning,computing gradients and updating parameters</p>
+<dd><dl class="docutils">
+<dt>the main function that performs learning,computing gradients and updating parameters </dt>
+<dd>this is called by the optimizer module for each iteration</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>update - python function</strong></p>
+<blockquote class="last">
+<div><p>this represents the update function that performs the gradient descent iteration</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
@@ -366,6 +447,24 @@ useful in running algorithms for batch processing</p>
 <dt id="MLPHiddenLayer.MLP.predict">
 <tt class="descname">predict</tt><big>(</big><em>x</em><big>)</big><a class="reference internal" href="_modules/MLPHiddenLayer.html#MLP.predict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MLPHiddenLayer.MLP.predict" title="Permalink to this definition">¶</a></dt>
 <dd><p>the function predicts the output of the MLP feed forward network given the input X</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>x</strong> : numpy array,shape=(n_in,)</p>
+<blockquote>
+<div><p>input vector for classification</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>o</strong> : numpy array,shape=(n_out,)</p>
+<blockquote class="last">
+<div><p>vector that contains prediction probability that input vector belongs to output</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
@@ -378,6 +477,19 @@ useful in running algorithms for batch processing</p>
 <dt id="MLPHiddenLayer.MLP.propagate_backward">
 <tt class="descname">propagate_backward</tt><big>(</big><em>error</em>, <em>weights</em>, <em>input</em><big>)</big><a class="reference internal" href="_modules/MLPHiddenLayer.html#MLP.propagate_backward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MLPHiddenLayer.MLP.propagate_backward" title="Permalink to this definition">¶</a></dt>
 <dd><p>the function that executes the backward propagation loop on hidden layers</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>error</strong> : numpy array,shape=()</p>
+<p><strong>weight</strong> : numpy array,shape=()</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">None</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
@@ -414,7 +526,7 @@ and starts the training process</p>
 
 <dl class="data">
 <dt id="MLPHiddenLayer.rng">
-<tt class="descclassname">MLPHiddenLayer.</tt><tt class="descname">rng</tt><em class="property"> = &lt;mtrand.RandomState object at 0x589d300&gt;</em><a class="headerlink" href="#MLPHiddenLayer.rng" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">MLPHiddenLayer.</tt><tt class="descname">rng</tt><em class="property"> = &lt;mtrand.RandomState object at 0x540e330&gt;</em><a class="headerlink" href="#MLPHiddenLayer.rng" title="Permalink to this definition">¶</a></dt>
 <dd><p>logistic function</p>
 </dd></dl>
 
