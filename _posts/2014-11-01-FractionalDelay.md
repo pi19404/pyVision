@@ -1,4 +1,3 @@
-
 ---
 layout: post
 title:  Fraction Delays using Linear Interpolation
