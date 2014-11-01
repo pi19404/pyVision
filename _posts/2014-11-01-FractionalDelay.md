@@ -1,10 +1,10 @@
 ---
 layout: post
-title:  Fraction Delays using Linear Interpolation
+title:  Fraction Delays using Linear Interpolation and Resampling
 ---
 
 ### Introduction
-In this article we look at implementing fractional delays using Linear Interpolation
+In this article we look at implementing fractional delays using Linear Interpolation and Resampling Techniques
 
 A integral delay of $M$ is obtained by a delay line of length $M$.A factional  delay is implemented cascading the integral part of delay with a block which can approximate a constant phase delay equal to fractional part of $m$
 
