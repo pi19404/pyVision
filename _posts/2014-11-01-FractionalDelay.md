@@ -38,6 +38,7 @@ $\displaystyle {\hat y}\left(n-\frac{1}{4}\right)
 \;=\;\frac{3}{4} \cdot y(n) + \frac{1}{4}\cdot y(n-1) $
 
 The python code for implementing fractional delay by interpolation can be found below
+
 <pre class="brush:python">
 
 
@@ -103,6 +104,7 @@ def delay(signal,N):
     d=signal[len(signal)-N:len(signal)];#numpy.zeros((1,N+1));    
     signal1=numpy.append(d,signal[0:len(signal)-N])
     return signal1;
+    
     </pre>
 
 
@@ -119,6 +121,7 @@ The steps to introduce fractional delay are
  - downsample by a factor $N$
 
 <pre class="brush:python">
+
 def fdelay(signal,N,mode="upsample"):
     """ function introduces a fractional delay of N samples 
     
@@ -163,6 +166,7 @@ def fdelay(signal,N,mode="upsample"):
         output=out1
          
     return output
+
 </pre>
 
 The Rational number has been chosse such that denominator is limited to 20 ,so that we are not
