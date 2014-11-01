@@ -1,6 +1,8 @@
 
-
-## Fraction Delays using Linear Interpolation
+---
+layout: post
+title:  Fraction Delays using Linear Interpolation
+---
 
 ### Introduction
 In this article we look at implementing fractional delays using Linear Interpolation
@@ -129,6 +131,8 @@ def fdelay(signal,N,mode="upsample"):
     N      : factional
              delay
         
+    mode   : "linear " - linear interpolation
+             "upsample " - upsampling technique
     Returns
     --------
     out : numpy-array
@@ -162,7 +166,15 @@ def fdelay(signal,N,mode="upsample"):
     return output
 </pre>
 
+The Rational number has been chosse such that denominator is limited to 20 ,so that we are not
+upscaling by a large factor.
+
 ### Code
 The code for the same can be found in the pyVision github repository in files
-Utils.py
+
+ - [Utils.py](https://github.com/pi19404/pyVision/blob/master/pySignalProc/Utils.py)
+
+The function `fdelay` implements fractional delay while function `delay` implements integer delay.
+The `mode` parameter of `fdelay` function specified which method to use to perform fractional delay operations.
+presently it support `linear` - Linear Interpolation and `upsample` - Upsamling technique
 
