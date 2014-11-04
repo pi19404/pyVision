@@ -1,12 +1,12 @@
-PKG = 'simulator1'
-import roslib; 
-roslib.load_manifest(PKG)
-from simulator1.msg import Transmitter as tmsg
+#PKG = 'simulator1'
+#import roslib; 
+#roslib.load_manifest(PKG)
+#from simulator1.msg import Transmitter as tmsg
 
-import rospy
-from std_msgs.msg import String
-import rospy
-from std_msgs.msg import String
+#import rospy
+#from std_msgs.msg import String
+#import rospy
+#from std_msgs.msg import String
 
 from math import atan2, degrees, pi
 import numpy as np;
@@ -32,11 +32,6 @@ import time
 import math
 
 
-import rospy
-from rospy.numpy_msg import numpy_msg
-from rospy_tutorials.msg import Floats
-   
-from rospy.numpy_msg import numpy_msg
 
 from scipy.signal import butter, lfilter,filtfilt
 
@@ -44,8 +39,13 @@ from numpy.linalg import *
 import fractions
 
 
+
 cexp=numpy.vectorize(cmath.exp);
 acos=numpy.vectorize(math.acos);
+
+        
+
+        
     
 def distance(source,destination):
     diff=source-destination;
@@ -55,6 +55,16 @@ def distance(source,destination):
  
     dist=np.sqrt(dist)
     return dist;
+    
+    
+    
+
+def phase_sift(signal,phase):
+    Fsignal=np.fft.fft(signal)
+    freq = np.fft.fftfreq(Fsignal.size,1.0)
+    Fsignal=Fsignal*np.exp(-1j * np.pi *freq)  
+    signal=np.real(np.fft.ifft(Fsignal))
+    return signal
 
 def angle(source,dest):
     #print source,dest
@@ -74,7 +84,7 @@ def convolution(signal,h):
     return output
     
     
-def fdelay(signal,N,mode="upsample"):
+def fdelay(signal,N,mode="linear"):
     """ function introduces a fractional delay of N samples 
     
     Parameters
@@ -97,7 +107,7 @@ def fdelay(signal,N,mode="upsample"):
         #perform integral delay
         signal=delay(signal,i)           
         #perform linear interpolation for fractional delay    
-        output=convolution(signal,[f,i-f])
+        output=convolution(signal,[f,1-f])
     if mode=="upsample":
         N=math.ceil(N*100)/100
         #get rational approximation
@@ -227,3 +237,21 @@ def addNoise(s,variance):
     noise = np.random.normal(0,variance,len(s))                    
     s=s+noise;                              
     return s;
+
+
+   
+#    res=v4.angle(v4,v1)
+#    print res*180/math.pi
+# 
+#    res=v5.angle(v5,v1)
+#    print res*180/math.pi
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
