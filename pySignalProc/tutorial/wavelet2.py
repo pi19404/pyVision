@@ -11,6 +11,57 @@ import pywt
 from matplotlib.pyplot import plot, show, figure, title
 
 
+def multiplotSpectrum(y,Fs,text=None,phase=False):
+     """
+     Plots a  Amplitude Spectrum of y(t)
+     """
+     
+     
+     index=len(y)
+     levels=index-2
+     for i in range(len(y)):
+         n = len(y[i]) 
+         #
+         freq = np.fft.fftshift(np.fft.fftfreq(y[i].size,1.0)) # two sides frequency range
+         #freq=freq[range(n/2)] # one side frequency range
+         #print freq,y.size
+         Y = np.fft.fftshift(numpy.fft.fft(y[i]))/n # fft computing and normalization
+         #np.fft.fftshift
+         if i==0 or i==1:
+             f1=Fs/(2**levels)
+         elif i!=len(y)-1:
+             f1=Fs/(2**(levels-i+1))
+         else:
+             f1=Fs
+         freq=freq*f1
+            
+         
+         subplot(index,1,i+1)
+         
+         plot(freq,len(y[i])*abs(Y),'r') # plotting the spectrum
+         plt.grid()
+         if Fs!=1:
+             xlabel('Freq (Hz)')
+             ylabel('|F(freq)|')
+         else :
+             xlabel('W (rad)')
+             ylabel('|F(W)|')
+         
+         if phase==True:
+             subplot(index,2,i+1)
+             plot(freq,np.angle(Y)/math.pi,'r') # plotting the spectrum
+             if Fs!=1:
+                 xlabel('Freq (Hz)')
+                 ylabel('P(freq)')
+             else :
+                 xlabel('W (rad)')
+                 ylabel('P(W)')
+             plt.grid()
+         
+         #plotSpectrum(y,Fs)
+         #show()    
+         #return Y,freq
+         
 def coef_pyramid_plot(coefs, first=0, scale='uniform', ax=None,sig=None,w=None):
     """
     Parameters
@@ -58,11 +109,20 @@ def coef_pyramid_plot(coefs, first=0, scale='uniform', ax=None,sig=None,w=None):
             t=[]
             for k in range(len(coefs[i-1])):
                 for m in range(rep):
+                       
+                        if rep*k+m > len(sig):
+                            bb=1
+                            break;
+                        bb=0
                         c.append(coefs[i-1][k])
                         t.append((rep*k+m))
+                        
                 if k!=len(coefs[i-1])-1:
                     c.append(coefs[i-1][k+1])
                     t.append((rep)*k+m)
+                    
+                if bb==1:
+                    break
 
         else:
             
@@ -70,10 +130,10 @@ def coef_pyramid_plot(coefs, first=0, scale='uniform', ax=None,sig=None,w=None):
             t=[]
             for k in range(len(coefs[i-1])):
                 for m in range(2*rep):
-#                        if m==0:
-#                            c.append(0)
-#                            t.append((rep*k+(m+1)/2))
-                        
+
+                        if rep*k+(m+1)/2 > len(sig):
+                            bb=1
+                            break;                        
                         if m<=(rep-1):
                             c.append(coefs[i-1][k])
                             t.append((rep*k+(m+1)/2))
@@ -81,29 +141,32 @@ def coef_pyramid_plot(coefs, first=0, scale='uniform', ax=None,sig=None,w=None):
                         elif m>=(rep-1):
                             c.append(-coefs[i-1][k])
                             t.append((rep*k+(m+1)/2))                        
-                        
-                #c.append(coefs[i-1][k])
-                #t.append((rep)*k+(m+1)/2)            
-            
-        #print t
-        #print c
+           
+
+
+        print min(t),max(t)
         c=np.array(c)
         t=np.array(t)
         ax.plot(t,c)
+        ax.grid()
         c1.append(c)
         t1.append(t)
         
     
         
     ax=fig.add_subplot(n_levels+1,1,i+1)
-    ax.plot(sig)    
+    ax.plot(range(len(sig)),sig)    
     c1.append(sig)
     t1.append(range(len(sig)))    
     return fig,c1,t1
-    
+
+
+
+#generate wavelet object    
 w = pywt.Wavelet('haar')
 scaling, wavelet, x = w.wavefun()
 
+#plotting the wavelet and scaling functions figures 1,2
 fig, axes = plt.subplots(1, 2, sharey=True, figsize=(8,6))
 ax1, ax2 = axes
 ax1.grid()
@@ -118,6 +181,8 @@ ax2.plot(x-x.mean(), wavelet);
 ax2.grid()
 fig.tight_layout()
 
+
+#plotting the wavelet decomposition coefficients asnd frequency response fig 3,4
 print w.dec_lo,w.dec_hi
 figure()
 s=np.append(np.array(w.dec_lo),np.zeros(1000))
@@ -128,6 +193,8 @@ figure()
 s=np.append(np.array(w.dec_hi),np.zeros(1022))
 Utils.plotSpectrum(s,2,"Frequeny response",True)
 
+
+#plotting the sinc squared function and frequency response fig 4,5
 
 tmin = -1;
 tmax = 1;
@@ -142,29 +209,60 @@ figure()
 Utils.plotSpectrum(x,FS[0])
 
 
+#plottig the frequency response of downsampled signal
 x=x[range(0,len(x),2)]
 figure()
 Utils.plotSpectrum(x,FS[0])
 
 
-x=Utils.squared_sinc(fo,t)
-x=Utils.sinepulse(1000,0,1000,10)
+#plotting sine pulse and wavelet coefficients for 3 level decomposition and its
+#freuqency response fig 6,7
+x=Utils.sinepulse(1024,0,1024,10)
 
 coeff=pywt.wavedec(x,w,level=3,mode='sym')
 
+#plot projection onto wavelet basis
 fig, axes = plt.subplots(2, 1, figsize=(9,11), sharex=True)
-
 ax=axes[0]
 fig,c1,t1= coef_pyramid_plot(coeff[0:], ax=axes[0],sig=x,w=w) # omit smoothing coefs
 
 
-
+#plot frequency response of wavelet coefficients
 figure()
 coeff.append(x)
-print len(coeff)
-Utils.multiplotSpectrum(coeff,FS[0])
-    
+multiplotSpectrum(coeff,FS[0])
 
 
+#plotting sinc squared signal wavelet projection and freq response fig 8,9    
+x=Utils.squared_sinc(fo,t)
+
+coeff=pywt.wavedec(x,w,level=3,mode='sym')
+
+#plot projection onto wavelet basis
+fig, axes = plt.subplots(2, 1, figsize=(9,11), sharex=True)
+ax=axes[0]
+fig,c1,t1= coef_pyramid_plot(coeff[0:], ax=axes[0],sig=x,w=w) # omit smoothing coefs
+
+
+#plot frequency response of wavelet coefficients
+figure()
+coeff.append(x)
+multiplotSpectrum(coeff,FS[0])
+
+#plotting sine pulse and wavelet coeff and frequency response for 5 level decomposition fig 10,11
+
+x=Utils.sinepulse(1024,0,1024,100.0/32)
+coeff=pywt.wavedec(x,w,level=5,mode='sym')
+
+
+#plot projection onto wavelet basis
+fig, axes = plt.subplots(1, 1, figsize=(9,9))
+fig,c1,t1= coef_pyramid_plot(coeff[0:], ax=axes,sig=x,w=w) # omit smoothing coefs
+fig.tight_layout()
+
+#plot frequency response of wavelet coefficients
+figure()
+coeff.append(x)
+multiplotSpectrum(coeff,FS[0])
 show()
 
