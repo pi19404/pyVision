@@ -14,16 +14,26 @@ relative_permalinks: true
 # Setup
 title:               pyVision
 tagline:             'A Machine Learning and Signal Processing toolbox'
-description:         'A Machine Learning and Signal Processing toolbox'
+description:         'A Machine Learning and Signal Processing library'
 url:                 pi19404.github.io
 baseurl:             /pyVision
 paginate:            5
+
+#github repo
+github:
+  repo : http://www.github.com/pi19404/pyVision
 
 # About/contact
 author:
   name:              pi19404
   url:               https://pi-virtualworld@blogspot.com
   email:             pi19404@gmail.com
+  github : 	     pi19404
+  blogger :	      https://pi-virtualworld@blogspot.com
+  wordpress : 	 	http://eternalwandering777.wordpress.com
+  scribd	:	http://www.scribd.com/pi19404
+  github1	:	http://www.github.com/pi19404/OpenVision
+  github2	:	http://www.github.com/pi19404/OpenVision
 
 # Custom vars
 version:             1.0.0

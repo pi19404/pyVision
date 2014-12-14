@@ -14,8 +14,8 @@ title: Home
   {% for post in paginator.posts %}
   <ul class="entries">
     <li>
-    	<a href="{{ post.url | remove_first:'/'}}">
-        {{ post.title }} - <span class="post-date">{{ post.date | date_to_string }}</span>
+    	<a href="{{ site.baseurl }}/{{ post.url | remove_first:'/'}}">
+        {{ post.title }} <span class="post-date">{{ post.date | date_to_string }}</span>
       </a>
 	</li>
   </ul>
