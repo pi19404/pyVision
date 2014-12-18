@@ -111,8 +111,8 @@ def zplane(z, p, filename=None):
 
 from math import factorial
 
-def calculate_combinations(n, r):    
-    r=0.5*factorial(n+r) /( factorial(n) * factorial(r))
+def calculate_combinations(p, k):    
+    r=0.5*combination(p+k,k);
     return r
 
 def combination(n,r):    
@@ -142,15 +142,15 @@ def cosp(p,pad=0):
     
 
 
-vv=np.vectorize(calculate_combinations)    
+#vv=np.vectorize(calculate_combinations)    
 #
-n=4
+#n=4
 #print calculate_combinations(10,n)
 
 #print calculate_combinations(10,10),2*calculate_combinations(10,9)
 
-index=np.array(range(0,n+1))
-r=vv(9,index)
+#index=np.array(range(0,n+1))
+#r=vv(9,index)
 
 #print np.sum(r)
         
