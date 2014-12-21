@@ -111,15 +111,20 @@ def zplane(z, p, filename=None):
 
 from math import factorial
 
+
+
 def calculate_combinations(p, k):    
+    """ calculates the combination p+kCk """
     r=0.5*combination(p+k,k);
     return r
 
 def combination(n,r):    
+    """ calculates the combination nCr """
     r=factorial(n) /( factorial(n-r) * factorial(r))
     return r
     
-def cosp(p,pad=0):
+def sinp(p,pad=0):
+    """ calculates the coefficients trigonometric polynomial sin^2p(x) """
     
     result=np.zeros(2*p+1)
     g1=1.0/(2**(2*p))
@@ -127,123 +132,180 @@ def cosp(p,pad=0):
     result[p]=g1*t1
     
 
-    for k in range(p):
+    for k in range(p):        
         v=g1*combination(2*p,k)
+        if (p-k)%2!=0:
+            v=-v       
         result[k]=v
         result[2*p-k]=v
     
     l=2*pad-2*p
     result=np.append(np.zeros(l/2),result)    
     result=np.append(result,np.zeros(l/2))
-    #print result,len(result)
+    
     return result
     
   
+def unique_real_zeros(z):            
+    """ calculates the stable unique zeros from magnitude squared transfer function """
+    unique = scipy.unique(z)
+    
+    counts=np.zeros(len(unique))
+
+    for i in range(len(unique)):
+        for k in range(len(z)):
+            if unique[i]==z[k]:
+                counts[i]=counts[i]+1
+
+    zeros=[]
+    
+    for e in range(len(unique)):
+        if (np.imag(unique[e])==0 or abs(np.imag(unique[e]))<1e-3) and (abs(np.real(unique[e])-1)<1e-3 or abs(np.real(unique[e]))<1):                    
+            if counts[e]>1:
+                multi=counts[e]/2
+                print multi
+                zeros.append(np.repeat(np.real(unique[e]),multi))
+            if counts[e]==1 and (abs(np.real(unique[e])-1)<1e-3 or abs(np.real(unique[e]))<1):
+                zeros.append(np.real(unique[e]))
+
+
+    zeros=np.array(zeros,float)
+    return zeros
+
+def stable_zeros(z):    
+    """ get the stable complex zeros from magnitude squared transfer function """
+   
+    fz=[]
+    for l in z:
+        if np.imag(l)!=0:
+            l1=l*np.conj(l)
+            l1=np.abs(l)            
+            if l1<1 or abs(l1-1)<1e-3:
+                fz.append(l)
+      
+      
+    
+    fz=np.array(fz)
+    return fz
+    
     
 
+def cqf_filters(dec_lo):
+    """ computs the decomposition and analysis low and high pass filters given decomposition low pass filter """
+    index=np.array(range(len(dec_lo)))
+    dec_hi=np.exp(-1j*math.pi*index)*np.flipud(dec_lo)
+    dec_hi=dec_hi.real
+    
+    
+    recon_lo=np.exp(-1j*math.pi*index)*dec_hi.real
+    recon_lo=recon_lo.real
+    
+    recon_hi=-np.exp(-1j*math.pi*index)*dec_lo.real
+    recon_hi=recon_hi.real
+    
 
-#vv=np.vectorize(calculate_combinations)    
-#
-#n=4
-#print calculate_combinations(10,n)
+    return dec_lo,dec_hi,recon_lo,recon_hi
 
-#print calculate_combinations(10,10),2*calculate_combinations(10,9)
 
-#index=np.array(range(0,n+1))
-#r=vv(9,index)
-
-#print np.sum(r)
+def trigonometric_filter_zeros(zeros):
+    """ function return the zeros of trigonometric polynomial L(w)"""
+    v=[]
+    z=[]        
+    for i in range(zeros):    
+        v.append(calculate_combinations(zeros-1,i))
         
+    v=np.array(v,float)   
+    
+    result=np.zeros(2*zeros-1)
+    for k in range(zeros):    
+        result=result+v[k]*sinp(k,zeros-1)
+        
+      
+    den=np.zeros(len(result))
+    den[len(den)-1]=1
+   
+    #convertize the transfer function to pole zero representation
+    z1, p, k = tf2zpk(result,den)
 
-zeros=2
+    z=np.append(z,unique_real_zeros(z1))
+    z=np.append(z,stable_zeros(z1))
 
-z=[]
-for i in range(zeros):
-    z.append(-1)
+        
+    return z
+    
+def compute_coeffs(z,z1):
+    """ function computes the filter coefficients of decomposition low pass filter
+        given zeros at pi and zeros of trigonmonetric polynomial 
+        for daubach filter """
+        
+    #adding poles for causal system    
+    zeros=len(z)
+    p=np.zeros(zeros-1)
+    p=np.array(p)
+    z=np.append(z,z1)
+    
+    h = zpk2tf(z,p,[1])   
+    h=np.array(h[0])
 
-
-v=[]    
-
-for i in range(zeros):    
-    v.append(calculate_combinations(zeros-1,i))
-
-print v,"V"
-N=zeros 
-
-v=np.array(v,float)
-
-
-result=np.zeros(2*N-1)
-for k in range(N):    
-    result=result+v[k]*cosp(k,N-1)
+    #normalizing the filter coefficients    
+    h=h/math.sqrt(np.sum(h**2))
+    return h,z,p     
     
 
+def DaubechiesWavelet(zeros=2):
 
+
+    #populating zeros at pi
+    z=[]
+    for i in range(zeros):
+        z.append(-1)
+
+
+    #compute the zeros corresponding to trigonometric polynomial
+    tz=trigonometric_filter_zeros(zeros)
+
+    #compute the low pass filter decomposition filter
+    h,z,p=compute_coeffs(z,tz)
+
+    #plotting the pole zero plot
+    figure()
+    zplane(z, p)
+
+    #computing the wavelet filter coefficients of CQF
+    h1,h2,h3,h4=cqf_filters(h)
     
-v=result
-print result,"|Q|^2"
+    return h1,h2,h3,h4
 
 
 
-z1, p, k = tf2zpk(v,[1])
+
+dec_lo,dec_hi,recon_lo,recon_hi=DaubechiesWavelet(3)
 
 
 
-z2=[]
-for i in z1:
-    z2.append(i)
+print dec_lo
+print dec_hi
+print recon_lo
+print recon_hi
+    
 
+w=pywt.Wavelet('db3')
+print w.rec_lo
+print w.rec_hi
+print w.dec_lo
+print w.dec_hi
 
-
-z2=np.array(z2)
 figure()
-
-
-
-
-
-fz=[]
-fr=[]
-for l in z2:
-    if np.imag(l)==0:
-        if abs(l)<=1:
-            fr.append(-l)
-    else:
-        l1=l*np.conj(l)
-        l1=l1.real
-        if math.sqrt(l1) <= 1:
-            fz.append(-l)
-
-z=np.append(z,fr)
-z=np.append(z,fz)
-
-
-print z,"zeros"      
-
-
-
-
-#z=np.array(z)
-p=np.zeros(zeros+1)
-p=np.array(p)
-h = zpk2tf(z,p,1.0)    
- 
-zplane(z, p)
-h=np.array(h[0])
-
-
-
-
-h1=h/math.sqrt(np.sum(h**2))
-
-print "filter coeffieints",h1
-print "constrains",np.sum(h1),np.sum(h1**2) 
+z,p,k=tf2zpk(w.rec_lo,[1]);
+zplane(z,p)
+show() 
+ddddddddd
+#print "constrains",np.sum(h1),np.sum(h1**2) 
 
    
 
 
-length=4
-w=pywt.Wavelet('db2')
+
 
 print np.mean((w.rec_lo-h1)**2),"estimation error"
 
