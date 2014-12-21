@@ -18,7 +18,7 @@ relative_permalinks: true
 title:               pyVision
 tagline:             'A Machine Learning and Signal Processing toolbox'
 description:         'A Machine Learning and Signal Processing library'
-url:                 pi19404.github.io
+url:                 http://pi19404.github.io
 baseurl:             /pyVision
 paginate:            5
 
