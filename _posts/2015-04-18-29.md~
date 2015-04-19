@@ -1,0 +1,162 @@
+---
+layout: post
+title: OpenCV 2.4.11 Build from Sources for Linux and Android
+---
+
+### **OpenCV 2.4.11 Build from Sources for Linux and Android**
+
+In this article we will look at the process of compiling OpenCV 2.4.11 libraries from source for linux and Android ARM platform .
+
+- Get the  latest snapshot from OpenCV Git repository
+`https://github.com/Itseez/opencv`
+
+<pre class="brush:python">
+
+cd $workspaace
+git clone https://github.com/Itseez/opencv.git
+
+</pre>
+
+- Install the pre-requisite packages
+
+<pre class="brush:python">
+sudo apt-get install build-essential
+
+sudo apt-get install cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev
+
+sudo apt-get install python-dev python-numpy libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libjasper-dev libdc1394-22-dev
+</pre>
+
+* If you are using 64-bit linux  make sure to install  ia32 shared libraries - transitional package 
+
+
+### **CMake-GUI Configure and Build **
+
+- `CMake`, the cross-platform, open-source build system consisting of a set of tools to build, test and package software. `cmake-gui` provides graphical user interface to configure build.
+
+- Create a temporary directory `linux_build`, where the Makefiles, project files as well the object files and output binaries will be generated
+
+- Launch the `cmake-gui` utility 
+
+<pre class="brush:python">
+cd linnux_build
+cmake-gui  
+
+</pre>
+ 
+- Select the OpenCV source and configure build directory where the make files will be generated.
+
+
+![enter image description here](http://pi19404.github.io/pyVision/images/25/a292.png)
+
+
+**Configuration**
+
+- Press Configure button  
+- You may receive error configuration completed/terminated with errors .The error log can be seen in the Tab below the option panel . The errors are occuring because the default options enabled are not compatible  with software packages installed in the system
+- To resolve the errors  deselect the packages that are not required    
+This will check for dependencies,download pre-requisites and generate system dependent Makefiles for compilation
+
+**For example :**
+
+- Disabled `WITH_IPP` as i was facing come download issues with the package
+- Disable `WITH_CUDA`  i do not have GPU  and do not  require CUDA toolkit .
+- Disable `WITH_GSTREAMER` since i had not installed the GSTREAMER package
+- Disable `WITH_OPENEXR` ( OPENEXR is format for HDR images )
+- Disable `WITH_V4l`               ( v4l is video for linux package)
+
+Enabling Additional options that are disabled by default
+
+- Enable `WITH_TBB`          
+- Enable WITH_OPENCL  (OpenCL is open source package for hetrogenous parallel programming)
+
+**Generate Build Files **
+
+- After selecting the suitable options that i press the generate option ,and errors are resolved and make files are generated successfully.
+
+Alternatively you can install the required packages to resolve the dependencies and then proceed to generate the make files successfully.
+
+**Make and Install **
+  Go to the build directory configured in the cmake-gui and enter
+<pre class="brush:python">
+
+  make 
+  make install
+
+</pre>
+
+### **Android build**
+
+- Download Require Android Pre-Requisites like Android SDK and Android NDK
+
+	-	[Android SDK - Android Software development toolkit](http://developer.android.com/sdk/installing.html)
+	- [Android NDK](http://developer.android.com/tools/sdk/ndk/index.html) - The NDK is a toolset that allows you to implement parts of your app using native-code languages such as C and C++
+
+*  Export the following `ANDROID_SDK` and `ANDROID_NDK` shell variables indicating the path where the packages have been downloaded/installed.
+
+<pre class="brush:python">
+
+export ANDROID_SDK = /opt/android-sdk-linux
+export ANDROID_NDK = /opt/android-ndk-r7
+
+</pre>
+
+#### **CMake Toolchain Build**
+
+- Create build directory for Android
+- After Launching the `cmake-gui` click on configure . 
+- Select the options `Specify toolchain for cross compiling` 
+
+![enter image description here](http://pi19404.github.io/pyVision/images/25/a291.png)
+
+- The toolchain can be found found at `${opencv_source_dir}/platforms/android/android.toolchain.cmake`
+
+- Select the toolchain and click on finish to complete the CMake configuration process and Click on `Generate`
+
+
+-  Remember to enable `BUILD_SHARED_LIBS` . This options will generate `.so` library files
+	
+	- 
+![enter image description here](http://pi19404.github.io/pyVision/images/25/a293.png)
+
+- To fasten the build you can disable following options 
+	- BUILD_EXAMPLES
+	- BUILD_ANDROID_EXAMPLES
+	- BUILD_OPENEXR
+	- BUILD_PERF_TESTS
+	- BUILD_WITH_DEBUG_INFO
+	- BUILD_TBB
+	- WITH_CUDA
+
+
+#### **Android and ARM options**
+
+-  Select the android-sdk ,android-api level and ARM architecture type if required .Else it will be compiled with default options
+- `Application binary interface (ABI)` describes the low-level interface between a computer program and the  OS or another program
+- An embedded-application binary interface (EABI) specifies standard conventions for file formats, data types, register usage, stack frame organization, and function parameter passing of an embedded software program.
+
+   - armeabi ( ABI for ARM-based CPUs that support *at* *least* the ARMv5TE instruction set)
+   - arm-v7a (dedicated hardware floating point registers provided by CPU)
+  - armeabi-v7a with VFPV3 ( hardware floating point registers and computations to boost floating point performance with VFPV3 as floating-point unit )
+   - arm-v7a-with neon (hardware floating point and vectorization and SIMD operation)
+
+- For the present build i selected arm-v7a is selected as my Mobile device processor belongs to family that supports armv7 architecture and has hardware floating point support.
+
+- This information can be observed when mobile is connected to USB and launching the DDMS utility or viewing the device details in eclipse plugin etc.
+  
+#### **Cross - Compiling for Android**  
+
+-  As in the ubuntu case if errors are encountered un-check the packages not applicable or not   required   or install the required packages to resolve the error and click on generate.
+
+- Initiate the compilation by typing `make` command in the build directory
+
+- After completion the android compatible OpenCV libraries can be found in `${build_dir}/libs/armeabi-v7a` directory
+
+The precompiled libraries  `armeabi-v7a` libraries can be found at git repository `https://github.com/pyVision/root` in `adroid/OpenCV_Android_libraries/2.4.11/armeabi-v7a`  
+subdirectory .
+
+The libraries for other `eabi ` format will be added soon
+
+
+
+

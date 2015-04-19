@@ -7,7 +7,7 @@ title: Serial Bluetooth Terminal on Linux
 
 In this article we will look at how to establish a serial connection with devices via bluetooth .
 
-### <i class="icon-pencil"></i> Device Pairing
+### <i class="icon-pencil"></i> ** Device Pairing**
 We need to pair the device before starting the communication
 
 You can pair the device using standard bluetooth GUI utilities or command line utilties.In this article we will look at command-line utilities to do so.

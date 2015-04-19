@@ -1,0 +1,90 @@
+---
+layout: post
+title: De-Compiling Android Application
+---
+
+#### De-compiling Android Application ####
+
+All applications for Android phones are distributed as APK Files. These files contain all the source,UI , images and other media necessary to run the application on your phone.
+
+The decompilation process isn't perfect and the code you get won't reflect the original code 100%. Things like variable names, loop structures and anonymous inner classes might be interpreted differently especially if the application will obfuscate your code.
+
+- Getting the APK File
+ - Download the apk file from net of fetch it from the android phone
+ - This command gives the list of installed apk files with associated path
+
+	<pre class="brush:python"> 
+
+	adb shell pm list packages -f -3 
+
+	</pre>
+
+	- This command will get the apk file on the PC
+
+	<pre class="brush:python">
+
+	adb pull /data/app/programming.apk 
+
+	</pre>
+
+	- Change file extension to .zip
+
+	<pre class="brush:python">
+
+	cp programming.apk programming.zip
+
+	</pre>
+
+	- Extract the contents of the file
+
+	 <pre class="brush:python">
+
+	 unzip programming.zip 
+
+	 </pre>
+		    
+- Decompiling the code
+	- Download [dex2jar](http://code.google.com/p/dex2jar/)  utility	  
+
+ - Get the classes.dex file unzipped contents
+
+<pre class="brush:python">
+
+${PATH}/dex2jar/d2j-dex2jar.sh classes.dex 
+
+</pre>
+
+ This will convert the dex to jar file and output will result in `classes_dex2jar.jar` file.
+ 
+- Download java decompilers like [jd-gui ](http://jd.benow.ca/) or [Luyten](https://github.com/deathmarine/Luyten)
+
+ - Open decompiler gui and open the jar file 		  
+	For Lyuten type the command
+	
+	<pre class="brush:python">
+
+	java -jar luyten.jar 
+
+	</pre>
+
+	you will be able to view all the sources of project,external jar files etc.
+	
+	- Save the source file
+  - Select option File -> Save All Sources 
+			 This will save all the files on the file system.
+
+At this point the sources have been decompiled but not the resources etc
+
+- Decompiling Resources
+	- Download the latest version of [apktool](http://ibotpeaches.github.io/Apktool/) which is a tool for reverse engineering APK files. This tool dissassembles the code in Smali  format along with resources . We will user only resources obtained from this utility as java file had been obtained from earlier approach.
+
+	<pre class="brush:python">
+	
+	java -jar apktool_2.0.0rc4.jar d programming.apk
+	
+	</pre>
+    
+    This will create programming folder containing source and resource files
+    
+At this point we have recovered both the source and resource files.
+

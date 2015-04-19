@@ -206,7 +206,6 @@ $$\dot{\theta(t)} = v(t) \frac{K_{t}}{R*J}*e^{-\frac{(b+ \frac{K_{b}K_{t}}{R})}{
 $$ P(s) = \frac {\dot{\Theta}(s)}{V(s)} = \frac{\frac{K_{t}}{R}}{Js + (b+ \frac{K_{b}K_{t}}{R})} \qquad  $$
 
 using final value theorem we get
-
 $\dot{\Theta} =  V\frac{\frac{K_{t}}{R}}{(b+ \frac{K_{b}K_{t}}{R})}$
 
 This equations helps us compute the angular velocity of motor for any given input voltage.
