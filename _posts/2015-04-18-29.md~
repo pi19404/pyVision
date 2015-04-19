@@ -52,9 +52,9 @@ cmake-gui
 
 **Configuration**
 
-- Press Configure button  
+- Press Configure button 
 - You may receive error configuration completed/terminated with errors .The error log can be seen in the Tab below the option panel . The errors are occuring because the default options enabled are not compatible  with software packages installed in the system
-- To resolve the errors  deselect the packages that are not required    
+- To resolve the errors deselect the packages that are not required
 This will check for dependencies,download pre-requisites and generate system dependent Makefiles for compilation
 
 **For example :**
@@ -67,7 +67,7 @@ This will check for dependencies,download pre-requisites and generate system dep
 
 Enabling Additional options that are disabled by default
 
-- Enable `WITH_TBB`          
+- Enable `WITH_TBB`
 - Enable WITH_OPENCL  (OpenCL is open source package for hetrogenous parallel programming)
 
 **Generate Build Files **
@@ -89,10 +89,10 @@ Alternatively you can install the required packages to resolve the dependencies 
 
 - Download Require Android Pre-Requisites like Android SDK and Android NDK
 
-	-	[Android SDK - Android Software development toolkit](http://developer.android.com/sdk/installing.html)
+	- [Android SDK - Android Software development toolkit](http://developer.android.com/sdk/installing.html)
 	- [Android NDK](http://developer.android.com/tools/sdk/ndk/index.html) - The NDK is a toolset that allows you to implement parts of your app using native-code languages such as C and C++
 
-*  Export the following `ANDROID_SDK` and `ANDROID_NDK` shell variables indicating the path where the packages have been downloaded/installed.
+- Export the following `ANDROID_SDK` and `ANDROID_NDK` shell variables indicating the path where the packages have been downloaded/installed.
 
 <pre class="brush:python">
 
