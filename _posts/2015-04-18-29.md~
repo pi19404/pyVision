@@ -8,7 +8,7 @@ title: OpenCV 2.4.11 Build from Sources for Linux and Android
 In this article we will look at the process of compiling OpenCV 2.4.11 libraries from source for linux and Android ARM platform .
 
 - Get the  latest snapshot from OpenCV Git repository
-`https://github.com/Itseez/opencv`
+[https://github.com/Itseez/opencv](https://github.com/Itseez/opencv)
 
 <pre class="brush:python">
 
@@ -152,7 +152,10 @@ export ANDROID_NDK = /opt/android-ndk-r7
 
 - After completion the android compatible OpenCV libraries can be found in `${build_dir}/libs/armeabi-v7a` directory
 
-The precompiled libraries  `armeabi-v7a` libraries can be found at git repository `https://github.com/pyVision/root` in `adroid/OpenCV_Android_libraries/2.4.11/armeabi-v7a`  
+
+#### **Pre Compiled Libraries Downloaded** ####
+
+The precompiled libraries  `armeabi-v7a` libraries can be found at git repository [https://github.com/pyVision/root](https://github.com/pyVision/root) in `adroid/OpenCV_Android_libraries/2.4.11/armeabi-v7a`  
 subdirectory .
 
 The libraries for other `eabi ` format will be added soon
