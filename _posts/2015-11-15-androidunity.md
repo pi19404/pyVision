@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Unity Android Application Integration
-published: true
+published: false
 ---
 
 ## **Unity Android Application Integration**
@@ -36,18 +36,18 @@ using System.Collections;
 
 public class AndroidUnityInterface : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-	
-		Debug.LogError ("Starting the Android Unity Interface");
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    // Use this for initialization
+    void Start () {
+    
+        Debug.LogError ("Starting the Android Unity Interface");
+    }
+    
+    // Update is called once per frame
+    void Update () {
 
-		Debug.LogError ("Update the Android Unity Interface");
-	
-	}
+        Debug.LogError ("Update the Android Unity Interface");
+    
+    }
 }
 
 ```
@@ -55,6 +55,7 @@ public class AndroidUnityInterface : MonoBehaviour {
 This script will call the `Start` function while initialization and `Update` function is called at every frame.
 
 ### Unity Project Build
+
 Build the project for the Android platform.Open the `Player settings` and take note of the package name that you have chosen as your "Bundle Identifier as `com.example.androidunityinterface` and the Android API level (e.g., 4.3 "JellyBean"), as you will reuse these settings later.
 
 The same package name will be used while creating the android application in the below section.
@@ -81,10 +82,10 @@ Thus by extending the UnityPlayerNativeActivity we are manually instantiating th
 
 - As mentioned in the above section the `UnityPlayerNative` class is found in the classes.jar file in Unity. This files needs to be added to android project.
 
-	The jar file can be found in 
+    The jar file can be found in 
 `Editor\Data\PlaybackEngines\androidplayer\release\bin` path in Unity Installation directory.
 
-	We need to add this `classes.jar` file to the project.
+    We need to add this `classes.jar` file to the project.
 
 - we also need to copy unity libraries from following path from unity installation directory `Editor\Data\PlaybackEngines\androidplayer\development\libs\armeabi-v7a` to libs directory of the Android project.
 
@@ -105,7 +106,7 @@ public class MainActivity extends UnityPlayerNativeActivity  {
 
         Runnable runnable = new Runnable() {
             public void run() {
-	            //gets the root default unity view
+                //gets the root default unity view
                 ViewGroup rootView = (ViewGroup) MainActivity.this.findViewById(android.R.id.content);
                 rootView.setKeepScreenOn(true);
             }
@@ -122,7 +123,9 @@ public class MainActivity extends UnityPlayerNativeActivity  {
 ```
 
 ### Native Events forwarding 
+
 we need to allow native events forwarding so that events(like touch) are forwarded from unity to android.This is done by specifying the `ForwardNativeEventsToDalvik` setting in the manifest (must be set to true) 
+
 ```
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
@@ -263,3 +266,4 @@ https://bitbucket.org/pi19404/unityandroidproject/
 **References**
 - http://docs.unity3d.com/Manual/PluginsForAndroid.html
 - https://developer.vuforia.com/library/articles/Solution/How-To-Add-Views-Over-Unity-for-Android
+
