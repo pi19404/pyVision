@@ -28,6 +28,7 @@ url:                 http://pi19404.github.io
 baseurl:             /pyVision
 paginate:            5
 
+encoding: UTF-8
 #github repo
 github:
   repo : http://www.github.com/pi19404/pyVision
