@@ -10,8 +10,9 @@ analytics :
   google : 
       tracking_id : 'UA-38535188-2'
 
-gems:
+plugins:
   - jekyll-sitemap
+  - jekyll-paginate
 
 highlighter:         rouge
 
@@ -49,5 +50,3 @@ author:
 # Custom vars
 version:             1.0.0
 
-
-plugins: [jekyll-paginate]
