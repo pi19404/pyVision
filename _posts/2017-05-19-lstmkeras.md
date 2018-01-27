@@ -1,6 +1,6 @@
 ---
 layout: post
-title: NLP : NLP : Introduction to LSTM using Keras
+title: NLP Introduction to LSTM using Keras
 published: true
 ---
 

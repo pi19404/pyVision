@@ -152,7 +152,7 @@ Playbook file for the same
      - { role: jeqo.netbeans}
   vars :
     netbeans_version : 8.1 
-    netbeans_base: "{{/opt/softwares/netbeans}}"
+    netbeans_base: "\{\{ /opt/softwares/netbeans }}"
     netbeans_home: "{{ netbeans_base }}/netbeans-{{ netbeans_version }}"
 
 

@@ -104,7 +104,7 @@ we take complete signal,and compute the Fourier series coefficients,output can b
 
 Let us consider  magnitude plot of Fourier series
 
-![enter image description here](https://googledrive.com/host/0B-pfqaQBbAAtbExWN0Zya3JySzA/image2.png)
+![enter image description here]({{ site.baseurl }}/images/blog/images/image2.png)
 
 <pre class="brush : python ">
 def FourierSinusoids(F,w,Fs,synthesis=None):    
@@ -191,7 +191,7 @@ series coefficients are equal to the total number of input samples.
 
 Now let us consider a combination of sinusoidal signals at freuency 10 and 15Hz.The signal is periodic with frequency which is LCM of 10 and 15 ie 5Hz.
 
-![enter image description here](https://googledrive.com/host/0B-pfqaQBbAAtbExWN0Zya3JySzA/image4.png)
+![enter image description here]({{ site.baseurl }}/images/blog/images/image4.png)
 
 <pre class="brush : python ">
     if mode==1:
@@ -202,7 +202,7 @@ Now let us consider a combination of sinusoidal signals at freuency 10 and 15Hz.
 </pre>
 Now lets keep on adding frequency components.The below signal is periodic with period of 1 sec 
 
-![enter image description here](https://googledrive.com/host/0B-pfqaQBbAAtbExWN0Zya3JySzA/image5.png)
+![enter image description here]({{ site.baseurl }}/images/blog/images/image5.png)
 
 
 <pre class="brush : python ">
@@ -224,7 +224,7 @@ $${x[n] =
 
 Below is plot of the original and reconstructed signal and python code for the 
 
-![enter image description here](https://googledrive.com/host/0B-pfqaQBbAAtbExWN0Zya3JySzA/image6.png)
+![enter image description here]({{ site.baseurl }}/images/blog/images/image6.png)
 
 <pre class="brush : python ">
 def IFourierSeries(input):
@@ -278,7 +278,7 @@ Thus by computing the DFT we obtain the Fourier series coefficients for single p
 It is upto us to choose a period of the signal.Let us consider a aperiodic impulse of length 150 and on-duty cycle of 5.
 
 Let us consider N=150,450 and observe the results.
-![enter image description here](https://googledrive.com/host/0B-pfqaQBbAAtbExWN0Zya3JySzA/image7.png)
+![enter image description here]({{ site.baseurl }}/images/blog/images/image7.png)
 
 At we increase the period of the signal we can see that resolution in the freuency domain increases.
 
@@ -286,7 +286,7 @@ As $N \rightarrow \infty$ ,the samples in the freuency domain will be placed clo
 If samples in frequency domain are spaced infinitely closely,it can be considered a continuous signal.
 This gives us Discrete Time Fourier Transform representation of the signal.
 
-![enter image description here](https://googledrive.com/host/0B-pfqaQBbAAtbExWN0Zya3JySzA/image8.png)
+![enter image description here]({{ site.baseurl }}/images/blog/images/image8.png)
 
 <pre class="brush : python ">
 def FourierRect(N):     
