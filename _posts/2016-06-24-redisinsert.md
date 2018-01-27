@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Jekyll A Static Website Generator
+title: Redis Mass Insertion of Data
 published: true
 ---
 
