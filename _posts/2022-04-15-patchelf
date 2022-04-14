@@ -21,3 +21,6 @@ make
 make check
 sudo make install
 
+patchElf usages
+-----
+
