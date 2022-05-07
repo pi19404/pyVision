@@ -1,0 +1,18 @@
+# GitPod Installation
+
+### Step 1: Create a Kubernetes Cluster <a href="#step-1-create-a-kubernetes-cluster" id="step-1-create-a-kubernetes-cluster"></a>
+
+Gitpod is a Kubernetes application that uses Kubernetes internally to provision workspaces as Kubernetes pods. Before you can start installing Gitpod, you need to create a compatible Kubernetes cluster.&#x20;
+
+### Step 2: Install Cert-Manager <a href="#step-2-install-cert-manager" id="step-2-install-cert-manager"></a>
+
+Once you have created your Kubernetes cluster you need to install [cert-manager](https://cert-manager.io). cert-manager is needed in any case even when you bring your own TLS certificate for your domain.&#x20;
+
+### Step 3: Configure DNS <a href="#step-3-configure-dns" id="step-3-configure-dns"></a>
+
+To install Gitpod you need a domain with a TLS certificate. The DNS setup to your domain needs to be configured such that it points to the ingress of your Kubernetes cluster.
+
+### Step 4: Install Gitpod <a href="#step-4-install-gitpod" id="step-4-install-gitpod"></a>
+
+
+

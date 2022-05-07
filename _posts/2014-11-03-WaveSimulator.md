@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  Shperical Wave Simulator
+category: Signal Processing
 ---
 ### Introduction
 

@@ -13,7 +13,8 @@ analytics :
 plugins:
   - jekyll-sitemap
   - jekyll-paginate
-
+  - jekyll-category-pages
+  
 highlighter:         rouge
 
 # Permalinks

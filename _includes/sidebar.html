@@ -26,9 +26,18 @@
       {% endif %}
     {% endfor %}
 
-    <a class="sidebar-nav-item" href="{{ site.github.repo }}/zipball/master">Download</a>
-    <a class="sidebar-nav-item" href="{{ site.github.repo }}">GitHub project</a>
-    <a class="sidebar-nav-item" ><g:plusone size="medium">Google</g:plusone> </a>
+    <!-- <a class="sidebar-nav-item" href="{{ site.github.repo }}/zipball/master">Download</a>
+    <a class="sidebar-nav-item" href="{{ site.github.repo }}">GitHub project</a> -->
+    <a class="sidebar-nav-item" ><g:plusone size="medium">Categories</g:plusone> </a>
+    <div>
+      <ul>
+        {% for category in site.categories %}
+        
+        <li><a href="{{ site.baseurl }}//category/{{ category | first |replace:' ','+'}}/index.html">{{ category | first }}</a></li>
+        {% endfor %}
+        </ul>
+    
+    </div>
 <a class="sidebar-nav-item" >
 <div class='g-person' data-href='https://plus.google.com/115840780257908006648' data-layout='landscape' data-rel='author' data-showcoverphoto='false' data-showtagline='false' data-theme='dark' data-width='100'></a>
 </div>

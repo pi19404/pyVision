@@ -1,3 +1,9 @@
+---
+layout: post
+title: Install LetsCrypt SSL Wildcard Certificate on Ubuntu
+category: Linux
+---
+
 # Install LetsCrypt SSL Wildcard Certificate on Ubuntu
 
 #### **INSTALLING CERTBOT** <a href="#bkmrk-installing-certbot" id="bkmrk-installing-certbot"></a>

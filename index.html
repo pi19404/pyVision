@@ -15,7 +15,7 @@ title: Home
   <ul class="entries">
     <li>
     	<a href="{{ site.baseurl }}/{{ post.url | remove_first:'/'}}">
-        {{ post.title }} <span class="post-date">{{ post.date | date_to_string }}</span>
+        {{ post.title }} <span class="post-date">{{ post.category }} {{ post.date | date_to_string }}</span>
       </a>
 	</li>
   </ul>
