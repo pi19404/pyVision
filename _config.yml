@@ -13,7 +13,7 @@ analytics :
 plugins:
   - jekyll-sitemap
   - jekyll-paginate
-  - jekyll-category-pages
+  
   
 highlighter:         rouge
 
@@ -21,6 +21,7 @@ highlighter:         rouge
 #
 # Use of `relative_permalinks` ensures post links from the index work properly.
 permalink:           pretty
+
 relative_permalinks: false 
 
 # Setup

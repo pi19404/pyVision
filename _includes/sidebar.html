@@ -35,7 +35,7 @@
         <g:plusone size="medium">Categories</g:plusone>
         {% assign sortedCategories = site.categories | sort %}
         {% for category in sortedCategories %}
-         {% assign cat4url = category[0] | remove:' ' | downcase %}
+         {% assign cat4url = category[0]  | downcase |slugify %}
          <a class="sidebar-nav-item" href="{{site.baseurl}}/category1/{{cat4url}}">
             {{category[0]}}
          </a>
