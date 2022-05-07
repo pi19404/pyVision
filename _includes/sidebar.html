@@ -28,8 +28,22 @@
 
     <!-- <a class="sidebar-nav-item" href="{{ site.github.repo }}/zipball/master">Download</a>
     <a class="sidebar-nav-item" href="{{ site.github.repo }}">GitHub project</a> -->
-    <a class="sidebar-nav-item" ><g:plusone size="medium">Categories</g:plusone> </a>
-    <div>
+    <!-- <a class="sidebar-nav-item" ><g:plusone size="medium">Categories</g:plusone> </a> -->
+
+    <div >
+      <nav class="sidebar-nav-item">
+        <g:plusone size="medium">Categories</g:plusone>
+        {% assign sortedCategories = site.categories | sort %}
+        {% for category in sortedCategories %}
+         {% assign cat4url = category[0] | remove:' ' | downcase %}
+         <a class="sidebar-nav-item" href="{{site.baseurl}}/category1/{{cat4url}}">
+            {{category[0]}}
+         </a>
+        {% endfor %}
+      </nav>
+    
+    </div>
+    <!-- <div>
       <ul>
         {% for category in site.categories %}
         
@@ -37,7 +51,7 @@
         {% endfor %}
         </ul>
     
-    </div>
+    </div> -->
 <a class="sidebar-nav-item" >
 <div class='g-person' data-href='https://plus.google.com/115840780257908006648' data-layout='landscape' data-rel='author' data-showcoverphoto='false' data-showtagline='false' data-theme='dark' data-width='100'></a>
 </div>
