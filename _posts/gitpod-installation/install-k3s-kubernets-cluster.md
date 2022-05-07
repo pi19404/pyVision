@@ -98,7 +98,7 @@ watch kubectl get pods --all-namespaces
 
 Wait until each pod shows the `STATUS` of `Running`.
 
-![](<../../.gitbook/assets/image (7) (1).png>)
+![](<{{ site.baseurl }}/images/gitbook/assets/image (7) (1).png>)
 
 Confirm that you now have a node in your cluster with the following command.
 
@@ -106,7 +106,7 @@ Confirm that you now have a node in your cluster with the following command.
 kubectl get nodes -o wide
 ```
 
-![](<../../.gitbook/assets/image (8).png>)\
+![](<{{ site.baseurl }}/images/gitbook/assets/image (8).png>)\
 References
 
 * [https://www.gitpod.io/docs/self-hosted/latest/cluster-set-up/on-k3s](https://www.gitpod.io/docs/self-hosted/latest/cluster-set-up/on-k3s)

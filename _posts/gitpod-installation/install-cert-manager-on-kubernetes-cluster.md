@@ -25,11 +25,11 @@ You can use either an [`Issuer` or `ClusterIssuer`](https://cert-manager.io/docs
 
 Create and Account and Login into cloudflare . Click on Add a Site option to start the domain delegation process
 
-![](<../../.gitbook/assets/image (2).png>)
+![](<{{ site.baseurl }}/images/gitbook/assets/image (2).png>)
 
 For now choose the Free option and continue
 
-![](../../.gitbook/assets/image.png)
+![]({{ site.baseurl }}/images/gitbook/assets/image.png)
 
 **Log in** to the **administrator account** for your domain registrar . In this case domain registrar is onlydomain.com .&#x20;
 
@@ -52,7 +52,7 @@ tegan.ns.cloudflare.com
 zod.ns.cloudflare.com
 ```
 
-![](<../../.gitbook/assets/image (4).png>)
+![](<{{ site.baseurl }}/images/gitbook/assets/image (4).png>)
 
 This will update the DNS Settings and allow the DNS to be managed via cloudflare
 
@@ -66,7 +66,7 @@ Tokens can be created at **User Profile > API Tokens > API Tokens**. The followi
 * Zone Resources:
   * `Include - All Zones`
 
-![](<../../.gitbook/assets/image (5).png>)
+![](<{{ site.baseurl }}/images/gitbook/assets/image (5).png>)
 
 Copy The token and save it as it will not be displayed again for security purposes
 

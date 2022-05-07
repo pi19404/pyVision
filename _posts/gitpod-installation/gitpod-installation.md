@@ -29,13 +29,13 @@ we will use ngrok for port forwarding
 ngrok http 8800
 ```
 
-![](<../../.gitbook/assets/image (6) (1).png>)
+![image](<{{ site.baseurl }}/images/gitbook/assets/image (6) (1).png>)
 
 The first page will ask you to upload your Gitpod license. Gitpod provides community license for free (right click and save link as [here](https://raw.githubusercontent.com/gitpod-io/gitpod/main/install/licenses/Community.yaml))
 
 .&#x20;
 
-![](<../../.gitbook/assets/image (1).png>)
+![](<{{ site.baseurl }}/images/gitbook/assets/image (1).png>)
 
 Enter the domain name as :gitpod.miko-robot.co.in
 
@@ -49,7 +49,7 @@ Mark Allow login by into workspace via ssh
 
 Check if all the pods are running states
 
-![](<../../.gitbook/assets/image (7).png>)
+![](<{{ site.baseurl }}/images/gitbook/image (7).png>)
 
 
 
@@ -59,4 +59,4 @@ kubectl -n gitpod patch svc proxy -p '{"spec": {"type": "LoadBalancer", "externa
 
 Once the installation has been finished successfully, you will see the status “Ready” with a small green indicator next to the Gitpod logo. You see which version you installed and which license you are using.
 
-![](<../../.gitbook/assets/image (6).png>)
+![](<{{ site.baseurl }}/images/gitbook/assets/image (6).png>)
