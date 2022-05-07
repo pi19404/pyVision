@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    
+  <!-- Enable responsiveness on mobile devices-->
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">-->
+ 
+
+  <title>
+    
+      Time Delay Estimation Techniques - part 2 &middot; 
+      pyVision
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/pyVision/public/css/poole.css">
+  <link rel="stylesheet" href="/pyVision/public/css/syntax.css">
+  <link rel="stylesheet" href="/pyVision/public/css/lanyon.css">
+  <!--<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700|PT+Sans:400">-->
+    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/pyVisionpublic/apple-touch-icon-precomposed.png">
+  <link rel="shortcut icon" href="/pyVisionpublic/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script type="text/x-mathjax-config">
+   MathJax.Hub.Config({ 
+                config: ["MMLorHTML.js"], 
+                extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js"], 
+                jax: ["input/TeX"], 
+                tex2jax: { 
+                    inlineMath: [ ['$','$'], ["\\(","\\)"] ], 
+                    displayMath: [ ['$$','$$'], ["\\[","\\]"] ], 
+                    processEscapes: false 
+                }, 
+                TeX: { 
+                    TagSide: "right", 
+                    TagIndent: ".8em", 
+                    MultLineWidth: "85%", 
+                    equationNumbers: { 
+                       autoNumber: "AMS", 
+                    }, 
+                    unicode: { 
+                       fonts: "STIXGeneral,'Arial Unicode MS'" 
+                    } 
+                }, 
+                showProcessingMessages: false 
+            }); 
+</script>
+<!--<script src="/pyVision/javascripts/gitdata.js"></script>-->
+	<script type="text/javascript">
+    	$(function() {
+        $("#display-projects").getRepos("pi19404"); //Add your github username.
+    	});
+	</script>
+<script type="text/javascript"
+    src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<link href='http://alexgorbatchev.com/pub/sh/2.1.364/styles/shCore.css' rel='stylesheet' type='text/css'/> 
+<link href='http://alexgorbatchev.com/pub/sh/2.1.364/styles/shThemeDefault.css' rel='stylesheet' type='text/css'/> 
+<script src='http://alexgorbatchev.com/pub/sh/2.1.364/scripts/shCore.js' type='text/javascript' > </script>
+<script src='http://alexgorbatchev.com/pub/sh/2.1.364/scripts/shBrushCpp.js' type='text/javascript' > </script>
+<script src='http://alexgorbatchev.com/pub/sh/2.1.364/scripts/shBrushCSharp.js' type='text/javascript' > </script>
+<script src='http://alexgorbatchev.com/pub/sh/2.1.364/scripts/shBrushCss.js' type='text/javascript' > </script>
+<script src='http://alexgorbatchev.com/pub/sh/2.1.364/scripts/shBrushJava.js' type='text/javascript' > </script>
+<script src='http://alexgorbatchev.com/pub/sh/2.1.364/scripts/shBrushJScript.js' type='text/javascript' /> </script>
+<script src='http://alexgorbatchev.com/pub/sh/2.1.364/scripts/shBrushPhp.js' type='text/javascript' > </script>
+<script src='http://alexgorbatchev.com/pub/sh/2.1.364/scripts/shBrushPython.js' type='text/javascript' > </script>
+<script src='http://alexgorbatchev.com/pub/sh/2.1.364/scripts/shBrushRuby.js' type='text/javascript' > </script>
+<script src='http://alexgorbatchev.com/pub/sh/2.1.364/scripts/shBrushSql.js' type='text/javascript' > </script>
+<script src='http://alexgorbatchev.com/pub/sh/2.1.364/scripts/shBrushVb.js' type='text/javascript' > </script>
+<script src='http://alexgorbatchev.com/pub/sh/2.1.364/scripts/shBrushXml.js' type='text/javascript' > </script>
+<script src='http://alexgorbatchev.com/pub/sh/2.1.364/scripts/shBrushPerl.js' type='text/javascript' > </script>
+<script language='javascript'> 
+SyntaxHighlighter.config.bloggerMode = false;
+SyntaxHighlighter.all();
+</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-38535188-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</head>
+
+
+  <body>
+
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+
+
+
+
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="/pyVision/">Home </a>
+
+    
+
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="/pyVision//about/">About</a>
+        
+      
+    
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+    
+      
+    
+
+    <!-- <a class="sidebar-nav-item" href="http://www.github.com/pi19404/pyVision/zipball/master">Download</a>
+    <a class="sidebar-nav-item" href="http://www.github.com/pi19404/pyVision">GitHub project</a> -->
+    <a class="sidebar-nav-item" ><g:plusone size="medium">Categories</g:plusone> </a>
+    <div>
+      <ul>
+        
+        
+        <li><a href="/pyVision//category/Linux/index.html">Linux</a></li>
+        
+        
+        <li><a href="/pyVision//category/Signal+Processing/index.html">Signal Processing</a></li>
+        
+        
+        <li><a href="/pyVision//category/Raspberry+PI/index.html">Raspberry PI</a></li>
+        
+        
+        <li><a href="/pyVision//category/Software/index.html">Software</a></li>
+        
+        
+        <li><a href="/pyVision//category/Embedded+Firmware/index.html">Embedded Firmware</a></li>
+        
+        
+        <li><a href="/pyVision//category/Software+Installation/index.html">Software Installation</a></li>
+        
+        
+        <li><a href="/pyVision//category/Software+installation/index.html">Software installation</a></li>
+        
+        </ul>
+    
+    </div>
+<a class="sidebar-nav-item" >
+<div class='g-person' data-href='https://plus.google.com/115840780257908006648' data-layout='landscape' data-rel='author' data-showcoverphoto='false' data-showtagline='false' data-theme='dark' data-width='100'></a>
+</div>
+
+<div class='widget-content'>
+<script type="text/javascript" src="http://jj.revolvermaps.com/2/1.js?i=9bj6dpaloim&amp;s=220&amp;m=7&amp;v=true&amp;r=true&amp;b=ffffff&amp;n=false&amp;c=ff0000" async="async"></script>
+</div>
+
+<script type="text/javascript">
+function cantload() {
+img = document.getElementById("clustrMapsImg");
+img.onerror = null;
+img.src = "http://www2.clustrmaps.com/images/clustrmaps-back-soon.jpg";
+document.getElementById("clustrMapsLink").href = "http://www2.clustrmaps.com";
+}
+img = document.getElementById("clustrMapsImg");
+img.onerror = cantload;
+</script>
+<div class='widget-content'>
+<div id="clustrmaps-widget"></div><script type="text/javascript">var _clustrmaps = {'url' : 'http://pi-virtualworld.blogspot.com', 'user' : 1165875, 'server' : '3', 'id' : 'clustrmaps-widget', 'version' : 1, 'date' : '2015-04-05', 'lang' : 'en', 'corners' : 'square' };(function (){ var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = 'http://www3.clustrmaps.com/counter/map.js'; var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);})();</script><noscript><a href="http://www3.clustrmaps.com/user/ace11ca33"><img src="http://www3.clustrmaps.com/stats/maps-no_clusters/pi-virtualworld.blogspot.com-thumb.jpg" alt="Locations of visitors to this page" /></a></noscript>
+</a>
+
+<!-- Copyright (c)2009 Site Meter -->
+
+
+</div>
+
+<div class='widget-content'>
+<script type="text/javascript" src="http://feedjit.com/serve/?vv=1022&amp;tft=3&amp;dd=0&amp;wid=f31e21a2d981f025&amp;pid=0&amp;proid=0&amp;bc=000000&amp;tc=F5F5F5&amp;brd1=454545&amp;lnk=C95050&amp;hc=FFFFFF&amp;hfc=5C5A5A&amp;btn=8A0214&amp;ww=200&amp;went=10"></script><noscript><a href="http://feedjit.com/">Feedjit Live Blog Stats</a></noscript>
+</div>
+ 
+<!-- Site Meter -->
+<script type="text/javascript" src="http://s30.sitemeter.com/js/counter.js?site=s30pi19404">
+</script>
+<noscript>
+<a href="http://s30.sitemeter.com/stats.asp?site=s30pi19404" target="_top">
+<img src="http://s30.sitemeter.com/meter.asp?site=s30pi19404" alt="Site Meter" border="0"/></a>
+</noscript>   
+  </nav>
+
+  <div class="sidebar-item">
+    <p>
+      &copy; 2022. All rights reserved.
+    </p>
+  </div>
+</div>
+
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      
+        <div class="container">
+          <h1 class="header">
+            <a href="/" title="Home">pyVision</a></br>
+            <small>A Machine Learning and Signal Processing toolbox</small>
+          </h1>
+
+        <section id="downloads" class="clearfix">
+          <a href="https://github.com/pi19404/pyVision/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
+          <a href="https://github.com/pi19404/pyVision/tarball/master" id="download-tar-gz" class="button"><span>Download.tar.gz</span></a>
+          <a href="https://github.com/pi19404/pyVision" id="view-on-github" class="button"><span>View on GitHub</span></a>
+		
+	   <hr>
+          </section>
+    
+	</br>	</br>
+      <div class="content">
+        <article class="post">
+  <h1 class="post-title">Time Delay Estimation Techniques - part 2</h1>
+  <span class="post-date">19 Oct 2014</span>
+  <h3 id="introduction">Introduction</h3>
+
+<p>In this article we will look at improving the Time Delay estimation in presense of noise using information of signals coming in from multiple receivers or observing multiple samples
+intervals of the signal.</p>
+
+<h3 id="background">Background</h3>
+
+<p>Let us consider an array of N receiver ,the signal $x_{m}[n]$ at receiver is given by</p>
+
+\[x\_{m}[n] = s[n]*h[n]+w[n]\]
+
+<p>Let us say that by choosing the appropriate  delays $\delta_{m}$ we can make all the receivers aligned in time and them summing the time aligned signals together.</p>
+
+<p>The aim of such techniques is to boost SNR of the signal by combining the signals from multiple receivers.</p>
+
+<p>Since the signal is periodic,we can observe multiple instances of the same signal.Again if we are sure that the signals are coherent in sampled intervals we can combine multiple observation of the signal.The aim of such techniques is to boost the SNR of the signal by observing multiple instances of the singal.</p>
+
+<p>Both techniques have the same effect of enhancing the signal and averaging the noise,therby increasing the SNR of the signal.</p>
+
+<h3 id="reducing-environmental-noise">Reducing Environmental Noise</h3>
+
+<p>Mathematically this can be expressed as</p>
+
+\[y[n] = \sum\_{m=1}^{M} x\_{m}[n-\delta\_{m}]\]
+
+\[y[n] = \sum\_{m=1}^{M} s\_{m}[n-\delta\_{m} ] + w\_{m}[n]\]
+
+<p>The noise due to sensor or amplification process can be assumed to be independent.
+The noise introduced dues to environment will be same in all the receivers.
+The noise can be assumed to be sample of stationary white random process.</p>
+
+<p>Let us assume for now that signals are time aligned</p>
+
+<p>We can see that the our signal contains information plus additive noise.Most of region
+contains just noise and only a small section of the time duration contains the information.</p>
+
+<p>The basic idea is that when we add the signals ,information will get enhanced while the noise will get averaged.In this way we can boost signal strength and achieve higher SNR.</p>
+
+<p>If the noise from independent receivers are considered to uncorrleated.
+When we add noise components,we are  effectively adding two independent gaussian
+random variables.Thus resultant is also a Gaussian random variable.</p>
+
+<p>The sum of N Gaussian random variables is the Gaussian random variable with the standard deviation
+\(\sqrt{ \sum\_{i=0}^N\sigma\_{i }^2}\)</p>
+
+<p>Thus if we consider that noise power is same in each of receivers then by adding the signals
+the resultant noise power is</p>
+
+\[P\_{N}=  \sigma^2 N\]
+
+<p>However the signal is a deterministic ,the resultant signal power of adding N signals is</p>
+
+<p>$P_{M} = N^2 P_{S} $</p>
+
+<p>Thus the SNR of resultant signal is</p>
+
+\[SNR = \frac{P\_{s}}{P\_{n}} N\]
+
+<p>The SNR is boosted by $N$ times.</p>
+
+<p>Let us see if we can observe this via simulations</p>
+
+<p>to generated uncorrelated random sequences,we change the seed every time we generate the random noise.This will simulate condition of noise generated from multiple sensors.</p>
+
+<p>In the first case we observe only the noise signal</p>
+
+<p>Let us observe the variance of sum signal for N={2,4,8 …. 128}</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>N</th>
+      <th>Simulation</th>
+      <th>Theory</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>2</td>
+      <td>0.14</td>
+      <td>0.14</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>0.20</td>
+      <td>0.2</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>0.28</td>
+      <td>0.28</td>
+    </tr>
+    <tr>
+      <td>16</td>
+      <td>0.39</td>
+      <td>0.4</td>
+    </tr>
+    <tr>
+      <td>32</td>
+      <td>0.56</td>
+      <td>0.56</td>
+    </tr>
+    <tr>
+      <td>64</td>
+      <td>0.78</td>
+      <td>0.8</td>
+    </tr>
+    <tr>
+      <td>128</td>
+      <td>1.144</td>
+      <td>1.13</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>we can see from the table that simulated and theoretical results agrees with each other</p>
+
+<p>we consider the case where $M=4$ independent receivers are used .The signal is corrupted by additive environmental  noise of variance $\sigma^2=0.2$</p>
+
+<pre>
+signal strength 1.6
+noise power  0.04
+Input SNR  40.0
+estimated noise power  0.16
+estimated signal power  6.4
+estimated SNR  40.0
+estimated improvement  1.0
+emprical signal power  6.56051311603
+emprical noise power  0.160339040093
+emprical SNR  40.9165048776
+emprical SNR improvement  1.02291262194
+</pre>
+<p>The empirical results agree with our theoretical analysis.
+Thought the improvement factor is not very significant</p>
+
+<h3 id="sensor-noise">Sensor Noise</h3>
+
+<p>The next case comes where we observe signal from the same receiver over N periods.</p>
+
+<p>Again the noise observed at each sample instance $[n]$ is sample of Gaussian random variable
+since we assume stationary noise process.Thus noise variance is $\sigma^2$.Thus the sum signal will have noise power of $(N * \sigma^2)$</p>
+
+<p>As we add the signals the signal power increases by factor $N^2$.</p>
+
+<p>This comes directly from central limit theorem and law of larger numbers that the sum of N iid samples will approach gaussian distribution.Thus noise variance will be $\sigma^2$.</p>
+
+\[SNR =  \frac{P\_{s}}{P\_{n}} {N}\]
+
+<p>The SNR is boosted by N Times.</p>
+
+<p>we consider the case where $M=2$ independent receivers are observed over a duration of $N=4$ periods.The signal is corrupted by additive  sensor noise of variance $\sigma^2=0.4$</p>
+
+<p>let us consider the case of $N=1$ ,number of periods</p>
+<pre>
+signal strength 1.6
+noise power  0.16
+Input SNR  10.0
+estimated noise power  0.32
+estimated signal power  6.4
+estimated SNR  20.0
+estimated improvement  2.0
+emprical signal power  7.04582360211
+emprical noise power  0.321264927044
+emprical SNR  21.931505773
+emprical SNR improvement  2.1931505773
+</pre>
+<p>Let us consider the case of $N=4$</p>
+<pre>
+signal strength 1.6
+noise power  0.16
+Input SNR  10.0
+estimated noise power  1.28
+estimated signal power  102.4
+estimated SNR  80.0
+estimated improvement  8.0
+emprical signal power  105.0704936
+emprical noise power  1.27294915151
+emprical SNR  82.5409981816
+emprical SNR improvement  8.25409981816
+</pre>
+
+<p>The empirical estimates again agree with our theoretical analysis.
+We get a significant improvement in SNR,just by increasing the number of periods of observation.The SNR improves linearly by factor of $N$.</p>
+
+<h3 id="snr-improvement-in-presence-of-sensor-and-environmental-noise">SNR Improvement In Presence of sensor and environmental noise</h3>
+
+<p>Let us say that the signal is corrupted by both environmental and receiver noise</p>
+
+<p>There are  N receivers .The same environmental noise is observed in each of the receivers.
+Let us assume that the sequences are time aligned.Each of receivers has uncorrelated noise components.
+We observe each receiver channel for M periods .</p>
+
+<p>Thus in total we have M*N Signals</p>
+
+<p>Thus total noise power in a single period be considered as $2 \sigma^2$</p>
+
+<p>The environmental noise component which is present in all the sensors cannot
+be reduced by adding the sensor signals.This component can only be reduced by observing the signal over longer duration</p>
+
+<p>When signals from different receivers are added,the environmental noise power is also amplified
+along with the signal.This noise power is amplified by a factor $N^2$</p>
+
+<p>Now we have M periods of the signal,Thus noise power after adding M periods of the signal is given by
+$M*N^2$.</p>
+
+<p>The factor by which total sensor noise power increases by adding all the signals is given by $MN$</p>
+
+<p>Thus the total noise power is given by $M N^2 \sigma_{1}^2 + MN \sigma_{2}^2$</p>
+
+<p>The factor by which total signal power increases by adding all the signals is given by $M^2N^2$</p>
+
+<p>Thus SNR of sum of signals is given by $\frac{M^2N^2 P_{M}}{M N^2 \sigma_{1}^2 + MN \sigma_{2}^2}$</p>
+
+<p>When both variances are same,the SNR Improvement can be expressed as 
+$\frac{2M^2N^2}{N^2M+NM} =\frac {2MN}{N+1}$</p>
+
+<p>we consider the case where $N=2$ independent receivers are observed over a duration of $M=4$ periods.The signal is corrupted by additive  environmental and sensor noise of variance $\sigma^2=0.4$</p>
+
+<p>Theoretical improvement by a factor of   5.33</p>
+
+<pre>
+signal strength 1.6
+noise power  0.32
+Input SNR  5.0
+estimated noise power  3.84
+estimated signal power  102.4
+estimated SNR  26.6666666667
+estimated improvement  5.33333333333
+emprical signal power  107.678534403
+emprical noise power  3.82682954561
+emprical SNR  28.1377921644
+emprical SNR improvement  5.62755843289
+</pre>
+<p>The simulations give a improvement by 5.62</p>
+
+<p>In terms of decibles its improvement of about 25db just by averaging signals.</p>
+
+<p>Also it can be seen that improvement is larger by considering longer duration signals than adding more receivers.</p>
+
+<h3 id="time-delay-estimation">Time Delay Estimation</h3>
+
+<p>Given signals form  the receviers,time period to analyze signals we compute the SNR for all possible delays between the signals.The delay which gives the maximum SNR is considered to be the time delay between the signals.</p>
+
+<p>In the present article we only consider pairs of signals for analysis.We can perform the delay and sum operation wrt to ideal signal or noisy signal from one of the receivers.</p>
+
+<h3 id="ideal-signal">Ideal Signal</h3>
+<p>In the first method we  construct an ideal signal and perform this computation wrt signals obtained from both the receivers.</p>
+
+<p>The ideal signal is not plagued by environmental and sensor noise.When we add ideal and noisy version of the signal,the environmental and sensor noise are averaged.</p>
+
+<p>However the improvement is only between a pair of signals.The environmental signal can only be reduced by a factor of 4.</p>
+
+<p>Let us first consider the case of noise variance of $0.4$ and use a ideal signal to perform the computation</p>
+
+<pre>
+signal strength 1.6
+noise power  0.32
+Input SNR  5.0
+estimated noise power  1.28
+estimated signal power  102.4
+estimated SNR  80.0
+estimated improvement  16.0
+emprical signal power  103.442427564
+emprical noise power  1.26823592579
+emprical SNR  81.5640256366
+emprical SNR improvement  16.3128051273
+mean delay  5.0
+std deviation  0.0
+</pre>
+
+<p>Now the same computation is performed using a signal received from one of the receivers.
+$MN^2 \sigma_{1}^2 + MN \sigma_{2}^2$ and for N=2 we get $4M  \sigma_{1}^2 + 2M \sigma_{2}^2$
+and the total signal power increases by $4 M^2$</p>
+
+<pre>
+signal strength 1.6
+noise power  0.32
+Input SNR  5.0
+estimated noise power  3.84
+estimated signal power  102.4
+estimated SNR  26.6666666667
+estimated improvement  5.33333333333
+emprical signal power  104.34546039
+emprical noise power  3.07193469288
+emprical SNR  33.9673433265
+emprical SNR improvement  6.79346866529
+mean delay  5.0
+std deviation  0.0
+</pre>
+
+<p>Improvement factor is greater is the case of using ideal signal.In both the methods
+since pairwise operations are performed,increasing the number of receivers has not effect
+on the analysis.</p>
+
+<h3 id="code">Code</h3>
+<p>A class  <strong><em>TimeDelaySimulator</em></strong> encapsulates all the methods for generating time delayed signals with additive environmental and sensor noise components and computing the statistics.</p>
+
+<p>All the results mentioned in the article can be simulate by executing the script.</p>
+
+<pre class="brush:python">
+
+    def run(self,isignal):
+        """ main function that generates noisy,time delayed signals 
+        
+        Parameters 
+        --------
+        isignal : numpy array
+                  ideal signal
+        Returns
+        -------
+        out : numpy array shape=(length,channel,period)
+            
+        
+        """
+
+        l=len(isignal)
+        #array for storing signal and noise
+        signal=numpy.zeros((l,self.nchannels,self.periods));
+        noise=numpy.zeros((l,self.nchannels,self.periods));    
+        
+        #generate environmental noise for each period and across all channels
+        for k in range(self.periods):
+            n=self.GenerateNoise(self.enoise,l)           
+            #simulating environmental noise
+            for i in range(self.nchannels):
+                noise[:,i,k]=n;
+            
+            
+        #for each channel add sensor noise
+        for k in range(self.nchannels):
+            
+            #dummpy call to change the random seed 
+            #so that we can generate uncorrelated sensor noise
+            self.GenerateNoise(self.snoise,l,1)
+            for i in range(self.periods):
+                signal[:,k,i]=self.delay(isignal,(k+1)*self.tdelay)+noise[:,k,i]+self.GenerateNoise(self.snoise,l)    
+        
+        #change the seed everytime the function is called
+        self.seed=int(np.random.uniform(0,1)*10000);   
+            
+        #flag to print the statistics 
+        if self.once==1:
+            self.once=0;
+            PS=np.mean(isignal*isignal);
+            PN=self.enoise*self.enoise+self.snoise*self.snoise;
+           
+            if self.tde_method==0:
+                PNT=(self.periods*self.enoise*self.enoise)
+                PNT=PNT+(self.periods*self.nchannels*self.snoise*self.snoise/self.nchannels)
+                PST=(self.periods*self.periods)*PS*4              
+                
+            if self.tde_method==1:
+                PNT=(self.periods*4*self.enoise*self.enoise)
+                PNT=PNT+(self.periods*2*self.snoise*self.snoise)
+                PST=(self.periods*self.periods)*PS*4
+            
+            print "signal strength",PS
+            print "noise power ",PN
+            self.SNRI=PS/PN
+            print "Input SNR ",self.SNRI          
+            print "estimated noise power ",PNT
+            print "estimated signal power ",PST
+            self.SNR0=PST/PNT
+            print "estimated SNR ",self.SNR0
+            print "estimated improvement ",self.SNR0/self.SNRI
+        
+        #returns the signal        
+        return signal
+
+</pre>
+
+<p>A class  <strong><em>TimeDelayEstimator</em></strong> encapsulates all the methods for computing the time delay estimation mentioned in the article.</p>
+
+<pre class="brush:python">
+
+    def run(self,signal,isignal,enoise,snoise,method=0):
+        """ the main function that performs time delay estimation
+        
+        Parameters
+        -----------
+        signal : numpy array shape=(length,channel,periods)
+                 input noisy signals for time delay estimation
+                 
+        isgignal : numpy array shape=(length,)
+                   ideal signal
+                   
+        enoise,snoise : float 
+                        environmental and sensor noise standard deviation
+        
+        method      : integer
+                      0 - for pariwise delay sum with ideal signal
+                      1 - pariwise delay sum with noisy signals
+        
+        Returns
+        -------
+        tdelay : numpy integer
+                 estimated time delay
+             
+        
+        """
+        
+        size1=signal.shape;
+        ch=size1[1];
+        length=size1[0];
+        periods=size1[2];
+        enoise=enoise*enoise;
+        snoise=snoise*snoise;
+        PS=np.mean(isignal*isignal);      
+ 
+
+
+        if method==0:
+            iloop=ch-1
+        if method==1:
+            iloop=ch-1;         
+        
+        #compute the SNR threshold
+        if method==0:
+            vnoise=(periods**enoise/4)+(periods*iloop*snoise/iloop);
+            vsnoise=[-2*vnoise,2*vnoise]    
+            ispower=(periods*periods*PS);
+            spower=np.mean(signal*signal)*periods*periods
+            OSNR=(periods*periods*4*PS)+(1*vsnoise);
+            OSNR=OSNR/(periods*periods)
+        if method==1:
+            vnoise=(periods*enoise)+(periods*iloop*snoise);
+            vsnoise=[-2*vnoise,1*vnoise];
+            spower=np.mean(signal*signal)*periods*periods
+            ispower=(periods*periods*iloop*iloop*PS);
+            OSNR=(periods*periods*4*PS)+vsnoise
+            OSNR=OSNR/(periods*periods)
+           
+        
+        
+        #add the signals along periods
+        s=np.mean(signal,axis=2);
+        
+  
+        SNR=np.zeros((iloop,length))
+        for i in range(iloop):
+            #delay sum operation for various delays
+            for k in range(length):
+                if method==0:
+                
+                    su=s[:,0]+self.delay(s[:,i+1],k)
+                if method==1:
+                    su=s[:,0]+self.delay(s[:,i+1],k)
+                
+                #apply SNR Thresholding
+                SNR[i,k]=np.mean(su*su);
+                if(SNR[i,k] &amp;lt ;OSNR[0]):
+                   SNR[i,k]=0
+        
+        #find the index of maximum SNR
+        m1=np.argmax(SNR,axis=1)          
+   
+
+        #average all the time delays        
+        if method==0:
+            tdelay=0;
+            
+            
+            for i in range(iloop-1):
+               
+                tdelay=tdelay+abs(m1[0]-m1[i+1])/(i+1)
+            tdelay=tdelay/(iloop-1)
+        if method==1:
+            
+            tdelay=0;
+            for i in range(iloop):
+                tdelay=tdelay+((length-(abs(m1[i])+1)))/(i+1);
+              
+            
+            tdelay=tdelay/iloop;
+           
+            
+
+        #return the result  
+        return tdelay   
+
+</pre>
+
+<p>Change the mode from 0-4 to test various algorithms.The parameters like delay and noise can also
+be changed and the various results mentioned in the article can be generated.</p>
+
+<p>The code can be found in the pyVision github repository <a href="https://github.com/pi19404/pyVision">https://github.com/pi19404/pyVision</a></p>
+
+<p>Files</p>
+
+<ul>
+  <li>pySignalProc/TimeDelayEstimation.py</li>
+</ul>
+
+
+</article>
+<div id="page-navigation"> 
+        <div class="clear">&nbsp;</div> 
+        <div class="left"> 
+         
+                <a href="/pyVision//signal%20processing/2014/10/13/TDOA1/" title="Previous Post: 
+Time Delay Estimation Techniques - Part 1">&laquo; Time Delay Estimation Techniques - Part 1</a> 
+         
+        </div> 
+
+        <div class="right"> 
+         
+                <a href="/pyVision//signal%20processing/2014/11/01/FractionalDelay/" title="next Post: 
+Fraction Delays using Linear Interpolation and Resampling">Fraction Delays using Linear Interpolation and Resampling &raquo; </a> 
+         
+        </div> 
+        <div class="clear">&nbsp;</div> 
+</div> 
+<div id="disqus_thread"></div>
+		<script type="text/javascript">
+			/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+			var disqus_shortname = 'pi19404'; // required: replace example with your forum shortname
+    			var disqus_identifier = '/signal%20processing/2014/10/19/TODA2/';
+    			var disqus_url = 'http://pyvision.github.com/signal%20processing/2014/10/19/TODA2/';       
+ 
+			/* * * DON'T EDIT BELOW THIS LINE * * */
+			(function() {
+				var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+				dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+				(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+			})();
+		</script>
+		<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+		<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+
+      </div>
+    </div>
+
+      
+       <footer>
+          pyVision is maintained by <a href="https://github.com/pi19404">pi19404</a><br>
+        </footer>
+    
+    </div>
+ <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+    <script>
+      (function(document) {
+        var toggle = document.querySelector('.sidebar-toggle');
+        var sidebar = document.querySelector('#sidebar');
+        var checkbox = document.querySelector('#sidebar-checkbox');
+
+        document.addEventListener('click', function(e) {
+          var target = e.target;
+
+          if(!checkbox.checked ||
+             sidebar.contains(target) ||
+             (target === checkbox || target === toggle)) return;
+
+          checkbox.checked = true;
+        }, false);
+      })(document);
+    </script>
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+    <script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'pyvision'; // required: replace example with your forum shortname
+    var disqus_identifier = '/signal%20processing/2014/10/19/TODA2/';
+    var disqus_url = 'http://pyvision.github.com/signal%20processing/2014/10/19/TODA2/';
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+    </script>
+
+  </body>
+</html>

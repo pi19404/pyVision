@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    
+  <!-- Enable responsiveness on mobile devices-->
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">-->
+ 
+
+  <title>
+    
+      NLP Latent semantic indexing using Gensim &middot; 
+      pyVision
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/pyVision/public/css/poole.css">
+  <link rel="stylesheet" href="/pyVision/public/css/syntax.css">
+  <link rel="stylesheet" href="/pyVision/public/css/lanyon.css">
+  <!--<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700|PT+Sans:400">-->
+    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/pyVisionpublic/apple-touch-icon-precomposed.png">
+  <link rel="shortcut icon" href="/pyVisionpublic/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script type="text/x-mathjax-config">
+   MathJax.Hub.Config({ 
+                config: ["MMLorHTML.js"], 
+                extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js"], 
+                jax: ["input/TeX"], 
+                tex2jax: { 
+                    inlineMath: [ ['$','$'], ["\\(","\\)"] ], 
+                    displayMath: [ ['$$','$$'], ["\\[","\\]"] ], 
+                    processEscapes: false 
+                }, 
+                TeX: { 
+                    TagSide: "right", 
+                    TagIndent: ".8em", 
+                    MultLineWidth: "85%", 
+                    equationNumbers: { 
+                       autoNumber: "AMS", 
+                    }, 
+                    unicode: { 
+                       fonts: "STIXGeneral,'Arial Unicode MS'" 
+                    } 
+                }, 
+                showProcessingMessages: false 
+            }); 
+</script>
+<!--<script src="/pyVision/javascripts/gitdata.js"></script>-->
+	<script type="text/javascript">
+    	$(function() {
+        $("#display-projects").getRepos("pi19404"); //Add your github username.
+    	});
+	</script>
+<script type="text/javascript"
+    src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<link href='http://alexgorbatchev.com/pub/sh/2.1.364/styles/shCore.css' rel='stylesheet' type='text/css'/> 
+<link href='http://alexgorbatchev.com/pub/sh/2.1.364/styles/shThemeDefault.css' rel='stylesheet' type='text/css'/> 
+<script src='http://alexgorbatchev.com/pub/sh/2.1.364/scripts/shCore.js' type='text/javascript' > </script>
+<script src='http://alexgorbatchev.com/pub/sh/2.1.364/scripts/shBrushCpp.js' type='text/javascript' > </script>
+<script src='http://alexgorbatchev.com/pub/sh/2.1.364/scripts/shBrushCSharp.js' type='text/javascript' > </script>
+<script src='http://alexgorbatchev.com/pub/sh/2.1.364/scripts/shBrushCss.js' type='text/javascript' > </script>
+<script src='http://alexgorbatchev.com/pub/sh/2.1.364/scripts/shBrushJava.js' type='text/javascript' > </script>
+<script src='http://alexgorbatchev.com/pub/sh/2.1.364/scripts/shBrushJScript.js' type='text/javascript' /> </script>
+<script src='http://alexgorbatchev.com/pub/sh/2.1.364/scripts/shBrushPhp.js' type='text/javascript' > </script>
+<script src='http://alexgorbatchev.com/pub/sh/2.1.364/scripts/shBrushPython.js' type='text/javascript' > </script>
+<script src='http://alexgorbatchev.com/pub/sh/2.1.364/scripts/shBrushRuby.js' type='text/javascript' > </script>
+<script src='http://alexgorbatchev.com/pub/sh/2.1.364/scripts/shBrushSql.js' type='text/javascript' > </script>
+<script src='http://alexgorbatchev.com/pub/sh/2.1.364/scripts/shBrushVb.js' type='text/javascript' > </script>
+<script src='http://alexgorbatchev.com/pub/sh/2.1.364/scripts/shBrushXml.js' type='text/javascript' > </script>
+<script src='http://alexgorbatchev.com/pub/sh/2.1.364/scripts/shBrushPerl.js' type='text/javascript' > </script>
+<script language='javascript'> 
+SyntaxHighlighter.config.bloggerMode = false;
+SyntaxHighlighter.all();
+</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-38535188-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</head>
+
+
+  <body>
+
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+
+
+
+
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="/pyVision/">Home </a>
+
+    
+
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="/pyVision//about/">About</a>
+        
+      
+    
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+    
+      
+    
+
+    <!-- <a class="sidebar-nav-item" href="http://www.github.com/pi19404/pyVision/zipball/master">Download</a>
+    <a class="sidebar-nav-item" href="http://www.github.com/pi19404/pyVision">GitHub project</a> -->
+    <a class="sidebar-nav-item" ><g:plusone size="medium">Categories</g:plusone> </a>
+    <div>
+      <ul>
+        
+        
+        <li><a href="/pyVision//category/Linux/index.html">Linux</a></li>
+        
+        
+        <li><a href="/pyVision//category/Signal+Processing/index.html">Signal Processing</a></li>
+        
+        
+        <li><a href="/pyVision//category/Raspberry+PI/index.html">Raspberry PI</a></li>
+        
+        
+        <li><a href="/pyVision//category/Software/index.html">Software</a></li>
+        
+        
+        <li><a href="/pyVision//category/Embedded+Firmware/index.html">Embedded Firmware</a></li>
+        
+        
+        <li><a href="/pyVision//category/Software+Installation/index.html">Software Installation</a></li>
+        
+        
+        <li><a href="/pyVision//category/Software+installation/index.html">Software installation</a></li>
+        
+        </ul>
+    
+    </div>
+<a class="sidebar-nav-item" >
+<div class='g-person' data-href='https://plus.google.com/115840780257908006648' data-layout='landscape' data-rel='author' data-showcoverphoto='false' data-showtagline='false' data-theme='dark' data-width='100'></a>
+</div>
+
+<div class='widget-content'>
+<script type="text/javascript" src="http://jj.revolvermaps.com/2/1.js?i=9bj6dpaloim&amp;s=220&amp;m=7&amp;v=true&amp;r=true&amp;b=ffffff&amp;n=false&amp;c=ff0000" async="async"></script>
+</div>
+
+<script type="text/javascript">
+function cantload() {
+img = document.getElementById("clustrMapsImg");
+img.onerror = null;
+img.src = "http://www2.clustrmaps.com/images/clustrmaps-back-soon.jpg";
+document.getElementById("clustrMapsLink").href = "http://www2.clustrmaps.com";
+}
+img = document.getElementById("clustrMapsImg");
+img.onerror = cantload;
+</script>
+<div class='widget-content'>
+<div id="clustrmaps-widget"></div><script type="text/javascript">var _clustrmaps = {'url' : 'http://pi-virtualworld.blogspot.com', 'user' : 1165875, 'server' : '3', 'id' : 'clustrmaps-widget', 'version' : 1, 'date' : '2015-04-05', 'lang' : 'en', 'corners' : 'square' };(function (){ var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = 'http://www3.clustrmaps.com/counter/map.js'; var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);})();</script><noscript><a href="http://www3.clustrmaps.com/user/ace11ca33"><img src="http://www3.clustrmaps.com/stats/maps-no_clusters/pi-virtualworld.blogspot.com-thumb.jpg" alt="Locations of visitors to this page" /></a></noscript>
+</a>
+
+<!-- Copyright (c)2009 Site Meter -->
+
+
+</div>
+
+<div class='widget-content'>
+<script type="text/javascript" src="http://feedjit.com/serve/?vv=1022&amp;tft=3&amp;dd=0&amp;wid=f31e21a2d981f025&amp;pid=0&amp;proid=0&amp;bc=000000&amp;tc=F5F5F5&amp;brd1=454545&amp;lnk=C95050&amp;hc=FFFFFF&amp;hfc=5C5A5A&amp;btn=8A0214&amp;ww=200&amp;went=10"></script><noscript><a href="http://feedjit.com/">Feedjit Live Blog Stats</a></noscript>
+</div>
+ 
+<!-- Site Meter -->
+<script type="text/javascript" src="http://s30.sitemeter.com/js/counter.js?site=s30pi19404">
+</script>
+<noscript>
+<a href="http://s30.sitemeter.com/stats.asp?site=s30pi19404" target="_top">
+<img src="http://s30.sitemeter.com/meter.asp?site=s30pi19404" alt="Site Meter" border="0"/></a>
+</noscript>   
+  </nav>
+
+  <div class="sidebar-item">
+    <p>
+      &copy; 2022. All rights reserved.
+    </p>
+  </div>
+</div>
+
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      
+        <div class="container">
+          <h1 class="header">
+            <a href="/" title="Home">pyVision</a></br>
+            <small>A Machine Learning and Signal Processing toolbox</small>
+          </h1>
+
+        <section id="downloads" class="clearfix">
+          <a href="https://github.com/pi19404/pyVision/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
+          <a href="https://github.com/pi19404/pyVision/tarball/master" id="download-tar-gz" class="button"><span>Download.tar.gz</span></a>
+          <a href="https://github.com/pi19404/pyVision" id="view-on-github" class="button"><span>View on GitHub</span></a>
+		
+	   <hr>
+          </section>
+    
+	</br>	</br>
+      <div class="content">
+        <article class="post">
+  <h1 class="post-title">NLP Latent semantic indexing using Gensim</h1>
+  <span class="post-date">15 May 2017</span>
+  <p>In the article http://34.194.184.172/emotix/index.php/2017/05/15/nlp-dictionarybag-of-words-and-tfidf-using-gensim/
+we saw how to compute the TFIDF vectors of document enabling us to reprepsent a sentense/document using a mathematical
+representation.</p>
+
+<p>However the each sentense/document is reprepsented by unequal length feature vectors.</p>
+
+<p>To perform task like find which two documents are similar or find documents similar to given document.A typical ways is to compute the term document matrix.Where the rows consists of the terms while the columns consist of the documents.Thus by analyzing which terms are occuring in which documents we can compute similarity between document pairs.</p>
+
+<p>For performing tasks like finding the topic of document,recommendation we need a discriminative classifier.</p>
+
+<p>Whenever we want to compute similarity we need to compute the input document/sentence against all the sentence/document in term document matrix.The we can have a weighted count of documents the input document is similar to and assign the input document to the class which has registered maximum values of similarity measure.This simple approach may be satisfactory for a host of application especially if we want to run it only once and offline .</p>
+
+<p>Similarity over entire term-document matrix is not feasible method of discriminative classification especially if we want to run the algorithm in real time .</p>
+
+<p>Latent Semantic Analysis arose from the problem of how to find relevant documents from search words.
+ LSA assumes that words that are close in meaning will occur will belong to the same topic.</p>
+
+<p>This enables us to</p>
+<ul>
+  <li>It generates latent topics/models which are represented by fixed dimensional vector</li>
+  <li>It enables us to represent documents as linear combination of the topic vectors.</li>
+  <li>It converts a variable length feature vector representing a document to fixed length feature vector</li>
+  <li>It converts a large length feature vector to a short length feature vector and therby reduces the computational load</li>
+</ul>
+
+<p>In simple terms ,LSA uses  SVD to perform dimensionality reduction on the tf-idf vectors.It groups document into latent topics/classes and expresses and mathematicall represents the document as a linear combination of vectors representing the topics/classes</p>
+
+<p>The term-document matrix is converted to topic-document matrix.Some words/terms or dimensions of the matrix are combined
+and depend on more than one term.The the rank lowering is expected to merge the dimensions associated with terms that have similar meanings.</p>
+
+<p>The words belonging to similar documents are expected to be merged to a single dimension representing topic/concept represented by the words.</p>
+
+<p>To construct the topic models or vectors the LSI algorithm accepts as input the tfidf vectors and dictionary used to construct the tfidf vectors.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+tfidf = models.TfidfModel(bow,normalize=False)
+corpus_tfidf=tfidf[bow]
+
+NO_OF_TOPICS=10;
+lsi = models.LsiModel(corpus_tfidf, id2word=dict, num_topics=NO_OF_TOPICS)
+corpus_lsi = lsi[corpus_tfidf]
+
+for i in lsi.print_topics():
+    print i
+		
+for doc in corpus_lsi:
+     print(doc)
+		 
+</code></pre></div></div>
+
+<p>For example the statement has a tfidf vector as</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[(116, 0.08954685018891612), (292, 0.35664692448848984), (23575, 0.468033500575449), (76631, 0.6858442297536098), (396448, 0.4187441554540362)]
+</code></pre></div></div>
+
+<p>The topic vectors are expressed as linear combination of word</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(0, u'-0.491*"2" + -0.377*"a" + -0.366*"into" + -0.241*"to" + -0.235*"ounces" + -0.227*"pounds" + -0.199*"1" + -0.186*"pound" + -0.174*"gram" + -0.172*"years"')
+(1, u'-0.408*"the" + -0.383*"weather" + -0.366*"what" + -0.318*"in" + -0.298*"is" + -0.261*"\'s" + -0.211*"distance" + -0.164*"from" + 0.145*"into" + -0.144*"how"')
+(2, u'0.440*"1" + -0.298*"2" + -0.293*"into" + 0.285*"pound" + 0.281*"to" + 0.229*"us" + 0.220*"liquid" + 0.208*"a" + 0.208*"gallon" + -0.201*"ounces"')
+(3, u'-0.403*"from" + -0.311*"far" + -0.301*"distance" + 0.291*"weather" + 0.260*"\'s" + -0.250*"is" + -0.249*"how" + 0.229*"in" + -0.218*"road" + -0.218*"by"')
+(4, u'0.440*"us" + 0.416*"liquid" + 0.386*"gallon" + -0.336*"a" + -0.297*"pound" + -0.205*"gram" + 0.184*"into" + 0.183*"imperial" + -0.129*"tonne" + -0.127*"milligram"')
+(5, u'-0.418*"indian" + -0.363*"rupees" + -0.340*"dollar" + -0.285*"convert" + 0.228*"distance" + -0.205*"rupee" + -0.204*"in" + 0.170*"a" + -0.166*"you" + -0.166*"do"')
+(6, u'0.632*"ounce" + 0.505*"an" + -0.349*"pounds" + 0.247*"into" + -0.180*"a" + -0.141*"2" + -0.125*"gram" + -0.125*"to" + 0.098*"years" + 0.085*"1"')
+(7, u'-0.403*"distance" + 0.375*"far" + -0.340*"between" + 0.241*"road" + 0.241*"by" + -0.227*"and" + 0.221*"from" + 0.214*"how" + 0.182*"weather" + 0.154*"goa"')
+(8, u'-0.724*"years" + 0.433*"pounds" + 0.298*"ounces" + 0.173*"grams" + -0.159*"a" + 0.154*"ounce" + -0.148*"minutes" + 0.111*"an" + -0.107*"weeks" + -0.079*"seconds"')
+(9, u'0.673*"pound" + -0.543*"gram" + 0.222*"ounces" + 0.209*"into" + -0.190*"ounce" + -0.169*"an" + -0.128*"grams" + -0.128*"2" + -0.106*"a" + -0.093*"in"')
+</code></pre></div></div>
+
+<p>This show the 10 highest weighted words contributing to the topic vector</p>
+
+<p>After Performing LSI over the corpus containing the sentenses</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[(0, -0.051051416577990574), (1, -0.036492033868053303), (2, 0.074519246143707196), (3, -0.018580909401619147), (4, 0.016247308095280522), (5, -0.24649553328692864), (6, -0.01305561872828372), (7, -0.1020150188870306), (8, 0.00079849557800111158), (9, -0.035308315739288908)]
+</code></pre></div></div>
+
+<p>Thus we converted the set of documents to fixed length feature vector containing 10 vector.</p>
+
+<p>Now since each sentence/document is expressed as fixed length vectors a host of machine learning algorithms open up which can enable us to perform discriminative classification.</p>
+
+<p>As seen above the LSI gives us a method to transformation to convert any document to a fixed length feature representation.
+Once LSI model is created and we can use it to transform another set of documents not related to the training dataset used to generate the LSI model.</p>
+
+<p>We can train the LSI model on a very large corpus collected over several years consisting of serveral millions of documents.This model will not be updated frequenctly due to computation and time complexities.</p>
+
+<p>While the training database for classification task or recommendation task may be a smaller database and which might be updated regularily or when new content becomes available.</p>
+
+<p>LSI captures the hidden context in the articles,any new documents belonging to the domain will exhibit similar characteristics .
+Incremental addition of few thousand documents will not affect the LSI model computed over a few million documents.</p>
+
+<p>However we cannot train the LSI model on medical corpus and expect it to perform well on news corpus.</p>
+
+<p>Transformation of a document to fixed length feature vector using LSI can be considered as pre-processing step for other Machine learning algorithms.LSI process can be abstracted as a method to convert any text to fixed length vector representation.</p>
+
+<p><strong>References</strong></p>
+
+<ul>
+  <li>https://en.wikipedia.org/wiki/Latent_semantic_analysis#Rank_lowering</li>
+  <li>https://radimrehurek.com/gensim/tut1.html</li>
+</ul>
+
+
+</article>
+<div id="page-navigation"> 
+        <div class="clear">&nbsp;</div> 
+        <div class="left"> 
+         
+                <a href="/pyVision//2017/05/13/spacy1/" title="Previous Post: 
+NLP spaCy Word and document vectors">&laquo; NLP spaCy Word and document vectors</a> 
+         
+        </div> 
+
+        <div class="right"> 
+         
+                <a href="/pyVision//2017/05/15/gensim2/" title="next Post: 
+NLP Dictionary,Bag Of Words and TFIDF using Gensim">NLP Dictionary,Bag Of Words and TFIDF using Gensim &raquo; </a> 
+         
+        </div> 
+        <div class="clear">&nbsp;</div> 
+</div> 
+<div id="disqus_thread"></div>
+		<script type="text/javascript">
+			/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+			var disqus_shortname = 'pi19404'; // required: replace example with your forum shortname
+    			var disqus_identifier = '/2017/05/15/gensim1/';
+    			var disqus_url = 'http://pyvision.github.com/2017/05/15/gensim1/';       
+ 
+			/* * * DON'T EDIT BELOW THIS LINE * * */
+			(function() {
+				var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+				dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+				(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+			})();
+		</script>
+		<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+		<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+
+      </div>
+    </div>
+
+      
+       <footer>
+          pyVision is maintained by <a href="https://github.com/pi19404">pi19404</a><br>
+        </footer>
+    
+    </div>
+ <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+    <script>
+      (function(document) {
+        var toggle = document.querySelector('.sidebar-toggle');
+        var sidebar = document.querySelector('#sidebar');
+        var checkbox = document.querySelector('#sidebar-checkbox');
+
+        document.addEventListener('click', function(e) {
+          var target = e.target;
+
+          if(!checkbox.checked ||
+             sidebar.contains(target) ||
+             (target === checkbox || target === toggle)) return;
+
+          checkbox.checked = true;
+        }, false);
+      })(document);
+    </script>
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+    <script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'pyvision'; // required: replace example with your forum shortname
+    var disqus_identifier = '/2017/05/15/gensim1/';
+    var disqus_url = 'http://pyvision.github.com/2017/05/15/gensim1/';
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+    </script>
+
+  </body>
+</html>

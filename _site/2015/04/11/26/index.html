@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    
+  <!-- Enable responsiveness on mobile devices-->
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">-->
+ 
+
+  <title>
+    
+      DC motor Characteristic Curvers &middot; 
+      pyVision
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/pyVision/public/css/poole.css">
+  <link rel="stylesheet" href="/pyVision/public/css/syntax.css">
+  <link rel="stylesheet" href="/pyVision/public/css/lanyon.css">
+  <!--<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700|PT+Sans:400">-->
+    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/pyVisionpublic/apple-touch-icon-precomposed.png">
+  <link rel="shortcut icon" href="/pyVisionpublic/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script type="text/x-mathjax-config">
+   MathJax.Hub.Config({ 
+                config: ["MMLorHTML.js"], 
+                extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js"], 
+                jax: ["input/TeX"], 
+                tex2jax: { 
+                    inlineMath: [ ['$','$'], ["\\(","\\)"] ], 
+                    displayMath: [ ['$$','$$'], ["\\[","\\]"] ], 
+                    processEscapes: false 
+                }, 
+                TeX: { 
+                    TagSide: "right", 
+                    TagIndent: ".8em", 
+                    MultLineWidth: "85%", 
+                    equationNumbers: { 
+                       autoNumber: "AMS", 
+                    }, 
+                    unicode: { 
+                       fonts: "STIXGeneral,'Arial Unicode MS'" 
+                    } 
+                }, 
+                showProcessingMessages: false 
+            }); 
+</script>
+<!--<script src="/pyVision/javascripts/gitdata.js"></script>-->
+	<script type="text/javascript">
+    	$(function() {
+        $("#display-projects").getRepos("pi19404"); //Add your github username.
+    	});
+	</script>
+<script type="text/javascript"
+    src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<link href='http://alexgorbatchev.com/pub/sh/2.1.364/styles/shCore.css' rel='stylesheet' type='text/css'/> 
+<link href='http://alexgorbatchev.com/pub/sh/2.1.364/styles/shThemeDefault.css' rel='stylesheet' type='text/css'/> 
+<script src='http://alexgorbatchev.com/pub/sh/2.1.364/scripts/shCore.js' type='text/javascript' > </script>
+<script src='http://alexgorbatchev.com/pub/sh/2.1.364/scripts/shBrushCpp.js' type='text/javascript' > </script>
+<script src='http://alexgorbatchev.com/pub/sh/2.1.364/scripts/shBrushCSharp.js' type='text/javascript' > </script>
+<script src='http://alexgorbatchev.com/pub/sh/2.1.364/scripts/shBrushCss.js' type='text/javascript' > </script>
+<script src='http://alexgorbatchev.com/pub/sh/2.1.364/scripts/shBrushJava.js' type='text/javascript' > </script>
+<script src='http://alexgorbatchev.com/pub/sh/2.1.364/scripts/shBrushJScript.js' type='text/javascript' /> </script>
+<script src='http://alexgorbatchev.com/pub/sh/2.1.364/scripts/shBrushPhp.js' type='text/javascript' > </script>
+<script src='http://alexgorbatchev.com/pub/sh/2.1.364/scripts/shBrushPython.js' type='text/javascript' > </script>
+<script src='http://alexgorbatchev.com/pub/sh/2.1.364/scripts/shBrushRuby.js' type='text/javascript' > </script>
+<script src='http://alexgorbatchev.com/pub/sh/2.1.364/scripts/shBrushSql.js' type='text/javascript' > </script>
+<script src='http://alexgorbatchev.com/pub/sh/2.1.364/scripts/shBrushVb.js' type='text/javascript' > </script>
+<script src='http://alexgorbatchev.com/pub/sh/2.1.364/scripts/shBrushXml.js' type='text/javascript' > </script>
+<script src='http://alexgorbatchev.com/pub/sh/2.1.364/scripts/shBrushPerl.js' type='text/javascript' > </script>
+<script language='javascript'> 
+SyntaxHighlighter.config.bloggerMode = false;
+SyntaxHighlighter.all();
+</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-38535188-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</head>
+
+
+  <body>
+
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+
+
+
+
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="/pyVision/">Home </a>
+
+    
+
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="/pyVision//about/">About</a>
+        
+      
+    
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+    
+      
+    
+
+    <!-- <a class="sidebar-nav-item" href="http://www.github.com/pi19404/pyVision/zipball/master">Download</a>
+    <a class="sidebar-nav-item" href="http://www.github.com/pi19404/pyVision">GitHub project</a> -->
+    <a class="sidebar-nav-item" ><g:plusone size="medium">Categories</g:plusone> </a>
+    <div>
+      <ul>
+        
+        
+        <li><a href="/pyVision//category/Linux/index.html">Linux</a></li>
+        
+        
+        <li><a href="/pyVision//category/Signal+Processing/index.html">Signal Processing</a></li>
+        
+        
+        <li><a href="/pyVision//category/Raspberry+PI/index.html">Raspberry PI</a></li>
+        
+        
+        <li><a href="/pyVision//category/Software/index.html">Software</a></li>
+        
+        
+        <li><a href="/pyVision//category/Embedded+Firmware/index.html">Embedded Firmware</a></li>
+        
+        
+        <li><a href="/pyVision//category/Software+Installation/index.html">Software Installation</a></li>
+        
+        
+        <li><a href="/pyVision//category/Software+installation/index.html">Software installation</a></li>
+        
+        </ul>
+    
+    </div>
+<a class="sidebar-nav-item" >
+<div class='g-person' data-href='https://plus.google.com/115840780257908006648' data-layout='landscape' data-rel='author' data-showcoverphoto='false' data-showtagline='false' data-theme='dark' data-width='100'></a>
+</div>
+
+<div class='widget-content'>
+<script type="text/javascript" src="http://jj.revolvermaps.com/2/1.js?i=9bj6dpaloim&amp;s=220&amp;m=7&amp;v=true&amp;r=true&amp;b=ffffff&amp;n=false&amp;c=ff0000" async="async"></script>
+</div>
+
+<script type="text/javascript">
+function cantload() {
+img = document.getElementById("clustrMapsImg");
+img.onerror = null;
+img.src = "http://www2.clustrmaps.com/images/clustrmaps-back-soon.jpg";
+document.getElementById("clustrMapsLink").href = "http://www2.clustrmaps.com";
+}
+img = document.getElementById("clustrMapsImg");
+img.onerror = cantload;
+</script>
+<div class='widget-content'>
+<div id="clustrmaps-widget"></div><script type="text/javascript">var _clustrmaps = {'url' : 'http://pi-virtualworld.blogspot.com', 'user' : 1165875, 'server' : '3', 'id' : 'clustrmaps-widget', 'version' : 1, 'date' : '2015-04-05', 'lang' : 'en', 'corners' : 'square' };(function (){ var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = 'http://www3.clustrmaps.com/counter/map.js'; var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);})();</script><noscript><a href="http://www3.clustrmaps.com/user/ace11ca33"><img src="http://www3.clustrmaps.com/stats/maps-no_clusters/pi-virtualworld.blogspot.com-thumb.jpg" alt="Locations of visitors to this page" /></a></noscript>
+</a>
+
+<!-- Copyright (c)2009 Site Meter -->
+
+
+</div>
+
+<div class='widget-content'>
+<script type="text/javascript" src="http://feedjit.com/serve/?vv=1022&amp;tft=3&amp;dd=0&amp;wid=f31e21a2d981f025&amp;pid=0&amp;proid=0&amp;bc=000000&amp;tc=F5F5F5&amp;brd1=454545&amp;lnk=C95050&amp;hc=FFFFFF&amp;hfc=5C5A5A&amp;btn=8A0214&amp;ww=200&amp;went=10"></script><noscript><a href="http://feedjit.com/">Feedjit Live Blog Stats</a></noscript>
+</div>
+ 
+<!-- Site Meter -->
+<script type="text/javascript" src="http://s30.sitemeter.com/js/counter.js?site=s30pi19404">
+</script>
+<noscript>
+<a href="http://s30.sitemeter.com/stats.asp?site=s30pi19404" target="_top">
+<img src="http://s30.sitemeter.com/meter.asp?site=s30pi19404" alt="Site Meter" border="0"/></a>
+</noscript>   
+  </nav>
+
+  <div class="sidebar-item">
+    <p>
+      &copy; 2022. All rights reserved.
+    </p>
+  </div>
+</div>
+
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      
+        <div class="container">
+          <h1 class="header">
+            <a href="/" title="Home">pyVision</a></br>
+            <small>A Machine Learning and Signal Processing toolbox</small>
+          </h1>
+
+        <section id="downloads" class="clearfix">
+          <a href="https://github.com/pi19404/pyVision/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
+          <a href="https://github.com/pi19404/pyVision/tarball/master" id="download-tar-gz" class="button"><span>Download.tar.gz</span></a>
+          <a href="https://github.com/pi19404/pyVision" id="view-on-github" class="button"><span>View on GitHub</span></a>
+		
+	   <hr>
+          </section>
+    
+	</br>	</br>
+      <div class="content">
+        <article class="post">
+  <h1 class="post-title">DC motor Characteristic Curvers</h1>
+  <span class="post-date">11 Apr 2015</span>
+  <h3 id="dc-motor-equilibrium-analysis">DC Motor Equilibrium Analysis</h3>
+
+<p>In this article we will look  DC motor characteric curves and see how we can obtain parameters to model the DC motor from commonly provided specifications in motor Datasheet.</p>
+
+<h3 id="equilibrium-analysis">Equilibrium analysis</h3>
+
+<p>In the article “DC motor First order approximation” we saw how to characterize a DC motor using basic parameters provided in the motor Datasheet and predict the speed and responsiveness of motor for any given input voltage.</p>
+
+<p>Let us look at some of parameters in mode detail under steady state conditions with a load.We apply a voltage and wait  till the motor achieves constant velocity .</p>
+
+<p>If we apply a voltage source to the motor terminal and mechanical load torque $\tau$ on the rotor</p>
+
+<p>$ b \dot{\theta} = K_{t} i -\tau $</p>
+
+<p>$  Ri = V - K_{b}\dot{\theta}$</p>
+
+<p>Solving we get</p>
+
+<p>$ i = \frac{b \dot{\theta} + \tau}{K_t}$</p>
+
+<p>$ V= R \frac{b \dot{\theta} + \tau}{K_t} +K_{b}\dot{\theta}$</p>
+
+<p>$ \dot{\theta} \big(\frac{Rb}{K_{t}}+K_{b}\big) = V - \frac{R*\tau}{K_{t}} $</p>
+
+<p>$ \dot{\theta} \big(b+\frac{K_{b}K_{t}}{R}\big) = \frac{VK_{t}}{R} - \tau $</p>
+
+\[\tau =\frac{VK_{t}}{R} -\dot{\theta} \big(b+\frac{K_{b}K_{t}}{R}\big)\]
+
+\[\dot{\theta}  = (\frac{VK_{t}}{R} - \tau ){\big(b+\frac{K_{b}K_{t}}{R}\big)}^{-1}\]
+
+<ul>
+  <li>Slope of torque speed graph indicates inverse proportionality due to negative sign.</li>
+  <li>The linear relationship between the torque provided by a motor
+and the speed at which it operates is specific to the input voltage at the motor’s leads</li>
+</ul>
+
+<p>Thus we can plot the load v/s speed graph at specified voltage and power specifications.</p>
+
+<p>Let us plot the torque v/s speed graph for nominal voltage of 12V
+and let load torque vary from 0 to 50 mNm and observe the RPM and power requirement of the motor.</p>
+
+<p><img src="http://pi19404.github.io/pyVision/images/24/242.png" alt="enter image description here" /></p>
+
+<ul>
+  <li>At zero torque, the speed is highest. This speed is called no-load speed $\dot{\theta}_{n}$. The no-load speed can easily be calculated from the applied voltage and the speed constant of the motor.</li>
+  <li>Enhancing the load torque leads to a linear reduction of the speed.</li>
+  <li>Increasing the torque further reduces speed up to the point where the motor stops. The corresponding torque is called stall torque $\tau_{s}$</li>
+  <li>The current corresponding to the stall torque is named starting current
+or no load current $i_{o}$</li>
+  <li>A higher voltage results in a higher no-load speed</li>
+  <li>The speed-torque gradient is unaffected with increase in voltage.  Changing the applied voltage results in a parallel shift of the speed-torque line</li>
+  <li>A strong motor is characterized by a flat speed-torque line. The speed drops only slightly when the load torque is enhanced. The value of the gradient is small.</li>
+  <li>On a weaker motor the speed drop is larger. The speed-torque line is steeper and the value of its gradient is high.</li>
+</ul>
+
+<h3 id="stall-torque">Stall Torque</h3>
+<p>The torque provided by the motor when the rotor no longer turns is known as the stall torque.The torque of motor at zero  speed.</p>
+
+<p>It can be calculated as</p>
+
+<p>$\tau_{s} =\frac{VK_{t}}{R} $</p>
+
+<h3 id="no-load-speed">No Load Speed</h3>
+
+<p>The speed at which the rotor turns when no torque is provided is known as the no-load speed. The no-load speed is called as such since it is the speed at which the rotor will turn when there is no load connected.</p>
+
+\[\dot{\theta} = (\frac{V*K_{t}}{R}){\big(b+\frac{K_{b}K_{t}}{R}\big)}^{-1}\]
+
+<p>No load speed is maximum speed that can be attained by the motor at the specified voltage .</p>
+
+<h3 id="stall-current">Stall Current</h3>
+<p>The stall current is the current drawn by the motor when rotor no longer turns. The current draw is proportional to the torque.The stall current is the maximum current drawn by the motor under equilibrium condition.</p>
+
+<p>$ i = \frac{\tau}{K_t}$
+$ i = \frac{V}{R}$</p>
+
+<h3 id="no-load-current">No load Current</h3>
+<p>$ i = \frac{b\dot{\theta}}{K_{t}}$</p>
+
+<h3 id="equilibrium-torquespeed--current">Equilibrium Torque,Speed &amp; Current</h3>
+<p>For a fixed voltage the equilibrium torque,speed and current can be expressed as</p>
+
+<p>\(\tau =\tau_{s} -\dot{\theta} \big(b+\frac{K_{b}K_{t}}{R}\big)\)
+\(\dot{\theta}  = \theta_{n} - \tau {\big(b+\frac{K_{b}K_{t}}{R}\big)}^{-1}\)
+\(I =  I_{S} - \dot{\theta} \big(\frac{K_{b}}{R}\big)\)</p>
+
+<h3 id="motor-datasheet">Motor Datasheet</h3>
+<p>Not all motor manufactures provide parameters that can be used directly to model the motor.</p>
+
+<p>The parameter like L,R,torque constant,backemf constant etc are called as Intrinsic Parameters of the motor.</p>
+
+<p>The values like stall torque,stall current,no load speed and current are the values measured values and most often found in datasheets.</p>
+
+<p>For example the important specifications of motor are often given in the form</p>
+
+<ul>
+  <li>Nominal voltage 4.5V</li>
+  <li>No load speed 23000rpm</li>
+  <li>no load current 70mA</li>
+  <li>Stall torque of 0.34mNm</li>
+</ul>
+
+<p>Let us assume that we have also some intrinsic parameters like R</p>
+
+<p>We know that the stall torque
+$\tau_{s} =\frac{VK_{t}}{R} $</p>
+
+<p>Thus we can compute $K_{t}$ from the equation
+The no load speed is given by</p>
+
+\[\dot{\theta_{n}}  = (\frac{VK_{t}}{R} ){\big(b+\frac{K_{b}K_{t}}{R}\big)}^{-1}\]
+
+\[\frac{\tau_{s}}{\dot{\theta_{n}}} =\big(b+\frac{K_{b}K_{t}}{R}\big)\]
+
+<p>viscous friction coefficient $b$ can be computed from this equation.</p>
+
+<p>Just by observing the graph we can determine the slope and the intercept ie  $\big(b+\frac{K_{b}K_{t}}{R}\big)$ and $\frac{VK_{t}}{R}$.</p>
+
+<p>Thus knowing the nominal voltage and estimate of R we can determine $K_{t}$ and $b$ from the graph itself.</p>
+
+<p>Thus we have all the information we need for the first order model of a DC Motor.</p>
+
+<p>For example for the portscape 216E motor http://www.portescap.com/sites/default/files/26n58_specifications.pdf we found that simple armature resistance yeilded a value of 15.2 
+and based on that given specifications ans above formulat the intrinsic model parameters computed are</p>
+
+<pre class="brush:python">
+Kt =0.0236
+b =9.9544e-07
+</pre>
+
+<p>These are approximately equal to the values in the datasheet.</p>
+
+<h3 id="mechanical-power">Mechanical Power</h3>
+
+<p>The mechanical power $P$ delivered by the motor is</p>
+
+<p>$P = \tau \dot{\theta}$
+$P =\tau_{s}\dot{\theta} -\dot{\theta}^2 \big(b+\frac{K_{b}K_{t}}{R}\big) $</p>
+
+<p>We can find the velocity that provides the maximum power by computing the gradient wrt $\dot{\theta}$</p>
+
+<p>$\dot{\theta_{max}} = 0.5\tau_{s}\big(b+\frac{K_{b}K_{t}}{R}\big)^{-1}$</p>
+
+<p>$\dot{\theta_{max}} = 0.5\dot{\theta_{n}}$</p>
+
+<p>Thus maximum mechanical power is achieved when motor is running at half the no load velocity.</p>
+
+<p>At this point the torque is 
+$\tau_{max} = 0.5\tau_{s}$</p>
+
+<p>Thus maximum power is achieved when the torque is half of stall torque.</p>
+
+<p>Since the current draw is proportional to the torque, then the current at the point of maximum power transfer shall also be one half of the stall current.</p>
+
+<p>$I_{max} = 0.5I_{s}$</p>
+
+<p>The maximum mechanical power produced by the motor is as follows
+$P_{max}=\frac{1}{4} \tau_{s}\dot{\theta}_{n}$</p>
+
+<p>Thus maximum efficiency is obtained when speed is half  no load speed
+and torque is half stall torque.</p>
+
+<p>Power delivered by the motor is area of a rectangle under the torque/speed curve with one corner at the origin and another corner at a point on the curve</p>
+
+<p>We can see the maximum area is obtained when</p>
+
+<p>$\dot{\theta_{max}} = 0.5\dot{\theta_{n}}$</p>
+
+<p>and</p>
+
+<p>$\tau_{max} = 0.5\tau_{s}$</p>
+
+<p>corresponding to the peak in the power v/s speed curve</p>
+
+<p><img src="http://pi19404.github.io/pyVision/images/24/251.png" alt="enter image description here" /></p>
+
+<h3 id="motor-efficiency">Motor Efficiency</h3>
+
+<p>The efficiency $\eta$ of a motor is defined as the ratio between the input electrical power and output mechanical power</p>
+
+<p>$\eta = \frac{P}{VI}$</p>
+
+<p>$I =  \frac{V_{S}}{R} - \dot{\theta} \big(\frac{K_{b}}{R}\big)$
+$P_{i} = VI = V\frac{V_{S}}{R} - V\dot{\theta} \big(\frac{K_{b}}{R}\big)$
+$ \tau =\tau_{s} -\dot{\theta} \big(b+\frac{K_{b}K_{t}}{R}\big)$
+$P_{o} = \frac{K_{t}V_{s}}{R}\dot{\theta} -\dot{\theta}^2 \big(b+\frac{K_{b}K_{t}}{R}\big)$</p>
+
+<p>$\eta = \frac{\frac{K_{t}V_{s}}{R}\dot{\theta} -\dot{\theta}^2 \big(b+\frac{K_{b}K_{t}}{R}\big)}{V\frac{V_{S}}{R} - V\dot{\theta} \big(\frac{K_{b}}{R}\big)}$</p>
+
+<p>$\dot{\theta}_{me} = \frac{bc - \sqrt{b^2c^2-abcd}}{bd}$</p>
+
+<p>where</p>
+
+<p>$a = \tau_{s}-Kt*i_{o},$</p>
+
+<p>$b = b + \frac{K_{b}K_{t}}{R},$</p>
+
+<p>$c= \frac{V*Vs}{R},$</p>
+
+<p>$d = V\big(\frac{K_{b}}{R}\big),$</p>
+
+<p><img src="http://pi19404.github.io/pyVision/images/24/252.png" alt="enter image description here" /></p>
+
+<p>We can see from the plot that the  velocity at max efficiency is 4237 rpm
+And operating of max power is different from that of max efficiency.</p>
+
+<p>The first order model we enables us to plot the motor characteristics plot and observe the behavious of motor to a good degree of accuracy.</p>
+
+<h3 id="code">Code</h3>
+<p>The code to compute and plot the various DC motor curves can be found in file <code class="language-plaintext highlighter-rouge">dcmotor2</code> at bitbucket repository <a href="https://bitbucket.org/snippets/pi19404/55ep">https://bitbucket.org/snippets/pi19404/55ep</a></p>
+
+<h3 id="references">References</h3>
+<ul>
+  <li>http://www.portescap.com/sites/default/files/wp_drivers_for_ironless_dc_motors.pdf</li>
+  <li>http://dsc.ijs.si/Damir.Vrancic/Files/dp7091.pdf
+-http://www.precisionmicrodrives.com/application-notes-technical-guides/application-bulletins/ab-025-using-spice-to-model-dc-motors</li>
+  <li>http://www.ti.com/lit/an/slua076/slua076.pdf</li>
+  <li>http://mechanical.poly.edu/faculty/slee/ME3411/Exp3.pdf</li>
+  <li>http://mplab.ucsd.edu/tutorials/dc.pdf
+-http://ece.ut.ac.ir/Classpages/S89/ECE425/HW5SOL.pdf
+-http://www.site.uottawa.ca/~rhabash/ELG3311A4Ch9.pdf</li>
+  <li>http://mplab.ucsd.edu/tutorials/</li>
+  <li>http://www.cecs.uci.edu/publication/d-d-gajski-s-abdi-a-gerstlauer-and-g-schirner-embedded-system-design-modeling-synthesis-verification/</li>
+  <li>http://www.ni.com/white-paper/4074/en/</li>
+  <li>http://www.maxonmotor.com/medias/sys_master/8798985748510.pdf</li>
+  <li>http://www.me.umn.edu/courses/me2011/arduino/technotes/dcmotors/</li>
+  <li>http://lancet.mit.edu/motors/motors3.html</li>
+  <li>http://www.delta-line.com/data/download/Brush_DC_Motor_Basics.pdf</li>
+  <li>http://www.gearseds.com/files/Lesson3_Mathematical%20Models%20of%20Motors.pdf</li>
+</ul>
+
+
+</article>
+<div id="page-navigation"> 
+        <div class="clear">&nbsp;</div> 
+        <div class="left"> 
+         
+                <a href="/pyVision//2015/04/10/25/" title="Previous Post: 
+First Order Approximation of DC Motor">&laquo; First Order Approximation of DC Motor</a> 
+         
+        </div> 
+
+        <div class="right"> 
+         
+                <a href="/pyVision//2015/04/17/27/" title="next Post: 
+Git Subtree Installation and Usage on Linux">Git Subtree Installation and Usage on Linux &raquo; </a> 
+         
+        </div> 
+        <div class="clear">&nbsp;</div> 
+</div> 
+<div id="disqus_thread"></div>
+		<script type="text/javascript">
+			/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+			var disqus_shortname = 'pi19404'; // required: replace example with your forum shortname
+    			var disqus_identifier = '/2015/04/11/26/';
+    			var disqus_url = 'http://pyvision.github.com/2015/04/11/26/';       
+ 
+			/* * * DON'T EDIT BELOW THIS LINE * * */
+			(function() {
+				var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+				dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+				(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+			})();
+		</script>
+		<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+		<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+
+      </div>
+    </div>
+
+      
+       <footer>
+          pyVision is maintained by <a href="https://github.com/pi19404">pi19404</a><br>
+        </footer>
+    
+    </div>
+ <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+    <script>
+      (function(document) {
+        var toggle = document.querySelector('.sidebar-toggle');
+        var sidebar = document.querySelector('#sidebar');
+        var checkbox = document.querySelector('#sidebar-checkbox');
+
+        document.addEventListener('click', function(e) {
+          var target = e.target;
+
+          if(!checkbox.checked ||
+             sidebar.contains(target) ||
+             (target === checkbox || target === toggle)) return;
+
+          checkbox.checked = true;
+        }, false);
+      })(document);
+    </script>
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+    <script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'pyvision'; // required: replace example with your forum shortname
+    var disqus_identifier = '/2015/04/11/26/';
+    var disqus_url = 'http://pyvision.github.com/2015/04/11/26/';
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+    </script>
+
+  </body>
+</html>

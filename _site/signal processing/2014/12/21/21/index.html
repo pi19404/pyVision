@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    
+  <!-- Enable responsiveness on mobile devices-->
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">-->
+ 
+
+  <title>
+    
+      Conjugate Quadrature Filter Bank - Deriving Daubechies Filter Coefficients &middot; 
+      pyVision
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/pyVision/public/css/poole.css">
+  <link rel="stylesheet" href="/pyVision/public/css/syntax.css">
+  <link rel="stylesheet" href="/pyVision/public/css/lanyon.css">
+  <!--<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700|PT+Sans:400">-->
+    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/pyVisionpublic/apple-touch-icon-precomposed.png">
+  <link rel="shortcut icon" href="/pyVisionpublic/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script type="text/x-mathjax-config">
+   MathJax.Hub.Config({ 
+                config: ["MMLorHTML.js"], 
+                extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js"], 
+                jax: ["input/TeX"], 
+                tex2jax: { 
+                    inlineMath: [ ['$','$'], ["\\(","\\)"] ], 
+                    displayMath: [ ['$$','$$'], ["\\[","\\]"] ], 
+                    processEscapes: false 
+                }, 
+                TeX: { 
+                    TagSide: "right", 
+                    TagIndent: ".8em", 
+                    MultLineWidth: "85%", 
+                    equationNumbers: { 
+                       autoNumber: "AMS", 
+                    }, 
+                    unicode: { 
+                       fonts: "STIXGeneral,'Arial Unicode MS'" 
+                    } 
+                }, 
+                showProcessingMessages: false 
+            }); 
+</script>
+<!--<script src="/pyVision/javascripts/gitdata.js"></script>-->
+	<script type="text/javascript">
+    	$(function() {
+        $("#display-projects").getRepos("pi19404"); //Add your github username.
+    	});
+	</script>
+<script type="text/javascript"
+    src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<link href='http://alexgorbatchev.com/pub/sh/2.1.364/styles/shCore.css' rel='stylesheet' type='text/css'/> 
+<link href='http://alexgorbatchev.com/pub/sh/2.1.364/styles/shThemeDefault.css' rel='stylesheet' type='text/css'/> 
+<script src='http://alexgorbatchev.com/pub/sh/2.1.364/scripts/shCore.js' type='text/javascript' > </script>
+<script src='http://alexgorbatchev.com/pub/sh/2.1.364/scripts/shBrushCpp.js' type='text/javascript' > </script>
+<script src='http://alexgorbatchev.com/pub/sh/2.1.364/scripts/shBrushCSharp.js' type='text/javascript' > </script>
+<script src='http://alexgorbatchev.com/pub/sh/2.1.364/scripts/shBrushCss.js' type='text/javascript' > </script>
+<script src='http://alexgorbatchev.com/pub/sh/2.1.364/scripts/shBrushJava.js' type='text/javascript' > </script>
+<script src='http://alexgorbatchev.com/pub/sh/2.1.364/scripts/shBrushJScript.js' type='text/javascript' /> </script>
+<script src='http://alexgorbatchev.com/pub/sh/2.1.364/scripts/shBrushPhp.js' type='text/javascript' > </script>
+<script src='http://alexgorbatchev.com/pub/sh/2.1.364/scripts/shBrushPython.js' type='text/javascript' > </script>
+<script src='http://alexgorbatchev.com/pub/sh/2.1.364/scripts/shBrushRuby.js' type='text/javascript' > </script>
+<script src='http://alexgorbatchev.com/pub/sh/2.1.364/scripts/shBrushSql.js' type='text/javascript' > </script>
+<script src='http://alexgorbatchev.com/pub/sh/2.1.364/scripts/shBrushVb.js' type='text/javascript' > </script>
+<script src='http://alexgorbatchev.com/pub/sh/2.1.364/scripts/shBrushXml.js' type='text/javascript' > </script>
+<script src='http://alexgorbatchev.com/pub/sh/2.1.364/scripts/shBrushPerl.js' type='text/javascript' > </script>
+<script language='javascript'> 
+SyntaxHighlighter.config.bloggerMode = false;
+SyntaxHighlighter.all();
+</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-38535188-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</head>
+
+
+  <body>
+
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+
+
+
+
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="/pyVision/">Home </a>
+
+    
+
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="/pyVision//about/">About</a>
+        
+      
+    
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+    
+      
+    
+
+    <!-- <a class="sidebar-nav-item" href="http://www.github.com/pi19404/pyVision/zipball/master">Download</a>
+    <a class="sidebar-nav-item" href="http://www.github.com/pi19404/pyVision">GitHub project</a> -->
+    <a class="sidebar-nav-item" ><g:plusone size="medium">Categories</g:plusone> </a>
+    <div>
+      <ul>
+        
+        
+        <li><a href="/pyVision//category/Linux/index.html">Linux</a></li>
+        
+        
+        <li><a href="/pyVision//category/Signal+Processing/index.html">Signal Processing</a></li>
+        
+        
+        <li><a href="/pyVision//category/Raspberry+PI/index.html">Raspberry PI</a></li>
+        
+        
+        <li><a href="/pyVision//category/Software/index.html">Software</a></li>
+        
+        
+        <li><a href="/pyVision//category/Embedded+Firmware/index.html">Embedded Firmware</a></li>
+        
+        
+        <li><a href="/pyVision//category/Software+Installation/index.html">Software Installation</a></li>
+        
+        
+        <li><a href="/pyVision//category/Software+installation/index.html">Software installation</a></li>
+        
+        </ul>
+    
+    </div>
+<a class="sidebar-nav-item" >
+<div class='g-person' data-href='https://plus.google.com/115840780257908006648' data-layout='landscape' data-rel='author' data-showcoverphoto='false' data-showtagline='false' data-theme='dark' data-width='100'></a>
+</div>
+
+<div class='widget-content'>
+<script type="text/javascript" src="http://jj.revolvermaps.com/2/1.js?i=9bj6dpaloim&amp;s=220&amp;m=7&amp;v=true&amp;r=true&amp;b=ffffff&amp;n=false&amp;c=ff0000" async="async"></script>
+</div>
+
+<script type="text/javascript">
+function cantload() {
+img = document.getElementById("clustrMapsImg");
+img.onerror = null;
+img.src = "http://www2.clustrmaps.com/images/clustrmaps-back-soon.jpg";
+document.getElementById("clustrMapsLink").href = "http://www2.clustrmaps.com";
+}
+img = document.getElementById("clustrMapsImg");
+img.onerror = cantload;
+</script>
+<div class='widget-content'>
+<div id="clustrmaps-widget"></div><script type="text/javascript">var _clustrmaps = {'url' : 'http://pi-virtualworld.blogspot.com', 'user' : 1165875, 'server' : '3', 'id' : 'clustrmaps-widget', 'version' : 1, 'date' : '2015-04-05', 'lang' : 'en', 'corners' : 'square' };(function (){ var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = 'http://www3.clustrmaps.com/counter/map.js'; var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);})();</script><noscript><a href="http://www3.clustrmaps.com/user/ace11ca33"><img src="http://www3.clustrmaps.com/stats/maps-no_clusters/pi-virtualworld.blogspot.com-thumb.jpg" alt="Locations of visitors to this page" /></a></noscript>
+</a>
+
+<!-- Copyright (c)2009 Site Meter -->
+
+
+</div>
+
+<div class='widget-content'>
+<script type="text/javascript" src="http://feedjit.com/serve/?vv=1022&amp;tft=3&amp;dd=0&amp;wid=f31e21a2d981f025&amp;pid=0&amp;proid=0&amp;bc=000000&amp;tc=F5F5F5&amp;brd1=454545&amp;lnk=C95050&amp;hc=FFFFFF&amp;hfc=5C5A5A&amp;btn=8A0214&amp;ww=200&amp;went=10"></script><noscript><a href="http://feedjit.com/">Feedjit Live Blog Stats</a></noscript>
+</div>
+ 
+<!-- Site Meter -->
+<script type="text/javascript" src="http://s30.sitemeter.com/js/counter.js?site=s30pi19404">
+</script>
+<noscript>
+<a href="http://s30.sitemeter.com/stats.asp?site=s30pi19404" target="_top">
+<img src="http://s30.sitemeter.com/meter.asp?site=s30pi19404" alt="Site Meter" border="0"/></a>
+</noscript>   
+  </nav>
+
+  <div class="sidebar-item">
+    <p>
+      &copy; 2022. All rights reserved.
+    </p>
+  </div>
+</div>
+
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      
+        <div class="container">
+          <h1 class="header">
+            <a href="/" title="Home">pyVision</a></br>
+            <small>A Machine Learning and Signal Processing toolbox</small>
+          </h1>
+
+        <section id="downloads" class="clearfix">
+          <a href="https://github.com/pi19404/pyVision/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
+          <a href="https://github.com/pi19404/pyVision/tarball/master" id="download-tar-gz" class="button"><span>Download.tar.gz</span></a>
+          <a href="https://github.com/pi19404/pyVision" id="view-on-github" class="button"><span>View on GitHub</span></a>
+		
+	   <hr>
+          </section>
+    
+	</br>	</br>
+      <div class="content">
+        <article class="post">
+  <h1 class="post-title">Conjugate Quadrature Filter Bank - Deriving Daubechies Filter Coefficients</h1>
+  <span class="post-date">21 Dec 2014</span>
+  <h3 id="introduction">Introduction</h3>
+
+<p>In this article we will look at the concept of conjugate quadrature filter bank and process computationally derive the Daubechies wavelet filter coefficient
+for any filter length</p>
+
+<h3 id="conjugate-quadrature-filters-cqfs">Conjugate Quadrature Filters (CQFs)</h3>
+
+<p>Following up on the Perfect Reconstruction Filter Banks.In this article we will look at look at realization of perfect reconstruction filter bank using Conjugate Quadrature Filters.</p>
+
+<p>Let $x[n]$ represent  a real sequence and $X(z)$ represent the Z transform.</p>
+
+<p><strong>Conjugate  Filter</strong></p>
+
+<p>$X(z) = \sum x[n] z^{-k}$
+$Y(z) = X^{*}(Z)=\sum x[n] z^{k} = X(z^{-1})$
+$y[n] = x[N-n]$</p>
+
+<p><strong>Quadrature Filters</strong></p>
+
+<p>If $Y(z) = H_{0}(-z)$
+$y[n] = \sum_{k} (-1)^{k} h_{o}[k] = (-1)^{n}h_{o}[n]$</p>
+
+<p>The filter responses are symmetric about $\Omega = \pi / 2$</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>$</td>
+      <td>Y(e^{j\Omega})</td>
+      <td>=</td>
+      <td>Y(e^{j(\pi - \Omega)})</td>
+      <td>$</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Conjugate  Quadrature Filters</strong></p>
+
+<p>The relation between the analysis HPF (high pass filter) and analysis LPF (low pass filter) of the filter
+bank forms conjugate quadrature relationship</p>
+
+<p>$H_{1}(z) = z^{-d}H_{0}(-z^{-1})$</p>
+
+<p>$G_{0}(z)  = H_{1}(-z)$</p>
+
+<p>$G_{1}(z)  = -H_{0}(-z)$</p>
+
+<p>$h_{1}(n) = \sum_{k=0}^{N} h_{0}(N-k-d)(-1)^{k} $</p>
+
+<p>$ z^{-d}$ is used to introduce causality</p>
+
+<p>$H_{1}(e^{j\omega}) = e^{-j\omega d}H_{0}(-e^{-j\omega}) $</p>
+
+<p>Magnitude response is given by
+$|H_{1}(e^{j\omega})| = |H_{0}(-e^{-j\omega})| $</p>
+
+<p>if $H_{0}(z)$ is a low pass filter with real impulse response then
+$H_{0}(e^{-j\omega}) =H_{0}^{*}(e^{-j\omega})$</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>$</td>
+      <td>H_{1}(e^{j\omega})</td>
+      <td>=</td>
+      <td>H_{0}</td>
+      <td>(e^{-j(\omega+\pi)})</td>
+      <td>$</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Condition For Perfect Reconstruction</strong></p>
+
+<p>$T_{1}(z) =[H_{0}(z) H_{1}(-z) - H_{1}(z) H_{0}(-z)] =C_{0} z^{-D} $</p>
+
+<p>$T_{1}(z) = H_{0}(z) {-z}^{-d}H_{0}(z^{-1}) - z^{-d}H_{0}(-z^{-1})H_{0}(-z)=c_{0}z^{-d}$</p>
+
+<p>${-1}^{d} H_{0}(z) H_{0}(z^{-1}) - H_{0}(-z^{-1})H_{0}(-z) = C_{0}$</p>
+
+<p>if D is odd</p>
+
+<p>$ H_{0}(z) H_{0}(z^{-1}) + H_{0}(-z^{-1})H_{0}(-z) = C_{0}=2$</p>
+
+<p>$ H_{0}(e^{j\omega}) H_{0}(e^{-j\omega}) + H_{0}(-e^{-j\omega})H_{0}(-j\omega) = C_{0}=2$</p>
+
+<p>For real impulse response</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>$</td>
+      <td>H_{0}(e^{j\omega})</td>
+      <td>^2 +</td>
+      <td>H_{0}(e^{-j(\omega+\pi)})</td>
+      <td>^2 = C_{0}=2$</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>$K_{0}(z) = H_{0}(z) H_{0}(z^{-1}) $</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>$K_{0}(e^{j\omega}) = H_{0}(e^{j\omega}) H_{0}(e^{-j\omega}) =</td>
+      <td>H_{0}(z)</td>
+      <td>^2$</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>$K_{0}(-z) = H_{0}(-z) H_{0}(-z^{-1}) $</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>$K_{0}(-e^{j\omega}) = H_{0}(-e^{j\omega}) H_{0}(-e^{-j\omega}) =</td>
+      <td>H_{0}(-z)</td>
+      <td>^2$</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>With odd D</p>
+
+<p>$K_{0}(z)+ K_{0}(-z)= C_{0}=2$</p>
+
+<p>with even D</p>
+
+<p>$K_{0}(z)- K_{0}(-z) = C_{0}=2$</p>
+
+<p><strong>Normalization Constraint</strong></p>
+
+<p>$ x[n] \Rightarrow X(z) $</p>
+
+<p>$ x[-n] \Rightarrow X(z^{-1}) $</p>
+
+<p>$K_{0}(z) = H_{0}(z) H_{0}(z^{-1}) $ are convolution of signal $h_{0}[n]$ and $h_{0}[-n]$ which is correlation function $R_{k}[n]$ which is symmetrical</p>
+
+<p>$K_{0}(-z) = H_{0}(-z) H_{0}(-z^{-1}) $ are convolution of signal $h_{0}[n]e^{j\pi n}$ and $h_{0}[-n]e^{-j\pi n}$ which is correlation function $R_{k}[n]e^{j\pi n}$ which is symmetrical</p>
+
+<p>These give rise to</p>
+
+<blockquote>
+  <blockquote>
+    <p>Square Normalization Constraint <br />
+$\sum_{n} h_{0}^2[n] =1$</p>
+  </blockquote>
+</blockquote>
+
+<p><strong>Scaling Function Constraint</strong>
+We impose a constraint that scaling function has unit area</p>
+
+<p>$\phi(t) = \sum_{k} h_{0}[k] \phi[2t-k]$
+$\int \phi(t) dt = \int  \sum_{k} h_{0}[k] \phi[2t-k]$ dt $</p>
+
+<blockquote>
+  <blockquote>
+    <p>Normalization Constraint  <br />
+$\sum_{n} h_{0}[n] = \sqrt{2}$</p>
+  </blockquote>
+</blockquote>
+
+<p><strong>Conditions for Perfect Reconstruction</strong>
+For perfect reconstruction filter banks we need to select $H_{0}(z)$ which will satisfy the condition</p>
+
+<p>With odd D <br />
+$K_{0}(z)+ K_{0}(-z)= C_{0}$</p>
+
+<p>with even D	 
+$K_{0}(z)- K_{0}(-z) = C_{0}$</p>
+
+<p>From the above equation the summation  $K_{0}(z)+ K_{0}(-z)$ represents the nonzero sample value at even location and zero sample value at the odd location.</p>
+
+<p>Let $k_{0}[n]$ correspond to the sequence $K_{0}(z)$.The requirement is that we only want non zero value at zero location and zero value at all other locations</p>
+
+<p>This gives rise to</p>
+
+<blockquote>
+  <blockquote>
+    <p>Even shift orthogonality <br />
+$\sum_{k=0}^{N-1} h_{0}[k]h_{0}[k-2l]  = 0 ,\forall l \ne 0 $</p>
+  </blockquote>
+</blockquote>
+
+<p>Let $k_{0}[n]$ correspond to the sequence $K_{0}(z)$.The requirement is that we only want non zero value at zero location and zero value at all other locations</p>
+
+<p>This gives rise to</p>
+
+<blockquote>
+  <blockquote>
+    <p>Even shift orthogonality <br />
+$\sum_{k=0}^{N-1} h_{0}[k]h_{0}[k-2l]  = 0 ,\forall l \ne 0 $</p>
+  </blockquote>
+</blockquote>
+
+<p>The two additional constrains on the filter moments are due to vanishing moment constrain seen in the article <a href="http://pi19404.github.io/pyVision/2014/11/29/14/">Approximation of Piecewise Polynomial Using Wavelets</a></p>
+
+<blockquote>
+  <blockquote>
+    <p>Zero order vanishing moment constraint <br />
+$\sum\_{k} (-1)^{k} h(k) =0$</p>
+  </blockquote>
+</blockquote>
+
+<blockquote>
+  <blockquote>
+    <p>pth order vanishing moment constraint <br />
+$\sum\_{k} (-1)^{k} k^{p}h(k) =0$</p>
+  </blockquote>
+</blockquote>
+
+<p>Thus the constraints imposed on filter coefficients like square normalization,normalization,vanishing moments and even shift orthogonality are consequence or requirement of perfect reconstruction filter bank</p>
+
+<h3 id="daubechies-family-of--wavelets">Daubechies Family of  Wavelets</h3>
+
+<p>Daubechies is a class of wavelets belonging to class of Conjugate Quadrature Filters .</p>
+
+<p>In Daubechies family of wavelets  the idea is to have more $(1 − z^{−1}) $ terms on the high pass branch.
+Daubechies wavelet filters bank are realization of type of filter bank called Conjugate Quadrature Filter bank.</p>
+
+<p>As a example let us consider a filter of length 4 (Daubechies 2 Wavelets)
+As mentioned we are seeking a filter that has 2 $(1-z^{-1})$ terms on it high pass branch</p>
+
+<p>The filter is of the form</p>
+
+<p>$H_{1}(z) = z^{-d}H_{0}(-z^{-1})$</p>
+
+<p>That means the low pass filter will have 2 $(1+z^{-1})$ terms on it high pass branch</p>
+
+<p>$H_{0}(z)=h_{0}+ h_{1}z^{-1} + h_{2}z^{-2}+h_{3}z^{-3}$</p>
+
+<p>$H_{0}(z)=(1+z^{-1})^2(1+B_{0}z^{-1})$</p>
+
+<p>$H_{0}(\omega) =( {1+e^{-j\omega}})^2 L(\omega)$</p>
+
+<p>$H_{0}(\pi) =0 $</p>
+
+<p>This constraint comes from above condition</p>
+
+<blockquote>
+  <blockquote>
+    <p>Vanishing moment Constraint <br />
+$H_{0}(\pi) =0 $
+$h_{0} - h_{1} + h_{2} - h_{3} =0$</p>
+  </blockquote>
+</blockquote>
+
+<p>$H_{0}(z)=(1+2z^{-1}+z^{-2})(1+B_{0}z^{-1})$</p>
+
+<p>$H_{0}(z)=1+(2+B_{0})z^{-1}+(1+2B_{0})z^{-2}+B_{0}z^{-3}$</p>
+
+<p>$h_{0}[n]=C_{0}[ 1 , (2+B_{0}) ,(1+2B_{0}) , B_{0} ]$</p>
+
+<p>The even values of autocorrelation function should be 0</p>
+
+<p>$R(2) = (1+2B_{0}) +(2+B_{0})B_{0}=0$</p>
+
+<p>$R(2) =  $B_{0}^{2}+ 4 B_{0} + 1=0$</p>
+
+<p>solving we get</p>
+
+<p>$B_{0} =  -2 + \sqrt{3} =-0.268$</p>
+
+<p>we also get</p>
+
+<p>$h_{0}[n] = C_{n}[1,1.732,0.464,-0.268]$</p>
+
+<p>$R(0) = 0.4829$</p>
+
+<p>Thus we have $C_{0}=\frac{1}{0.4829}$</p>
+
+<p>$h_{0}[n] = [0.4829,0.8364,0.2241,-0.129]$</p>
+
+<p>The filter coefficient is said to belong to family of Daubechies wavelts .And since the high has filter
+has 2 zeros it is called as daub-2 wavelet.</p>
+
+<p>For example in the above case we have</p>
+
+<p>$h_{0}^{2}+ h_{1}^{2} + h_{2}^{2}+h_{3}^{2}=1$</p>
+
+<p>$h_{0}+ h_{1} + h_{2}+h_{3}=\sqrt{2}$</p>
+
+<p>$h_{0}h_{2}+ h_{1}h_{3}=0$</p>
+
+<p>$h_{0} - h_{1} + h_{2} - h_{3} =0$</p>
+
+<p>$0*h_{0} - h_{1} + 2 h_{2} - 3 h_{3} =0$</p>
+
+<p>The next member of Daubechies family is a length 6 filter of degree 5.And $H_{0}(z)$ can be written as</p>
+
+<p>$H_{0}(z)=(1+z^{-1})^3(1+B_{0}z^{-1})(1+B_{1}z^{-1})$</p>
+
+<p>we can solve for the coefficient using the same method as above</p>
+
+<p>This type of filter banks are called Conjugate Quadrature filter bank. The reason for this
+nomenclature is that the low pass and the high pass filter frequency responses are $\pi$ apart from
+each other and are governed by the constraint</p>
+
+<p>$K_{0}(z)+ K_{0}(-z)= C_{0}$</p>
+
+<p>Typically the Daubechies can be defined for any filter size.</p>
+
+<p>However we need a computationally way to derive these equations.The equations have a  nonlinear
+constraint due to double shift orthogonality .The approach described above is not a scalable approach for higher filter sizes.</p>
+
+<h3 id="computing-the-wavelet-coefficients">Computing the Wavelet Coefficients</h3>
+
+<p>We know that if a filter has $p$ zeros at $\pi$ it has 2 vanishing moments and total filter length if $2p$ and transfer function will have $2p-1$ zeros</p>
+
+<p>The product filter $K_{0}(z)$ will have impulse response $4p-1$ coefficients and transfer function will have $4p-2$ zeros</p>
+
+<p>for example</p>
+
+<p>$h_{0}[n]=[-0.1294, 0.2241, 0.8365, 0.48296]$</p>
+
+<p>$H_{0}(z)=-0.1294,+0.2241z^{-1}+0.8365z^{-2}0.48296z^{-3}$</p>
+
+<p>$k_{0}[n]=[ 0.01674682, -0.0580127 , -0.16626588 , 0.25     ,   0.91626588 , 0.8080127,0.23325318]$</p>
+
+<p>The pole zero plot of $h_{0}[n],k_{0}[n]$ is shown below
+we can see that $h_{0}[n]$ has 3 zeros and $k_{0}[n]$ as 6 zeros</p>
+
+<p><img src="http://pi19404.github.io/pyVision/images/15/w151.png" alt="enter image description here" /></p>
+
+<p><img src="http://pi19404.github.io/pyVision/images/15/w152.png" alt="enter image description here" /></p>
+
+<p>since $h(n)$ is real ,$h_{0}[Z]$ is a polynomial with real coefficients</p>
+
+<p>Furthermore from complex conjugate theorem if  a polynomial</p>
+
+<p>$H(z) = a_{0} + a_{1}z + a_{2}z^2 + \cdots + a_{n} z^n$</p>
+
+<p>has real coefficients, then any complex zeros occur in conjugate pairs. That is, if $a + bi$ is a zero then so is $a – bi$ and vice-versa.This is a direct implication that magnitude spectrum of polynomial with real coefficients is even symmetric.</p>
+
+<p>This can be also seen in the below plot of arbitrary polynomial</p>
+
+<p>$h[n]=[1,2,2,-1,5,4]$</p>
+
+<p><img src="http://pi19404.github.io/pyVision/images/15/w153.png" alt="enter image description here" /></p>
+
+<p>If $H(z)$ has p zeros then $K(z)=H(z)<em>H^{</em>}(z)$ will have 2p zeros</p>
+
+<p>if $K(z)$ is real and even symmetric $K(z)=K^{<em>}(z)=K(z^{</em>})=K(z^{-1})$</p>
+
+<p>if $z$ is a zero then $z^*=z^{-1}$ is also a zero</p>
+
+<p>Thus $K_{0}(z)=H(z)*H^{* }(z)$ has zeros that come in quadrapulets of $z_{0},z^{*}_{0},\frac{1}{z_{0}},\frac{1}{z_{0}^{ * }}$ for complex zeros and duplets for real zero $z_{0},\frac{1}{z_{0}}$</p>
+
+<p>Again we take a arbitraty polynomial</p>
+
+<p>$h[n]=[1,1,2,2]$</p>
+
+<p>$k[n]=[ 2 , 4  ,7 ,10,  7  ,4  ,2]$</p>
+
+<p><img src="http://pi19404.github.io/pyVision//images/15/w154.png" alt="enter image description here" /></p>
+
+<p><img src="http://pi19404.github.io/pyVision/images/15/w155.png" alt="enter image description here" /></p>
+
+<p>Let us assume that the frequency response  of filter will take the form</p>
+
+<p>$H_{0}(\omega) =( \frac{1+e^{-j\omega}}{2})^p L(\omega)$</p>
+
+<p>The filter will have $p$ zeros at $\pi$  and let us assume that $L(\omega)$ is a  polynomial which has a degree $p-1$ .</p>
+
+<p>$L(\omega)$ is not unique . For any quadrapulet of complex zeros in $K(z)$.One can choose a pair of zeros to retain for construction of zeros in $L(z)$.Similarly for every duplet of real zeros there are 2 ways of choosing the $L(z)$</p>
+
+<p>Thus there are total of $2^p$ different ways of choosing $L$.</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>In the above example $</td>
+      <td>L(w)</td>
+      <td>^2$ contains zeros at $[j\sqrt{2},-j\sqrt{2},j\frac{1}{\sqrt2},-j\frac{1}{\sqrt2}]=[z1,z2,z3,z4]$</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
+    <tr>
+      <td>$</td>
+      <td>H_{0}(\omega)</td>
+      <td>^2 =cos^2(\frac{\omega}{2})^p</td>
+      <td>L(\omega)</td>
+      <td>^2$</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>In case of the above example the zeros are located at</p>
+
+<p>$[j\sqrt{2},-j\sqrt{2},-1,-1,j\frac{1}{\sqrt2},-j\frac{1}{\sqrt2}]$</p>
+
+<p>The zeros at $(-1)$ are not part of $L(\omega)$</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>$</td>
+      <td>L(w)</td>
+      <td>^2$ contains zeros at $[j\sqrt{2},-j\sqrt{2},j\frac{1}{\sqrt2},-j\frac{1}{\sqrt2}]$</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>This can be written as</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>$</td>
+      <td>L(z)</td>
+      <td>^2 = (z-j\sqrt{2})(z+j\sqrt{2})(z-j\frac{1}{\sqrt2})(z+j\frac{1}{\sqrt2})$</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
+    <tr>
+      <td>$</td>
+      <td>L(z)</td>
+      <td>^2 = z^{4} + 2.5z^{2} +1$</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>It can also be seen that fourier transform of $K[z]$ can be written as polynomial of $cos(\omega)$</p>
+
+<p>$K(\omega) = 2 e^{-j3\omega}[e^{-j3\omega}+4e^{-j2\omega} + 7 e^{-j\omega} + 10 + 2 e^{j3\omega}+4e^{j2\omega}+ 7 e^{j\omega} ]$</p>
+
+<p>$K(\omega)= 2e^{-j3\omega}[4cos(2\omega ) + 7 cos(\omega ) + 10 + 2 cos(3\omega )]$</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>$</td>
+      <td>L(\omega)</td>
+      <td>^2 = e^{j4\omega} + 2.5e^{j2\omega} + 1=e^{j2\omega}[2.5+2cos(2\omega)$</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
+    <tr>
+      <td>$</td>
+      <td>L(\omega)</td>
+      <td>^2 =e^{j2\omega}[0.5  + 4 cos^2(\omega)]=e^{j2\omega}[16cos^2(\omega/2)-16cos(\omega/2)-3.5]$</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>This can be always expressed in the form of $sin^2(\omega/2)$</p>
+
+<p>Again</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>$</td>
+      <td>H(e^{j\omega})</td>
+      <td>^2 +</td>
+      <td>H(e^{-j(\omega+\pi)})</td>
+      <td>^2=1$</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>if $y=cos^2(\omega/2)$ where $y \in [-1,1] $</p>
+
+<p>Let us assume that $L(\omega)$ can always expressed as trigonometric polynomial interms of 1-y and $L(\omega+\pi)$ be expressed as polynomial of y.</p>
+
+<p>The equation can be written as</p>
+
+<blockquote>
+  <blockquote>
+    <p>$y^{p}F(1-y) + (1-y)^{p}F(y) = 1 ,\forall  p $</p>
+  </blockquote>
+</blockquote>
+
+<p>This implies that any $H_{0}(\omega)$ satisfying the condition for perfect reconstruction corresponds to a polynomial $F(1-y)$ solving the above equation</p>
+
+<p>Conversly every polynomial which satisfies the above equation will satisfy perfect reconstruction criteria and define the analysis filter of perfect reconstruction filter bank</p>
+
+<h3 id="a-possible-solution">A possible solution</h3>
+
+<p>An example of such a polynomial is</p>
+
+<blockquote>
+  <blockquote>
+    <p>$F(y) = \frac{1}{2(1-y)^p} $</p>
+  </blockquote>
+</blockquote>
+
+<p>From binomial theorem we have</p>
+
+<p>$\frac{1}{(1-x)^s} = \sum_{k=0}^\infty {s+k-1 \choose k} x^k \equiv \sum_{k=0}^\infty {s+k-1 \choose k} x^k = \sum_{k=0}^{p-1} {p+k-1 \choose k}  x^{k} + O(x^p)$</p>
+
+<p>This translates to</p>
+
+<p>$1 + y^{k}O((1-y)^k) + (1-y)^{k} O(y^k) = 1$</p>
+
+<p>or</p>
+
+<p>$y^{k}O((1-y)^k) + (1-y)^{k} O(y^k)=0$</p>
+
+<p>Let us take a finite number of terms of the series</p>
+
+<p>$F_{p}(y) =0.5 \sum_{k=0}^p [{p+k \choose k} y^k]$</p>
+
+<p>$F_{p}(1-y) = 0.5 \sum_{k=0}^p [{p+k \choose k} (1-y)^k]$</p>
+
+<p>$S_{p} = 0.5 \sum_{k=0}^p {p+k \choose k}  [{p+k \choose k}  y^{p}(1-y)^k + y^{k}(1-y)^p ]	$</p>
+
+<p>Let $A_{n,j}$ represent the coefficient $jth$ term of the series</p>
+
+<p>$A_{n,j} = 0.5{n+j\choose j}  $</p>
+
+<p>$A_{n,0} = 1  $</p>
+
+<p>$(1-y)^{n+1}  = (1-y)^n - y(1-y)^n $
+ $(y)^{n+1}  = (y)^n - (1-y)(y)^n $</p>
+
+<p>Now $S_{0} = 1$</p>
+
+<p>$S_{p-1} = \sum_{k=0}^{p-1} A_{p-1,k}A_{p-1,j}  [y^{p-1}(1-y)^k + y^{k}(1-y)^{p-1} 	]$</p>
+
+<p>$S_{p-1} = A_{p-1,0}[(1-y)^{p-1}  +y^{p-1}] + A_{p-1,1}[y(1-y)^{p-1}  +y^{p-1}(1-y)] + \ldots$</p>
+
+<p>$S_{p-1} = A_{p-1,0}[(1-y)^{p-1}  -y(1-y)^{p-1}+y^{p-1} -y^{p-1}(1-y)] + (A_{p-1,1}+A_{p-1,0})[y(1-y)^{p-1} (A_{p-1,1}+A_{p-1,0}][y(1-y)^{p-1}  +y^{p-1}(1-y)] + \ldots$</p>
+
+<p>$S_{p-1} =  A_{p-1,0}[(1-y)^{p}+(y)^{p}] + (\sum_{k=0}^{1}A_{p-1,k})[y(1-y)^{p-1}  +y^{p-1}(1-y)] + \ldots$</p>
+
+<p>$S_{p-1} =  \sum_{j=0}^{p-1} (\sum_{k=0}^{j+1}A_{p-1,k})[y^{j}(1-y)^{p-1}  +y^{p-1}(1-y)^{j}] +2\sum_{k=0}^{p}A_{p-1,k} (1-y)^{p} y^{p} $</p>
+
+<p>Again by properties of binomial coefficients</p>
+
+<p>$\sum_{k=0}^{j+1}A_{p-1,k} = A_{p,j}$</p>
+
+<p>$2 A_{p,p-1} = A_{p,p}$</p>
+
+<p>$S_{p-1} =  \sum_{j=0}^{p-1} A_{p,j}[y^{j}(1-y)^{p-1}  +y^{p-1}(1-y)^{j}] +2A_{p,p-1}(1-y)^{p-1} y^{p-1} $</p>
+
+<p>$S_{p-1} =  \sum_{j=0}^{p-1} A_{p,j}[y^{j}(1-y)^{p-1}  +y^{p-1}(1-y)^{j}] +2 A_{p,p-1} (1-y)^{p-1} [y^{p} + (1-y)y^{p-1}]$</p>
+
+<p>$S_{p-1} =  \sum_{j=0}^{p-1} A_{p,j}[y^{j}(1-y)^{p-1}  +y^{p-1}(1-y)^{j}] +2 A_{p,p-1} (1-y)^{p-1} y^{p} + (1-y)^{p}y^{p-1}]$</p>
+
+<p>$S_{p-1}=S_{p}$</p>
+
+<p>By induction if $S_{0}=1$ then $S_{p}=1 ,\forall p$</p>
+
+<p>Thus the polynomial</p>
+<blockquote>
+  <blockquote>
+    <p>$F_{p}(y) =0.5 \sum_{k=0}^p {p+k \choose k} y^k$  solves the equation</p>
+  </blockquote>
+</blockquote>
+
+<blockquote>
+  <blockquote>
+    <p>$y^{p}F(1-y) + (1-y)^{p}F(y) = 1 ,\forall  p $ and $F(y) &gt; 0$</p>
+  </blockquote>
+</blockquote>
+
+<blockquote>
+  <blockquote>
+    <p>and $F_{p}(y) =0.5 \sum_{k=0}^p {p+k \choose k} y^k$  solves the equation</p>
+  </blockquote>
+</blockquote>
+
+<blockquote>
+  <blockquote>
+    <p>$y^{p}F(1-y) + (1-y)^{p}F(y) = 1 ,\forall  p $ and $F(y) &gt; 0$</p>
+  </blockquote>
+</blockquote>
+
+<p>and thus satisfies the conditions for perfect reconstruction filter bank</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>$</td>
+      <td>L(\omega)</td>
+      <td>^2=F(1-y)=F(\omega)$</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>$F(\omega) =0.5 \sum_{k=0}^p c_{k} (sin(\omega/2) )^{2k} $</p>
+
+<p>$F(\omega) =0.5 \sum_{k=0}^p c_{k} sin^{2k}(\frac{\omega}{2}) $</p>
+
+<p><strong>By the properties of  trigonometric polynomials we have</strong></p>
+
+<p>$ cos^{2n} (x) = (1/2)^{2n}  \sum_{k=0}^{2n} {2n \choose k} exp( i(2n-2j)x )$</p>
+
+<p>$ sin^{2n} (x) = (1/2)^{2n}  \sum_{k=0}^{2n} {2n \choose k} exp( i(2n-2j)(x - \pi/2) )$</p>
+
+<p>$sin^{2n}(\omega/2) = \frac{1}{2^{2n}}{2n \choose  n}-\frac{1}{2^{2n}} \sum_{k=0}^{n-1} (-1)^{n-k}{2n \choose k}e^{(n-k)j\omega}+e^{-(n-k)j\omega}$</p>
+
+<h3 id="code">Code</h3>
+
+<p>Now after lengthy mathematical derivation ,we look at implementing this so that we can determine the filter coefficient for Daubechies file for any length.</p>
+
+<p>The first selection parameter in the design of Daubechies wavelets number of zeros at $\pi$</p>
+
+<p>If the filter has $p$ zeros at $\pi$ then total filter length is 2p and the Z transform of the filter has $2p-1$ zeros</p>
+
+<p><strong>Zeros at $\pi$</strong></p>
+
+<pre class="brush:python">
+zeros=2
+
+ #populating the array containing zeros of transfer function
+z=[]
+for i in range(zeros):
+    z.append(-1)
+
+</pre>
+
+<p>We have to find the locations of $p-1$ zeros to complete determine the transfer function of the filter
+These zeros will belong to polynomial defined by $L(\omega)$</p>
+
+<p><strong>Coefficients of Trigonometric polynomial</strong>
+We have seen that $|L(\omega)|^2$ is expressed as trigonometric polynomial $F(1-y)$</p>
+
+<p>$F_{p}(1-y) = 0.5 \sum_{k=0}^{p-1} [{p+k \choose k} (1-y)^k]$</p>
+
+<p>The function to compute the coefficients of function is given below</p>
+
+<pre class="brush:python">
+
+def calculate_combinations(p, k):
+    """ calculates the combination p+kCk """
+    r=0.5*combination(p+k,k);
+    return r
+
+def combination(n,r):
+    """ calculates the combination nCr """
+    r=factorial(n) /( factorial(n-r) * factorial(r))
+    return r
+
+trigo_coeffs=np.vectorize(calculate_combinations)
+
+ #coefficient of trigonometric polynomial
+v=[]
+
+for i in range(zeros):
+    v.append(calculate_combinations(zeros-1,i))
+    
+</pre>
+
+<p>Thus the trigonometric polynomial</p>
+
+<p>$F(\omega) =0.5 \sum_{k=0}^p c_{k} sin^{2k}(\frac{\omega}{2}) $</p>
+
+<p>where $c_{k}={p+k \choose k}$
+ and</p>
+
+<p>$sin^{2n}(\omega/2) = \frac{1}{2^{2n}}{2n \choose  n}-\frac{1}{2^{2n}} \sum_{k=0}^{n-1}(-1)^{n-k} {2n \choose k}e^{(n-k)j\omega}+e^{-(n-k)j\omega}$</p>
+
+<p>The function to compute the coefficients of $sin^{2n}(\omega/2)$ is as below</p>
+
+<pre class="brush:python">
+
+def sinp(p,pad=0):
+    """ calculates the coefficients trigonometric polynomial sin^2p(x) """
+    
+    result=np.zeros(2*p+1)
+    g1=1.0/(2**(2*p))
+    t1=combination(2*p,p)
+    result[p]=g1*t1
+    
+
+    for k in range(p):
+        v=g1*combination(2*p,k)
+        if (p-k)%2!=0:
+            v=-v       
+        result[k]=v
+        result[2*p-k]=v
+    
+    l=2*pad-2*p
+    result=np.append(np.zeros(l/2),result)
+    result=np.append(result,np.zeros(l/2))
+    
+    return result
+
+
+
+</pre>
+
+<table>
+  <tbody>
+    <tr>
+      <td>**Compute the transfer function of $</td>
+      <td>L(\omega)</td>
+      <td>^2$**</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
+    <tr>
+      <td>The number of terms in the polynomial $F(1-y)$ in terms of y will be $p-1$  and in terms of $</td>
+      <td>L(\omega)</td>
+      <td>^2$ will be  $2p-1$</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>&lt;/pre class=”brush:python”&gt;</p>
+
+<p>result=np.zeros(2<em>zeros-1)
+for k in range(N):
+    result=result+v[k]</em>sinp(k,zeros-1)</p>
+
+<p>&lt;/pre&gt;</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>Thus we have now discrete time representation  of $</td>
+      <td>L(\omega)</td>
+      <td>^2$</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
+    <tr>
+      <td>**Obtain poles and zeros of $</td>
+      <td>L(\omega)</td>
+      <td>^2$**</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
+    <tr>
+      <td>We can obtain the poles and zeros of $</td>
+      <td>L(\omega)</td>
+      <td>^2$ from the discrete time representation</td>
+    </tr>
+  </tbody>
+</table>
+
+<pre class="brush:python">
+
+z1, p, k = tf2zpk(v,[1])
+
+z2=[]
+for i in z1:
+    z2.append(i)
+
+</pre>
+
+<table>
+  <tbody>
+    <tr>
+      <td>**Zeros of $</td>
+      <td>L(\omega)</td>
+      <td>$**</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
+    <tr>
+      <td>we know that the filter has $p$ zeros at $\pi$ and $2p-1$ zeros belong to $</td>
+      <td>L(\omega)</td>
+      <td>^2$</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
+    <tr>
+      <td>out of the $2p-1$ zeros we need to select $p-1$ zeros of $</td>
+      <td>L(\omega)</td>
+      <td>$</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>This selection is not unique ,we can select any pair of $p-1$ zeros</p>
+
+<p>However for the filter to the stable we require that polse and zeros lie inside the unit circle of Z transform of the function.</p>
+
+<p>Since the filter is real we know that if $z_{o} $ is a real zero then so is $\frac{1}{z_{o}}$.Thus we need to only select one zero from such a pair.</p>
+
+<p>Since the filter is real we know that if $z_{o}$ is a complex zero then so are $z_{o}^{ * },\frac{1}{z_{o}},\frac{1}{z_{o}^{ * }}$.From the 4 zeros we need to select only pair $z_{o},z_{o}^{ * }$ or  $\frac{1}{z_{o}},\frac{1}{z_{o}^{ * }}$ correponding to zero that lie within the unit circle.</p>
+
+<p>Thus we select a subset of only those zeros that lie within the unit circle</p>
+
+<pre class="brush:python">
+
+def stable_zeros(z):
+    """ get the stable complex zeros from magnitude squared transfer function """
+   
+    fz=[]
+    for l in z:
+        if np.imag(l)!=0:
+            l1=l*np.conj(l)
+            l1=np.abs(l)            
+            #compare magnitude of imageinary component with 1
+            if l1&amp;lt1 or abs(l1-1)&amp;lt1e-3:
+                fz.append(l)
+      
+      
+    
+    fz=np.array(fz)
+    return fz
+
+def unique_real_zeros(z):
+    """ calculates the stable unique zeros from magnitude squared transfer function """
+    unique = scipy.unique(z)
+    
+    counts=np.zeros(len(unique))
+
+    for i in range(len(unique)):
+        for k in range(len(z)):
+            if unique[i]==z[k]:
+                counts[i]=counts[i]+1
+
+    zeros=[]
+    
+    for e in range(len(unique)):
+	    #compare the magnitude of real component with 1
+        if (np.imag(unique[e])==0 or abs(np.imag(unique[e]))&amp;lt1e-3) and (abs(np.real(unique[e])-1)&amp;lt1e-3 or abs(np.real(unique[e]))&amp;lt1):                    
+            if counts[e]&gt;1:
+                multi=counts[e]/2
+                print multi
+                zeros.append(np.repeat(np.real(unique[e]),multi))
+            if counts[e]==1 and (abs(np.real(unique[e])-1)&amp;lt1e-3 or abs(np.real(unique[e]))&amp;lt1):
+                zeros.append(np.real(unique[e]))
+
+
+    zeros=np.array(zeros,float)
+    return zeros
+
+</pre>
+
+<p><strong>Filter Transfer Function</strong></p>
+
+<p>Now that we have zeros at $\pi$ and zeros corresponding to $L(\omega)$,we can compute
+the zeros of complete filter and then compute the discrete time representation of the filter coefficient</p>
+
+<pre class="brush:python">
+
+def trigonometric_filter_zeros(zeros):
+    """ function return the zeros of trigonometric polynomial L(w)"""
+    v=[]
+    z=[]
+    for i in range(zeros):
+        v.append(calculate_combinations(zeros-1,i))
+        
+    v=np.array(v,float)
+    
+    result=np.zeros(2*zeros-1)
+    for k in range(zeros):
+        result=result+v[k]*sinp(k,zeros-1)
+        
+      
+    den=np.zeros(len(result))
+    den[len(den)-1]=1
+   
+    #convertize the transfer function to pole zero representation
+    z1, p, k = tf2zpk(result,den)
+
+    z=np.append(z,unique_real_zeros(z1))
+    z=np.append(z,stable_zeros(z1))
+
+        
+    return z
+
+
+def compute_coeffs(z,z1):
+    """ function computes the filter coefficients of decomposition low pass filter
+        given zeros at pi and zeros of trigonmonetric polynomial 
+        for daubach filter """
+        
+    #adding poles for causal system
+    zeros=len(z)
+    p=np.zeros(zeros-1)
+    p=np.array(p)
+    z=np.append(z,z1)
+    
+    h = zpk2tf(z,p,[1])
+    h=np.array(h[0])
+
+    #normalizing the filter coefficients
+    h=h/math.sqrt(np.sum(h**2))
+    return h,z,p
+
+
+   ...........
+   #populating zeros at pi
+    z=[]
+    for i in range(zeros):
+        z.append(-1)
+
+
+   #compute the zeros corresponding to trigonometric polynomial
+    tz=trigonometric_filter_zeros(zeros)
+
+   #compute the low pass filter decomposition filter
+    h,z,p=compute_coeffs(z,tz)
+        
+</pre>
+
+<p><strong>CQF Filters</strong></p>
+
+<p>Once we have computed the low pass filter coefficients we can compute the filter coefficients corresponding to all other filters of the CQF filter bank</p>
+
+<p>$h_{1}(n) = \sum_{k=0}^{N} h_{0}(N-k-d)(-1)^{k} $</p>
+
+<p>$g_{o}(n) = \sum_{k=0}^{N} h_{1}(k)(-1)^{k}$</p>
+
+<p>$g_{1}(n) = \sum_{k=0}^{n} h_{o}(n)(-1)^{k}</p>
+
+<pre class="brush:python">
+
+def cqf_filters(dec_lo):
+    """ computs the decomposition and analysis low and high pass filters given decomposition low pass filter """
+    index=np.array(range(len(dec_lo)))
+    dec_hi=np.exp(-1j*math.pi*index)*np.flipud(dec_lo)
+    dec_hi=dec_hi.real
+    
+    
+    recon_lo=np.exp(-1j*math.pi*index)*dec_hi.real
+    recon_lo=recon_lo.real
+    
+    recon_hi=-np.exp(-1j*math.pi*index)*dec_lo.real
+    recon_hi=recon_hi.real
+    
+
+    return dec_lo,dec_hi,recon_lo,recon_hi
+
+</pre>
+
+<h3 id="pole-zero-plots">Pole Zero plots</h3>
+
+<p>Below are the pole zero plots for filter sizes of length 4</p>
+
+<p><img src="http://pi19404.github.io/pyVision/images/15/w156.png" alt="enter image description here" /></p>
+
+<p>###Code</p>
+
+<p>The code can be found at <a href="https://github.com/pi19404/pyVision">pyVision</a> github repository</p>
+
+<p>Files</p>
+<ul>
+  <li>pyVision/pySignalProc/tutorial/wavelet5.py</li>
+</ul>
+
+<h3 id="references">References</h3>
+<ul>
+  <li>https://gist.github.com/endolith/4625838</li>
+  <li>http://enc.tfode.com/Binomial-QMF</li>
+  <li>http://web.njit.edu/~akansu/s1.htm</li>
+  <li>http://www.bearcave.com/misl/misl_tech/wavelets/lifting/predict.html</li>
+  <li>https://blancosilva.wordpress.com/teaching/mathematical-imaging/wavelets-in-sage/</li>
+  <li>http://web.mit.edu/1.130/WebDocs/1.130/Software/Examples/example6.m</li>
+  <li>http://fourier.eng.hmc.edu/e161/lectures/filterbank/node3.html</li>
+  <li>http://enc.tfode.com/Binomial-QMF</li>
+  <li>http://web.njit.edu/~akansu/s1.htm</li>
+  <li>https://www.safaribooksonline.com/library/view/audio-signal-processing/9780471791478/ch006-sec004.html</li>
+  <li>http://www.globalspec.com/reference/9046/348308/chapter-9-2-quadrature-mirror-filters-and-conjugate-quadrature-filters</li>
+  <li>http://www.dsprelated.com/dspbooks/sasp/Conjugate_Quadrature_Filters_CQF.html</li>
+  <li>http://www.raywenderlich.com/12065/how-to-create-a-simple-android-game</li>
+  <li>https://gist.github.com/endolith/4625838</li>
+  <li>http://enc.tfode.com/Binomial-QMF</li>
+  <li>http://web.njit.edu/~akansu/s1.htm</li>
+  <li>http://www.bearcave.com/misl/misl_tech/wavelets/lifting/predict.html</li>
+  <li>https://blancosilva.wordpress.com/teaching/mathematical-imaging/wavelets-in-sage/</li>
+  <li>http://web.mit.edu/1.130/WebDocs/1.130/Software/Examples/example6.m</li>
+  <li>http://fourier.eng.hmc.edu/e161/lectures/filterbank/node3.html</li>
+  <li>http://enc.tfode.com/Binomial-QMF</li>
+  <li>http://web.njit.edu/~akansu/s1.htm</li>
+</ul>
+
+
+</article>
+<div id="page-navigation"> 
+        <div class="clear">&nbsp;</div> 
+        <div class="left"> 
+         
+                <a href="/pyVision//software/2014/12/17/21/" title="Previous Post: 
+GStreamer Typefinding and Dynamic Pipelines - Part 2">&laquo; GStreamer Typefinding and Dynamic Pipelines - Part 2</a> 
+         
+        </div> 
+
+        <div class="right"> 
+         
+                <a href="/pyVision//linux/2015/04/03/22/" title="next Post: 
+Serial Bluetooth Terminal on Linux">Serial Bluetooth Terminal on Linux &raquo; </a> 
+         
+        </div> 
+        <div class="clear">&nbsp;</div> 
+</div> 
+<div id="disqus_thread"></div>
+		<script type="text/javascript">
+			/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+			var disqus_shortname = 'pi19404'; // required: replace example with your forum shortname
+    			var disqus_identifier = '/signal%20processing/2014/12/21/21/';
+    			var disqus_url = 'http://pyvision.github.com/signal%20processing/2014/12/21/21/';       
+ 
+			/* * * DON'T EDIT BELOW THIS LINE * * */
+			(function() {
+				var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+				dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+				(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+			})();
+		</script>
+		<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+		<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+
+      </div>
+    </div>
+
+      
+       <footer>
+          pyVision is maintained by <a href="https://github.com/pi19404">pi19404</a><br>
+        </footer>
+    
+    </div>
+ <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+    <script>
+      (function(document) {
+        var toggle = document.querySelector('.sidebar-toggle');
+        var sidebar = document.querySelector('#sidebar');
+        var checkbox = document.querySelector('#sidebar-checkbox');
+
+        document.addEventListener('click', function(e) {
+          var target = e.target;
+
+          if(!checkbox.checked ||
+             sidebar.contains(target) ||
+             (target === checkbox || target === toggle)) return;
+
+          checkbox.checked = true;
+        }, false);
+      })(document);
+    </script>
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+    <script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'pyvision'; // required: replace example with your forum shortname
+    var disqus_identifier = '/signal%20processing/2014/12/21/21/';
+    var disqus_url = 'http://pyvision.github.com/signal%20processing/2014/12/21/21/';
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+    </script>
+
+  </body>
+</html>

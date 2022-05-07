@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    
+  <!-- Enable responsiveness on mobile devices-->
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">-->
+ 
+
+  <title>
+    
+      Installing OS on Raspberry PI using NOOBS &middot; 
+      pyVision
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/pyVision/public/css/poole.css">
+  <link rel="stylesheet" href="/pyVision/public/css/syntax.css">
+  <link rel="stylesheet" href="/pyVision/public/css/lanyon.css">
+  <!--<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700|PT+Sans:400">-->
+    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/pyVisionpublic/apple-touch-icon-precomposed.png">
+  <link rel="shortcut icon" href="/pyVisionpublic/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script type="text/x-mathjax-config">
+   MathJax.Hub.Config({ 
+                config: ["MMLorHTML.js"], 
+                extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js"], 
+                jax: ["input/TeX"], 
+                tex2jax: { 
+                    inlineMath: [ ['$','$'], ["\\(","\\)"] ], 
+                    displayMath: [ ['$$','$$'], ["\\[","\\]"] ], 
+                    processEscapes: false 
+                }, 
+                TeX: { 
+                    TagSide: "right", 
+                    TagIndent: ".8em", 
+                    MultLineWidth: "85%", 
+                    equationNumbers: { 
+                       autoNumber: "AMS", 
+                    }, 
+                    unicode: { 
+                       fonts: "STIXGeneral,'Arial Unicode MS'" 
+                    } 
+                }, 
+                showProcessingMessages: false 
+            }); 
+</script>
+<!--<script src="/pyVision/javascripts/gitdata.js"></script>-->
+	<script type="text/javascript">
+    	$(function() {
+        $("#display-projects").getRepos("pi19404"); //Add your github username.
+    	});
+	</script>
+<script type="text/javascript"
+    src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<link href='http://alexgorbatchev.com/pub/sh/2.1.364/styles/shCore.css' rel='stylesheet' type='text/css'/> 
+<link href='http://alexgorbatchev.com/pub/sh/2.1.364/styles/shThemeDefault.css' rel='stylesheet' type='text/css'/> 
+<script src='http://alexgorbatchev.com/pub/sh/2.1.364/scripts/shCore.js' type='text/javascript' > </script>
+<script src='http://alexgorbatchev.com/pub/sh/2.1.364/scripts/shBrushCpp.js' type='text/javascript' > </script>
+<script src='http://alexgorbatchev.com/pub/sh/2.1.364/scripts/shBrushCSharp.js' type='text/javascript' > </script>
+<script src='http://alexgorbatchev.com/pub/sh/2.1.364/scripts/shBrushCss.js' type='text/javascript' > </script>
+<script src='http://alexgorbatchev.com/pub/sh/2.1.364/scripts/shBrushJava.js' type='text/javascript' > </script>
+<script src='http://alexgorbatchev.com/pub/sh/2.1.364/scripts/shBrushJScript.js' type='text/javascript' /> </script>
+<script src='http://alexgorbatchev.com/pub/sh/2.1.364/scripts/shBrushPhp.js' type='text/javascript' > </script>
+<script src='http://alexgorbatchev.com/pub/sh/2.1.364/scripts/shBrushPython.js' type='text/javascript' > </script>
+<script src='http://alexgorbatchev.com/pub/sh/2.1.364/scripts/shBrushRuby.js' type='text/javascript' > </script>
+<script src='http://alexgorbatchev.com/pub/sh/2.1.364/scripts/shBrushSql.js' type='text/javascript' > </script>
+<script src='http://alexgorbatchev.com/pub/sh/2.1.364/scripts/shBrushVb.js' type='text/javascript' > </script>
+<script src='http://alexgorbatchev.com/pub/sh/2.1.364/scripts/shBrushXml.js' type='text/javascript' > </script>
+<script src='http://alexgorbatchev.com/pub/sh/2.1.364/scripts/shBrushPerl.js' type='text/javascript' > </script>
+<script language='javascript'> 
+SyntaxHighlighter.config.bloggerMode = false;
+SyntaxHighlighter.all();
+</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-38535188-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</head>
+
+
+  <body>
+
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+
+
+
+
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="/pyVision/">Home </a>
+
+    
+
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="/pyVision//about/">About</a>
+        
+      
+    
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+    
+      
+    
+
+    <!-- <a class="sidebar-nav-item" href="http://www.github.com/pi19404/pyVision/zipball/master">Download</a>
+    <a class="sidebar-nav-item" href="http://www.github.com/pi19404/pyVision">GitHub project</a> -->
+    <a class="sidebar-nav-item" ><g:plusone size="medium">Categories</g:plusone> </a>
+    <div>
+      <ul>
+        
+        
+        <li><a href="/pyVision//category/Linux/index.html">Linux</a></li>
+        
+        
+        <li><a href="/pyVision//category/Signal+Processing/index.html">Signal Processing</a></li>
+        
+        
+        <li><a href="/pyVision//category/Raspberry+PI/index.html">Raspberry PI</a></li>
+        
+        
+        <li><a href="/pyVision//category/Software/index.html">Software</a></li>
+        
+        
+        <li><a href="/pyVision//category/Embedded+Firmware/index.html">Embedded Firmware</a></li>
+        
+        
+        <li><a href="/pyVision//category/Software+Installation/index.html">Software Installation</a></li>
+        
+        
+        <li><a href="/pyVision//category/Software+installation/index.html">Software installation</a></li>
+        
+        </ul>
+    
+    </div>
+<a class="sidebar-nav-item" >
+<div class='g-person' data-href='https://plus.google.com/115840780257908006648' data-layout='landscape' data-rel='author' data-showcoverphoto='false' data-showtagline='false' data-theme='dark' data-width='100'></a>
+</div>
+
+<div class='widget-content'>
+<script type="text/javascript" src="http://jj.revolvermaps.com/2/1.js?i=9bj6dpaloim&amp;s=220&amp;m=7&amp;v=true&amp;r=true&amp;b=ffffff&amp;n=false&amp;c=ff0000" async="async"></script>
+</div>
+
+<script type="text/javascript">
+function cantload() {
+img = document.getElementById("clustrMapsImg");
+img.onerror = null;
+img.src = "http://www2.clustrmaps.com/images/clustrmaps-back-soon.jpg";
+document.getElementById("clustrMapsLink").href = "http://www2.clustrmaps.com";
+}
+img = document.getElementById("clustrMapsImg");
+img.onerror = cantload;
+</script>
+<div class='widget-content'>
+<div id="clustrmaps-widget"></div><script type="text/javascript">var _clustrmaps = {'url' : 'http://pi-virtualworld.blogspot.com', 'user' : 1165875, 'server' : '3', 'id' : 'clustrmaps-widget', 'version' : 1, 'date' : '2015-04-05', 'lang' : 'en', 'corners' : 'square' };(function (){ var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = 'http://www3.clustrmaps.com/counter/map.js'; var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);})();</script><noscript><a href="http://www3.clustrmaps.com/user/ace11ca33"><img src="http://www3.clustrmaps.com/stats/maps-no_clusters/pi-virtualworld.blogspot.com-thumb.jpg" alt="Locations of visitors to this page" /></a></noscript>
+</a>
+
+<!-- Copyright (c)2009 Site Meter -->
+
+
+</div>
+
+<div class='widget-content'>
+<script type="text/javascript" src="http://feedjit.com/serve/?vv=1022&amp;tft=3&amp;dd=0&amp;wid=f31e21a2d981f025&amp;pid=0&amp;proid=0&amp;bc=000000&amp;tc=F5F5F5&amp;brd1=454545&amp;lnk=C95050&amp;hc=FFFFFF&amp;hfc=5C5A5A&amp;btn=8A0214&amp;ww=200&amp;went=10"></script><noscript><a href="http://feedjit.com/">Feedjit Live Blog Stats</a></noscript>
+</div>
+ 
+<!-- Site Meter -->
+<script type="text/javascript" src="http://s30.sitemeter.com/js/counter.js?site=s30pi19404">
+</script>
+<noscript>
+<a href="http://s30.sitemeter.com/stats.asp?site=s30pi19404" target="_top">
+<img src="http://s30.sitemeter.com/meter.asp?site=s30pi19404" alt="Site Meter" border="0"/></a>
+</noscript>   
+  </nav>
+
+  <div class="sidebar-item">
+    <p>
+      &copy; 2022. All rights reserved.
+    </p>
+  </div>
+</div>
+
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      
+        <div class="container">
+          <h1 class="header">
+            <a href="/" title="Home">pyVision</a></br>
+            <small>A Machine Learning and Signal Processing toolbox</small>
+          </h1>
+
+        <section id="downloads" class="clearfix">
+          <a href="https://github.com/pi19404/pyVision/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
+          <a href="https://github.com/pi19404/pyVision/tarball/master" id="download-tar-gz" class="button"><span>Download.tar.gz</span></a>
+          <a href="https://github.com/pi19404/pyVision" id="view-on-github" class="button"><span>View on GitHub</span></a>
+		
+	   <hr>
+          </section>
+    
+	</br>	</br>
+      <div class="content">
+        <article class="post">
+  <h1 class="post-title">Installing OS on Raspberry PI using NOOBS</h1>
+  <span class="post-date">04 Dec 2014</span>
+  <h3 id="introduction">Introduction</h3>
+
+<p>In this article we will look at installing operating system on Raspberry Pi using NOOBS operating system install manager</p>
+
+<h3 id="noobs">NOOBS</h3>
+
+<p>To get started with Raspberry Pi you need an operating system. NOOBS (New Out Of the Box Software) is an easy operating system install manager for the Raspberry Pi.</p>
+
+<p>The New Out Of Box Software (NOOBS) system not only makes it extremely simple to go from a blank SD card to an installed copy of Rasbian, but it also comes prepackaged with alternative Raspberry Pi operating systems like Pidora (a Fedora-based build), RISC OS (a modern repackaging of the speedy 1990s ARM-based desktop operating system), Arch (an Arch Linux port for the Pi), and two distributions of XBMC: Raspbmc and OpenELEC.</p>
+
+<p>The following Operating Systems are currently included in NOOBS:</p>
+
+<ul>
+  <li>Raspbian</li>
+  <li>Pidora</li>
+  <li>OpenELEC</li>
+  <li>RaspBMC</li>
+  <li>RISC OS</li>
+  <li>Arch Linux</li>
+</ul>
+
+<p>As of NOOBS v1.3.10 (September 2014), only Raspbian is installed by default in NOOBS. The others can be installed with a network connection.</p>
+
+<p><strong>Download</strong>
+NOOBS can be  download  for free and installed it on your SD card.</p>
+
+<p>NOOBS is available for download on the Raspberry Pi website: <a href="raspberrypi.org/downloads">raspberrypi.org/downloads</a></p>
+
+<p>NOOBS is available in two forms: offline and network install; or network install only.</p>
+
+<p>The full version has the images of each of the operating systems included, so they can be installed from the SD card while offline, whereas NOOBS Lite requires an internet connection to download the selected operating system.</p>
+
+<p>In this artile the NOOBS we will install OS on Raspberry PI using NOOBS offline version is used .</p>
+
+<p><img src="http://pi19404.github.io/pyVision/images/16/r1.png" alt="enter image description here" /></p>
+
+<p>Download the NOOBS offline and network install package.</p>
+
+<p><strong>Install NOOBS on SD CARD</strong>
+Raspberry PI requires a  SD card that is 4GB or greater in size .</p>
+
+<p>We will be performing the operations on Linux OS
+Download and install the following filesystem partition management utilities</p>
+
+<ul>
+  <li>gparted - Partition Editor</li>
+  <li>pysdm - Storage device manager</li>
+</ul>
+
+<p><strong>Formatting the SD Card</strong>
+Using Tools like gparted format the entire SD Card as FAT32 Filesystem</p>
+
+<p>Delete any existing partitions so that entire space on SDCard in unallocated</p>
+
+<p>RightClick on the unallocated space and select the “New” options to create a new parition</p>
+
+<p><img src="http://pi19404.github.io/pyVision/images/16/r5.png" alt="enter image description here" /></p>
+
+<p>Select the filesystem type and FAT32</p>
+
+<p>Assign the filesystem lable ( not assiging a lablel causes issues while installing OS on Raspberry PI)</p>
+
+<p>Make sure all the space on the SD Card is selected by setting “New Size” to “Maximum Size”</p>
+
+<p>Click on Add to configure the formatting options</p>
+
+<p><img src="http://pi19404.github.io/pyVision/images/16/r2.png" alt="enter image description here" /></p>
+
+<p>Click on  the “Apply” option to format the SD Card or select the menu option
+“Edit -&gt; Apply All Operations” to begin formatting the SD Card</p>
+
+<p><strong>Assigning filesystem permissions</strong>
+Now open the pysdm utility as root by typing “sudo pysdm” on the terminal</p>
+
+<p>Choose the suitable Device from the list .
+In the present case the SD card is identified as “/dev/sdc”</p>
+
+<p><img src="http://pi19404.github.io/pyVision/images/16/r6.png" alt="enter image description here" /></p>
+
+<p>Select the Assistant menu</p>
+
+<ul>
+  <li>Mounting Menu :set the umask for “directory”,”file” and “file and directory” permissions  to 000 indicating that any user can read,write and execute files on the filesystem.</li>
+</ul>
+
+<p><img src="http://pi19404.github.io/pyVision/images/16/r7.png" alt="enter image description here" /></p>
+
+<ul>
+  <li>Special Files : select all the options which enables any user to execute binary on the filesystem</li>
+</ul>
+
+<p><img src="http://pi19404.github.io/pyVision/images/16/r8.png" alt="enter image description here" /></p>
+
+<p><strong>Copying the NOOBS File</strong></p>
+
+<ul>
+  <li>Extract the files contained in this NOOBS zip file.(NOOBS_v1_3_10.zip)</li>
+  <li>Copy extracted files onto the SD Card so that files are placed in the root directory of the SD card</li>
+</ul>
+
+<p><strong>Starting Installation Process</strong>
+Insert the SD card into your Pi and connect the power supply.</p>
+
+<p>The first thing done on the first boot is  “RECOVERY” FAT partition will be automatically resized to a minimum, and a list of OSs that are available to install will be displayed.</p>
+
+<p>If filesytem is not assigned a lable or filesystem permissions are not set then resizing operation fails and it may lead to different types of issues  .</p>
+
+<p>Once the initialization process is done, you’ll be kicked into the NOOBS installation menu is displayed
+Select the “Raspbian” and click on Install to start with installation</p>
+
+<p>It will take some time to unpack and install the operating system on the SD Card
+Once the process is finished, you can boot right into your installed operating systems</p>
+
+
+</article>
+<div id="page-navigation"> 
+        <div class="clear">&nbsp;</div> 
+        <div class="left"> 
+         
+                <a href="/pyVision//signal%20processing/2014/11/29/14/" title="Previous Post: 
+Approximation of Piecewise Polynomial Using Wavelets">&laquo; Approximation of Piecewise Polynomial Using Wavelets</a> 
+         
+        </div> 
+
+        <div class="right"> 
+         
+                <a href="/pyVision//linux/2014/12/05/17/" title="next Post: 
+Starting Programs at Boot using Supervisor Process Control Utility">Starting Programs at Boot using Supervisor Process Control Utility &raquo; </a> 
+         
+        </div> 
+        <div class="clear">&nbsp;</div> 
+</div> 
+<div id="disqus_thread"></div>
+		<script type="text/javascript">
+			/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+			var disqus_shortname = 'pi19404'; // required: replace example with your forum shortname
+    			var disqus_identifier = '/raspberry%20pi/2014/12/04/16/';
+    			var disqus_url = 'http://pyvision.github.com/raspberry%20pi/2014/12/04/16/';       
+ 
+			/* * * DON'T EDIT BELOW THIS LINE * * */
+			(function() {
+				var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+				dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+				(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+			})();
+		</script>
+		<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+		<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+
+      </div>
+    </div>
+
+      
+       <footer>
+          pyVision is maintained by <a href="https://github.com/pi19404">pi19404</a><br>
+        </footer>
+    
+    </div>
+ <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+    <script>
+      (function(document) {
+        var toggle = document.querySelector('.sidebar-toggle');
+        var sidebar = document.querySelector('#sidebar');
+        var checkbox = document.querySelector('#sidebar-checkbox');
+
+        document.addEventListener('click', function(e) {
+          var target = e.target;
+
+          if(!checkbox.checked ||
+             sidebar.contains(target) ||
+             (target === checkbox || target === toggle)) return;
+
+          checkbox.checked = true;
+        }, false);
+      })(document);
+    </script>
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+    <script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'pyvision'; // required: replace example with your forum shortname
+    var disqus_identifier = '/raspberry%20pi/2014/12/04/16/';
+    var disqus_url = 'http://pyvision.github.com/raspberry%20pi/2014/12/04/16/';
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+    </script>
+
+  </body>
+</html>
