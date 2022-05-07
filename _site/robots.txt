@@ -1,1 +1,1 @@
-Sitemap: http://localhost:4000/pyVision/sitemap.xml
+Sitemap: http://pi19404.github.io/pyVision/sitemap.xml

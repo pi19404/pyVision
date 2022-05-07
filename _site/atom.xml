@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
  <title>pyVision</title>
- <link href="http://localhost:4000/atom.xml" rel="self"/>
- <link href="http://localhost:4000/"/>
- <updated>2022-05-07T16:45:36+00:00</updated>
- <id>http://localhost:4000</id>
+ <link href="http://pi19404.github.io/atom.xml" rel="self"/>
+ <link href="http://pi19404.github.io/"/>
+ <updated>2022-05-07T19:54:44+00:00</updated>
+ <id>http://pi19404.github.io</id>
  <author>
    <name>pi19404</name>
    <email>pi19404@gmail.com</email>
@@ -14,9 +14,9 @@
  
  <entry>
    <title>GitPod Self Host Installation on K3S</title>
-   <link href="http://localhost:4000/linux/2022/05/07/gitpod1/"/>
+   <link href="http://pi19404.github.io/linux/2022/05/07/gitpod1/"/>
    <updated>2022-05-07T00:00:00+00:00</updated>
-   <id>http://localhost:4000/linux/2022/05/07/gitpod1</id>
+   <id>http://pi19404.github.io/linux/2022/05/07/gitpod1</id>
    <content type="html">&lt;h1 id=&quot;gitpod-installation&quot;&gt;GitPod Installation&lt;/h1&gt;
 
 &lt;h3 id=&quot;step-1-create-a-kubernetes-cluster-&quot;&gt;Step 1: Create a Kubernetes Cluster &lt;a href=&quot;#step-1-create-a-kubernetes-cluster&quot; id=&quot;step-1-create-a-kubernetes-cluster&quot;&gt;&lt;/a&gt;&lt;/h3&gt;
@@ -113,14 +113,14 @@ export K3S_URL=&quot;https://node0:6443&quot;
 
 &lt;p&gt;Wait until each pod shows the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;STATUS&lt;/code&gt; of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Running&lt;/code&gt;.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;../../.gitbook/assets/image (7) (1).png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/pyVision/images/gitbook/assets/image (7) (1).png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Confirm that you now have a node in your cluster with the following command.&lt;/p&gt;
 
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;kubectl get nodes -o wide
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;../../.gitbook/assets/image (8).png&quot; alt=&quot;&quot; /&gt;&lt;br /&gt;
+&lt;p&gt;&lt;img src=&quot;/pyVision/images/gitbook/assets/image (8).png&quot; alt=&quot;&quot; /&gt;&lt;br /&gt;
 References&lt;/p&gt;
 
 &lt;ul&gt;
@@ -159,11 +159,11 @@ References&lt;/p&gt;
 
 &lt;p&gt;Create and Account and Login into cloudflare . Click on Add a Site option to start the domain delegation process&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;../../.gitbook/assets/image (2).png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/pyVision/images/gitbook/assets/image (2).png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;For now choose the Free option and continue&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;../../.gitbook/assets/image.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/pyVision/images/gitbook/assets/image.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Log in&lt;/strong&gt; to the &lt;strong&gt;administrator account&lt;/strong&gt; for your domain registrar . In this case domain registrar is onlydomain.com . &lt;/p&gt;
 
@@ -187,7 +187,7 @@ References&lt;/p&gt;
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;zod.ns.cloudflare.com
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;../../.gitbook/assets/image (4).png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/pyVision/images/gitbook/assets/image (4).png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;This will update the DNS Settings and allow the DNS to be managed via cloudflare&lt;/p&gt;
 
@@ -209,7 +209,7 @@ References&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&quot;../../.gitbook/assets/image (5).png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/pyVision/images/gitbook/assets/image (5).png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Copy The token and save it as it will not be displayed again for security purposes&lt;/p&gt;
 
@@ -367,13 +367,13 @@ https-certificates          True    https-certificates          5m
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ngrok http 8800
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;../../.gitbook/assets/image (6) (1).png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/pyVision/images/gitbook/assets/image (6) (1).png&quot; alt=&quot;image&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;The first page will ask you to upload your Gitpod license. Gitpod provides community license for free (right click and save link as &lt;a href=&quot;https://raw.githubusercontent.com/gitpod-io/gitpod/main/install/licenses/Community.yaml&quot;&gt;here&lt;/a&gt;)&lt;/p&gt;
 
 &lt;p&gt;. &lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;../../.gitbook/assets/image (1).png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/pyVision/images/gitbook/assets/image (1).png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Enter the domain name as :gitpod.miko-robot.co.in&lt;/p&gt;
 
@@ -385,23 +385,23 @@ https-certificates          True    https-certificates          5m
 
 &lt;p&gt;Check if all the pods are running states&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;../../.gitbook/assets/image (7).png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/pyVision/images/gitbook/image (7).png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;kubectl -n gitpod patch svc proxy -p '{&quot;spec&quot;: {&quot;type&quot;: &quot;LoadBalancer&quot;, &quot;externalIPs&quot;:[&quot;xxx.xxx.xxx.xx&quot;]}}'
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Once the installation has been finished successfully, you will see the status “Ready” with a small green indicator next to the Gitpod logo. You see which version you installed and which license you are using.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;../../.gitbook/assets/image (6).png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/pyVision/images/gitbook/assets/image (6).png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 </content>
  </entry>
  
  <entry>
    <title>Install ngrok on Ubuntu 20.04</title>
-   <link href="http://localhost:4000/linux/2022/05/05/ngrok/"/>
+   <link href="http://pi19404.github.io/linux/2022/05/05/ngrok/"/>
    <updated>2022-05-05T00:00:00+00:00</updated>
-   <id>http://localhost:4000/linux/2022/05/05/ngrok</id>
+   <id>http://pi19404.github.io/linux/2022/05/05/ngrok</id>
    <content type="html">&lt;h1 id=&quot;install-ngrok&quot;&gt;Install ngrok&lt;/h1&gt;
 
 &lt;p&gt;create an account and login in to ngrok&lt;/p&gt;
@@ -429,9 +429,9 @@ chmod 755 /usr/bin/ngrok
  
  <entry>
    <title>Lets Crypt SSL Certificate Installation on Ubuntu</title>
-   <link href="http://localhost:4000/linux/2022/04/24/letscrypt1/"/>
+   <link href="http://pi19404.github.io/linux/2022/04/24/letscrypt1/"/>
    <updated>2022-04-24T00:00:00+00:00</updated>
-   <id>http://localhost:4000/linux/2022/04/24/letscrypt1</id>
+   <id>http://pi19404.github.io/linux/2022/04/24/letscrypt1</id>
    <content type="html">&lt;h1 id=&quot;lets-crypt-ssl-certificate-installation-on-ubuntu&quot;&gt;Lets Crypt SSL Certificate Installation on Ubuntu&lt;/h1&gt;
 
 &lt;p&gt;The first step to using Let’s Encrypt to obtain an SSL certificate is to install the Certbot software on your server.&lt;/p&gt;
@@ -531,9 +531,9 @@ Select the appropriate number [1-2] then [enter] (press 'c' to cancel):
  
  <entry>
    <title>Install LetsCrypt SSL Wildcard Certificate on Ubuntu</title>
-   <link href="http://localhost:4000/linux/2022/04/24/install-letscrypt-ssl-wildcard-certificate-on-ubuntu/"/>
+   <link href="http://pi19404.github.io/linux/2022/04/24/install-letscrypt-ssl-wildcard-certificate-on-ubuntu/"/>
    <updated>2022-04-24T00:00:00+00:00</updated>
-   <id>http://localhost:4000/linux/2022/04/24/install-letscrypt-ssl-wildcard-certificate-on-ubuntu</id>
+   <id>http://pi19404.github.io/linux/2022/04/24/install-letscrypt-ssl-wildcard-certificate-on-ubuntu</id>
    <content type="html">&lt;h1 id=&quot;install-letscrypt-ssl-wildcard-certificate-on-ubuntu&quot;&gt;Install LetsCrypt SSL Wildcard Certificate on Ubuntu&lt;/h1&gt;
 
 &lt;h4 id=&quot;installing-certbot-&quot;&gt;&lt;strong&gt;INSTALLING CERTBOT&lt;/strong&gt; &lt;a href=&quot;#bkmrk-installing-certbot&quot; id=&quot;bkmrk-installing-certbot&quot;&gt;&lt;/a&gt;&lt;/h4&gt;
@@ -611,9 +611,9 @@ server {
  
  <entry>
    <title>patchelf Installation and usage</title>
-   <link href="http://localhost:4000/linux/2022/04/14/patchelf/"/>
+   <link href="http://pi19404.github.io/linux/2022/04/14/patchelf/"/>
    <updated>2022-04-14T00:00:00+00:00</updated>
-   <id>http://localhost:4000/linux/2022/04/14/patchelf</id>
+   <id>http://pi19404.github.io/linux/2022/04/14/patchelf</id>
    <content type="html">&lt;p&gt;Patch Elf is a A small utility to modify the dynamic linker and RPATH of ELF executables&lt;/p&gt;
 
 &lt;p&gt;To build patchelf&lt;/p&gt;
@@ -661,9 +661,9 @@ sudo make install
  
  <entry>
    <title>GLib 2.25 Installation on Ubuntu 16.04</title>
-   <link href="http://localhost:4000/linux/2022/04/14/glibc/"/>
+   <link href="http://pi19404.github.io/linux/2022/04/14/glibc/"/>
    <updated>2022-04-14T00:00:00+00:00</updated>
-   <id>http://localhost:4000/linux/2022/04/14/glibc</id>
+   <id>http://pi19404.github.io/linux/2022/04/14/glibc</id>
    <content type="html">&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
 &lt;p&gt;In this article we will look at installation of Glib 2.25 installation on Ubuntu 16.04&lt;/p&gt;
 
@@ -719,9 +719,9 @@ export LD_LIBRARY_PATH=/opt/glibc-2.25/lib
  
  <entry>
    <title>Natural Language Understanding - Intent Detection with Keras and LSTM</title>
-   <link href="http://localhost:4000/2018/01/31/lstm4/"/>
+   <link href="http://pi19404.github.io/2018/01/31/lstm4/"/>
    <updated>2018-01-31T00:00:00+00:00</updated>
-   <id>http://localhost:4000/2018/01/31/lstm4</id>
+   <id>http://pi19404.github.io/2018/01/31/lstm4</id>
    <content type="html">&lt;p&gt;In this example we will look at the problem of natural language understanding.The aim is simply to understand the meaning of sentense. This is a unsolved problem in the context of open domain sentense understaing ie there exists no system that can understand the meaning of any open domain sentense.However many of the techniques that work well do so within a specific domain.&lt;/p&gt;
 
 &lt;p&gt;An intent is a group of utterances with similar meaning&lt;/p&gt;
@@ -888,9 +888,9 @@ since dataset is very small for DNN applications .&lt;/p&gt;
  
  <entry>
    <title>Using Pre Trained Word Vector Embeddings for Sequence Classification using LSTM</title>
-   <link href="http://localhost:4000/2018/01/30/lstm3/"/>
+   <link href="http://pi19404.github.io/2018/01/30/lstm3/"/>
    <updated>2018-01-30T00:00:00+00:00</updated>
-   <id>http://localhost:4000/2018/01/30/lstm3</id>
+   <id>http://pi19404.github.io/2018/01/30/lstm3</id>
    <content type="html">&lt;p&gt;In this article we will look at using pre trained word vector embedding for sequence classification
 using LSTM&lt;/p&gt;
 
@@ -1198,9 +1198,9 @@ good embeddings over current data,it may limit the generalization ability of the
  
  <entry>
    <title>Sequence classification with LSTM</title>
-   <link href="http://localhost:4000/2018/01/30/lstm2/"/>
+   <link href="http://pi19404.github.io/2018/01/30/lstm2/"/>
    <updated>2018-01-30T00:00:00+00:00</updated>
-   <id>http://localhost:4000/2018/01/30/lstm2</id>
+   <id>http://pi19404.github.io/2018/01/30/lstm2</id>
    <content type="html">&lt;p&gt;In this article, we will look at how to use LSTM recurrent neural network models for sequence classification problems using the Keras deep learning library&lt;/p&gt;
 
 &lt;p&gt;A standard dataset used to demonstrate sequence classification is sentiment classficiation on IMDB movie review dataset.&lt;/p&gt;
@@ -1388,9 +1388,9 @@ model.evaluate(X_test,y_test)
  
  <entry>
    <title>Java AES encryption and decryption</title>
-   <link href="http://localhost:4000/2017/05/24/javaaes/"/>
+   <link href="http://pi19404.github.io/2017/05/24/javaaes/"/>
    <updated>2017-05-24T00:00:00+00:00</updated>
-   <id>http://localhost:4000/2017/05/24/javaaes</id>
+   <id>http://pi19404.github.io/2017/05/24/javaaes</id>
    <content type="html">&lt;h1 id=&quot;introduction&quot;&gt;&lt;strong&gt;Introduction&lt;/strong&gt;&lt;/h1&gt;
 
 &lt;p&gt;In cryptography, encryption is the process of encoding a message or information in such a way that only authorized parties can access it&lt;/p&gt;
@@ -1486,9 +1486,9 @@ CBC block cipher algorithm and use PKCS5Padding scheme&lt;/p&gt;
  
  <entry>
    <title>NLP Introduction to LSTM using Keras</title>
-   <link href="http://localhost:4000/2017/05/19/lstmkeras/"/>
+   <link href="http://pi19404.github.io/2017/05/19/lstmkeras/"/>
    <updated>2017-05-19T00:00:00+00:00</updated>
-   <id>http://localhost:4000/2017/05/19/lstmkeras</id>
+   <id>http://pi19404.github.io/2017/05/19/lstmkeras</id>
    <content type="html">&lt;h1 id=&quot;long-short-term-memory-network&quot;&gt;&lt;strong&gt;Long Short-Term Memory Network&lt;/strong&gt;&lt;/h1&gt;
 
 &lt;p&gt;The Long Short-Term Memory network, or LSTM network, is a recurrent neural network.&lt;/p&gt;
@@ -1698,9 +1698,9 @@ model.save('my_model.h5')
  
  <entry>
    <title>NLP Basics of using Stanford corenlp server</title>
-   <link href="http://localhost:4000/2017/05/19/corenlp1/"/>
+   <link href="http://pi19404.github.io/2017/05/19/corenlp1/"/>
    <updated>2017-05-19T00:00:00+00:00</updated>
-   <id>http://localhost:4000/2017/05/19/corenlp1</id>
+   <id>http://pi19404.github.io/2017/05/19/corenlp1</id>
    <content type="html">&lt;p&gt;&lt;a href=&quot;https://stanfordnlp.github.io/CoreNLP/index.html&quot;&gt;Stanford CoreNLP&lt;/a&gt; provides a set of natural language analysis tools written in Java&lt;/p&gt;
 
 &lt;p&gt;CoreNLP source code can be downloaded from https://github.com/stanfordnlp/CoreNLP&lt;/p&gt;
@@ -1767,9 +1767,9 @@ sentiment - sentiment analysis annotator&lt;/p&gt;
  
  <entry>
    <title>NLP Installing TensorFlow on ubuntu 16.04</title>
-   <link href="http://localhost:4000/2017/05/16/tensorflow1/"/>
+   <link href="http://pi19404.github.io/2017/05/16/tensorflow1/"/>
    <updated>2017-05-16T00:00:00+00:00</updated>
-   <id>http://localhost:4000/2017/05/16/tensorflow1</id>
+   <id>http://pi19404.github.io/2017/05/16/tensorflow1</id>
    <content type="html">&lt;p&gt;&lt;a href=&quot;https://www.tensorflow.org/&quot;&gt;TensorFlow&lt;/a&gt; is An open-source software library for Machine Intelligence.
 In this article will be installing tensorflow on ubuntu 16.04 with GPU support.&lt;/p&gt;
 
@@ -1966,9 +1966,9 @@ python -c &quot;import tensorflow; print(tensorflow.__version__)&quot;
  
  <entry>
    <title>NLP Dictionary,Bag Of Words and TFIDF using Gensim</title>
-   <link href="http://localhost:4000/2017/05/15/gensim2/"/>
+   <link href="http://pi19404.github.io/2017/05/15/gensim2/"/>
    <updated>2017-05-15T00:00:00+00:00</updated>
-   <id>http://localhost:4000/2017/05/15/gensim2</id>
+   <id>http://pi19404.github.io/2017/05/15/gensim2</id>
    <content type="html">&lt;p&gt;In Natural language processing one of the most common questions is how to convert a sentense to some kind of numeric representation for machine learning algorithms.&lt;/p&gt;
 
 &lt;p&gt;One of the elemenatry ways of doing this to represent a sentense by its mathematical represetation is by measuring the relative frequency count of words occuring in sentense&lt;/p&gt;
@@ -2108,9 +2108,9 @@ to do stop word removal as pre processing stage in the NLP pipeline.&lt;/p&gt;
  
  <entry>
    <title>NLP Latent semantic indexing using Gensim</title>
-   <link href="http://localhost:4000/2017/05/15/gensim1/"/>
+   <link href="http://pi19404.github.io/2017/05/15/gensim1/"/>
    <updated>2017-05-15T00:00:00+00:00</updated>
-   <id>http://localhost:4000/2017/05/15/gensim1</id>
+   <id>http://pi19404.github.io/2017/05/15/gensim1</id>
    <content type="html">&lt;p&gt;In the article http://34.194.184.172/emotix/index.php/2017/05/15/nlp-dictionarybag-of-words-and-tfidf-using-gensim/
 we saw how to compute the TFIDF vectors of document enabling us to reprepsent a sentense/document using a mathematical
 representation.&lt;/p&gt;
@@ -2217,9 +2217,9 @@ Incremental addition of few thousand documents will not affect the LSI model com
  
  <entry>
    <title>NLP spaCy Word and document vectors</title>
-   <link href="http://localhost:4000/2017/05/13/spacy1/"/>
+   <link href="http://pi19404.github.io/2017/05/13/spacy1/"/>
    <updated>2017-05-13T00:00:00+00:00</updated>
-   <id>http://localhost:4000/2017/05/13/spacy1</id>
+   <id>http://pi19404.github.io/2017/05/13/spacy1</id>
    <content type="html">&lt;h1 id=&quot;introduction&quot;&gt;&lt;strong&gt;Introduction&lt;/strong&gt;&lt;/h1&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://spacy.io/&quot;&gt;spaCy&lt;/a&gt; is a library for advanced natural language processing in Python and Cython.&lt;/p&gt;
@@ -2296,9 +2296,9 @@ print(v1[0],v1[1],v1[2])
  
  <entry>
    <title>RASA NLU Trainer Frontend application</title>
-   <link href="http://localhost:4000/2017/05/12/rasa1/"/>
+   <link href="http://pi19404.github.io/2017/05/12/rasa1/"/>
    <updated>2017-05-12T00:00:00+00:00</updated>
-   <id>http://localhost:4000/2017/05/12/rasa1</id>
+   <id>http://pi19404.github.io/2017/05/12/rasa1</id>
    <content type="html">&lt;p&gt;&lt;a href=&quot;https://rasa.ai/&quot;&gt;rasa NLU&lt;/a&gt; (Natural Language Understanding) is a tool for intent classification and entity extraction&lt;/p&gt;
 
 &lt;p&gt;The RASA NLU Trainer helps in creating training data files in a format suitable for intent and entity extraction&lt;/p&gt;
@@ -2331,9 +2331,9 @@ server listening at http://localhost:36252/
  
  <entry>
    <title>Natural Language Processing Pre Processing Stemming,Lemmatization,Stop Words</title>
-   <link href="http://localhost:4000/2017/05/12/nlp3/"/>
+   <link href="http://pi19404.github.io/2017/05/12/nlp3/"/>
    <updated>2017-05-12T00:00:00+00:00</updated>
-   <id>http://localhost:4000/2017/05/12/nlp3</id>
+   <id>http://pi19404.github.io/2017/05/12/nlp3</id>
    <content type="html">&lt;h1 id=&quot;introduction&quot;&gt;&lt;strong&gt;Introduction&lt;/strong&gt;&lt;/h1&gt;
 
 &lt;p&gt;The fundamental purpose  of Natural Language Processing is to do some form of analysis, or processing, where the machine can understand, at least to some level, what the text means, says, or implies.&lt;/p&gt;
@@ -2461,9 +2461,9 @@ others:others
  
  <entry>
    <title>Apache Thrift Basics with java application</title>
-   <link href="http://localhost:4000/2017/05/08/aj1/"/>
+   <link href="http://pi19404.github.io/2017/05/08/aj1/"/>
    <updated>2017-05-08T00:00:00+00:00</updated>
-   <id>http://localhost:4000/2017/05/08/aj1</id>
+   <id>http://pi19404.github.io/2017/05/08/aj1</id>
    <content type="html">&lt;p&gt;Apache Thrift is a RPC framework founded by facebook and now it is an Apache project. Thrift lets you define data types and service interfaces in a language neutral definition file. That definition file is used as the input for the compiler to generate code for building RPC clients and servers that communicate over different programming languages.&lt;/p&gt;
 
 &lt;h1 id=&quot;installation&quot;&gt;&lt;strong&gt;Installation&lt;/strong&gt;&lt;/h1&gt;
@@ -2639,9 +2639,9 @@ transport.close();
  
  <entry>
    <title>Apache Avro RPC Framework using Netty Server</title>
-   <link href="http://localhost:4000/2017/05/05/a1/"/>
+   <link href="http://pi19404.github.io/2017/05/05/a1/"/>
    <updated>2017-05-05T00:00:00+00:00</updated>
-   <id>http://localhost:4000/2017/05/05/a1</id>
+   <id>http://pi19404.github.io/2017/05/05/a1</id>
    <content type="html">&lt;p&gt;Apache Avro is more than a data serialization framework. It provides support for RPC Mechanisms&lt;/p&gt;
 
 &lt;p&gt;Avro protocols describe RPC interfaces. Like schemas, they are defined with JSON text.&lt;/p&gt;
@@ -2795,9 +2795,9 @@ which can be called by other frontend or backend componenets.&lt;/p&gt;
  
  <entry>
    <title>Apache Avro Data serialization Framework</title>
-   <link href="http://localhost:4000/2017/05/04/a1/"/>
+   <link href="http://pi19404.github.io/2017/05/04/a1/"/>
    <updated>2017-05-04T00:00:00+00:00</updated>
-   <id>http://localhost:4000/2017/05/04/a1</id>
+   <id>http://pi19404.github.io/2017/05/04/a1</id>
    <content type="html">&lt;h1 id=&quot;introduction&quot;&gt;&lt;strong&gt;Introduction&lt;/strong&gt;&lt;/h1&gt;
 
 &lt;p&gt;Data serialization is a mechanism to translate or serialize data into binary or textual form that can be transported over the network or store on some persisten storage .Serialization operation is performed by the sender/transmitter of the data&lt;/p&gt;
@@ -3070,9 +3070,9 @@ System.out.println(em);
  
  <entry>
    <title>Install Mantis Issue Tracker on Ubuntu 16.04</title>
-   <link href="http://localhost:4000/2017/05/02/a1/"/>
+   <link href="http://pi19404.github.io/2017/05/02/a1/"/>
    <updated>2017-05-02T00:00:00+00:00</updated>
-   <id>http://localhost:4000/2017/05/02/a1</id>
+   <id>http://pi19404.github.io/2017/05/02/a1</id>
    <content type="html">&lt;p&gt;MantisBT is an open source issue tracker.We will look at installation of Mantis on ubuntu 16.04 OS.&lt;/p&gt;
 
 &lt;p&gt;You can download mantis from &lt;a href=&quot;https://www.mantisbt.org/download.php&quot;&gt;&lt;/a&gt;&lt;/p&gt;
@@ -3124,9 +3124,9 @@ This will do the necessary installation.&lt;/p&gt;
  
  <entry>
    <title>asciinema Terminal Recording Installation and usage</title>
-   <link href="http://localhost:4000/2017/04/24/a1/"/>
+   <link href="http://pi19404.github.io/2017/04/24/a1/"/>
    <updated>2017-04-24T00:00:00+00:00</updated>
-   <id>http://localhost:4000/2017/04/24/a1</id>
+   <id>http://pi19404.github.io/2017/04/24/a1</id>
    <content type="html">&lt;p&gt;asciinema is a lightweight, purely text-based approach to terminal recording.&lt;/p&gt;
 
 &lt;p&gt;To install &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;asciinema&lt;/code&gt; on ubuntu 16.04 run the following command&lt;/p&gt;
@@ -3218,9 +3218,9 @@ https://asciinema.org/a/7bkwd4gyh0keo2c01uqej9syo
  
  <entry>
    <title>Partitioning and Mounting disk on Ubuntu 16.04 using fdisk and gparted</title>
-   <link href="http://localhost:4000/2017/04/22/a3/"/>
+   <link href="http://pi19404.github.io/2017/04/22/a3/"/>
    <updated>2017-04-22T00:00:00+00:00</updated>
-   <id>http://localhost:4000/2017/04/22/a3</id>
+   <id>http://pi19404.github.io/2017/04/22/a3</id>
    <content type="html">&lt;p&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fdisk&lt;/code&gt; command is a text-based utility for viewing and managing hard disk partitions on Linux. It’s one of the most powerful tools you can use to manage partitions.&lt;/p&gt;
 
 &lt;p&gt;Many drives come with a single partition already set up, but all storage devices are just treated as a mass of unallocated, free space when they contain no partitions. To actually set up a file system and save any files to the drive, the drive needs a partition.&lt;/p&gt;
@@ -3441,9 +3441,9 @@ sudo gnome-disks
  
  <entry>
    <title>Mounting NFS Share on ubuntu 16.04 Client</title>
-   <link href="http://localhost:4000/2017/04/22/a1/"/>
+   <link href="http://pi19404.github.io/2017/04/22/a1/"/>
    <updated>2017-04-22T00:00:00+00:00</updated>
-   <id>http://localhost:4000/2017/04/22/a1</id>
+   <id>http://pi19404.github.io/2017/04/22/a1</id>
    <content type="html">&lt;p&gt;We will look at the process of mounting the network file storage on ubuntu16.04 system client&lt;/p&gt;
 
 &lt;p&gt;On the client server, we need to install a package called nfs-common, which provides NFS functionality without including unneeded server components. Again, we will refresh the local package index prior to installation to ensure that we have up-to-date information:&lt;/p&gt;
@@ -3491,9 +3491,9 @@ nfs_host:/mount  500G  128K  500G   1% /opt/miko/storage/disk2
  
  <entry>
    <title>Glassfish Admin Password Management and Command Login without password</title>
-   <link href="http://localhost:4000/2017/04/21/a5/"/>
+   <link href="http://pi19404.github.io/2017/04/21/a5/"/>
    <updated>2017-04-21T00:00:00+00:00</updated>
-   <id>http://localhost:4000/2017/04/21/a5</id>
+   <id>http://pi19404.github.io/2017/04/21/a5</id>
    <content type="html">&lt;h2 id=&quot;introduction&quot;&gt;&lt;strong&gt;Introduction&lt;/strong&gt;&lt;/h2&gt;
 
 &lt;p&gt;we can use the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;asadmin&lt;/code&gt; utility to perform administrative tasks for Oracle GlassFish Server from the command line or from a script.&lt;/p&gt;
@@ -3556,9 +3556,9 @@ Enter admin password for user &quot;admin&quot;&amp;gt;
  
  <entry>
    <title>Glassfish application deployment from commandline</title>
-   <link href="http://localhost:4000/2017/04/21/a4/"/>
+   <link href="http://pi19404.github.io/2017/04/21/a4/"/>
    <updated>2017-04-21T00:00:00+00:00</updated>
-   <id>http://localhost:4000/2017/04/21/a4</id>
+   <id>http://pi19404.github.io/2017/04/21/a4</id>
    <content type="html">&lt;p&gt;**Application Deployment **&lt;/p&gt;
 
 &lt;p&gt;To deploy application from commandline we need to run the following commands&lt;/p&gt;
@@ -3603,9 +3603,9 @@ adadmin --user admin --passwordfile  /opt/password.txt redeploy --contextroot $c
  
  <entry>
    <title>How to Install and Configure Ansible on Ubuntu 16.04</title>
-   <link href="http://localhost:4000/2017/04/20/a5/"/>
+   <link href="http://pi19404.github.io/2017/04/20/a5/"/>
    <updated>2017-04-20T00:00:00+00:00</updated>
-   <id>http://localhost:4000/2017/04/20/a5</id>
+   <id>http://pi19404.github.io/2017/04/20/a5</id>
    <content type="html">&lt;h1 id=&quot;introduction&quot;&gt;&lt;strong&gt;Introduction&lt;/strong&gt;&lt;/h1&gt;
 
 &lt;p&gt;Configuration management systems are designed to make controlling large numbers of servers in easy for administrators and operations teams. They allow you to control many systems from one central location using automated way.&lt;/p&gt;
@@ -3743,9 +3743,9 @@ dev2 | SUCCESS =&amp;gt; {
  
  <entry>
    <title>Docker Installation and setup on ubuntu OS</title>
-   <link href="http://localhost:4000/2017/04/19/a5/"/>
+   <link href="http://pi19404.github.io/2017/04/19/a5/"/>
    <updated>2017-04-19T00:00:00+00:00</updated>
-   <id>http://localhost:4000/2017/04/19/a5</id>
+   <id>http://pi19404.github.io/2017/04/19/a5</id>
    <content type="html">&lt;h1 id=&quot;introduction&quot;&gt;&lt;strong&gt;Introduction&lt;/strong&gt;&lt;/h1&gt;
 
 &lt;p&gt;Docker is the world’s leading software container platform&lt;/p&gt;
@@ -3929,9 +3929,9 @@ sudo systemctl stop docker
  
  <entry>
    <title>Generating a pem file for auto login to ubuntu 14.04 server</title>
-   <link href="http://localhost:4000/2017/04/18/a6/"/>
+   <link href="http://pi19404.github.io/2017/04/18/a6/"/>
    <updated>2017-04-18T00:00:00+00:00</updated>
-   <id>http://localhost:4000/2017/04/18/a6</id>
+   <id>http://pi19404.github.io/2017/04/18/a6</id>
    <content type="html">&lt;p&gt;&lt;strong&gt;Generate the key&lt;/strong&gt;&lt;/p&gt;
 
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ ssh-keygen -t rsa -b 2048 -v 
@@ -3970,9 +3970,9 @@ sudo systemctl stop docker
  
  <entry>
    <title>Sudo Permissions to a script on ubuntu 14.04</title>
-   <link href="http://localhost:4000/2017/04/18/a5/"/>
+   <link href="http://pi19404.github.io/2017/04/18/a5/"/>
    <updated>2017-04-18T00:00:00+00:00</updated>
-   <id>http://localhost:4000/2017/04/18/a5</id>
+   <id>http://pi19404.github.io/2017/04/18/a5</id>
    <content type="html">&lt;p&gt;The sudoers file located at: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/etc/sudoers&lt;/code&gt;, contains the rules that users must follow when using the sudo command.&lt;/p&gt;
 
 &lt;p&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/etc/sudoers&lt;/code&gt; file controls who can run what commands as what users on what machines and can also control special things such as whether you need a password for particular commands. The file is composed of aliases (basically variables) and user specifications (which control who can run what).&lt;/p&gt;
@@ -4017,9 +4017,9 @@ and this will not ask for a password from the user&lt;/p&gt;
  
  <entry>
    <title>Adding Swap Space on Ubuntu 14.04</title>
-   <link href="http://localhost:4000/linux/2016/12/23/Swapubuntu/"/>
+   <link href="http://pi19404.github.io/linux/2016/12/23/Swapubuntu/"/>
    <updated>2016-12-23T00:00:00+00:00</updated>
-   <id>http://localhost:4000/linux/2016/12/23/Swapubuntu</id>
+   <id>http://pi19404.github.io/linux/2016/12/23/Swapubuntu</id>
    <content type="html">&lt;p&gt;Swap space in Linux can be used when a system requires more memory than it has been physically allocated. When swap space is enabled, Linux systems can swap infrequently used memory pages from physical memory to swap space (either a dedicated partition or a swap file in an existing file system) and free up that space for memory pages that require high speed access.&lt;/p&gt;
 
 &lt;p&gt;To see if your instance is using swap space, you can use the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;swapon -s&lt;/code&gt; command.&lt;/p&gt;
@@ -4055,9 +4055,9 @@ sudo swapon /dev/xvda3
  
  <entry>
    <title>Introduction to Apache Spark Lightweight Web Framework</title>
-   <link href="http://localhost:4000/2016/12/23/ApacheSpak/"/>
+   <link href="http://pi19404.github.io/2016/12/23/ApacheSpak/"/>
    <updated>2016-12-23T00:00:00+00:00</updated>
-   <id>http://localhost:4000/2016/12/23/ApacheSpak</id>
+   <id>http://pi19404.github.io/2016/12/23/ApacheSpak</id>
    <content type="html">&lt;p&gt;Introduction
 Apache Spark is a Lightweight Web Framework .Spark Framework is a true micro Java web framework. Its total size is less than a megabyte, and to keep it lean and clean we decided to cut support for Java 7 in Spark 2. If you are stuck with Java 7 for whatever reason, you unfortunately have to have to use Spark 1.&lt;/p&gt;
 
@@ -4109,9 +4109,9 @@ In all the apis the data will be in form of a json.This leads to losse coupling 
  
  <entry>
    <title>Tomcat7 installation on Ubuntu 14.04</title>
-   <link href="http://localhost:4000/2016/12/22/Tomcatinstallation/"/>
+   <link href="http://pi19404.github.io/2016/12/22/Tomcatinstallation/"/>
    <updated>2016-12-22T00:00:00+00:00</updated>
-   <id>http://localhost:4000/2016/12/22/Tomcatinstallation</id>
+   <id>http://pi19404.github.io/2016/12/22/Tomcatinstallation</id>
    <content type="html">&lt;p&gt;&lt;strong&gt;tomcat7 installation&lt;/strong&gt;&lt;/p&gt;
 
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt-get install tomcat7
@@ -4159,9 +4159,9 @@ ln -s /var/lib/tomcat7/logs /usr/share/tomcat7/logs
  
  <entry>
    <title>Glassfish Installation on Ubuntu 14.04</title>
-   <link href="http://localhost:4000/2016/12/22/GlassfishInstallation/"/>
+   <link href="http://pi19404.github.io/2016/12/22/GlassfishInstallation/"/>
    <updated>2016-12-22T00:00:00+00:00</updated>
-   <id>http://localhost:4000/2016/12/22/GlassfishInstallation</id>
+   <id>http://pi19404.github.io/2016/12/22/GlassfishInstallation</id>
    <content type="html">&lt;p&gt;&lt;strong&gt;Download glassfish&lt;/strong&gt;&lt;/p&gt;
 
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;wget http://download.java.net/glassfish/4.1/release/glassfish-4.1.zip
@@ -4265,9 +4265,9 @@ asadmin&amp;gt; change-admin-password
  
  <entry>
    <title>Importing Mysql Database on ubuntu 14.04</title>
-   <link href="http://localhost:4000/2016/12/20/mysqlimport/"/>
+   <link href="http://pi19404.github.io/2016/12/20/mysqlimport/"/>
    <updated>2016-12-20T00:00:00+00:00</updated>
-   <id>http://localhost:4000/2016/12/20/mysqlimport</id>
+   <id>http://pi19404.github.io/2016/12/20/mysqlimport</id>
    <content type="html">&lt;p&gt;&lt;strong&gt;Create a database&lt;/strong&gt;&lt;/p&gt;
 
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;CREATE DATABASE &amp;lt;DATABASENAME&amp;gt;;
@@ -4282,9 +4282,9 @@ asadmin&amp;gt; change-admin-password
  
  <entry>
    <title>OrientDB Graph Database Installation on Ubuntu 14.04</title>
-   <link href="http://localhost:4000/2016/12/13/OrientdbInstall/"/>
+   <link href="http://pi19404.github.io/2016/12/13/OrientdbInstall/"/>
    <updated>2016-12-13T00:00:00+00:00</updated>
-   <id>http://localhost:4000/2016/12/13/OrientdbInstall</id>
+   <id>http://pi19404.github.io/2016/12/13/OrientdbInstall</id>
    <content type="html">&lt;p&gt;&lt;strong&gt;Pre-Requisites&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;Java needs to be installed before processing with orientdb installation&lt;/p&gt;
@@ -4418,9 +4418,9 @@ test , test is a person
  
  <entry>
    <title>Install Docker on Ubuntu 14.04</title>
-   <link href="http://localhost:4000/software%20installation/2016/07/26/dockerinstall/"/>
+   <link href="http://pi19404.github.io/software%20installation/2016/07/26/dockerinstall/"/>
    <updated>2016-07-26T00:00:00+00:00</updated>
-   <id>http://localhost:4000/software%20installation/2016/07/26/dockerinstall</id>
+   <id>http://pi19404.github.io/software%20installation/2016/07/26/dockerinstall</id>
    <content type="html">&lt;p&gt;&lt;strong&gt;Install Docker&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;Docker requires a 64-bit installation regardless of your Ubuntu version. Additionally, your kernel must be 3.10 at minimum. The latest 3.10 minor version or a newer maintained version are also acceptable.&lt;/p&gt;
@@ -4494,9 +4494,9 @@ sudo apt-get install apparmor
  
  <entry>
    <title>Ansible Installation on Ubuntu 14.04 and Installation of Netbeans IDE</title>
-   <link href="http://localhost:4000/software%20installation/2016/07/26/ansibleinstall/"/>
+   <link href="http://pi19404.github.io/software%20installation/2016/07/26/ansibleinstall/"/>
    <updated>2016-07-26T00:00:00+00:00</updated>
-   <id>http://localhost:4000/software%20installation/2016/07/26/ansibleinstall</id>
+   <id>http://pi19404.github.io/software%20installation/2016/07/26/ansibleinstall</id>
    <content type="html">&lt;h2 id=&quot;ansible-installation&quot;&gt;&lt;strong&gt;Ansible installation&lt;/strong&gt;&lt;/h2&gt;
 
 &lt;p&gt;In this guide, we will discuss how to install Ansible on an Ubuntu 14.04 machine and go over some basics of how to use the software.&lt;/p&gt;
@@ -4647,9 +4647,9 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCUUKR4c6AEubtkiVToENFyxMiOUQ+P2yjcJlo3167l
  
  <entry>
    <title>Install and Configure Salt Master and Minion Servers on Ubuntu 14.04</title>
-   <link href="http://localhost:4000/software%20installation/2016/07/25/saltInstallation/"/>
+   <link href="http://pi19404.github.io/software%20installation/2016/07/25/saltInstallation/"/>
    <updated>2016-07-25T00:00:00+00:00</updated>
-   <id>http://localhost:4000/software%20installation/2016/07/25/saltInstallation</id>
+   <id>http://pi19404.github.io/software%20installation/2016/07/25/saltInstallation</id>
    <content type="html">&lt;h2 id=&quot;introduction&quot;&gt;&lt;strong&gt;Introduction&lt;/strong&gt;&lt;/h2&gt;
 
 &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;SaltStack&lt;/code&gt; is a powerful, flexible, high performing configuration management and remote execution system. It can be used manage your infrastructure from a centralized location while minimizing manual maintenance steps.&lt;/p&gt;
@@ -4842,9 +4842,9 @@ klugserver:
  
  <entry>
    <title>Redis Mass Insertion of Data</title>
-   <link href="http://localhost:4000/2016/06/24/redisinsert/"/>
+   <link href="http://pi19404.github.io/2016/06/24/redisinsert/"/>
    <updated>2016-06-24T00:00:00+00:00</updated>
-   <id>http://localhost:4000/2016/06/24/redisinsert</id>
+   <id>http://pi19404.github.io/2016/06/24/redisinsert</id>
    <content type="html">&lt;h1 id=&quot;redis-mass-insert&quot;&gt;&lt;strong&gt;Redis Mass Insert&lt;/strong&gt;&lt;/h1&gt;
 
 &lt;p&gt;Sometimes Redis instances need to be loaded with a big amount of preexisting or user generated data in a short amount of time, so that millions of keys will be created as fast as possible&lt;/p&gt;
@@ -4944,9 +4944,9 @@ value
  
  <entry>
    <title>Artifactory and Maven repository Setup</title>
-   <link href="http://localhost:4000/software%20installation/2016/05/10/aristofactormaven/"/>
+   <link href="http://pi19404.github.io/software%20installation/2016/05/10/aristofactormaven/"/>
    <updated>2016-05-10T00:00:00+00:00</updated>
-   <id>http://localhost:4000/software%20installation/2016/05/10/aristofactormaven</id>
+   <id>http://pi19404.github.io/software%20installation/2016/05/10/aristofactormaven</id>
    <content type="html">&lt;h2 id=&quot;artifactory-and-maven-repository-setup&quot;&gt;&lt;strong&gt;Artifactory and Maven repository Setup&lt;/strong&gt;&lt;/h2&gt;
 
 &lt;p&gt;In this article we will look at maven repository management using Artifactory repository manager.&lt;/p&gt;
@@ -5096,9 +5096,9 @@ to find the encrypted password we need to first create master password&lt;/p&gt;
  
  <entry>
    <title>Samba File Server Setup</title>
-   <link href="http://localhost:4000/software%20installation/2016/04/24/Samba1/"/>
+   <link href="http://pi19404.github.io/software%20installation/2016/04/24/Samba1/"/>
    <updated>2016-04-24T00:00:00+00:00</updated>
-   <id>http://localhost:4000/software%20installation/2016/04/24/Samba1</id>
+   <id>http://pi19404.github.io/software%20installation/2016/04/24/Samba1</id>
    <content type="html">&lt;h2 id=&quot;samba-file-server&quot;&gt;&lt;strong&gt;Samba File Server&lt;/strong&gt;&lt;/h2&gt;
 
 &lt;p&gt;One of the most common ways to network Ubuntu and Windows computers is to configure Samba as a File Server. This section covers setting up a Samba server to share files with Windows clients.&lt;/p&gt;
@@ -5236,9 +5236,9 @@ sudo restart nmbd
  
  <entry>
    <title>RAM Computation for ARM Microcontroller</title>
-   <link href="http://localhost:4000/software/2016/04/20/ARMRAM/"/>
+   <link href="http://pi19404.github.io/software/2016/04/20/ARMRAM/"/>
    <updated>2016-04-20T00:00:00+00:00</updated>
-   <id>http://localhost:4000/software/2016/04/20/ARMRAM</id>
+   <id>http://pi19404.github.io/software/2016/04/20/ARMRAM</id>
    <content type="html">&lt;h1 id=&quot;ram-computation-for-arm-microcontroller&quot;&gt;&lt;strong&gt;RAM Computation for ARM Microcontroller&lt;/strong&gt;&lt;/h1&gt;
 
 &lt;p&gt;An ARM Cortex compiled bare metal application consists of the following sections.&lt;/p&gt;
@@ -5360,9 +5360,9 @@ Total RAM size required: 15.6kB&lt;/p&gt;
  
  <entry>
    <title>ANTLR installation and usage on ubuntu 14.04</title>
-   <link href="http://localhost:4000/software/2016/04/14/AntLR1/"/>
+   <link href="http://pi19404.github.io/software/2016/04/14/AntLR1/"/>
    <updated>2016-04-14T00:00:00+00:00</updated>
-   <id>http://localhost:4000/software/2016/04/14/AntLR1</id>
+   <id>http://pi19404.github.io/software/2016/04/14/AntLR1</id>
    <content type="html">&lt;h1 id=&quot;antlr-installation-and-usage-on-ubuntu-1404&quot;&gt;&lt;strong&gt;ANTLR installation and usage on ubuntu 14.04&lt;/strong&gt;&lt;/h1&gt;
 
 &lt;p&gt;In this article we will look at installation and usage of ANTLRsoftware&lt;/p&gt;
@@ -5466,9 +5466,9 @@ $ javac Hello*.java
  
  <entry>
    <title>Apache OpenNLP Installation on ubuntu 14.04</title>
-   <link href="http://localhost:4000/software%20installation/2016/04/09/openNLPInstall/"/>
+   <link href="http://pi19404.github.io/software%20installation/2016/04/09/openNLPInstall/"/>
    <updated>2016-04-09T00:00:00+00:00</updated>
-   <id>http://localhost:4000/software%20installation/2016/04/09/openNLPInstall</id>
+   <id>http://pi19404.github.io/software%20installation/2016/04/09/openNLPInstall</id>
    <content type="html">&lt;h2 id=&quot;apache-opennlp-installation-on-ubuntu-1404&quot;&gt;&lt;strong&gt;Apache OpenNLP Installation on ubuntu 14.04&lt;/strong&gt;&lt;/h2&gt;
 
 &lt;p&gt;The Apache OpenNLP library is a machine learning based toolkit for the processing of natural language text.&lt;/p&gt;
@@ -5507,9 +5507,9 @@ mvn install
  
  <entry>
    <title>Accessing VMWareWorkstation machine via VNC</title>
-   <link href="http://localhost:4000/software%20installation/2016/04/09/VNCVMWare/"/>
+   <link href="http://pi19404.github.io/software%20installation/2016/04/09/VNCVMWare/"/>
    <updated>2016-04-09T00:00:00+00:00</updated>
-   <id>http://localhost:4000/software%20installation/2016/04/09/VNCVMWare</id>
+   <id>http://pi19404.github.io/software%20installation/2016/04/09/VNCVMWare</id>
    <content type="html">&lt;p&gt;You can use a VNC client to connect to a running virtual machine. Because VNC software is cross-platform, you can use virtual machines running on different types of computers.&lt;/p&gt;
 
 &lt;p&gt;Workstation does not need to be running to use VNC to connect to a virtual machine. Only the virtual machine needs to be running, and it can be running in the background.
@@ -5561,9 +5561,9 @@ When you use a VNC client to connect to a virtual machine, some features do not 
  
  <entry>
    <title>Install Apache Tomcat 7 on Ubuntu 14.04</title>
-   <link href="http://localhost:4000/software%20installation/2016/03/31/TomcatInstall/"/>
+   <link href="http://pi19404.github.io/software%20installation/2016/03/31/TomcatInstall/"/>
    <updated>2016-03-31T00:00:00+00:00</updated>
-   <id>http://localhost:4000/software%20installation/2016/03/31/TomcatInstall</id>
+   <id>http://pi19404.github.io/software%20installation/2016/03/31/TomcatInstall</id>
    <content type="html">&lt;p&gt;In this we will look at installing
 Apache Tomcat 7 on Ubuntu 14.04 and deplyoying a web application&lt;/p&gt;
 
@@ -5694,9 +5694,9 @@ http://10.0.0.15:8090/manager/html
  
  <entry>
    <title>Apache Xerces on Ubuntu 14.04</title>
-   <link href="http://localhost:4000/software/2016/01/08/Xerses1/"/>
+   <link href="http://pi19404.github.io/software/2016/01/08/Xerses1/"/>
    <updated>2016-01-08T00:00:00+00:00</updated>
-   <id>http://localhost:4000/software/2016/01/08/Xerses1</id>
+   <id>http://pi19404.github.io/software/2016/01/08/Xerses1</id>
    <content type="html">&lt;p&gt;we will look at installation and basic usage of Xerses
 XML Parser on Ubuntu 14.04 platform&lt;/p&gt;
 
@@ -5842,9 +5842,9 @@ int main(int argc, char* argv[])
  
  <entry>
    <title>STM32 Cube Download</title>
-   <link href="http://localhost:4000/software%20installation/2015/12/31/STM32Cube/"/>
+   <link href="http://pi19404.github.io/software%20installation/2015/12/31/STM32Cube/"/>
    <updated>2015-12-31T00:00:00+00:00</updated>
-   <id>http://localhost:4000/software%20installation/2015/12/31/STM32Cube</id>
+   <id>http://pi19404.github.io/software%20installation/2015/12/31/STM32Cube</id>
    <content type="html">&lt;p&gt;&lt;strong&gt;STM32 Cube Download&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;STMCube™ is an STMicroelectronics original initiative to ease developers’ life by reducing development efforts, time and cost. STM32Cube covers STM32 portfolio.&lt;/p&gt;
@@ -5873,9 +5873,9 @@ http://www.st.com/web/en/catalog/tools/PF259242&lt;/p&gt;
  
  <entry>
    <title>State Machine Interface - Part 1</title>
-   <link href="http://localhost:4000/software/2015/12/29/SM/"/>
+   <link href="http://pi19404.github.io/software/2015/12/29/SM/"/>
    <updated>2015-12-29T00:00:00+00:00</updated>
-   <id>http://localhost:4000/software/2015/12/29/SM</id>
+   <id>http://pi19404.github.io/software/2015/12/29/SM</id>
    <content type="html">&lt;h2 id=&quot;state-machine-interface&quot;&gt;&lt;strong&gt;State Machine Interface&lt;/strong&gt;&lt;/h2&gt;
 
 &lt;p&gt;A State Machine is a design pattern in which actions are determined by events and the current context of the system. and are used most commonly to model the behavior of an object across its lifetime.&lt;/p&gt;
@@ -6357,9 +6357,9 @@ The binary can be launched in &lt;code class=&quot;language-plaintext highlighte
  
  <entry>
    <title>STLink Installation on Ubuntu 14.04</title>
-   <link href="http://localhost:4000/software%20installation/2015/12/28/STLinkInstall/"/>
+   <link href="http://pi19404.github.io/software%20installation/2015/12/28/STLinkInstall/"/>
    <updated>2015-12-28T00:00:00+00:00</updated>
-   <id>http://localhost:4000/software%20installation/2015/12/28/STLinkInstall</id>
+   <id>http://pi19404.github.io/software%20installation/2015/12/28/STLinkInstall</id>
    <content type="html">&lt;p&gt;&lt;strong&gt;STLink Installation on Ubuntu 14.04&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;In Linux a command line program can be used to program STM32 microcontrollers via the embedded ST-LINK found on evaluation boards such as the STM32F4 discovery .&lt;/p&gt;
@@ -6412,9 +6412,9 @@ sudo restart udev
  
  <entry>
    <title>Unity Android Application Integration</title>
-   <link href="http://localhost:4000/software/2015/12/20/soft2/"/>
+   <link href="http://pi19404.github.io/software/2015/12/20/soft2/"/>
    <updated>2015-12-20T00:00:00+00:00</updated>
-   <id>http://localhost:4000/software/2015/12/20/soft2</id>
+   <id>http://pi19404.github.io/software/2015/12/20/soft2</id>
    <content type="html">&lt;h2 id=&quot;unity-android-application-integration&quot;&gt;&lt;strong&gt;Unity Android Application Integration&lt;/strong&gt;&lt;/h2&gt;
 
 &lt;p&gt;In this article we look at how to integrate an Unity and Android Project more specifically
@@ -6674,9 +6674,9 @@ https://bitbucket.org/pi19404/unityandroidproject/&lt;/p&gt;
  
  <entry>
    <title>GitBucket setup on Ubuntu 14.04</title>
-   <link href="http://localhost:4000/software%20installation/2015/12/18/GitBucket/"/>
+   <link href="http://pi19404.github.io/software%20installation/2015/12/18/GitBucket/"/>
    <updated>2015-12-18T00:00:00+00:00</updated>
-   <id>http://localhost:4000/software%20installation/2015/12/18/GitBucket</id>
+   <id>http://pi19404.github.io/software%20installation/2015/12/18/GitBucket</id>
    <content type="html">&lt;h1 id=&quot;gitbucket-setup-on-ubuntu-1404&quot;&gt;GitBucket setup on Ubuntu 14.04&lt;/h1&gt;
 
 &lt;p&gt;GitBucket is a GitHub clone powered by Scala which has easy installation and high extensibility.&lt;/p&gt;
@@ -6720,9 +6720,9 @@ Thus context path will be choosen by default as /gitbucket&lt;/p&gt;
  
  <entry>
    <title>Installing R Packages</title>
-   <link href="http://localhost:4000/software/2015/09/06/soft1/"/>
+   <link href="http://pi19404.github.io/software/2015/09/06/soft1/"/>
    <updated>2015-09-06T00:00:00+00:00</updated>
-   <id>http://localhost:4000/software/2015/09/06/soft1</id>
+   <id>http://pi19404.github.io/software/2015/09/06/soft1</id>
    <content type="html">&lt;p&gt;&lt;strong&gt;Install R Packages&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;Let consider the installation of Knowledge Space Theory &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;kst&lt;/code&gt; package.&lt;/p&gt;
@@ -6760,9 +6760,9 @@ library(kst, lib.loc=”/data/Rpackage=s/”)&lt;/p&gt;
  
  <entry>
    <title>Installing R and RStudio in Ubuntu 12.04</title>
-   <link href="http://localhost:4000/software/2015/09/06/soft0/"/>
+   <link href="http://pi19404.github.io/software/2015/09/06/soft0/"/>
    <updated>2015-09-06T00:00:00+00:00</updated>
-   <id>http://localhost:4000/software/2015/09/06/soft0</id>
+   <id>http://pi19404.github.io/software/2015/09/06/soft0</id>
    <content type="html">&lt;h2 id=&quot;installing-r-and-rstudio-in-ubuntu-1204&quot;&gt;&lt;strong&gt;Installing R and RStudio in Ubuntu 12.04&lt;/strong&gt;&lt;/h2&gt;
 
 &lt;h2 id=&quot;universe&quot;&gt;&lt;strong&gt;Universe&lt;/strong&gt;&lt;/h2&gt;
@@ -6839,9 +6839,9 @@ library(kst, lib.loc=”/data/Rpackage=s/”)&lt;/p&gt;
  
  <entry>
    <title>User Defined Library in MBED</title>
-   <link href="http://localhost:4000/embedded%20firmware/2015/09/06/embed1/"/>
+   <link href="http://pi19404.github.io/embedded%20firmware/2015/09/06/embed1/"/>
    <updated>2015-09-06T00:00:00+00:00</updated>
-   <id>http://localhost:4000/embedded%20firmware/2015/09/06/embed1</id>
+   <id>http://pi19404.github.io/embedded%20firmware/2015/09/06/embed1</id>
    <content type="html">&lt;p&gt;This article describes on how to add a user defined library in MBED&lt;/p&gt;
 
 &lt;blockquote&gt;
@@ -6904,9 +6904,9 @@ KFACTORY_LIBRARIES=join(BUILD_DIR,&quot;kfactory&quot;);
  
  <entry>
    <title>MBED Setup Documentation</title>
-   <link href="http://localhost:4000/embedded%20firmware/2015/09/01/embed1/"/>
+   <link href="http://pi19404.github.io/embedded%20firmware/2015/09/01/embed1/"/>
    <updated>2015-09-01T00:00:00+00:00</updated>
-   <id>http://localhost:4000/embedded%20firmware/2015/09/01/embed1</id>
+   <id>http://pi19404.github.io/embedded%20firmware/2015/09/01/embed1</id>
    <content type="html">&lt;blockquote&gt;
   &lt;p&gt;&lt;strong&gt;MBED Setup&lt;/strong&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -7203,9 +7203,9 @@ help:
  
  <entry>
    <title>OpenCV 2.4.11 Build from Sources for Linux and Android</title>
-   <link href="http://localhost:4000/2015/04/18/29/"/>
+   <link href="http://pi19404.github.io/2015/04/18/29/"/>
    <updated>2015-04-18T00:00:00+00:00</updated>
-   <id>http://localhost:4000/2015/04/18/29</id>
+   <id>http://pi19404.github.io/2015/04/18/29</id>
    <content type="html">&lt;h3 id=&quot;opencv-2411-build-from-sources-for-linux-and-android&quot;&gt;&lt;strong&gt;OpenCV 2.4.11 Build from Sources for Linux and Android&lt;/strong&gt;&lt;/h3&gt;
 
 &lt;p&gt;In this article we will look at the process of compiling OpenCV 2.4.11 libraries from source for linux and Android ARM platform .&lt;/p&gt;
@@ -7416,9 +7416,9 @@ subdirectory .&lt;/p&gt;
  
  <entry>
    <title>Android Native Programming C/C++ with OpenCV</title>
-   <link href="http://localhost:4000/2015/04/17/28/"/>
+   <link href="http://pi19404.github.io/2015/04/17/28/"/>
    <updated>2015-04-17T00:00:00+00:00</updated>
-   <id>http://localhost:4000/2015/04/17/28</id>
+   <id>http://pi19404.github.io/2015/04/17/28</id>
    <content type="html">&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
 
 &lt;p&gt;This article describes how to setup Eclipse for using C/C++ OpenCV Programs together with Java in Android projects.&lt;/p&gt;
@@ -7757,9 +7757,9 @@ opencvp.run(mDrawOnTop.mImageWidth, mDrawOnTop.mImageHeight, mDrawOnTop.mYUVData
  
  <entry>
    <title>Git Subtree Installation and Usage on Linux</title>
-   <link href="http://localhost:4000/2015/04/17/27/"/>
+   <link href="http://pi19404.github.io/2015/04/17/27/"/>
    <updated>2015-04-17T00:00:00+00:00</updated>
-   <id>http://localhost:4000/2015/04/17/27</id>
+   <id>http://pi19404.github.io/2015/04/17/27</id>
    <content type="html">&lt;h3 id=&quot;installing-git-subtree-from-sources&quot;&gt;Installing Git Subtree From Sources&lt;/h3&gt;
 
 &lt;p&gt;Git subtree is a git helper to combine and manage multiple repos in one project.&lt;/p&gt;
@@ -7841,9 +7841,9 @@ git subtree add --prefix=adroid/ adroid master
  
  <entry>
    <title>DC motor Characteristic Curvers</title>
-   <link href="http://localhost:4000/2015/04/11/26/"/>
+   <link href="http://pi19404.github.io/2015/04/11/26/"/>
    <updated>2015-04-11T00:00:00+00:00</updated>
-   <id>http://localhost:4000/2015/04/11/26</id>
+   <id>http://pi19404.github.io/2015/04/11/26</id>
    <content type="html">&lt;h3 id=&quot;dc-motor-equilibrium-analysis&quot;&gt;DC Motor Equilibrium Analysis&lt;/h3&gt;
 
 &lt;p&gt;In this article we will look  DC motor characteric curves and see how we can obtain parameters to model the DC motor from commonly provided specifications in motor Datasheet.&lt;/p&gt;
@@ -8080,9 +8080,9 @@ And operating of max power is different from that of max efficiency.&lt;/p&gt;
  
  <entry>
    <title>First Order Approximation of DC Motor</title>
-   <link href="http://localhost:4000/2015/04/10/25/"/>
+   <link href="http://pi19404.github.io/2015/04/10/25/"/>
    <updated>2015-04-10T00:00:00+00:00</updated>
-   <id>http://localhost:4000/2015/04/10/25</id>
+   <id>http://pi19404.github.io/2015/04/10/25</id>
    <content type="html">&lt;h3 id=&quot;-dc-motor-model&quot;&gt;&lt;i class=&quot;icon-pencil&quot;&gt;&lt;/i&gt; DC Motor Model&lt;/h3&gt;
 
 &lt;p&gt;In this article we will look at how to model DC motor and first order model that enables us to quickly predict response of DC motor.&lt;/p&gt;
@@ -8313,9 +8313,9 @@ https://bitbucket.org/snippets/pi19404/55ep&lt;/p&gt;
  
  <entry>
    <title>Libgdx Setup and 3D animation Test Utility On Linux Platform</title>
-   <link href="http://localhost:4000/2015/04/09/24/"/>
+   <link href="http://pi19404.github.io/2015/04/09/24/"/>
    <updated>2015-04-09T00:00:00+00:00</updated>
-   <id>http://localhost:4000/2015/04/09/24</id>
+   <id>http://pi19404.github.io/2015/04/09/24</id>
    <content type="html">&lt;h3 id=&quot;libgdx-setup-on-linux-platform&quot;&gt;Libgdx Setup On Linux Platform&lt;/h3&gt;
 
 &lt;p&gt;In this article we will look at setting up Libgdx on Ubuntu 12.04 from sources and running a sample test utility for 3D models.&lt;/p&gt;
@@ -8412,9 +8412,9 @@ to convert the fbx model files to libgdx compatible files.&lt;/p&gt;
  
  <entry>
    <title>De-Compiling Android Application</title>
-   <link href="http://localhost:4000/software/2015/04/03/23/"/>
+   <link href="http://pi19404.github.io/software/2015/04/03/23/"/>
    <updated>2015-04-03T00:00:00+00:00</updated>
-   <id>http://localhost:4000/software/2015/04/03/23</id>
+   <id>http://pi19404.github.io/software/2015/04/03/23</id>
    <content type="html">&lt;h4 id=&quot;de-compiling-android-application&quot;&gt;De-compiling Android Application&lt;/h4&gt;
 
 &lt;p&gt;All applications for Android phones are distributed as APK Files. These files contain all the source,UI , images and other media necessary to run the application on your phone.&lt;/p&gt;
@@ -8532,9 +8532,9 @@ to convert the fbx model files to libgdx compatible files.&lt;/p&gt;
  
  <entry>
    <title>Serial Bluetooth Terminal on Linux</title>
-   <link href="http://localhost:4000/linux/2015/04/03/22/"/>
+   <link href="http://pi19404.github.io/linux/2015/04/03/22/"/>
    <updated>2015-04-03T00:00:00+00:00</updated>
-   <id>http://localhost:4000/linux/2015/04/03/22</id>
+   <id>http://pi19404.github.io/linux/2015/04/03/22</id>
    <content type="html">&lt;p&gt;In this article we will look at how to establish a serial connection with devices via bluetooth .&lt;/p&gt;
 
 &lt;h3 id=&quot;device-pairing&quot;&gt;&lt;i class=&quot;icon-pencil&quot;&gt;&lt;/i&gt;Device Pairing&lt;/h3&gt;
@@ -8672,9 +8672,9 @@ Press CTRL-C for hangup
  
  <entry>
    <title>Conjugate Quadrature Filter Bank - Deriving Daubechies Filter Coefficients</title>
-   <link href="http://localhost:4000/signal%20processing/2014/12/21/21/"/>
+   <link href="http://pi19404.github.io/signal%20processing/2014/12/21/21/"/>
    <updated>2014-12-21T00:00:00+00:00</updated>
-   <id>http://localhost:4000/signal%20processing/2014/12/21/21</id>
+   <id>http://pi19404.github.io/signal%20processing/2014/12/21/21</id>
    <content type="html">&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
 
 &lt;p&gt;In this article we will look at the concept of conjugate quadrature filter bank and process computationally derive the Daubechies wavelet filter coefficient
@@ -9670,9 +9670,9 @@ def cqf_filters(dec_lo):
  
  <entry>
    <title>GStreamer Typefinding and Dynamic Pipelines - Part 2</title>
-   <link href="http://localhost:4000/software/2014/12/17/21/"/>
+   <link href="http://pi19404.github.io/software/2014/12/17/21/"/>
    <updated>2014-12-17T00:00:00+00:00</updated>
-   <id>http://localhost:4000/software/2014/12/17/21</id>
+   <id>http://pi19404.github.io/software/2014/12/17/21</id>
    <content type="html">&lt;p&gt;###Introduction&lt;/p&gt;
 
 &lt;p&gt;In this tutorial we see how to build dynamic piplines and its application towards playing a video file.&lt;/p&gt;
@@ -9990,9 +9990,9 @@ gcc example3.c -o example3 `pkg-config --cflags --libs gstreamer-0.10` -g
  
  <entry>
    <title>Basics of GStreamer - Part 1</title>
-   <link href="http://localhost:4000/software/2014/12/14/20/"/>
+   <link href="http://pi19404.github.io/software/2014/12/14/20/"/>
    <updated>2014-12-14T00:00:00+00:00</updated>
-   <id>http://localhost:4000/software/2014/12/14/20</id>
+   <id>http://pi19404.github.io/software/2014/12/14/20</id>
    <content type="html">&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
 
 &lt;p&gt;GStreamer is a framework designed to handle streaming multimedia flows. Media travels from the “source” elements (the producers), down to the “sink” elements (the consumers), passing through a series of intermediate elements performing all kinds of tasks. The set of all the interconnected elements is called a “pipeline”.&lt;/p&gt;
@@ -10275,9 +10275,9 @@ gcc example2.c -o example2 `pkg-config --cflags --libs gstreamer-0.10` -g
  
  <entry>
    <title>Wavelet Two Channel FilterBank</title>
-   <link href="http://localhost:4000/signal%20processing/2014/12/08/19/"/>
+   <link href="http://pi19404.github.io/signal%20processing/2014/12/08/19/"/>
    <updated>2014-12-08T00:00:00+00:00</updated>
-   <id>http://localhost:4000/signal%20processing/2014/12/08/19</id>
+   <id>http://pi19404.github.io/signal%20processing/2014/12/08/19</id>
    <content type="html">&lt;h3 id=&quot;wavelet-two-channel-filterbank&quot;&gt;Wavelet Two Channel Filterbank&lt;/h3&gt;
 
 &lt;p&gt;We had seen the concept of Haar two channel filter bank in the article &lt;a href=&quot;http://pi19404.github.io/pyVision/2014/11/26/13/&quot;&gt;“Haar Wavelet Filter Bank”&lt;/a&gt;&lt;/p&gt;
@@ -10422,9 +10422,9 @@ $T_{0}(z) = H_{0}(-z) G_{0}(z) + H_{1}(-z) G_{1}(z) = 0$&lt;/p&gt;
  
  <entry>
    <title>Program Arduino Sketch Files From Commandline</title>
-   <link href="http://localhost:4000/2014/12/06/18/"/>
+   <link href="http://pi19404.github.io/2014/12/06/18/"/>
    <updated>2014-12-06T00:00:00+00:00</updated>
-   <id>http://localhost:4000/2014/12/06/18</id>
+   <id>http://pi19404.github.io/2014/12/06/18</id>
    <content type="html">&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
 
 &lt;p&gt;In this article we will look at how to program Arduino Sketch files from commandline&lt;/p&gt;
@@ -10649,9 +10649,9 @@ while True:
  
  <entry>
    <title>Starting Programs at Boot using Supervisor Process Control Utility</title>
-   <link href="http://localhost:4000/linux/2014/12/05/17/"/>
+   <link href="http://pi19404.github.io/linux/2014/12/05/17/"/>
    <updated>2014-12-05T00:00:00+00:00</updated>
-   <id>http://localhost:4000/linux/2014/12/05/17</id>
+   <id>http://pi19404.github.io/linux/2014/12/05/17</id>
    <content type="html">&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
 
 &lt;p&gt;In this article we look at how to automatically to automatically start a set of programs upon startup using ‘Supervisor’ process control tool for embedded&lt;/p&gt;
@@ -10886,9 +10886,9 @@ for example in the present case http://192.168.1.3:9001&lt;/p&gt;
  
  <entry>
    <title>Installing OS on Raspberry PI using NOOBS</title>
-   <link href="http://localhost:4000/raspberry%20pi/2014/12/04/16/"/>
+   <link href="http://pi19404.github.io/raspberry%20pi/2014/12/04/16/"/>
    <updated>2014-12-04T00:00:00+00:00</updated>
-   <id>http://localhost:4000/raspberry%20pi/2014/12/04/16</id>
+   <id>http://pi19404.github.io/raspberry%20pi/2014/12/04/16</id>
    <content type="html">&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
 
 &lt;p&gt;In this article we will look at installing operating system on Raspberry Pi using NOOBS operating system install manager&lt;/p&gt;
@@ -11007,9 +11007,9 @@ Once the process is finished, you can boot right into your installed operating s
  
  <entry>
    <title>Approximation of Piecewise Polynomial Using Wavelets</title>
-   <link href="http://localhost:4000/signal%20processing/2014/11/29/14/"/>
+   <link href="http://pi19404.github.io/signal%20processing/2014/11/29/14/"/>
    <updated>2014-11-29T00:00:00+00:00</updated>
-   <id>http://localhost:4000/signal%20processing/2014/11/29/14</id>
+   <id>http://pi19404.github.io/signal%20processing/2014/11/29/14</id>
    <content type="html">&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
 
 &lt;p&gt;In this article we look at Approximation of Piecewise Polynomial Using Wavelets&lt;/p&gt;
@@ -11262,9 +11262,9 @@ f(1) will give the value the value of piecewise function at 1
  
  <entry>
    <title>Haar Wavelet Filter Bank</title>
-   <link href="http://localhost:4000/signal%20processing/2014/11/26/13/"/>
+   <link href="http://pi19404.github.io/signal%20processing/2014/11/26/13/"/>
    <updated>2014-11-26T00:00:00+00:00</updated>
-   <id>http://localhost:4000/signal%20processing/2014/11/26/13</id>
+   <id>http://pi19404.github.io/signal%20processing/2014/11/26/13</id>
    <content type="html">&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
 &lt;p&gt;In this article we will look at discrete time signal processing using wavelets,more specificially we will look at the concept of Haar Filterbank&lt;/p&gt;
 
@@ -11624,9 +11624,9 @@ as produced a response.&lt;/p&gt;
  
  <entry>
    <title>Remote Accessing Raspberry PI</title>
-   <link href="http://localhost:4000/raspberry%20pi/2014/11/21/13/"/>
+   <link href="http://pi19404.github.io/raspberry%20pi/2014/11/21/13/"/>
    <updated>2014-11-21T00:00:00+00:00</updated>
-   <id>http://localhost:4000/raspberry%20pi/2014/11/21/13</id>
+   <id>http://pi19404.github.io/raspberry%20pi/2014/11/21/13</id>
    <content type="html">&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
 &lt;p&gt;In this article we will look at accessing Raspberry PI remotely&lt;/p&gt;
 
@@ -11731,9 +11731,9 @@ change to root user.&lt;/p&gt;
  
  <entry>
    <title>Haar Wavelets</title>
-   <link href="http://localhost:4000/signal%20processing/2014/11/20/12/"/>
+   <link href="http://pi19404.github.io/signal%20processing/2014/11/20/12/"/>
    <updated>2014-11-20T00:00:00+00:00</updated>
-   <id>http://localhost:4000/signal%20processing/2014/11/20/12</id>
+   <id>http://pi19404.github.io/signal%20processing/2014/11/20/12</id>
    <content type="html">&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
 
 &lt;p&gt;In this article we will look at basic introduction to wavelets using Haar wavelets&lt;/p&gt;
@@ -11986,9 +11986,9 @@ $y[n]=\frac{1}{\sqrt2} \frac{1}{2} x[2n]-x[2n+1]$&lt;/p&gt;
  
  <entry>
    <title>Shperical Wave Simulator</title>
-   <link href="http://localhost:4000/signal%20processing/2014/11/03/WaveSimulator/"/>
+   <link href="http://pi19404.github.io/signal%20processing/2014/11/03/WaveSimulator/"/>
    <updated>2014-11-03T00:00:00+00:00</updated>
-   <id>http://localhost:4000/signal%20processing/2014/11/03/WaveSimulator</id>
+   <id>http://pi19404.github.io/signal%20processing/2014/11/03/WaveSimulator</id>
    <content type="html">&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
 
 &lt;p&gt;In this article we will look at how to simulate a spherical wave produced from point source .&lt;/p&gt;
@@ -12205,9 +12205,9 @@ The code to generate the waveform can be executed by going to the pySignalProc d
  
  <entry>
    <title>Fraction Delays using Linear Interpolation and Resampling</title>
-   <link href="http://localhost:4000/signal%20processing/2014/11/01/FractionalDelay/"/>
+   <link href="http://pi19404.github.io/signal%20processing/2014/11/01/FractionalDelay/"/>
    <updated>2014-11-01T00:00:00+00:00</updated>
-   <id>http://localhost:4000/signal%20processing/2014/11/01/FractionalDelay</id>
+   <id>http://pi19404.github.io/signal%20processing/2014/11/01/FractionalDelay</id>
    <content type="html">&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
 &lt;p&gt;In this article we look at implementing fractional delays using Linear Interpolation and Resampling Techniques&lt;/p&gt;
 
@@ -12392,9 +12392,9 @@ presently it support &lt;code class=&quot;language-plaintext highlighter-rouge&q
  
  <entry>
    <title>Time Delay Estimation Techniques - part 2</title>
-   <link href="http://localhost:4000/signal%20processing/2014/10/19/TODA2/"/>
+   <link href="http://pi19404.github.io/signal%20processing/2014/10/19/TODA2/"/>
    <updated>2014-10-19T00:00:00+00:00</updated>
-   <id>http://localhost:4000/signal%20processing/2014/10/19/TODA2</id>
+   <id>http://pi19404.github.io/signal%20processing/2014/10/19/TODA2</id>
    <content type="html">&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
 
 &lt;p&gt;In this article we will look at improving the Time Delay estimation in presense of noise using information of signals coming in from multiple receivers or observing multiple samples
@@ -12893,9 +12893,9 @@ be changed and the various results mentioned in the article can be generated.&lt
  
  <entry>
    <title>Time Delay Estimation Techniques - Part 1</title>
-   <link href="http://localhost:4000/signal%20processing/2014/10/13/TDOA1/"/>
+   <link href="http://pi19404.github.io/signal%20processing/2014/10/13/TDOA1/"/>
    <updated>2014-10-13T00:00:00+00:00</updated>
-   <id>http://localhost:4000/signal%20processing/2014/10/13/TDOA1</id>
+   <id>http://pi19404.github.io/signal%20processing/2014/10/13/TDOA1</id>
    <content type="html">&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
 
 &lt;p&gt;In this article we will look at signal processing techniques for time delay estimation.&lt;/p&gt;
@@ -13497,9 +13497,9 @@ mean  9.746 Std  0.793400277288
  
  <entry>
    <title>Discrete Fourier Transform For Freuency Analysis</title>
-   <link href="http://localhost:4000/signal%20processing/2014/10/11/DFT1/"/>
+   <link href="http://pi19404.github.io/signal%20processing/2014/10/11/DFT1/"/>
    <updated>2014-10-11T00:00:00+00:00</updated>
-   <id>http://localhost:4000/signal%20processing/2014/10/11/DFT1</id>
+   <id>http://pi19404.github.io/signal%20processing/2014/10/11/DFT1</id>
    <content type="html">&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
 
 &lt;p&gt;&lt;strong&gt;Fourier analysis&lt;/strong&gt; is generally concerned with the analysis and synthesis of functions. The decomposition of signal into easy-to-analyze components and the reconstruction from such components.&lt;/p&gt;
@@ -14028,9 +14028,9 @@ and the result obtained is equivalent to linear convolution result.&lt;/p&gt;
  
  <entry>
    <title>Multilayer Perceptron in Python</title>
-   <link href="http://localhost:4000/2014/10/03/test/"/>
+   <link href="http://pi19404.github.io/ai/2014/10/03/test/"/>
    <updated>2014-10-03T00:00:00+00:00</updated>
-   <id>http://localhost:4000/2014/10/03/test</id>
+   <id>http://pi19404.github.io/ai/2014/10/03/test</id>
    <content type="html">&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
 &lt;p&gt;In this article we will look at supervised learning algorithm called Multi-Layer Perceptron (MLP) and implementation of single hidden layer MLP&lt;/p&gt;
 
@@ -14482,9 +14482,9 @@ is responsible for passing suitable inputs and weights to each hidden layer so t
  
  <entry>
    <title>Jekyll A Static Website Generator</title>
-   <link href="http://localhost:4000/linux/2014/10/03/Jekyll/"/>
+   <link href="http://pi19404.github.io/2014/10/03/Jekyll/"/>
    <updated>2014-10-03T00:00:00+00:00</updated>
-   <id>http://localhost:4000/linux/2014/10/03/Jekyll</id>
+   <id>http://pi19404.github.io/2014/10/03/Jekyll</id>
    <content type="html">&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
 &lt;p&gt;In this article we will look at &lt;strong&gt;Jekyll&lt;/strong&gt; static site generator to generate a static website and host the same on &lt;strong&gt;github&lt;/strong&gt;  using github pages.&lt;/p&gt;
 
