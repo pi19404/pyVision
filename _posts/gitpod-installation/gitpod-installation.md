@@ -54,7 +54,7 @@ Check if all the pods are running states
 
 
 ```
-kubectl -n gitpod patch svc proxy -p '{"spec": {"type": "LoadBalancer", "externalIPs":["164.52.207.58"]}}'
+kubectl -n gitpod patch svc proxy -p '{"spec": {"type": "LoadBalancer", "externalIPs":["xxx.xxx.xxx.xx"]}}'
 ```
 
 Once the installation has been finished successfully, you will see the status “Ready” with a small green indicator next to the Gitpod logo. You see which version you installed and which license you are using.
