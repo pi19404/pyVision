@@ -1,21 +1,22 @@
 ---
 layout: default
 title : {{ page.title }}
+
 ---
 
 <div class="categories">
   <h1 class="h1 category-title">
-    Topic:&nbsp;{{ page.category }}
-    <section><h1>Category index for &ldquo;{{ page.category }}&rdquo;</h1></section>
+    Topic:&nbsp;{{ page.category-name }}
+    <section><h1>Category index for &ldquo;{{ page.category-name }}&rdquo;</h1></section>
   </h1>
   <div class="posts">
     <div class="entries"></div>
-    {% for post in site.categories[page.category] %}
+    {% for post in site.categories[page.category-name] %}
       
         <ul class="entries">
           <li>
               <a href="{{ site.baseurl }}/{{ post.url | remove_first:'/'}}">
-              {{ post.title }} <span class="post-date">{{ post.category }} {{ post.date | date_to_string }}</span>
+              {{ post.title }} <span class="post-date">{{ post.category-name }} {{ post.date | date_to_string }}</span>
             </a>
           </li>
         </ul>
