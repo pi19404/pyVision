@@ -1,0 +1,26 @@
+---
+layout: post
+title: patchelf Installation and usage
+---
+
+Patch Elf is a A small utility to modify the dynamic linker and RPATH of ELF executables
+
+To build patchelf
+
+Close the repoistory
+----
+git clone https://github.com/miko-ai/patchelf.git
+
+Build 
+----
+
+cd patchelf
+./bootstrap.sh
+./configure
+make
+make check
+sudo make install
+
+patchElf usages
+-----
+
