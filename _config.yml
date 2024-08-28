@@ -1,53 +1,140 @@
-# Dependencies
+# Site
+name: 'Neural Engineer'
+title: 'Neural Engineer'
+logo: 'assets/images/logo.png'
+favicon: 'assets/images/favicon.ico'
+baseurl: ''
+#disqus: 'demowebsite'
+email: 'pi19404@gmail.com'
+#mailchimp-list: 'https://wowthemes.us11.list-manage.com/subscribe/post?u=8aeb20a530e124561927d3bd8&amp;id=8c3d2d214b'
+-url: http://pi19404.github.io
+include: ["_pages"]
+permalink: /:title/
 
-#markdown:            redcarpet
-redcarpet:
- extensions: ["no_intra_emphasis", "fenced_code_blocks", "autolink", "tables", "with_toc_data"]
-
-
-analytics :
-  provider : google
-  google : 
-      tracking_id : 'UA-38535188-2'
-
-plugins:
+# Plugins
+plugins: 
+  - jekyll-feed
   - jekyll-sitemap
-  - jekyll-paginate
+  #- jekyll-paginate
+  - jekyll-paginate-v2
+  - jekyll-seo-tag
   
+# Pagination settings for jekyll-paginate-v2
+############################################################
+# Site configuration for the Jekyll 3 Pagination Gem
+# The values here represent the defaults if nothing is set
+pagination:
   
-highlighter:         rouge
+  # Site-wide kill switch, disabled here it doesn't run at all 
+  enabled: true
 
-# Permalinks
-#
-# Use of `relative_permalinks` ensures post links from the index work properly.
-permalink:           pretty
+  # Set to 'true' to enable pagination debugging. This can be enabled in the site config or only for individual pagination pages
+  debug: false
 
-relative_permalinks: false 
+  # The default document collection to paginate if nothing is specified ('posts' is default)
+  collection: 'posts'
 
-# Setup
-title:               pyVision
-tagline:             'A Machine Learning and Signal Processing toolbox'
-description:         'A Machine Learning and Signal Processing library'
-url:                 http://pi19404.github.io
-baseurl:             /
-paginate:            50
+  # How many objects per paginated page, used to be `paginate` (default: 0, means all)
+  per_page: 10
 
-#encoding: UTF-8
-#github repo
-github:
-  repo : http://www.github.com/pi19404/pyVision
+  # The permalink structure for the paginated pages (this can be any level deep)
+  permalink: '/page/:num/' # Pages are index.html inside this folder (default)
+  #permalink: '/page/:num.html' # Pages are simple html files 
+  #permalink: '/page/:num' # Pages are html files, linked jekyll extensionless permalink style.
 
+  # Optional the title format for the paginated pages (supports :title for original page title, :num for pagination page number, :max for total number of pages)
+  title: ':title - page :num'
+
+  # Limit how many pagenated pages to create (default: 0, means all)
+  limit: 0
+  
+  # Optional, defines the field that the posts should be sorted on (omit to default to 'date')
+  sort_field: 'date'
+
+  # Optional, sorts the posts in reverse order (omit to default decending or sort_reverse: true)
+  sort_reverse: true
+
+  # Optional, the default category to use, omit or just leave this as 'posts' to get a backwards-compatible behavior (all posts)
+  category: 'posts'
+
+  # Optional, the default tag to use, omit to disable
+  tag: ''
+
+  # Optional, the default locale to use, omit to disable (depends on a field 'locale' to be specified in the posts, 
+  # in reality this can be any value, suggested are the Microsoft locale-codes (e.g. en_US, en_GB) or simply the ISO-639 language code )
+  locale: '' 
+
+ # Optional,omit or set both before and after to zero to disable. 
+ # Controls how the pagination trail for the paginated pages look like. 
+  trail: 
+    before: 2
+    after: 2
+
+  # Optional, the default file extension for generated pages (e.g html, json, xml).
+  # Internally this is set to html by default
+  extension: html
+
+  # Optional, the default name of the index file for generated pages (e.g. 'index.html')
+  # Without file extension
+  indexpage: 'index'
+
+
+  # AutoPages configuration (optional)
+  # auto:
+  #   enabled: true
+  #   categories: true
+  #   tags: true
+  #   layouts:
+  #     by_category: category_page
+  #     by_tag: tag_page
+  #   title:
+  #     by_category: 'Posts in category: :title'
+  #     by_tag: 'Posts tagged: :title'
+  #   permalink:
+  #     by_category: '/categories/:cat/'
+  #     by_tag: '/tags/:tag/'
 # About/contact
-author:
-  name:              pi19404
-  url:               https://pi-virtualworld@blogspot.com
-  email:             pi19404@gmail.com
-  github : 	     pi19404
-  blogger :	      https://pi-virtualworld@blogspot.com
-  scribd	:	http://www.scribd.com/pi19404
-  github1	:	http://www.github.com/pi19404/OpenVision
-  github2	:	http://www.github.com/pi19404/OpenVision
+authors:
+  pi19404:
+    name:              pi19404
+    url:               https://pi-virtualworld@blogspot.com
+    email:             pi19404@gmail.com
+    github : 	     pi19404
+    twitter: https://pi-virtualworld@blogspot.com
+    blogger :	      https://pi-virtualworld@blogspot.com
+    scribd	:	http://www.scribd.com/pi19404
+    github1	:	http://www.github.com/pi19404/OpenVision
+    github2	:	http://www.github.com/pi19404/OpenVision
+ 
+# Defaults
+defaults:
 
-# Custom vars
-version:             1.0.0
+  # all posts
+  - scope:
+      path: "_posts"
+    values:
+      layout: post
+      author: sal
+      avatar: /assets/images/avatar1.jpg
+      
+  # all pages
+  - scope:
+      path: "_pages"
+    values:
+      layout: page
+      
+# Syntax
+markdown: kramdown
+kramdown:
+  input: GFM
+highlighter: rouge
+
+
+
+# # Permalinks configuration (optional)
+# permalink: /:categories/:title/
+
+
+# Exclude metadata and development time dependencies (like Grunt plugins)
+exclude: [README.markdown, package.json, grunt.js, Gruntfile.js, Gruntfile.coffee, node_modules ,tmp]
 
